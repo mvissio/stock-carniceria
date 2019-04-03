@@ -9,3 +9,9 @@ $general-secondary3: #262424; //logo
 
 $general-white: #FFFFFF;
 $general-white1: #e6e6e6;
+
+$error-color:indianred;
+
+.error-label{
+  color:$error-color;
+}

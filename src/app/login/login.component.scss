@@ -75,14 +75,17 @@
     background: #fff;
     box-shadow: none !important;
     border-color: #e3e3e3;
-  }
-  .form-control:focus {
-    border-color: $general-primary;
-  }
-  .form-control, .btn {
-    border-radius: 2px;
-  }
 
+    &:focus{
+      border-color: #b2b2b2;
 
+    }
+    &.ng-invalid.ng-dirty{
+      border-color: $error-color;
+    }
+    .btn{
+      border-radius: 2px;
 
+    }
+  }
 }
