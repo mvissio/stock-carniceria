@@ -10,7 +10,7 @@ import {filter, map} from 'rxjs/operators';
 })
 export class BreadcrumbsComponent implements OnInit {
 
-  label: string = '';
+  label = '';
 
   constructor(
     private router: Router,
@@ -26,7 +26,7 @@ export class BreadcrumbsComponent implements OnInit {
         this.label = data.titulo;
         this.title.setTitle(this.label);
 
-        let metaTag: MetaDefinition = {
+        const metaTag: MetaDefinition = {
           name: 'description',
           content: this.label
         };

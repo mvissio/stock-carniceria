@@ -11,8 +11,7 @@ import { FormsModule } from '@angular/forms';
 
 import { PagesComponent } from './pages.component';
 
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { ProgressComponent } from './progress/progress.component';
+import { HomeComponent } from './home/home.component';
 import { Graficas1Component } from './graficas1/graficas1.component';
 
 
@@ -20,23 +19,19 @@ import { Graficas1Component } from './graficas1/graficas1.component';
 import { IncrementadorComponent } from '../components/incrementador/incrementador.component';
 import { GraficoDonaComponent } from '../components/grafico-dona/grafico-dona.component';
 import { AccoutSettingsComponent } from './accout-settings/accout-settings.component';
-import { PromesasComponent } from './promesas/promesas.component';
 import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
     declarations: [
         PagesComponent,
-        DashboardComponent,
-        ProgressComponent,
+        HomeComponent,
         Graficas1Component,
         IncrementadorComponent,
         GraficoDonaComponent,
         AccoutSettingsComponent,
-        PromesasComponent
     ],
     exports: [
-        DashboardComponent,
-        ProgressComponent,
+        HomeComponent,
         Graficas1Component
     ],
     imports: [

@@ -16,3 +16,19 @@ $error-color:indianred;
 .error-label{
   color:$error-color;
 }
+
+button.btn-black{
+  background-color: $general-secondary;
+  color: $general-white1;
+}
+
+img{
+  &.logo-big{
+    width:150px;
+    height:150px;
+  }
+  &.logo-small{
+    width:60px;
+    height:60px;
+  }
+}
