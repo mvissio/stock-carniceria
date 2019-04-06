@@ -1,3 +1,18 @@
 #themecolors a {
     cursor: pointer;
 }
+//COLORS
+$general-primary: #e40a3f;
+$general-primary1: #bc0a34;
+$general-secondary: #434343;
+$general-secondary2: #373737;
+$general-secondary3: #262424; //logo
+
+$general-white: #FFFFFF;
+$general-white1: #e6e6e6;
+
+$error-color:indianred;
+
+.error-label{
+  color:$error-color;
+}
