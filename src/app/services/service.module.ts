@@ -6,11 +6,13 @@ import {
   SidebarService,
   SharedService
  } from './service.index';
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    HttpClientModule
   ],
   providers: [
     SettingsService,

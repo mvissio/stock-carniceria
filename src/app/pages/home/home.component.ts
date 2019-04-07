@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {HomeService} from '../../services/pages/home.service';
+import {DataInfoContentInterface} from '../../interfaces/models.interface';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  dataInfoList: DataInfoContentInterface[] = [];
+
+  constructor(private _home: HomeService) {
+  }
 
   ngOnInit() {
+    this._home.getCommonsInfo().subscribe(resp => this.dataInfoList = resp);
   }
 
 }
