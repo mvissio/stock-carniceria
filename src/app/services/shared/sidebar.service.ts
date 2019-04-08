@@ -8,8 +8,17 @@ export class SidebarService {
       titulo: 'Principal',
       icono: 'mdi mdi-gauge',
       submenu: [
-        { titulo: 'Dashboard', url: '/home' },
+        { titulo: 'Inicio', url: '/inicio' },
         { titulo: 'Gráficas', url: '/graficas1' }
+      ]
+    },
+    {
+      titulo: 'Configuraciones',
+      icono: 'mdi mdi-settings',
+      submenu: [
+        { titulo: 'Productos', url: '/configuracion/productos' },
+        { titulo: 'Precios', url: '/configuracion/precios' },
+        { titulo: 'Usuarios', url: '/configuracion/usuarios' },
       ]
     }
   ];

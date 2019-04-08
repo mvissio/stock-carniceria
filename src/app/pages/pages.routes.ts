@@ -12,10 +12,10 @@ const pagesRoutes: Routes = [
         path: '',
         component: PagesComponent,
         children: [
-            { path: 'home', component: HomeComponent, data: { titulo: 'Inicio' } },
+            { path: 'inicio', component: HomeComponent, data: { titulo: 'Inicio' } },
             { path: 'graficas1', component: Graficas1Component, data: { titulo: 'Gráficas' } },
             { path: 'account-settings', component: AccoutSettingsComponent, data: { titulo: 'Ajustes de Tema' } },
-            { path: '', redirectTo: '/home', pathMatch: 'full' }
+            { path: '', redirectTo: '/inicio', pathMatch: 'full' }
         ]
     }
 ];
