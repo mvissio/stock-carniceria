@@ -4,7 +4,8 @@ import { CommonModule } from '@angular/common';
 import {
   SettingsService,
   SidebarService,
-  SharedService
+  SharedService,
+  AuthService
  } from './service.index';
 import {HttpClientModule} from '@angular/common/http';
 
@@ -17,7 +18,8 @@ import {HttpClientModule} from '@angular/common/http';
   providers: [
     SettingsService,
     SidebarService,
-    SharedService
+    SharedService,
+    AuthService 
   ],
   declarations: []
 })

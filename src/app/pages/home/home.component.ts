@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HomeService} from '../../services/pages/home.service';
 import {DataInfoContentInterface} from '../../interfaces/models.interface';
 

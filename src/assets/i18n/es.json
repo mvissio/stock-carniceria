@@ -1,0 +1,19 @@
+{
+    "generalValidations": {
+        "required": "Es requerido",
+        "email": "El correo electrónico debe ser una dirección de correo electrónico válida"
+    },
+    "generalHTTPErrors": {
+        "server": "Ha ocurrido un error en el servidor, intente nuevamente mas tarde.",
+        "formulario": "Los datos ingresados son incorrectos."
+    },
+    "login": {
+        "rememberMeCheck": "Recuérdame",
+        "forgotPasswordLink": "Olvide contraseña?",
+        "submitButton": "Ingresar",
+        "formError": "Usuario o contraseña incorrecta."
+    },
+    "header": {
+        "logoutLabel": "Salir"
+    }
+}

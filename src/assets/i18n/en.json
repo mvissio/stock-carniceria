@@ -1,0 +1,11 @@
+{
+    "generalValidations": {
+        "required": "It is required",
+        "email": "The email must be a valid email address"
+    },
+    "login": {
+        "rememberMeCheck": "Remind me",
+        "forgotPasswordLink": "Forget password?",
+        "submitButton": "Login"
+    }
+}
