@@ -16,6 +16,8 @@ import { Graficas1Component } from './graficas1/graficas1.component';
 import { AccoutSettingsComponent } from './accout-settings/accout-settings.component';
 import { ChartsModule } from 'ng2-charts';
 import {ComponentsModule} from '../components/components.module';
+import { UsersComponent } from './users/users.component';
+import { UserlistComponent } from './users/userlist.component';
 
 @NgModule({
     declarations: [
@@ -23,6 +25,8 @@ import {ComponentsModule} from '../components/components.module';
         HomeComponent,
       AccoutSettingsComponent,
       Graficas1Component,
+      UsersComponent,
+      UserlistComponent,
     ],
     exports: [
         HomeComponent,

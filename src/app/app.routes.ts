@@ -8,6 +8,11 @@ import { NopagefoundComponent } from './shared/nopagefound/nopagefound.component
 
 const appRoutes: Routes = [
     { path: 'login', component: LoginComponent },
+  {
+    path: '',
+    component: PagesComponent,
+    loadChildren: './pages/pages.module#PagesModule'
+  },
     { path: '**', component: NopagefoundComponent }
 ];
 

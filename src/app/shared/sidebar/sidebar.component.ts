@@ -7,7 +7,7 @@ import { AuthService } from '../../services/auth/auth.service';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styles: []
+  styleUrls: ['sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
 

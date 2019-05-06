@@ -1,14 +1,15 @@
-import { Injectable } from '@angular/core';
-import { environment } from '../../../environments/environment';
-import { Auth } from '../../models/auth.model';
-import { HttpClient, HttpResponse } from '@angular/common/http';
-import { HEADER_AUTHORIZATION_KEY, TOKEN_KEY, USUARIO_KEY } from '../../constants/constant';
-import { StorageService } from '../storage/storage.service';
-import { Router } from '@angular/router';
-import { JwtHelperService } from '@auth0/angular-jwt';
+import {Injectable} from '@angular/core';
+import {environment} from '../../../environments/environment';
+import {Auth} from '../../models/auth.model';
+import {HttpClient, HttpResponse} from '@angular/common/http';
+import {HEADER_AUTHORIZATION_KEY, TOKEN_KEY, USUARIO_KEY} from '../../constants/constant';
+import {StorageService} from '../storage/storage.service';
+import {Router} from '@angular/router';
+import {JwtHelperService} from '@auth0/angular-jwt';
 
 // Rxjs
-import { map } from 'rxjs/operators';
+import {map} from 'rxjs/operators';
+import swal from 'sweetalert';
 
 @Injectable({
   providedIn: 'root'
@@ -19,37 +20,40 @@ export class AuthService {
   token: string;
   helper: JwtHelperService;
 
-  constructor( private httpClient: HttpClient,
-               private _storageService: StorageService,
-               private router: Router ) {
-                this.helper = new JwtHelperService();
-               }
+  constructor(private httpClient: HttpClient,
+              private _storageService: StorageService,
+              private router: Router) {
+    this.helper = new JwtHelperService();
+  }
 
   login(auth: Auth, rememberMe: boolean) {
     const url = this.urlAuth.login;
     const body = JSON.stringify(auth);
     return this.httpClient.post(url, body, {observe: 'response'})
-                          .pipe(map( (resp: HttpResponse<any>) => {
-      this.token = resp.headers.get(HEADER_AUTHORIZATION_KEY);
-      if (rememberMe) {
-        this._storageService.saveStorage(`${TOKEN_KEY}:${this.token}`, `${USUARIO_KEY}:${auth.username}`);
-      } else {
-        this._storageService.saveStorage(`${TOKEN_KEY}:${this.token}`);
-        this._storageService.removeStorage(USUARIO_KEY);
-      }
-      return true;
+      .pipe(map((resp: HttpResponse<any>) => {
+        this.token = resp.headers.get(HEADER_AUTHORIZATION_KEY);
+        if (rememberMe) {
+          this._storageService.saveStorage(`${TOKEN_KEY}:${this.token}`, `${USUARIO_KEY}:${auth.username}`);
+        } else {
+          this._storageService.saveStorage(`${TOKEN_KEY}:${this.token}`);
+          this._storageService.removeStorage(USUARIO_KEY);
+        }
+        return true;
 
-   }));
+      }));
   }
 
   recoverPassword(email: string) {
     const url = this.urlAuth.recoverPassword;
-    return this.httpClient.post(url, {}, {params: {
-      email: email}})
+    return this.httpClient.post(url, {}, {
+      params: {
+        email: email
+      }
+    })
       .pipe(map((response: any) => response));
   }
 
-  isLogged()  {
+  isLogged() {
     if (!this.token) {
       this.token = this._storageService.loadStorage(TOKEN_KEY);
     }
@@ -72,7 +76,7 @@ export class AuthService {
   }
 
   isTokenActive() {
-    if(this.helper.isTokenExpired(this.token)) {
+    if (this.helper.isTokenExpired(this.token)) {
       localStorage.clear();
       return false;
     } else {
@@ -86,6 +90,34 @@ export class AuthService {
 
   getUserName(): string {
     return this.helper.decodeToken(this.token).sub;
+  }
+
+
+  openLogoutModal() {
+    swal({
+        title: '¿Estas seguro que quieres salir de la aplicacion?',
+        icon: 'warning',
+        closeOnClickOutside: true,
+        buttons: {
+          confirm: {
+            text: 'Confirmar',
+            value: true,
+            visible: true,
+            closeModal: true
+          },
+          cancel: {
+            text: 'Cancelar',
+            value: false,
+            visible: true,
+            closeModal: true,
+          }
+        }
+      }
+    ).then((data) => {
+      if (data) {
+        this.logout();
+      }
+    });
   }
 
 }

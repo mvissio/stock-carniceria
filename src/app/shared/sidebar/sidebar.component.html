@@ -7,17 +7,22 @@
         <!-- Sidebar navigation-->
         <nav class="sidebar-nav">
             <ul id="sidebarnav">
-                <li class="user-profile">
-                    <a class="disabled" aria-expanded="false">
-                        <i class="fa fa-user"></i>
-                        <span class="hide-menu"><b>{{ username }}</b><br/> <small>{{ userRol | titlecase }}</small> </span>
-                    </a>
-                </li>
+              <li class="user-profile">
+                <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+                  <i class="mdi mdi-account"></i>
+                  <span class="hide-menu">{{ username}} - {{ userRol | titlecase }} </span>
+                </a>
+                <ul aria-expanded="false" class="collapse">
+                  <li><a routerLinkActive="active" routerLink="/tema">Mi Tema</a></li>
+                  <li><a class="logout" (click)="_authService.openLogoutModal()">Logout</a></li>
+                </ul>
+              </li>
+
                 <li class="nav-devider"></li>
                 <li class="nav-small-cap">PERSONAL</li>
 
-                <div *ngFor="let menu of _sidebarService.menu">
-                    <li *ngIf="hasPermissions(menu.roles)">
+                    <li *ngFor="let menu of _sidebarService.menu">
+                      <ng-container  *ngIf="hasPermissions(menu.roles)">
                         <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i [class]="menu.icono"></i><span class="hide-menu"> {{ menu.titulo }} <span class="label label-rouded label-themecolor pull-right"> {{ menu.submenu.length }} </span></span></a>
                         <ul aria-expanded="false" class="collapse">
                             <div *ngFor="let submenu of menu.submenu; trackBy: trackByFn">
@@ -26,8 +31,8 @@
                                 </li>
                             </div>
                         </ul>
+                      </ng-container>
                     </li>
-                </div>
 
             </ul>
         </nav>
@@ -38,3 +43,31 @@
 <!-- ============================================================== -->
 <!-- End Left Sidebar - style you can find in sidebar.scss  -->
 <!-- ============================================================== -->
+
+
+<!--<aside class="left-sidebar">-->
+<!--  <div class="scroll-sidebar">-->
+<!--    <nav class="sidebar-nav">-->
+<!--      <ul id="sidebarnav">-->
+<!--        <li class="user-profile">-->
+<!--          <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><img src="../assets/images/users/profile.png" alt="user" /><span class="hide-menu">Steave Jobs </span></a>-->
+<!--          <ul aria-expanded="false" class="collapse">-->
+<!--            <li><a href="javascript:void()">Mi Perfil</a></li>-->
+<!--            <li><a routerLinkActive="active" routerLink="/theme">Mi Tema</a></li>-->
+<!--            <li><a routerLink="/login">Logout</a></li>-->
+<!--          </ul>-->
+<!--        </li>-->
+<!--        <li class="nav-devider"></li>-->
+<!--        <li class="nav-small-cap">PERSONAL</li>-->
+<!--        <li *ngFor="let menu of _sidebar.menu">-->
+<!--          <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i [class]="menu.icono"></i><span class="hide-menu"> {{ menu.titulo }} <span class="label label-rouded label-themecolor pull-right"> {{ menu.submenu.length }} </span></span></a>-->
+<!--          <ul aria-expanded="false" class="collapse">-->
+<!--            <li *ngFor="let submenu of menu.submenu">-->
+<!--              <a routerLinkActive="active" [routerLink]="[ submenu.url ]"> {{ submenu.titulo }} </a>-->
+<!--            </li>-->
+<!--          </ul>-->
+<!--        </li>-->
+<!--      </ul>-->
+<!--    </nav>-->
+<!--  </div>-->
+<!--</aside>-->

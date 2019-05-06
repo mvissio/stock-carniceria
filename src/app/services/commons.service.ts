@@ -12,4 +12,8 @@ export class CommonsService {
   getHttpClient(): HttpClient {
     return this._http;
   }
+
+  onLogoutModal(){
+
+  }
 }
