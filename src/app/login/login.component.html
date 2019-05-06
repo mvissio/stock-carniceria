@@ -6,7 +6,7 @@
                     <img src="assets/images/page-images/logo.svg" class="logo-big" alt="Home" />
                 </a>
                 <div class="form-group m-t-40">
-                    <input class="form-control" type="text" formControlName="user" placeholder="Usuario" required>
+                    <input class="form-control" type="text" formControlName="user" placeholder="Usuario">
                     <div *ngIf="f.user.invalid && (f.user.dirty || f.user.touched)" class="error-label">
                         <small *ngIf="f.user.errors.required">
                             {{'generalValidations.required' | translate}}
