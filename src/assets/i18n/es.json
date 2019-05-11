@@ -5,15 +5,22 @@
     },
     "generalHTTPErrors": {
         "server": "Ha ocurrido un error en el servidor, intente nuevamente mas tarde.",
-        "formulario": "Los datos ingresados son incorrectos."
+        "request": "Los datos ingresados son incorrectos.",
+        "notFound": "No se han encontrado datos.",
+        "conflict": "Ha habido un conflicto con los datos, intente nuevamente mas tarde.",
+        "authorization": "No tiene permisos para acceder a los datos requeridos.",
+        "login": "Usuario o contraseña incorrecta."
     },
     "login": {
         "rememberMeCheck": "Recuérdame",
         "forgotPasswordLink": "Olvide contraseña?",
-        "submitButton": "Ingresar",
-        "formError": "Usuario o contraseña incorrecta."
+        "submitButton": "Ingresar"
     },
     "header": {
         "logoutLabel": "Salir"
+    },
+    "spinner": {
+        "title": "Cargando",
+        "message": "Espere por favor"
     }
 }

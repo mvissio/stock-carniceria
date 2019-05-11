@@ -17,7 +17,7 @@ import { AccoutSettingsComponent } from './accout-settings/accout-settings.compo
 import { ChartsModule } from 'ng2-charts';
 import {ComponentsModule} from '../components/components.module';
 import { UsersComponent } from './users/users.component';
-import { UserlistComponent } from './users/userlist.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
     declarations: [
@@ -25,14 +25,14 @@ import { UserlistComponent } from './users/userlist.component';
         HomeComponent,
       AccoutSettingsComponent,
       Graficas1Component,
-      UsersComponent,
-      UserlistComponent,
+      UsersComponent
     ],
     exports: [
         HomeComponent,
         Graficas1Component
     ],
   imports: [
+    CommonModule,
     SharedModule,
     PAGES_ROUTES,
     ComponentsModule

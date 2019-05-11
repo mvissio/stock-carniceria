@@ -7,7 +7,7 @@ import {AccoutSettingsComponent} from './accout-settings/accout-settings.compone
 import {roles} from '../constants/constant';
 import {AuthGuard} from '../guards/auth.guard';
 import {GrantedAuthorityGuard} from '../guards/granted-authority.guard';
-import {UserlistComponent} from './users/userlist.component';
+import { UsersComponent } from './users/users.component';
 
 const pagesRoutes: Routes = [
   {
@@ -38,7 +38,7 @@ const pagesRoutes: Routes = [
     children: [
       {
         path: 'usuarios',
-        component: UserlistComponent,
+        component: UsersComponent,
         canActivate: [AuthGuard, GrantedAuthorityGuard],
         data: {titulo: 'Usuarios', roles: [roles.administrador]}
       },

@@ -27,9 +27,9 @@ export class UsersService {
       .pipe(map((newUser: any) => newUser));
   }
 
-  getAllUsers() {
+  getAllUsers(page: number) {
     const url = this.userUrl.base;
-    return this.httpClient.get(url)
+    return this.httpClient.get(`${url}?page=${page}&size=2&sort=userId,desc`)
       .pipe(map((response) => response));
   }
 

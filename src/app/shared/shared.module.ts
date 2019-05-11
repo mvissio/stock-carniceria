@@ -8,6 +8,8 @@ import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { PaginationComponent } from './pagination/pagination.component';
+import { LoadingComponent } from './loading/loading.component';
 
 
 @NgModule({
@@ -21,14 +23,18 @@ import { TranslateModule } from '@ngx-translate/core';
         HeaderComponent,
         SidebarComponent,
         BreadcrumbsComponent,
-        NopagefoundComponent
+        NopagefoundComponent,
+        PaginationComponent,
+        LoadingComponent
     ],
     exports: [
         NopagefoundComponent,
         HeaderComponent,
         SidebarComponent,
         BreadcrumbsComponent,
-        NopagefoundComponent
+        NopagefoundComponent,
+        PaginationComponent,
+        LoadingComponent
     ]
 })
 export class SharedModule { }

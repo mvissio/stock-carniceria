@@ -5,7 +5,8 @@ import { AuthService } from '../services/auth/auth.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Auth } from '../models/auth.model';
 import { USUARIO_KEY } from '../constants/constant';
-import { TranslateService } from '@ngx-translate/core';
+import { HandleErrorsService } from '../services/shared/handle-errors.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 declare function init_plugins();
 
@@ -27,9 +28,9 @@ export class LoginComponent implements OnInit {
 
   constructor(private _storageService: StorageService,
     private _authService: AuthService,
+    private _handleErrorsService: HandleErrorsService,
     private router: Router,
-    private fb: FormBuilder,
-    private translate: TranslateService) { }
+    private fb: FormBuilder) { }
 
   ngOnInit() {
     init_plugins();
@@ -56,27 +57,12 @@ export class LoginComponent implements OnInit {
   }
     const auth: Auth = new Auth(this.loginForm.value.user, this.loginForm.value.password);
     this._authService.login(auth, this.loginForm.value.rememberMe)
-    .subscribe(
-      () => {
-        this.router.navigate(['/inicio']);
-      },
-      (err) => {
-        this.handleErrors(err);
-        console.log(err);
-      });
-  }
-
-  handleErrors(err: any) {
-    if (err.status === 403) {
-      this.translate.get('login.formError')
-        .subscribe((res: string) => this.errorMessage = res);
-    }else if (err.status === 405) {
-      this.translate.get('generalHTTPErrors.formulario')
-        .subscribe((res: string) => this.errorMessage = res);    
-    } else {
-      this.translate.get('generalHTTPErrors.server')
-        .subscribe((res: string) => this.errorMessage = res);  
-    }
+    .subscribe(() => {
+      this.router.navigate(['/inicio'])
+    },
+      (err: HttpErrorResponse) => {
+        this.errorMessage = this._handleErrorsService.handleErrors(err, 'login');
+    });
   }
 
 }

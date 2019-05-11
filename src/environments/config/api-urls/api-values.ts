@@ -6,12 +6,10 @@ export const applicationApiUrls: ApiURLs = {
     recoverPassword: '/API_VERSION/recoverPassword'
   },
   user: {
-    base: 'API_VERSION/users'
+    base: 'API_VERSION/users',
+    getUserByUsername: '/username',
+    getUserByUserId: '/id',
+    getAllRoles: '/roles',
+    deleteUser: '/username'
   }
 };
-
-// USER_URLS
-applicationApiUrls.user.getUserByUsername = `${applicationApiUrls.user.base}/username`,
-applicationApiUrls.user.getUserByUserId = `${applicationApiUrls.user.base}/id`,
-applicationApiUrls.user.getAllRoles = `${applicationApiUrls.user.base}/roles`,
-applicationApiUrls.user.deleteUser = `${applicationApiUrls.user.base}/username`;

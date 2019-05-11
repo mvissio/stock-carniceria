@@ -1,3 +1,21 @@
-<p>
-  users works!
-</p>
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <input #input (keyup)="buscarUsuario( input.value )" type="text" class="form-control" placeholder="Buscar usuario...">
+
+            </div>
+        </div>
+    </div>
+</div>
+<ul class="list-group" *ngIf="!loading">
+    <li class="list-group-item" *ngFor="let user of users;">
+        {{ user?.username | titlecase }} - {{ user?.email }}
+    </li>
+</ul>
+<div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+</div>
+<app-loading [loading]="loading"></app-loading>
+<app-pagination [page]="page" [pages]="pages" (pageNumber)="setPage($event)" *ngIf="users"></app-pagination>
