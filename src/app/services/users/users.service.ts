@@ -27,9 +27,9 @@ export class UsersService {
       .pipe(map((newUser: any) => newUser));
   }
 
-  getAllUsers(page: number) {
+  getAllUsers(page: number, size: number = 10, sortBy: string = 'userId', sortOrder: string = 'desc') {
     const url = this.userUrl.base;
-    return this.httpClient.get(`${url}?page=${page}&size=2&sort=userId,desc`)
+    return this.httpClient.get(`${url}?page=${page}&size=${size}&sort=${sortBy},${sortOrder}`)
       .pipe(map((response) => response));
   }
 
