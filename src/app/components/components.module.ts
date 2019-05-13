@@ -10,7 +10,7 @@ import {CommonModule} from '@angular/common';
   declarations: [
     GraficoDonaComponent,
     IncrementadorComponent,
-    InfoCardComponent
+    InfoCardComponent,
   ],
   exports: [
     InfoCardComponent,

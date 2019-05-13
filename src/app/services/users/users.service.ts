@@ -5,6 +5,7 @@ import { User } from '../../models/user.model';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import * as bcrypt from 'bcryptjs';
+import {PageConfig} from '../../models/pageConfig.model';
 
 @Injectable({
   providedIn: 'root'
@@ -27,9 +28,9 @@ export class UsersService {
       .pipe(map((newUser: any) => newUser));
   }
 
-  getAllUsers(page: number, size: number = 10, sortBy: string = 'userId', sortOrder: string = 'desc') {
+  getAllUsers(page: PageConfig) {
     const url = this.userUrl.base;
-    return this.httpClient.get(`${url}?page=${page}&size=${size}&sort=${sortBy},${sortOrder}`)
+    return this.httpClient.get(`${url}?page=${page.pageNumber}&size=${page.pageSize}&sort=${page.sortName},${page.orderDesc}`)
       .pipe(map((response) => response));
   }
 

@@ -1,15 +1,15 @@
-<ul class="pagination fixed-bottom text-center">
-    <li class="page-item">
-        <a class="page-link" href="" aria-label="Previous" (click)="sendPage(page.number-1, $event)">
-            <span aria-hidden="true">&laquo;</span>
-        </a>
-    </li>
-    <li class="page-item" [ngClass]="{'active': i == page.number}" *ngFor="let p of pages; index as i">
-        <a class="page-link" href="" (click)="sendPage(i, $event)">{{i + 1}}</a>
-    </li>
-    <li class="page-item">
-        <a class="page-link" href="" aria-label="Next" (click)="sendPage(page.number+1, $event)">
-            <span aria-hidden="true">&raquo;</span>
-        </a>
-    </li>
+<ul class="pagination justify-content-center text-center">
+  <li class="page-item" [class.disabled]="page.number===0">
+    <a class="page-link" href="" aria-label="Previous" (click)="sendPage(page.number-1, $event)">
+      <span aria-hidden="true">&laquo;</span>
+    </a>
+  </li>
+  <li class="page-item" [ngClass]="{'active': i == page.number}" *ngFor="let p of pages; index as i">
+    <a class="page-link" href="" (click)="sendPage(i, $event)">{{i + 1}}</a>
+  </li>
+  <li class="page-item" [class.disabled]="page.number === page.totalPages-1">
+    <a class="page-link" href="" aria-label="Next" (click)="sendPage(page.number+1, $event)">
+      <span aria-hidden="true">&raquo;</span>
+    </a>
+  </li>
 </ul>

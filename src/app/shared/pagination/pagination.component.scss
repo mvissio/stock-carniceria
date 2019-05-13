@@ -1,3 +1,7 @@
 ul.pagination {
     left: 50%;
 }
+.disabled {
+  color: gray;
+  cursor: not-allowed;
+}

@@ -1,4 +1,4 @@
-import { ApiURLs, applicationApiUrls } from '../config/api-urls';
+import {ApiURLs, applicationApiUrls} from '../config/api-urls';
 
 export interface ICustomEnvironment {
   production: boolean;
@@ -16,11 +16,14 @@ export class Environment implements ICustomEnvironment {
     Object.assign(this, customEnvironment);
     this._setApiUrls(this.apiVersion);
   }
+
   private _setApiUrls(apiVersion: string = 'api') {
     Object.keys(this.apiUrls).forEach(key => {
       const subKey = this.apiUrls[key];
       Object.keys(subKey).forEach(apiSubKey => {
-        const apiUrl = (this.apiUrl + subKey[apiSubKey]) as string;
+        const apiUrl = (apiSubKey.toString() !== 'base') ?
+          (subKey['base'] + subKey[apiSubKey]) as string :
+          (this.apiUrl + subKey[apiSubKey]) as string;
         this.apiUrls[key][apiSubKey] = apiUrl.replace('API_VERSION', apiVersion);
       });
     });

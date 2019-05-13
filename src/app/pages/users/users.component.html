@@ -1,21 +1,55 @@
 <div class="row animated fadeIn">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-body">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
 
-                <input #input (keyup)="buscarUsuario( input.value )" type="text" class="form-control" placeholder="Buscar usuario...">
-
-            </div>
-        </div>
+        <input #input (keydown.enter)="findUser( input.value )" type="text" class="form-control"
+               placeholder="Buscar usuario...">
+      </div>
     </div>
+  </div>
 </div>
-<ul class="list-group" *ngIf="!loading">
-    <li class="list-group-item" *ngFor="let user of users;">
-        {{ user?.username | titlecase }} - {{ user?.email }}
-    </li>
-</ul>
+<div class="row animated fadeIn" *ngIf="!loading && !errorMessage">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+
+        <h3 class="card-title">Usuarios (
+          <small>{{ page.totalElements}}</small>
+          )
+        </h3>
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Role</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let user of users">
+            <td>{{ user.username }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{user.rol.nombre}}</td>
+            <td><span class="label label-rounded" [ngClass]="(user.enabled)? 'label-success':'label-danger'">{{(user.enabled)? 'Habilitado': 'Desahabilitado'}}</span></td>
+            <td>
+              <div class="button-group">
+                <button class="btn btn-secondary"><i class="mdi mdi-eye-outline"></i></button>
+                <button class="btn btn-info"><i class="mdi mdi-account-edit"></i></button>
+                <button class="btn btn-danger" (click)="deleteUser(user.username)"><i class="mdi mdi-account-remove"></i></button>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
 <div *ngIf="errorMessage" class="alert alert-danger">
-    {{ errorMessage }}
+  {{ errorMessage }}
 </div>
 <app-loading [loading]="loading"></app-loading>
 <app-pagination [page]="page" [pages]="pages" (pageNumber)="setPage($event)" *ngIf="users"></app-pagination>
