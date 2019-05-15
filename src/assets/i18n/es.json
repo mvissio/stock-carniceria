@@ -9,7 +9,8 @@
         "notFound": "No se han encontrado datos.",
         "conflict": "Ha habido un conflicto con los datos, intente nuevamente mas tarde.",
         "authorization": "No tiene permisos para acceder a los datos requeridos.",
-        "login": "Usuario o contraseña incorrecta."
+        "login": "Usuario o contraseña incorrecta.",
+        "cantConnect": "No se pudo conectar con el servidor."
     },
     "login": {
         "rememberMeCheck": "Recuérdame",
@@ -22,5 +23,15 @@
     "spinner": {
         "title": "Cargando",
         "message": "Espere por favor"
+    },
+    "modals": {
+        "logout": {
+            "title": "¿Estas seguro que quieres salir de la aplicacion?"
+        },
+        "deleteUser": {
+            "title": "¿Estas seguro que quieres desahibilitar el usuario {{param}}?"
+        },
+        "defaultConfirmButton": "Confirmar",
+        "defaultCancelButton": "Cancelar"
     }
 }

@@ -15,7 +15,8 @@ export class HandleErrorsService {
     const generalKeyLabel = 'generalHTTPErrors';
     switch (err.status) {
       case 0:
-        this.errorMessage = 'No se pudo conectar con el servidor';
+        this.errorMessage = (err.error)? err.error.message : this.translate.get(generalKeyLabel + '.cantConnect')
+        .subscribe((res: string) => this.errorMessage = res);
         break;
       case 400:
         this.errorMessage = (err.error)? err.error.message : this.translate.get(generalKeyLabel + '.request')

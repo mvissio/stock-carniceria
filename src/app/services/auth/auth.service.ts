@@ -6,6 +6,7 @@ import {HEADER_AUTHORIZATION_KEY, TOKEN_KEY, USUARIO_KEY} from '../../constants/
 import {StorageService} from '../storage/storage.service';
 import {Router} from '@angular/router';
 import {JwtHelperService} from '@auth0/angular-jwt';
+import { TranslateService } from '@ngx-translate/core';
 
 // Rxjs
 import {map} from 'rxjs/operators';
@@ -22,7 +23,8 @@ export class AuthService {
 
   constructor(private httpClient: HttpClient,
               private _storageService: StorageService,
-              private router: Router) {
+              private router: Router,
+              private translate: TranslateService) {
     this.helper = new JwtHelperService();
   }
 
@@ -94,31 +96,33 @@ export class AuthService {
 
 
   openLogoutModal() {
-    swal({
-        title: '¿Estas seguro que quieres salir de la aplicacion?',
-        icon: 'warning',
-        closeOnClickOutside: true,
-        buttons: {
-          confirm: {
-            text: 'Confirmar',
-            value: true,
-            visible: true,
-            closeModal: true
-          },
-          cancel: {
-            text: 'Cancelar',
-            value: false,
-            visible: true,
-            closeModal: true,
+    this.translate.get('modals')
+      .subscribe((res: any) => {
+        swal({
+          title: res.logout.title,
+          icon: 'warning',
+          closeOnClickOutside: true,
+          buttons: {
+            confirm: {
+              text: res.defaultConfirmButton,
+              value: true,
+              visible: true,
+              closeModal: true
+            },
+            cancel: {
+              text: res.defaultCancelButton,
+              value: false,
+              visible: true,
+              closeModal: true,
+            }
           }
         }
-      }
-    ).then((data) => {
-      if (data) {
-        this.logout();
-      }
+      ).then((data) => {
+        if (data) {
+          this.logout();
+        }
+      });
     });
   }
-
 }
 
