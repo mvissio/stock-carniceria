@@ -21,7 +21,7 @@ export class Environment implements ICustomEnvironment {
     Object.keys(this.apiUrls).forEach(key => {
       const subKey = this.apiUrls[key];
       Object.keys(subKey).forEach(apiSubKey => {
-        const apiUrl = (apiSubKey.toString() !== 'base') ?
+        const apiUrl = (apiSubKey.toString() !== 'base' && subKey['base']) ?
           (subKey['base'] + subKey[apiSubKey]) as string :
           (this.apiUrl + subKey[apiSubKey]) as string;
         this.apiUrls[key][apiSubKey] = apiUrl.replace('API_VERSION', apiVersion);

@@ -6,6 +6,7 @@ import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import * as bcrypt from 'bcryptjs';
 import {PageConfig} from '../../models/pageConfig.model';
+import { Page } from '../../models/page.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +14,10 @@ import {PageConfig} from '../../models/pageConfig.model';
 export class UsersService {
   userUrl = environment.apiUrls.user;
   user: User = new User();
-
-  constructor( private httpClient: HttpClient) { }
-
   roles: Rol[] = [];
   rolesSelected: Rol[] = [];
+
+  constructor( private httpClient: HttpClient) { }
 
   addUser(user: User) {
     let newUser = Object.assign({}, user); 
@@ -31,7 +31,7 @@ export class UsersService {
   getAllUsers(page: PageConfig) {
     const url = this.userUrl.base;
     return this.httpClient.get(`${url}?page=${page.pageNumber}&size=${page.pageSize}&sort=${page.sortName},${page.orderDesc}`)
-      .pipe(map((response) => response));
+      .pipe(map((response: Page) => response));
   }
 
   getUserByUserId(id: number) {

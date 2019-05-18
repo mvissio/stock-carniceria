@@ -15,7 +15,13 @@
     "login": {
         "rememberMeCheck": "Recuérdame",
         "forgotPasswordLink": "Olvide contraseña?",
-        "submitButton": "Ingresar"
+        "submitButton": "Ingresar",
+        "userPlaceholder": "Usuario",
+        "passwordPlaceholder": "Contraseña"
+    },
+    "forgotPassword": {
+        "info": "Escriba su correo electrónico y siga los pasos.",
+        "emailPlaceholder": "Dirección de correo electrónico"
     },
     "header": {
         "logoutLabel": "Salir"
@@ -33,5 +39,9 @@
         },
         "defaultConfirmButton": "Confirmar",
         "defaultCancelButton": "Cancelar"
+    },
+    "buttons": {
+        "submit": "Guardar",
+        "back": "Atrás"
     }
 }

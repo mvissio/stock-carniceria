@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
   loading = false;
   enabled = true;
   loginForm: FormGroup;
+  forgotPasswordForm: FormGroup;
   errorMessage: string;
 
   constructor(private _storageService: StorageService,
@@ -47,14 +48,19 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required],
       rememberMe: [false]
     }, {updateOn: 'blur'});
+    this.forgotPasswordForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+    }, {updateOn: 'blur'});
   }
 
-  get f() { return this.loginForm.controls; }
+  get loginControls() { return this.loginForm.controls; }
+
+  get forgotPasswordControls() { return this.forgotPasswordForm.controls; }
 
   login() {
     if (this.loginForm.invalid) {
       return;
-  }
+    }
     const auth: Auth = new Auth(this.loginForm.value.user, this.loginForm.value.password);
     this._authService.login(auth, this.loginForm.value.rememberMe)
     .subscribe(() => {
@@ -63,6 +69,20 @@ export class LoginComponent implements OnInit {
       (err: HttpErrorResponse) => {
         this.errorMessage = this._handleErrorsService.handleErrors(err, 'login');
     });
+  }
+
+  recoverPassword() {
+    if (this.forgotPasswordForm.invalid) {
+      return;
+    }
+    this._authService.recoverPassword(this.forgotPasswordForm.value.email)
+    .subscribe((res) => {
+        console.log(res);
+      },
+      (err: HttpErrorResponse) => {
+        this.errorMessage = this._handleErrorsService.handleErrors(err);
+      }
+    );
   }
 
 }

@@ -6,6 +6,8 @@ import {HandleErrorsService} from '../../services/shared/handle-errors.service';
 import { TranslateService } from '@ngx-translate/core';
 import {HttpErrorResponse} from '@angular/common/http';
 import {PageConfig} from '../../models/pageConfig.model';
+import { forkJoin } from 'rxjs';
+import { map } from 'rxjs/operators';
 import swal from 'sweetalert';
 
 @Component({
@@ -66,36 +68,34 @@ export class UsersComponent implements OnInit {
   }
 
   deleteUser(username: string) {
-    this.translate.get('modals.deleteUser.title', {param: username})
-      .subscribe((res: any) => {
-        this.translate.get('modals')
-          .subscribe((buttons: any) => {
-            swal({
-                title: res,
-                icon: 'warning',
-                closeOnClickOutside: true,
-                buttons: {
-                  confirm: {
-                    text: buttons.defaultConfirmButton,
-                    value: true,
-                    visible: true,
-                    closeModal: true
-                  },
-                  cancel: {
-                    text: buttons.defaultCancelButton,
-                    value: false,
-                    visible: true,
-                    closeModal: true,
-                  }
-                }
-              }
-            ).then((data) => {
-              if (data) {
-                this._userService.deleteUser(username).subscribe();
-              }
-            });
-          });  
-      });  
+    forkJoin(
+      [this.translate.get('modals.deleteUser.title', {param: username}),
+      this.translate.get('modals')
+    ]).subscribe((result) => {
+      swal({
+        title: result[0],
+        icon: 'warning',
+        closeOnClickOutside: true,
+        buttons: {
+          confirm: {
+            text: result[1].defaultConfirmButton,
+            value: true,
+            visible: true,
+            closeModal: true
+          },
+          cancel: {
+            text: result[1].defaultCancelButton,
+            value: false,
+            visible: true,
+            closeModal: true,
+          }
+        }
+      }
+    ).then((data) => {
+      if (data) {
+        this._userService.deleteUser(username).subscribe();
+      }
+    });
+    });  
   }
-
 }
