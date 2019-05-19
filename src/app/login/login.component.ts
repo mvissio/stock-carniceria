@@ -7,6 +7,7 @@ import { Auth } from '../models/auth.model';
 import { USUARIO_KEY } from '../constants/constant';
 import { HandleErrorsService } from '../services/shared/handle-errors.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { CommonsService } from '../services/commons.service';
 
 declare function init_plugins();
 
@@ -25,13 +26,13 @@ export class LoginComponent implements OnInit {
   enabled = true;
   loginForm: FormGroup;
   forgotPasswordForm: FormGroup;
-  errorMessage: string;
 
   constructor(private _storageService: StorageService,
     private _authService: AuthService,
     private _handleErrorsService: HandleErrorsService,
     private router: Router,
-    private fb: FormBuilder) { }
+    private fb: FormBuilder,
+    private _commonsService: CommonsService) { }
 
   ngOnInit() {
     init_plugins();
@@ -67,7 +68,7 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/inicio'])
     },
       (err: HttpErrorResponse) => {
-        this.errorMessage = this._handleErrorsService.handleErrors(err, 'login');
+        this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err, 'login'));
     });
   }
 
@@ -80,7 +81,7 @@ export class LoginComponent implements OnInit {
         console.log(res);
       },
       (err: HttpErrorResponse) => {
-        this.errorMessage = this._handleErrorsService.handleErrors(err);
+        this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
       }
     );
   }

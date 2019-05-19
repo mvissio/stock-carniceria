@@ -12,6 +12,21 @@ export const TIMEOUT = 'El tiempo de espera es muy largo intente nuevamente mas 
 
 
 export const roles = {
-    administrador: 'ADMINISTRADOR',
-    usuario: 'USUARIO'
-  };
+  sysAdministrador: 'SUPERADMINISTRADOR',
+  administrador: 'ADMINISTRADOR',
+  usuario: 'USUARIO'
+};
+
+export const toastType = {
+  error: 'error',
+  warning: 'warning',
+  info: 'info',
+  success: 'success'
+};
+
+export const toastPosition = {
+  default: 'toast-top-right',
+  bottomRight: 'toast-bottom-right',
+  topCenter: 'toast-top-center',
+  bottomCenter: 'toast-bottom-center'
+}

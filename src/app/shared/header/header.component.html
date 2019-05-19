@@ -1,54 +1,51 @@
 <header class="topbar">
-  <nav class="navbar top-navbar navbar-expand-md navbar-light">
-    <div class="navbar-header">
-      <a class="navbar-brand" (click)="router.navigate(['/inicio'])">
-        <b>
+    <nav class="navbar top-navbar navbar-expand-md navbar-light">
+        <div class="navbar-header">
+            <a class="navbar-brand" (click)="router.navigate(['/inicio'])">
+                <b>
           <img src="assets/images/page-images/logo.svg" class="dark-logo logo-small "/>
           <img src="assets/images/page-images/logo-white.svg" alt="homepage" class="light-logo logo-small"/>
         </b>
-        <span>
+                <span>
           <img src="assets/images/page-images/logo-text.svg" class="dark-logo logo-small-rec"/>
           <img src="assets/images/page-images/logo-text-white.svg" class="light-logo logo-small-rec"/>
         </span>
-      </a>
-    </div>
-    <div class="navbar-collapse">
-      <!-- ============================================================== -->
-      <!-- toggle and nav items -->
-      <!-- ============================================================== -->
-      <ul class="navbar-nav mr-auto">
-        <!-- This is  -->
-        <li class="nav-item"><a class="nav-link nav-toggler hidden-md-up waves-effect waves-dark"
-                                href="javascript:void(0)"><i class="ti-menu"></i></a></li>
-        <li class="nav-item"><a class="nav-link sidebartoggler hidden-sm-down waves-effect waves-dark"
-                                href="javascript:void(0)"><i class="ti-menu"></i></a></li>
-        <li class="nav-item hidden-sm-down"></li>
-      </ul>
-      <!-- ============================================================== -->
-      <!-- User profile and search -->
-      <!-- ============================================================== -->
-      <ul class="navbar-nav my-lg-0">
-        <!-- ============================================================== -->
-        <!-- Search -->
-        <!-- ============================================================== -->
-        <li class="nav-item hidden-xs-down search-box"><a class="nav-link hidden-sm-down waves-effect waves-dark"
-                                                          href="javascript:void(0)"><i class="ti-search"></i></a>
-          <form class="app-search">
-            <input type="text" class="form-control" placeholder="Search & enter"> <a class="srh-btn"><i
+            </a>
+        </div>
+        <div class="navbar-collapse">
+            <!-- ============================================================== -->
+            <!-- toggle and nav items -->
+            <!-- ============================================================== -->
+            <ul class="navbar-nav mr-auto">
+                <!-- This is  -->
+                <li class="nav-item"><a class="nav-link nav-toggler hidden-md-up waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a></li>
+                <li class="nav-item"><a class="nav-link sidebartoggler hidden-sm-down waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a></li>
+                <li class="nav-item hidden-sm-down"></li>
+            </ul>
+            <!-- ============================================================== -->
+            <!-- User profile and search -->
+            <!-- ============================================================== -->
+            <ul class="navbar-nav my-lg-0">
+                <!-- ============================================================== -->
+                <!-- Search -->
+                <!-- ============================================================== -->
+                <li class="nav-item hidden-xs-down search-box"><a class="nav-link hidden-sm-down waves-effect waves-dark" href="javascript:void(0)"><i class="ti-search"></i></a>
+                    <form class="app-search">
+                        <input type="text" class="form-control" placeholder="Search & enter"> <a class="srh-btn"><i
             class="ti-close"></i></a></form>
-        </li>
+                </li>
 
-        <!-- ============================================================== -->
-        <!-- Profile -->
-        <!-- ============================================================== -->
-        <li class="nav-item dropdown">
-          <a class="nav-link" (click)="_authService.openLogoutModal()">
-            <i class="fa fa-power-off"></i> {{ 'header.logoutLabel' | translate }}
-          </a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+                <!-- ============================================================== -->
+                <!-- Profile -->
+                <!-- ============================================================== -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link" (click)="_authService.openLogoutModal()">
+                        <i class="fa fa-power-off"></i> {{ 'header.logoutLabel' | translate }}
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 </header>
 <!-- ============================================================== -->
 <!-- End Topbar header -->

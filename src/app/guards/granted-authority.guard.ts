@@ -17,7 +17,7 @@ export class GrantedAuthorityGuard implements CanActivate {
     if (this._authService.hasPermissions(route.data.roles)) {
       return true;
     } else {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/inicio']);
       return false;
     }
   }

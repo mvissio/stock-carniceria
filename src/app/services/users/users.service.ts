@@ -60,7 +60,7 @@ export class UsersService {
   getAllRoles() {
     const url = this.userUrl.getAllRoles;
     return this.httpClient.get(url)
-      .pipe(map((response: any) => response.result));
+      .pipe(map((response: any) => response));
   }
 
   deleteUser(username: string) {

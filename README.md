@@ -25,3 +25,12 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+## Enviromments
+El directorio enviroments tiene los ambientes del sistema, tiene un subdirectorio config donde tenes la configuración de las rutas(son dos archivos el model: 'se definen las interfaces' y el api-values: 'donde se definen las rutas').
+
+## Pages
+En pages estan los componentes del sistema.
+
+## Paginations
+En shared pagination tenemos el componente paginación, ademas hay dos modelos de la paginación page y pageConfig. 

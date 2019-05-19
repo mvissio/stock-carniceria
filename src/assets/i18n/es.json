@@ -4,10 +4,10 @@
         "email": "El correo electrónico debe ser una dirección de correo electrónico válida"
     },
     "generalHTTPErrors": {
-        "server": "Ha ocurrido un error en el servidor, intente nuevamente mas tarde.",
+        "server": "Ha ocurrido un error en el servidor, intente nuevamente más tarde.",
         "request": "Los datos ingresados son incorrectos.",
         "notFound": "No se han encontrado datos.",
-        "conflict": "Ha habido un conflicto con los datos, intente nuevamente mas tarde.",
+        "conflict": "Ha habido un conflicto con los datos, intente nuevamente más tarde.",
         "authorization": "No tiene permisos para acceder a los datos requeridos.",
         "login": "Usuario o contraseña incorrecta.",
         "cantConnect": "No se pudo conectar con el servidor."
@@ -19,8 +19,24 @@
         "userPlaceholder": "Usuario",
         "passwordPlaceholder": "Contraseña"
     },
+    "users": {
+        "title": "Usuarios",
+        "searchLabel": "Buscar usuario...",
+        "usernamePlaceholder": "Nombre",
+        "emailPlaceholder": "Dirección de correo electrónico",
+        "passwordPlaceholder": "Contraseña",
+        "enabledPlaceholder": "Habilitado",
+        "rolPlaceholder": "Rol"
+    },
+    "table": {
+        "name": "Nombre",
+        "email": "Correo",
+        "role": "Role",
+        "status": "Estado",
+        "accions": "Acciones"
+    },
     "forgotPassword": {
-        "info": "Escriba su correo electrónico y siga los pasos.",
+        "info": "Ingrese su correo electrónico y siga los pasos.",
         "emailPlaceholder": "Dirección de correo electrónico"
     },
     "header": {
@@ -32,16 +48,28 @@
     },
     "modals": {
         "logout": {
-            "title": "¿Estas seguro que quieres salir de la aplicacion?"
+            "title": "¿Estas seguro que quieres salir de la aplicación?"
         },
         "deleteUser": {
-            "title": "¿Estas seguro que quieres desahibilitar el usuario {{param}}?"
+            "title": "¿Estas seguro que quieres deshabilitar el usuario {{param}}?"
         },
         "defaultConfirmButton": "Confirmar",
         "defaultCancelButton": "Cancelar"
     },
     "buttons": {
         "submit": "Guardar",
-        "back": "Atrás"
+        "back": "Volver",
+        "send": "Enviar",
+        "cancel": "Cancelar"
+    },
+    "toast": {
+        "error": "Error!",
+        "success": "Exito!",
+        "warning": "Advertencia!",
+        "info": "Información!"
+    },
+    "userStatus": {
+        "enabled": "Habilitado",
+        "disabled": "Deshabilitado"
     }
 }

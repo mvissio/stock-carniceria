@@ -18,21 +18,31 @@ import { ChartsModule } from 'ng2-charts';
 import {ComponentsModule} from '../components/components.module';
 import { UsersComponent } from './users/users.component';
 import { CommonModule } from '@angular/common';
+import { UserComponent } from './users/user/user.component';
+
+// others
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
+
 
 @NgModule({
     declarations: [
-        PagesComponent,
-        HomeComponent,
+      PagesComponent,
+      HomeComponent,
       AccoutSettingsComponent,
       Graficas1Component,
-      UsersComponent
+      UsersComponent,
+      UserComponent
     ],
     exports: [
-        HomeComponent,
-        Graficas1Component
+      HomeComponent,
+      Graficas1Component,
+      TranslateModule
     ],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     SharedModule,
     PAGES_ROUTES,
     ComponentsModule

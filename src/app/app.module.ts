@@ -1,5 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+
+//Toast
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+
 //Translation
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -48,7 +53,9 @@ export function createTranslateLoader(http: HttpClient) {
         useFactory: (createTranslateLoader),
         deps: [ HttpClient ]
       }
-    })
+    }),
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot() // ToastrModule added
   ],
   providers: [
     AuthGuard,
@@ -64,7 +71,7 @@ export function createTranslateLoader(http: HttpClient) {
       multi: true 
     },
     { provide: DEFAULT_TIMEOUT,
-      useValue: 90000 
+      useValue: 30000 
     },
   ],
   bootstrap: [AppComponent]

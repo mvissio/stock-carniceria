@@ -8,6 +8,7 @@ import {roles} from '../constants/constant';
 import {AuthGuard} from '../guards/auth.guard';
 import {GrantedAuthorityGuard} from '../guards/granted-authority.guard';
 import { UsersComponent } from './users/users.component';
+import { UserComponent } from './users/user/user.component';
 
 const pagesRoutes: Routes = [
   {
@@ -40,7 +41,19 @@ const pagesRoutes: Routes = [
         path: 'usuarios',
         component: UsersComponent,
         canActivate: [AuthGuard, GrantedAuthorityGuard],
-        data: {titulo: 'Usuarios', roles: [roles.administrador]}
+        data: {
+          titulo: 'Usuarios', roles: [roles.administrador]
+        },
+      },
+      { 
+        path: 'usuario/:id', component: UserComponent,
+        canActivate: [AuthGuard, GrantedAuthorityGuard],
+        data: {titulo: 'Actualizar Usuario', roles: [roles.administrador]}
+      },
+      { 
+        path: 'usuario', component: UserComponent,
+        canActivate: [AuthGuard, GrantedAuthorityGuard],
+        data: {titulo: 'Crear Usuario', roles: [roles.administrador]}
       },
       {path: '', redirectTo: '/inicio', pathMatch: 'full'}
     ]

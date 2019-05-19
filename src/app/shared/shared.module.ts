@@ -10,12 +10,13 @@ import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { PaginationComponent } from './pagination/pagination.component';
 import { LoadingComponent } from './loading/loading.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
     imports: [
-        RouterModule,
         CommonModule,
+        RouterModule,
         TranslateModule
     ],
     declarations: [
@@ -28,6 +29,9 @@ import { LoadingComponent } from './loading/loading.component';
         LoadingComponent
     ],
     exports: [
+        CommonModule,
+        RouterModule,
+        TranslateModule,
         NopagefoundComponent,
         HeaderComponent,
         SidebarComponent,

@@ -7,8 +7,9 @@ import { TranslateService } from '@ngx-translate/core';
 import {HttpErrorResponse} from '@angular/common/http';
 import {PageConfig} from '../../models/pageConfig.model';
 import { forkJoin } from 'rxjs';
-import { map } from 'rxjs/operators';
 import swal from 'sweetalert';
+import { CommonsService } from '../../services/commons.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-users',
@@ -20,12 +21,13 @@ export class UsersComponent implements OnInit {
   users: User[];
   pages: number[];
   loading = false;
-  errorMessage: string;
   pageConfig: PageConfig;
 
   constructor(private _userService: UsersService,
               private _handleErrorsService: HandleErrorsService,
-              private translate: TranslateService) {
+              private translate: TranslateService,
+              private router: Router,
+              private _commonsService: CommonsService) {
   }
 
   ngOnInit() {
@@ -51,20 +53,31 @@ export class UsersComponent implements OnInit {
         },
         (err: HttpErrorResponse) => {
           this.loading = false;
-          this.errorMessage = this._handleErrorsService.handleErrors(err);
+          this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
         });
   }
 
   findUser(username: string) {
     this.loading = true;
-    this._userService.getUserByUsername(username).subscribe(
-      (res: User) => {
-        this.loading = false;
-      },
-      (err: HttpErrorResponse) => {
-        this.loading = false;
-        this.errorMessage = this._handleErrorsService.handleErrors(err);
-      });
+    if(username !== null) {
+      this._userService.getUserByUsername(username).subscribe(
+        (res: any) => {
+          this.loading = false;
+          this.users = [];
+          this.users.push(res);
+        },
+        (err: HttpErrorResponse) => {
+          this.loading = false;
+          this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
+        });
+    } else {
+      this.getUsers(0);
+    }
+    
+  }
+
+  editUser(userId: number) {
+    this.router.navigate(['/configuracion/usuario', userId], {queryParams: {edit: true}, skipLocationChange: true});
   }
 
   deleteUser(username: string) {
@@ -97,5 +110,14 @@ export class UsersComponent implements OnInit {
       }
     });
     });  
+  }
+
+  getUserStatus(user: User): string {
+    let status: string;
+    this.translate.get((user.enabled)? 'userStatus.enabled': 'userStatus.disabled')
+    .subscribe((res) => {
+      status = res;
+    });
+    return status;
   }
 }
