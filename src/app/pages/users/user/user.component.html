@@ -6,44 +6,55 @@
                 <div class="col-sm-12 col-xs-12">
                     <form class="form-horizontal form-material" [formGroup]="userForm" (ngSubmit)="saveUser()">
                         <div class="form-group">
-                            <input class="form-control" type="text" formControlName="username" [placeholder]="'users.usernamePlaceholder' | translate">
-                            <small *ngIf="userControls.username.invalid && (userControls.username.dirty || userControls.username.touched)">
-                            {{'generalValidations.required' | translate}}
-                          </small>
+                            <input class="form-control" type="text" formControlName="username" [placeholder]="'users.usernamePlaceholder' | translate" [attr.disabled]="!disabledFields">
+                            <div *ngIf="userControls.username.invalid && (userControls.username.dirty || userControls.username.touched)" class="error-label">
+                                <small *ngIf="userControls.username.errors.required">
+                                  {{'generalValidations.required' | translate}}
+                                </small>
+                                <small *ngIf="userControls.username.errors.maxlength" [translate]="'generalValidations.maxLength'" [translateParams]="{param: userControls.username.errors.maxlength.requiredLength}"></small>
+                            </div>
                         </div>
                         <div class="form-group">
-                            <input class="form-control" type="email" formControlName="email" [placeholder]="'users.emailPlaceholder' | translate">
-                            <div *ngIf="userControls.email.invalid && (userControls.email.dirty || userControls.email.touched)">
+                            <input class="form-control" type="email" formControlName="email" [placeholder]="'users.emailPlaceholder' | translate" [attr.disabled]="!disabledFields">
+                            <div *ngIf="userControls.email.invalid && (userControls.email.dirty || userControls.email.touched)" class="error-label">
                                 <small *ngIf="userControls.email.errors.required">
-                              {{'generalValidations.required' | translate}}
-                          </small>
+                                  {{'generalValidations.required' | translate}}
+                                </small>
                                 <small *ngIf="userControls.email.errors.email">
-                            {{'generalValidations.email' | translate}}
-                          </small>
+                                  {{'generalValidations.email' | translate}}
+                                </small>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="rol" class="m-r-10">{{'users.rolPlaceholder' | translate}}</label>
                             <select class="custom-select" formControlName="rol" id="rol">
-                              <option value="rol" *ngFor="let rol of roles">{{rol}}</option>
-                          </select>
+                              <option [value]="rol" *ngFor="let rol of roles" [selected]="selectedRol(rol)" [attr.disabled]="!disabledFields">{{rol}}</option>
+                            </select>
                         </div>
                         <div class="form-group">
-                            <input class="form-control" type="password" formControlName="password" [placeholder]="'users.passwordPlaceholder' | translate">
-                            <small *ngIf="userControls.password.invalid && (userControls.password.dirty || userControls.password.touched)">
-                            {{'generalValidations.required' | translate}}
-                          </small>
+                            <input class="form-control" type="password" formControlName="password" [placeholder]="'users.passwordPlaceholder' | translate" [attr.disabled]="!disabledFields">
+                            <div *ngIf="userControls.password.invalid && (userControls.password.dirty || userControls.password.touched)" class="error-label">
+                                <small *ngIf="userControls.password.errors.required">
+                                  {{'generalValidations.required' | translate}}
+                                </small>
+                                <small *ngIf="userControls.password.errors.maxlength" [translate]="'generalValidations.maxLength'" [translateParams]="{param: userControls.password.errors.maxlength.requiredLength}"></small>
+                            </div>
                         </div>
-                        <div class="col">
-                            <input class="form-control" type="checkbox" formControlName="enabled">
-                            <label for="enabled">{{'users.enabledPlaceholder' | translate}}</label>
+                        <div class="form-group form-check">
+                            <input type="checkbox" class="form-check-input" id="enabled" formControlName="enabled" [attr.disabled]="!disabledFields">
+                            <label class="form-check-label" for="enabled">{{'users.enabledPlaceholder' | translate}}</label>
                         </div>
-                        <button class="btn btn-primary m-r-10" type="submit" [disabled]="userForm.invalid">
-                          <i class="fa fa-save"></i>
-                          {{'buttons.submit' | translate}}
-                        </button>
-                        <button (click)="back()" class="btn btn-danger" type="button">
-                          {{'buttons.cancel' | translate}}
+                        <div *ngIf="disabledFields">
+                            <button class="btn btn-primary m-r-10" type="submit" [disabled]="userForm.invalid">
+                            <i class="fa fa-save"></i>
+                            {{'buttons.submit' | translate}}
+                          </button>
+                            <button (click)="back()" class="btn btn-danger" type="button">
+                            {{'buttons.cancel' | translate}}
+                          </button>
+                        </div>
+                        <button *ngIf="!disabledFields" class="btn btn-inverse mdi mdi-keyboard-backspace" (click)="back()">
+                          {{'buttons.back' | translate}}
                         </button>
                     </form>
                 </div>

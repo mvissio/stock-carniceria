@@ -30,12 +30,19 @@
                             <td>{{ user?.username }}</td>
                             <td>{{ user?.email }}</td>
                             <td>{{user?.rol.nombre}}</td>
-                            <td><span class="label label-rounded" [ngClass]="(user.enabled)? 'label-success':'label-danger'">{{getUserStatus(user)}}</span></td>
+                            <td><span class="label label-rounded" [ngClass]="(user.enabled)? 'label-success':'label-danger'">{{getUserStatus(user)}}</span>
+                            </td>
                             <td>
                                 <div class="button-group">
-                                    <button class="btn btn-secondary"><i class="mdi mdi-eye-outline"></i></button>
-                                    <button class="btn btn-info"><i class="mdi mdi-account-edit" (click)="editUser(user.userId)"></i></button>
-                                    <button class="btn btn-danger" (click)="deleteUser(user.username)"><i class="mdi mdi-account-remove"></i></button>
+                                    <button class="btn btn-secondary" (click)="showUser(user.userId)">
+                                        <i class="mdi mdi-eye-outline"></i>
+                                    </button>
+                                    <button class="btn btn-info" (click)="editUser(user.userId)">
+                                        <i class="mdi mdi-account-edit"></i>
+                                        </button>
+                                    <button class="btn btn-danger" (click)="deleteUser(user.username)">
+                                        <i class="mdi mdi-account-remove"></i>
+                                    </button>
                                 </div>
                             </td>
                         </tr>

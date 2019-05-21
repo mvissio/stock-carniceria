@@ -80,6 +80,10 @@ export class UsersComponent implements OnInit {
     this.router.navigate(['/configuracion/usuario', userId], {queryParams: {edit: true}, skipLocationChange: true});
   }
 
+  showUser(userId: number) {
+    this.router.navigate(['/configuracion/usuario', userId], {queryParams: {edit: false}, skipLocationChange: true});
+  }
+
   deleteUser(username: string) {
     forkJoin(
       [this.translate.get('modals.deleteUser.title', {param: username}),

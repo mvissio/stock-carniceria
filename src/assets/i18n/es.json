@@ -1,7 +1,11 @@
 {
     "generalValidations": {
         "required": "Es requerido",
-        "email": "El correo electrónico debe ser una dirección de correo electrónico válida"
+        "email": "El correo electrónico debe ser una dirección de correo electrónico válida",
+        "maxLength": "La logitud maxima es de {{param}}",
+        "minLength": "La logitud minima es de {{param}}",
+        "min": "El mímimo es de {{param}}",
+        "max": "El máximo es de {{param}}"
     },
     "generalHTTPErrors": {
         "server": "Ha ocurrido un error en el servidor, intente nuevamente más tarde.",
@@ -26,7 +30,9 @@
         "emailPlaceholder": "Dirección de correo electrónico",
         "passwordPlaceholder": "Contraseña",
         "enabledPlaceholder": "Habilitado",
-        "rolPlaceholder": "Rol"
+        "rolPlaceholder": "Rol",
+        "createOk": "Usuario creado satisfactoriamente.",
+        "updateOk": "Usuario actualizado satisfactoriamente."
     },
     "table": {
         "name": "Nombre",

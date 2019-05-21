@@ -19,7 +19,7 @@ export class User {
         this.username = username;
         this.email = email;
         this.password = password;
-        this.enabled = enabled;
+        this.enabled = enabled || true;
         this.rol = rol;
     }
 }
