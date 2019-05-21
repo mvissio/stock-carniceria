@@ -31,7 +31,7 @@ export class UserComponent implements OnInit {
     private fb: FormBuilder,
     private _commonsService: CommonsService) {
     this.id = this.activateRoute.snapshot.params['id'];
-    this.disabledFields = this.activateRoute.snapshot.queryParams['edit'] && this.activateRoute.snapshot.queryParams['edit'] === 'true';
+    this.disabledFields = this.activateRoute.snapshot.queryParams['edit'] && this.activateRoute.snapshot.queryParams['edit'] === 'false';
     if (this.id) {
       this.edit = true;
       this.getUser();
@@ -53,6 +53,9 @@ export class UserComponent implements OnInit {
       rol: [this.user.rol, Validators.required],
       enabled: [this.user.enabled]
     }, {updateOn: 'blur'});
+    if (this.disabledFields)  {
+      this.userForm.disable();
+    }
   }
 
   get userControls() { return this.userForm.controls; }
