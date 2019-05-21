@@ -76,12 +76,8 @@ export class UsersComponent implements OnInit {
     
   }
 
-  editUser(userId: number) {
-    this.router.navigate(['/configuracion/usuario', userId], {queryParams: {edit: true}, skipLocationChange: true});
-  }
-
-  showUser(userId: number) {
-    this.router.navigate(['/configuracion/usuario', userId], {queryParams: {edit: false}, skipLocationChange: true});
+  editOrShowUser(userId: number, edit: boolean = false) {
+    this.router.navigate(['/configuracion/usuario', userId], {queryParams: {edit: edit}, skipLocationChange: true});
   }
 
   deleteUser(username: string) {
