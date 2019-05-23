@@ -77,8 +77,8 @@ export class LoginComponent implements OnInit {
       return;
     }
     this._authService.recoverPassword(this.forgotPasswordForm.value.email)
-    .subscribe((res) => {
-        console.log(res);
+    .subscribe((res: any) => {
+      this._commonsService.showMessage('success', res.result);
       },
       (err: HttpErrorResponse) => {
         this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
