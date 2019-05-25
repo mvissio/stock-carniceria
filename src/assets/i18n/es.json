@@ -34,11 +34,36 @@
         "createOk": "Usuario creado satisfactoriamente.",
         "updateOk": "Usuario actualizado satisfactoriamente."
     },
+    "articles": {
+        "title": "Articulos",
+        "searchLabel": "Buscar articulo...",
+        "namePlaceholder": "Nombre",
+        "brandPlaceholder" : "Marca",
+        "currentPricePlaceholder" : "Precio actual",
+        "currentQuantityPlaceholder" : "Cantidad actual",
+        "descriptionPlaceholder" : "Descripción",
+        "expirationDatePlaceholder" : "Tiempo de Expiración",
+        "measurementUnitIdPlaceholder" : "Undiad de medida",
+        "enabledPlaceholder": "Habilitado",
+        "createOk": "Articulo creado satisfactoriamente.",
+        "updateOk": "Articulo actualizado satisfactoriamente."
+    },
     "table": {
         "name": "Nombre",
         "email": "Correo",
         "role": "Role",
         "status": "Estado",
+        "accions": "Acciones"
+    },
+    "articleTable": {
+        "name" : "Nombre",
+        "brand" : "Marca",
+        "currentPrice" : "Precio",
+        "currentQuantity" : "Cantidad",
+        "description" : "Descripción",
+        "expirationDate" : "Fecha expiración",
+        "measurementUnitId" : "Unidad medida",
+        "status" : "Estado",
         "accions": "Acciones"
     },
     "forgotPassword": {
@@ -77,5 +102,9 @@
     "userStatus": {
         "enabled": "Habilitado",
         "disabled": "Deshabilitado"
+    },
+    "articleStatus": {
+        "enabled": "Alta",
+        "disabled": "Baja"
     }
 }

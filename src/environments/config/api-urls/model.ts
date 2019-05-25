@@ -1,6 +1,7 @@
 export class ApiURLs {
   auth: AuthURLs;
   user: UserURLs;
+  article: ArticleURLs;
 }
 
 interface AuthURLs {
@@ -14,5 +15,12 @@ interface UserURLs {
   getUserByUserId?: string;
   getAllRoles?: string;
   deleteUser?: string;
+}
+
+interface ArticleURLs {
+  base: string;
+  getArticleByName?: string;
+  getArticleByArticleId?: string;  
+  deleteArticle?: string;
 }
 

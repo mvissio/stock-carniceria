@@ -1,0 +1,64 @@
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <input #input (keyup.enter)="findArticle(input.value)" type="search" class="form-control" [placeholder]="'article.searchLabel' | translate">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row animated fadeIn" *ngIf="!loading">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">{{'articles.title' | translate}} (
+                    <small>{{ page.totalElements}}</small> )
+                </h3>
+                <button type="button" class="btn btn-primary float-right mdi mdi-plus" [routerLink]="['/configuracion/article']"></button>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>{{'articleTable.name' | translate}}</th>
+                            <th>{{'articleTable.brand' | translate}}</th>
+                            <th>{{'articleTable.currentPrice' | translate}}</th>
+                            <th>{{'articleTable.currentQuantity' | translate}}</th>
+                            <th>{{'articleTable.description' | translate}}</th>
+                            <th>{{'articleTable.expirationDate' | translate}}</th>
+                            <th>{{'articleTable.measurementUnitId' | translate}}</th>
+                            <th>{{'articleTable.status' | translate}}</th>                            
+                            <th>{{'articleTable.accions' | translate}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let article of articles">
+                            <td>{{ article?.name }}</td>
+                            <td>{{ article?.brand }}</td>
+                            <td>{{ article?.currentPrice }}</td>
+                            <td>{{article?.currentQuantity}}</td>
+                            <td>{{article?.description}}</td>
+                            <td>{{article?.expirationDate | date: 'dd/MM/yyyy'}}</td>
+                            <td>{{article?.measurementUnitId}}</td>
+                            <td><span class="label label-rounded" [ngClass]="(!article.disabled)? 'label-success':'label-danger'">{{getArticleStatus(article)}}</span>
+                            </td>
+                            <td>
+                                <div class="button-group">
+                                    <button class="btn btn-secondary" (click)="editOrShowArticle(article.articleId)">
+                                        <i class="mdi mdi-eye-outline"></i>
+                                    </button>
+                                    <button class="btn btn-info" (click)="editOrShowArticle(article.articleId, true)">
+                                        <i class="mdi mdi-account-edit"></i>
+                                        </button>
+                                    <button class="btn btn-danger" (click)="deleteArticle(article.name)">
+                                        <i class="mdi mdi-account-remove"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<app-loading [loading]="loading"></app-loading>
+<app-pagination [page]="page" [pages]="pages" (pageNumber)="setPage($event)" *ngIf="articles"></app-pagination>

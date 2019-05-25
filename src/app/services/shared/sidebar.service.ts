@@ -22,6 +22,7 @@ export class SidebarService {
         { titulo: 'Productos', url: '/configuracion/productos' },
         { titulo: 'Precios', url: '/configuracion/precios' },
         { titulo: 'Usuarios', url: '/configuracion/usuarios' },
+        { titulo: 'Articulos', url: '/configuracion/articulos' }
       ]
     }
   ];

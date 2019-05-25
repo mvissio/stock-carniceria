@@ -17,12 +17,14 @@ import { AccoutSettingsComponent } from './accout-settings/accout-settings.compo
 import { ChartsModule } from 'ng2-charts';
 import {ComponentsModule} from '../components/components.module';
 import { UsersComponent } from './users/users.component';
+import { ArticlesComponent } from './articles/articles.component';
 import { CommonModule } from '@angular/common';
 import { UserComponent } from './users/user/user.component';
 
 // others
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
+import { ArticleComponent } from './articles/article/article.component';
 
 
 @NgModule({
@@ -32,7 +34,9 @@ import { TranslateModule } from '@ngx-translate/core';
       AccoutSettingsComponent,
       Graficas1Component,
       UsersComponent,
-      UserComponent
+      ArticlesComponent,
+      UserComponent,
+      ArticleComponent
     ],
     exports: [
       HomeComponent,

@@ -10,6 +10,10 @@ import {GrantedAuthorityGuard} from '../guards/granted-authority.guard';
 import { UsersComponent } from './users/users.component';
 import { UserComponent } from './users/user/user.component';
 
+import { ArticlesComponent } from './articles/articles.component';
+import { ArticleComponent } from './articles/article/article.component';
+
+
 const pagesRoutes: Routes = [
   {
     path: '',
@@ -54,6 +58,25 @@ const pagesRoutes: Routes = [
         path: 'usuario', component: UserComponent,
         canActivate: [AuthGuard, GrantedAuthorityGuard],
         data: {titulo: 'Crear Usuario', roles: [roles.administrador]}
+      },
+      {path: '', redirectTo: '/inicio', pathMatch: 'full'},
+      {
+        path: 'articulos',
+        component: ArticlesComponent,
+        canActivate: [AuthGuard, GrantedAuthorityGuard],
+        data: {
+          titulo: 'Articulos', roles: [roles.administrador]
+        },
+      },
+      { 
+        path: 'articulo/:id', component: UserComponent,
+        canActivate: [AuthGuard, GrantedAuthorityGuard],
+        data: {titulo: 'Actualizar Articulo', roles: [roles.administrador]}
+      },
+      { 
+        path: 'articulo', component: UserComponent,
+        canActivate: [AuthGuard, GrantedAuthorityGuard],
+        data: {titulo: 'Crear Articulo', roles: [roles.administrador]}
       },
       {path: '', redirectTo: '/inicio', pathMatch: 'full'}
     ]

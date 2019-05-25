@@ -11,5 +11,10 @@ export const applicationApiUrls: ApiURLs = {
     getUserByUserId: '/id',
     getAllRoles: '/roles',
     deleteUser: '/username'
+  },
+  article: {
+    base:'API_VERSION/articles',
+    getArticleByArticleId: '/id',
+    deleteArticle: '/name'
   }
 };
