@@ -116,7 +116,9 @@ export class UserComponent implements OnInit {
     this.user.email = this.userForm.value.email;
     this.user.enabled = this.userForm.value.enabled;
     this.user.password = this.userForm.value.password;
-    this.user.rol = new Rol(this.userForm.value.rol);
+    if ((this.user.rol && this.user.rol !== this.userForm.value.rol) || !this.user.rol) {
+      this.user.rol = new Rol(this.userForm.value.rol);
+    }
   }
 
   selectedRol(rol: string): boolean {
