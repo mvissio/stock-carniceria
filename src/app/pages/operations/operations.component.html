@@ -1,0 +1,64 @@
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <input #input (keyup.enter)="findOperation(input.value)" type="search" class="form-control" [placeholder]="'operations.searchLabel' | translate">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row animated fadeIn" *ngIf="!loading">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">{{'operations.title' | translate}} (
+                    <small>{{ page.totalElements}}</small> )
+                </h3>
+                <button type="button" class="btn btn-primary float-right mdi mdi-plus" [routerLink]="['/operacion']"></button>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>{{'table.operations.creationDate' | translate}}</th>
+                            <th>{{'table.operations.disabledDate' | translate}}</th>
+                            <th>{{'table.operations.disabled' | translate}}</th>
+                            <th>{{'table.operations.type' | translate}}</th>
+                            <th>{{'table.operations.paymentMethod' | translate}}</th>
+                            <th>{{'table.operations.total' | translate}}</th>
+                            <th>{{'table.operations.subTotal' | translate}}</th>
+                            <th>{{'table.status' | translate}}</th>
+                            <th>{{'table.accions' | translate}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let operation of operations">
+                            <td>{{ operation?.creationDate }}</td>
+                            <td>{{ operation?.disabledDate }}</td>
+                            <td>{{operation?.rol.disabled}}</td>
+                            <td>{{ operation?.type }}</td>
+                            <td>{{ operation?.paymentMethod }}</td>
+                            <td>{{operation?.rol.total}}</td>
+                            <td>{{ operation?.subTotal }}</td>
+                            <td><span class="label label-rounded" [ngClass]="(operation.disabled)? 'label-success':'label-danger'">{{getOperationStatus(operation)}}</span>
+                            </td>
+                            <td>
+                                <div class="button-group">
+                                    <button class="btn btn-secondary" (click)="editOrShowOperation(operation.operationId)">
+                                      <i class="mdi mdi-eye-outline"></i>
+                                  </button>
+                                    <button class="btn btn-info" (click)="editOrShowOperation(operation.operationId, true)">
+                                      <i class="mdi mdi-account-edit"></i>
+                                      </button>
+                                    <button class="btn btn-danger" (click)="CancelOperation(operation.operationId)">
+                                      <i class="mdi mdi-account-remove"></i>
+                                  </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<app-loading [loading]="loading"></app-loading>
+<app-pagination [page]="page" [pages]="pages" (pageNumber)="setPage($event)" *ngIf="operation"></app-pagination>

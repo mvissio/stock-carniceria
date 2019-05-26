@@ -7,10 +7,6 @@ export const USUARIO_KEY = 'username';
 export const TOKEN_KEY = 'token';
 export const EMAIL_KEY = 'email';
 
-// Timeout
-export const TIMEOUT = 'El tiempo de espera es muy largo intente nuevamente mas tarde.';
-
-
 export const roles = {
   sysAdministrador: 'SUPERADMINISTRADOR',
   administrador: 'ADMINISTRADOR',

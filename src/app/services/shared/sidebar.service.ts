@@ -15,13 +15,21 @@ export class SidebarService {
       ]
     },
     {
+      titulo: 'Operaciones',
+      icono: 'mdi mdi-currency-usd',
+      roles: [roles.sysAdministrador, roles.administrador],
+      submenu: [
+        { titulo: 'Operaciones', url: '/operaciones' },
+      ]
+    },
+    {
       titulo: 'Configuraciones',
       icono: 'mdi mdi-settings',
-      roles: [roles.administrador],
+      roles: [roles.sysAdministrador, roles.administrador],
       submenu: [
         { titulo: 'Productos', url: '/configuracion/productos' },
         { titulo: 'Precios', url: '/configuracion/precios' },
-        { titulo: 'Usuarios', url: '/configuracion/usuarios' },
+        { titulo: 'Usuarios', url: '/configuracion/usuarios', roles: [roles.sysAdministrador] },
       ]
     }
   ];

@@ -14,7 +14,8 @@
         "conflict": "Ha habido un conflicto con los datos, intente nuevamente más tarde.",
         "authorization": "No tiene permisos para acceder a los datos requeridos.",
         "login": "Usuario o contraseña incorrecta.",
-        "cantConnect": "No se pudo conectar con el servidor."
+        "cantConnect": "No se pudo conectar con el servidor.",
+        "timeOut": "El tiempo de espera es muy largo intente nuevamente mas tarde."
     },
     "login": {
         "rememberMeCheck": "Recuérdame",
@@ -35,9 +36,20 @@
         "updateOk": "Usuario actualizado satisfactoriamente."
     },
     "table": {
-        "name": "Nombre",
-        "email": "Correo",
-        "role": "Role",
+        "users": {
+            "name": "Nombre",
+            "email": "Correo",
+            "role": "Role"
+        },
+        "operations": {
+            "creationDate": "Fecha de creación",
+            "disabledDate": "Fecha de baja",
+            "disabled": "Deshabilitar",
+            "type": "Tipo de operación",
+            "paymentMethod": "Forma de pago",
+            "total": "Total",
+            "subTotal": "Total"
+        },
         "status": "Estado",
         "accions": "Acciones"
     },
@@ -47,6 +59,10 @@
     },
     "header": {
         "logoutLabel": "Salir"
+    },
+    "sidebar": {
+        "menu": "Menu",
+        "themeLabel": "Mi tema"
     },
     "spinner": {
         "title": "Cargando",
@@ -58,6 +74,9 @@
         },
         "deleteUser": {
             "title": "¿Estas seguro que quieres deshabilitar el usuario {{param}}?"
+        },
+        "cancelOperation": {
+            "title": "¿Estas seguro que deseas cancelar la operación?"
         },
         "defaultConfirmButton": "Confirmar",
         "defaultCancelButton": "Cancelar"

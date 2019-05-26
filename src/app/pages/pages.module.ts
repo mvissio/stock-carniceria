@@ -23,7 +23,10 @@ import { UserComponent } from './users/user/user.component';
 // others
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-
+import { OperationsComponent } from './operations/operations.component';
+import { OperationComponent } from './operations/operation/operation.component';
+import { OperationDetailsComponent } from './operations/operation-details/operation-details.component';
+import { OperationDetailComponent } from './operations/operation-details/operation-detail/operation-detail.component';
 
 @NgModule({
     declarations: [
@@ -32,7 +35,11 @@ import { TranslateModule } from '@ngx-translate/core';
       AccoutSettingsComponent,
       Graficas1Component,
       UsersComponent,
-      UserComponent
+      UserComponent,
+      OperationsComponent,
+      OperationComponent,
+      OperationDetailsComponent,
+      OperationDetailComponent
     ],
     exports: [
       HomeComponent,
