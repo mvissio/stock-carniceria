@@ -77,12 +77,12 @@ export class ArticlesComponent implements OnInit {
   }
 
   editOrShowArticle(articleId: number, edit: boolean = false) {
-    this.router.navigate(['/configuracion/article', articleId], {queryParams: {edit: edit}, skipLocationChange: true});
+    this.router.navigate(['/configuracion/articulo', articleId], {queryParams: {edit: edit}, skipLocationChange: true});
   }
 
-  deleteArticle(username: string) {
+  deleteArticle(name: string, id : number) {
     forkJoin(
-      [this.translate.get('modals.deleteArticñe.title', {param: name}),
+      [this.translate.get('modals.deleteArticle.title', {param: name}),
       this.translate.get('modals')
     ]).subscribe((result) => {
       swal({
@@ -106,7 +106,7 @@ export class ArticlesComponent implements OnInit {
       }
     ).then((data) => {
       if (data) {
-        this._articleService.deleteArticle(name).subscribe();
+        this._articleService.deleteArticle(id).subscribe();
       }
     });
     });  

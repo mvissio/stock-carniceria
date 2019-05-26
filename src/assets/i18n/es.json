@@ -42,7 +42,7 @@
         "currentPricePlaceholder" : "Precio actual",
         "currentQuantityPlaceholder" : "Cantidad actual",
         "descriptionPlaceholder" : "Descripción",
-        "expirationDatePlaceholder" : "Tiempo de Expiración",
+        "expirationDatePlaceholder" : "Fecha de Expiración",
         "measurementUnitIdPlaceholder" : "Undiad de medida",
         "enabledPlaceholder": "Habilitado",
         "createOk": "Articulo creado satisfactoriamente.",
@@ -83,6 +83,9 @@
         },
         "deleteUser": {
             "title": "¿Estas seguro que quieres deshabilitar el usuario {{param}}?"
+        },
+        "deleteArticle": {
+            "title": "¿Estas seguro que quieres dar de baja el articulo {{param}}?"
         },
         "defaultConfirmButton": "Confirmar",
         "defaultCancelButton": "Cancelar"

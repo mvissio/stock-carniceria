@@ -7,6 +7,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CommonsService } from '../../../services/commons.service';
 import { HandleErrorsService } from '../../../services/shared/handle-errors.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { formatDate } from '@angular/common';
 
 
 @Component({
@@ -44,14 +45,15 @@ export class ArticleComponent implements OnInit {
   }
 
   initForm() {
+    const format = 'dd/MM/yyyy';
+    const locale = 'en-US';
     this.articleForm = this.fb.group({           
       name: [this.article.name, [Validators.required, Validators.maxLength(45)]],
       brand: [this.article.brand, [Validators.required, Validators.maxLength(45)]],
       currentPrice: [this.article.currentPrice],
       currentQuantity: [this.article.currentQuantity],
       description: [this.article.description, [Validators.required, Validators.maxLength(45)]],
-      expirationDate: [this.article.expirationDate],
-      measurementUnitId: [this.article.measurementUnitId, [Validators.required, Validators.maxLength(45)]],      
+      expirationDate: [(this.article.expirationDate != undefined) ? formatDate(this.article.expirationDate,format,locale) : 'nada' ]         
     }, {updateOn: 'blur'});
     if (this.disabledFields)  {
       this.articleForm.disable();
@@ -107,8 +109,7 @@ export class ArticleComponent implements OnInit {
     this.article.currentPrice = this.articleForm.value.currentPrice;
     this.article.currentQuantity = this.articleForm.value.currentQuantity;
     this.article.description = this.articleForm.value.description;
-    this.article.expirationDate = this.articleForm.value.expirationDate;
-    this.article.measurementUnitId = this.articleForm.value.measurementUnitId;        
+    this.article.expirationDate = new Date(this.articleForm.value.expirationDate);              
   }
    
   back() {

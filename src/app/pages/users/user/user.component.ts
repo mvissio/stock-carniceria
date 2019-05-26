@@ -82,6 +82,7 @@ export class UserComponent implements OnInit {
   }
 
   saveUser() {
+    console.log("guardo el usaurio")
     if (this.userForm.invalid) {
       return;
     }

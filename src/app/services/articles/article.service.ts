@@ -32,7 +32,7 @@ export class ArticleService {
   }
 
   getArticleByArticleId(id: number) {
-    const url = `${this.articleUrl.getArticleByArticleId}?id=${id}`;
+    const url = `${this.articleUrl.getArticleByArticleId}/${id}`;
     return this.httpClient.get(url)
       .pipe(map((response: Article) => {
           this.article = response;
@@ -50,14 +50,16 @@ export class ArticleService {
   }
   
   updateArticle(article: Article) {
+    article.expirationDate = new Date(article.expirationDate);
     const url = this.articleUrl.base;
     return this.httpClient.put(url, article)
       .pipe(map((response: any) => response));
   }
 
   
-  deleteArticle(name: string) {
-    const url = `${this.articleUrl.deleteArticle}?name=${name}`;
+  deleteArticle(id: number) {
+    const url = `${this.articleUrl.deleteArticle}/${id}`;
+    console.log("esta es la url" + url)
     return this.httpClient.delete(url)
     .pipe(map((response) => response));
   }

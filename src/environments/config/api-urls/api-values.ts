@@ -15,6 +15,6 @@ export const applicationApiUrls: ApiURLs = {
   article: {
     base:'API_VERSION/articles',
     getArticleByArticleId: '/id',
-    deleteArticle: '/name'
+    deleteArticle: '/id'
   }
 };

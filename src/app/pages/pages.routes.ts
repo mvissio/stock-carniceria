@@ -59,7 +59,7 @@ const pagesRoutes: Routes = [
         canActivate: [AuthGuard, GrantedAuthorityGuard],
         data: {titulo: 'Crear Usuario', roles: [roles.administrador]}
       },
-      {path: '', redirectTo: '/inicio', pathMatch: 'full'},
+      
       {
         path: 'articulos',
         component: ArticlesComponent,
@@ -69,12 +69,12 @@ const pagesRoutes: Routes = [
         },
       },
       { 
-        path: 'articulo/:id', component: UserComponent,
+        path: 'articulo/:id', component: ArticleComponent,
         canActivate: [AuthGuard, GrantedAuthorityGuard],
         data: {titulo: 'Actualizar Articulo', roles: [roles.administrador]}
       },
       { 
-        path: 'articulo', component: UserComponent,
+        path: 'articulo', component: ArticleComponent,
         canActivate: [AuthGuard, GrantedAuthorityGuard],
         data: {titulo: 'Crear Articulo', roles: [roles.administrador]}
       },
