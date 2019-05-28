@@ -122,7 +122,7 @@ export class UserComponent implements OnInit {
   }
 
   selectedRol(rol: string): boolean {
-    return (this.user.rol && rol === this.user.rol.nombre);
+    return (this.user.rol && rol === this.user.rol.name);
   }
  
   back() {

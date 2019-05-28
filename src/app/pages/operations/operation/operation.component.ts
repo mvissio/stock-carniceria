@@ -7,6 +7,7 @@ import { OperationsService } from '../../../services/pages/operations.service';
 import { HandleErrorsService } from '../../../services/shared/handle-errors.service';
 import { CommonsService } from '../../../services/commons.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-operation',
@@ -42,7 +43,15 @@ export class OperationComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.getAllRoles();
+    forkJoin([this._operationService.getAllOperationTypes(),
+      this._operationService.getAllPaymentMethods()
+    ])
+    .subscribe((res: any) => {
+      this.operationTypes = res[0];
+      this.paymentMethods = res[1];
+    }, (err: HttpErrorResponse) => {
+      this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
+    });
   }
 
   initForm() {
@@ -67,16 +76,6 @@ export class OperationComponent implements OnInit {
         this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
       });
   }
-
-
-  // getAllRoles() {
-  //   this._userService.getAllRoles()
-  //     .subscribe((res: any) => {
-  //       this.roles = res;
-  //     }, (err: HttpErrorResponse) => {
-  //       this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
-  //     });
-  // }
 
   saveOperation() {
     if (this.operationForm.invalid) {
@@ -113,9 +112,13 @@ export class OperationComponent implements OnInit {
     this.operation.paymentMethod = this.operationForm.value.paymentMethod;
   }
 
-  // selectedRol(rol: string): boolean {
-  //   return (this.user.rol && rol === this.user.rol.nombre);
-  // }
+  selectedOperationType(operationType: string): boolean {
+    return (this.operation.operationType && operationType === this.operation.operationType);
+  }
+
+  selectedPaymentMethod(paymentMethod: string): boolean {
+    return (this.operation.paymentMethod && paymentMethod === this.operation.paymentMethod);
+  }
  
   back() {
     this.router.navigate(['/operaciones']);

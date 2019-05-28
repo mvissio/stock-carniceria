@@ -26,6 +26,7 @@
     },
     "users": {
         "title": "Usuarios",
+        "childTitle": "Usuario: ",
         "searchLabel": "Buscar usuario...",
         "usernamePlaceholder": "Nombre",
         "emailPlaceholder": "Dirección de correo electrónico",
@@ -34,6 +35,14 @@
         "rolPlaceholder": "Rol",
         "createOk": "Usuario creado satisfactoriamente.",
         "updateOk": "Usuario actualizado satisfactoriamente."
+    },
+    "operations": {
+        "title": "Operaciones",
+        "childTitle": "Operación",
+        "searchLabel": "Buscar operación...",
+        "operationTypePlaceholder": "Tipo",
+        "paymentMethodPlaceholder": "Método de pago"
+
     },
     "table": {
         "users": {

@@ -57,4 +57,16 @@ export class OperationsService {
     return this.httpClient.delete(url)
     .pipe(map((response) => response));
   }
+
+  getAllOperationTypes() {
+    const url = this.operationUrl.getAllOperationTypes;
+    return this.httpClient.get(url)
+      .pipe(map((response: any) => response));
+  }
+
+  getAllPaymentMethods() {
+    const url = this.operationUrl.getAllPaymentMethods;
+    return this.httpClient.get(url)
+      .pipe(map((response: any) => response));
+  }
 }

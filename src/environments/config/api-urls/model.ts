@@ -27,6 +27,8 @@ interface OperationURLs {
   getOperationByDateBetween?: string;
   getOperationByTypeAndDate?: string;
   cancelOperation?: string;
+  getAllOperationTypes?: string;
+  getAllPaymentMethods?: string;
 }
 
 interface OperationDetailURLs {

@@ -1,12 +1,12 @@
 export class Rol {
   rolId: number;
-  nombre: string;
+  name: string;
   
   constructor(
-    nombre: string,
+    name: string,
     rolId?: number
   ) {
-    this.nombre = nombre;
+    this.name = name;
     this.rolId = rolId;
   }
   
