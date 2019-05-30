@@ -22,7 +22,8 @@ export class SidebarService {
         { titulo: 'Productos', url: '/configuracion/productos' },
         { titulo: 'Precios', url: '/configuracion/precios' },
         { titulo: 'Usuarios', url: '/configuracion/usuarios' },
-        { titulo: 'Articulos', url: '/configuracion/articulos' }
+        { titulo: 'Articulos', url: '/configuracion/articulos' },
+        { titulo: 'Unidades de medida', url: '/configuracion/unidadesMedida' }
       ]
     }
   ];

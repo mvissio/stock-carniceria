@@ -16,15 +16,18 @@ import { Graficas1Component } from './graficas1/graficas1.component';
 import { AccoutSettingsComponent } from './accout-settings/accout-settings.component';
 import { ChartsModule } from 'ng2-charts';
 import {ComponentsModule} from '../components/components.module';
-import { UsersComponent } from './users/users.component';
 import { ArticlesComponent } from './articles/articles.component';
+import { ArticleComponent } from './articles/article/article.component';
 import { CommonModule } from '@angular/common';
+import { UsersComponent } from './users/users.component';
 import { UserComponent } from './users/user/user.component';
+
 
 // others
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import { ArticleComponent } from './articles/article/article.component';
+import { MeasurementUnitsComponent } from './measurement-units/measurement-units.component';
+import { MeasurementUnitComponent } from './measurement-units/measurement-unit/measurement-unit.component';
 
 
 @NgModule({
@@ -34,9 +37,11 @@ import { ArticleComponent } from './articles/article/article.component';
       AccoutSettingsComponent,
       Graficas1Component,
       UsersComponent,
-      ArticlesComponent,
       UserComponent,
-      ArticleComponent
+      ArticlesComponent,      
+      ArticleComponent,
+      MeasurementUnitComponent,
+      MeasurementUnitsComponent
     ],
     exports: [
       HomeComponent,

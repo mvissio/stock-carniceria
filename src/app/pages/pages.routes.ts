@@ -9,9 +9,11 @@ import {AuthGuard} from '../guards/auth.guard';
 import {GrantedAuthorityGuard} from '../guards/granted-authority.guard';
 import { UsersComponent } from './users/users.component';
 import { UserComponent } from './users/user/user.component';
-
 import { ArticlesComponent } from './articles/articles.component';
 import { ArticleComponent } from './articles/article/article.component';
+import { MeasurementUnitsComponent } from './measurement-units/measurement-units.component';
+import { MeasurementUnitComponent } from './measurement-units/measurement-unit/measurement-unit.component';
+
 
 
 const pagesRoutes: Routes = [
@@ -59,7 +61,7 @@ const pagesRoutes: Routes = [
         canActivate: [AuthGuard, GrantedAuthorityGuard],
         data: {titulo: 'Crear Usuario', roles: [roles.administrador]}
       },
-      
+
       {
         path: 'articulos',
         component: ArticlesComponent,
@@ -78,7 +80,26 @@ const pagesRoutes: Routes = [
         canActivate: [AuthGuard, GrantedAuthorityGuard],
         data: {titulo: 'Crear Articulo', roles: [roles.administrador]}
       },
-      {path: '', redirectTo: '/inicio', pathMatch: 'full'}
+
+      {
+        path: 'unidadesMedida',
+        component: MeasurementUnitsComponent,
+        canActivate: [AuthGuard, GrantedAuthorityGuard],
+        data: {
+          titulo: 'Unidades de Medida', roles: [roles.administrador]
+        },
+      },
+      { 
+        path: 'unidadMedida/:id', component: MeasurementUnitComponent,
+        canActivate: [AuthGuard, GrantedAuthorityGuard],
+        data: {titulo: 'Actualizar unidad de medida', roles: [roles.administrador]}
+      },
+      { 
+        path: 'unidadMedida', component: MeasurementUnitComponent,
+        canActivate: [AuthGuard, GrantedAuthorityGuard],
+        data: {titulo: 'Crear unidadMedida', roles: [roles.administrador]}
+      }    
+      ,{path: '', redirectTo: '/inicio', pathMatch: 'full'}
     ]
   }
 ];

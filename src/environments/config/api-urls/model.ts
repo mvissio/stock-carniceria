@@ -2,6 +2,7 @@ export class ApiURLs {
   auth: AuthURLs;
   user: UserURLs;
   article: ArticleURLs;
+  measurementUnit: MeasurementUnitURLs 
 }
 
 interface AuthURLs {
@@ -23,4 +24,12 @@ interface ArticleURLs {
   getArticleByArticleId?: string;  
   deleteArticle?: string;
 }
+
+interface MeasurementUnitURLs {
+  base: string;
+  getMeasurementUnitByName?: string;
+  getMeasurementUnitByMeasurementUnitId?: string;  
+  deleteMeasurementUnit?: string;
+}
+
 

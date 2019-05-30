@@ -16,5 +16,11 @@ export const applicationApiUrls: ApiURLs = {
     base:'API_VERSION/articles',
     getArticleByArticleId: '/id',
     deleteArticle: '/id'
+  },
+  measurementUnit:{
+    base:'API_VERSION/measurementUnits',
+    getMeasurementUnitByMeasurementUnitId: '/id',
+    deleteMeasurementUnit: '/id'
   }
+
 };
