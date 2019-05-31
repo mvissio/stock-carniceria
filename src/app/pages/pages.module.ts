@@ -26,7 +26,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { OperationsComponent } from './operations/operations.component';
 import { OperationComponent } from './operations/operation/operation.component';
 import { OperationDetailsComponent } from './operations/operation-details/operation-details.component';
-import { OperationDetailComponent } from './operations/operation-details/operation-detail/operation-detail.component';
 
 @NgModule({
     declarations: [
@@ -38,8 +37,7 @@ import { OperationDetailComponent } from './operations/operation-details/operati
       UserComponent,
       OperationsComponent,
       OperationComponent,
-      OperationDetailsComponent,
-      OperationDetailComponent
+      OperationDetailsComponent
     ],
     exports: [
       HomeComponent,

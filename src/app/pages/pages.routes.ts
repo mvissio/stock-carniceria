@@ -20,30 +20,30 @@ const pagesRoutes: Routes = [
       {
         path: 'inicio', component: HomeComponent,
         canActivate: [AuthGuard, GrantedAuthorityGuard],
-        data: {titulo: 'Inicio', roles: [roles.sysAdministrador, roles.administrador]}
+        data: {titulo: 'Inicio', roles: [roles.sysAdmin, roles.admin]}
       },
       {
         path: 'graficas1', component: Graficas1Component,
         canActivate: [AuthGuard, GrantedAuthorityGuard],
-        data: {titulo: 'Gráficas', roles: [roles.sysAdministrador, roles.administrador]}
+        data: {titulo: 'Gráficas', roles: [roles.sysAdmin, roles.admin]}
       },
       {
         path: 'operaciones',
         component: OperationsComponent,
         canActivate: [AuthGuard, GrantedAuthorityGuard],
         data: {
-          titulo: 'Operaciones', roles: [roles.sysAdministrador, roles.administrador]
+          titulo: 'Operaciones', roles: [roles.sysAdmin, roles.admin]
         },
       },
       { 
         path: 'operacion/:id', component: OperationComponent,
         canActivate: [AuthGuard, GrantedAuthorityGuard],
-        data: {titulo: 'Actualizar Operacion', roles: [roles.sysAdministrador, roles.administrador]}
+        data: {titulo: 'Actualizar Operacion', roles: [roles.sysAdmin, roles.admin]}
       },
       { 
         path: 'operacion', component: OperationComponent,
         canActivate: [AuthGuard, GrantedAuthorityGuard],
-        data: {titulo: 'Crear Operacion', roles: [roles.sysAdministrador, roles.administrador]}
+        data: {titulo: 'Crear Operacion', roles: [roles.sysAdmin, roles.admin]}
       },
       {path: '', redirectTo: '/inicio', pathMatch: 'full'}
     ]
@@ -62,18 +62,18 @@ const pagesRoutes: Routes = [
         component: UsersComponent,
         canActivate: [AuthGuard, GrantedAuthorityGuard],
         data: {
-          titulo: 'Usuarios', roles: [roles.sysAdministrador]
+          titulo: 'Usuarios', roles: [roles.sysAdmin]
         },
       },
       { 
         path: 'usuario/:id', component: UserComponent,
         canActivate: [AuthGuard, GrantedAuthorityGuard],
-        data: {titulo: 'Actualizar Usuario', roles: [roles.sysAdministrador]}
+        data: {titulo: 'Actualizar Usuario', roles: [roles.sysAdmin]}
       },
       { 
         path: 'usuario', component: UserComponent,
         canActivate: [AuthGuard, GrantedAuthorityGuard],
-        data: {titulo: 'Crear Usuario', roles: [roles.sysAdministrador]}
+        data: {titulo: 'Crear Usuario', roles: [roles.sysAdmin]}
       },
       {path: '', redirectTo: '/inicio', pathMatch: 'full'}
     ]

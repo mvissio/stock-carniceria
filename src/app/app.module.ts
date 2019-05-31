@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 //Toast
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { NgxSmartModalModule } from 'ngx-smart-modal';
 
 //Translation
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';

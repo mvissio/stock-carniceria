@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { SidebarService } from '../../services/service.index';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-sidebar',
@@ -17,7 +18,7 @@ export class SidebarComponent implements OnInit {
 
   constructor( public _sidebarService: SidebarService,
     private _authService: AuthService,
-    private router: Router  ) { }
+    private translate: TranslateService) { }
 
     ngOnInit() {
       this.username = this._authService.getUserName();
@@ -26,5 +27,12 @@ export class SidebarComponent implements OnInit {
   
     hasPermissions(roles: string[]) {
       return this._authService.hasPermissions(roles, this.userRol);
+    }
+
+    getRolName() {
+      let rolName = '';
+      this.translate.get('roles.' + this.userRol)
+      .subscribe((value: any) => rolName = value);
+      return rolName;
     }
 }

@@ -41,7 +41,10 @@
         "childTitle": "Operación",
         "searchLabel": "Buscar operación...",
         "operationTypePlaceholder": "Tipo",
-        "paymentMethodPlaceholder": "Método de pago"
+        "paymentMethodPlaceholder": "Método de pago",
+        "detailOperationButtonLabel": "Añadir detalle operación",
+        "pricePlaceholder": "Precio",
+        "amountPlaceholder": "Cantidad"
 
     },
     "table": {
@@ -105,5 +108,19 @@
     "userStatus": {
         "enabled": "Habilitado",
         "disabled": "Deshabilitado"
+    },
+    "roles": {
+        "SYSADMIN": "sistemas",
+        "ADMIN": "administrador",
+        "USER": "usuario"
+    },
+    "operationTypes": {
+        "BUY": "Compra",
+        "SALE": "Venta"
+    },
+    "paymentMethods": {
+        "CC": "Tarjeta de Crédito",
+        "CASH": "Efectivo"
     }
+
 }

@@ -8,7 +8,7 @@ export class SidebarService {
     {
       titulo: 'Principal',
       icono: 'mdi mdi-gauge',
-      roles: [roles.administrador],
+      roles: [roles.admin],
       submenu: [
         { titulo: 'Inicio', url: '/inicio' },
         { titulo: 'Gráficas', url: '/graficas1' }
@@ -17,7 +17,7 @@ export class SidebarService {
     {
       titulo: 'Operaciones',
       icono: 'mdi mdi-currency-usd',
-      roles: [roles.sysAdministrador, roles.administrador],
+      roles: [roles.sysAdmin, roles.admin],
       submenu: [
         { titulo: 'Operaciones', url: '/operaciones' },
       ]
@@ -25,11 +25,11 @@ export class SidebarService {
     {
       titulo: 'Configuraciones',
       icono: 'mdi mdi-settings',
-      roles: [roles.sysAdministrador, roles.administrador],
+      roles: [roles.sysAdmin, roles.admin],
       submenu: [
         { titulo: 'Productos', url: '/configuracion/productos' },
         { titulo: 'Precios', url: '/configuracion/precios' },
-        { titulo: 'Usuarios', url: '/configuracion/usuarios', roles: [roles.sysAdministrador] },
+        { titulo: 'Usuarios', url: '/configuracion/usuarios', roles: [roles.sysAdmin] },
       ]
     }
   ];

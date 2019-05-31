@@ -10,7 +10,7 @@ import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { PaginationComponent } from './pagination/pagination.component';
 import { LoadingComponent } from './loading/loading.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { DropdownTranslatePipe } from './pipes/dropdown-translate.pipe';
 
 
 @NgModule({
@@ -26,7 +26,8 @@ import { ReactiveFormsModule } from '@angular/forms';
         BreadcrumbsComponent,
         NopagefoundComponent,
         PaginationComponent,
-        LoadingComponent
+        LoadingComponent,
+        DropdownTranslatePipe
     ],
     exports: [
         CommonModule,
@@ -38,7 +39,8 @@ import { ReactiveFormsModule } from '@angular/forms';
         BreadcrumbsComponent,
         NopagefoundComponent,
         PaginationComponent,
-        LoadingComponent
+        LoadingComponent,
+        DropdownTranslatePipe
     ]
 })
 export class SharedModule { }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Operation } from '../../../models/operation.model';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { OperationsService } from '../../../services/pages/operations.service';
@@ -8,6 +8,7 @@ import { HandleErrorsService } from '../../../services/shared/handle-errors.serv
 import { CommonsService } from '../../../services/commons.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { forkJoin } from 'rxjs';
+import { OperationDetail } from '../../../models/operationDetail.model';
 
 @Component({
   selector: 'app-operation',
@@ -55,9 +56,22 @@ export class OperationComponent implements OnInit {
   }
 
   initForm() {
+    let operationDetails = this.fb.array([]);
+    if (this.edit) {
+      if (this.operation.operationDetails) {
+        for (let operationDetail of this.operation.operationDetails) {
+          operationDetails.push(this.fb.group({
+            price: [operationDetail.price, Validators.required],
+            amount: [operationDetail.amount, Validators.required]
+          })
+          );
+        }
+      }
+    }
     this.operationForm = this.fb.group({
       operationType: [this.operation.operationType, Validators.required],
-      paymentMethod: [this.operation.paymentMethod, Validators.required]
+      paymentMethod: [this.operation.paymentMethod, Validators.required],
+      operationDetails: operationDetails
     }, {updateOn: 'blur'});
     if (this.disabledFields)  {
       this.operationForm.disable();
@@ -118,6 +132,15 @@ export class OperationComponent implements OnInit {
 
   selectedPaymentMethod(paymentMethod: string): boolean {
     return (this.operation.paymentMethod && paymentMethod === this.operation.paymentMethod);
+  }
+
+  addOperationDetail() {
+    (<FormArray>this.operationForm.get('operationDetails')).push(
+      new FormGroup({
+        price: new FormControl(null, Validators.required),
+        amount: new FormControl(null, Validators.required)
+      })
+    );
   }
  
   back() {

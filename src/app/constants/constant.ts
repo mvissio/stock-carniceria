@@ -8,9 +8,9 @@ export const TOKEN_KEY = 'token';
 export const EMAIL_KEY = 'email';
 
 export const roles = {
-  sysAdministrador: 'SUPERADMINISTRADOR',
-  administrador: 'ADMINISTRADOR',
-  usuario: 'USUARIO'
+  sysAdmin: 'SYSADMIN',
+  admin: 'ADMIN',
+  user: 'USER'
 };
 
 export const toastType = {
