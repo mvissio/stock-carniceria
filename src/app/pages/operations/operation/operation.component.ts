@@ -9,6 +9,7 @@ import { CommonsService } from '../../../services/commons.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { forkJoin } from 'rxjs';
 import { OperationDetail } from '../../../models/operationDetail.model';
+import { operationStatus } from '../../../constants/constant';
 
 @Component({
   selector: 'app-operation',
@@ -80,6 +81,17 @@ export class OperationComponent implements OnInit {
 
   get operationControls() { return this.operationForm.controls; }
 
+  operationDetailControls(i: number) { return this.operationForm.get("operationDetails")['controls'][i].controls; }
+
+  getArticlesByName() {
+    this._operationService.getOperationById(this.id)
+      .subscribe((res: Operation) => {
+        this.operation = res;
+        this.initForm();
+      }, (err: HttpErrorResponse) => {
+        this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
+      });
+  }
 
   getOperation() {
     this._operationService.getOperationById(this.id)
@@ -124,6 +136,19 @@ export class OperationComponent implements OnInit {
   setOperation() {
     this.operation.operationType = this.operationForm.value.operationType;
     this.operation.paymentMethod = this.operationForm.value.paymentMethod;
+    this.operation.operationDetails = this.operationForm.value.operationDetails;
+    if (!this.edit) {
+      this.operation.createDate = new Date();
+      this.operation.operationStatus = operationStatus.buy;
+      this.operation.subTotal = this.getTotal();
+      this.operation.total = this.getTotal();
+    }
+  }
+
+  getTotal() {
+    let total: number;
+    this.operation.operationDetails.forEach((operationDetail: OperationDetail) => total += operationDetail.price);
+    return total;
   }
 
   selectedOperationType(operationType: string): boolean {
@@ -141,6 +166,10 @@ export class OperationComponent implements OnInit {
         amount: new FormControl(null, Validators.required)
       })
     );
+  }
+
+  deleteOperationDetail(index: number) {
+    (<FormArray>this.operationForm.get('operationDetails')).removeAt(index);
   }
  
   back() {

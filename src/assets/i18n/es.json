@@ -41,11 +41,13 @@
         "childTitle": "Operación",
         "searchLabel": "Buscar operación...",
         "operationTypePlaceholder": "Tipo",
-        "paymentMethodPlaceholder": "Método de pago",
-        "detailOperationButtonLabel": "Añadir detalle operación",
+        "paymentMethodPlaceholder": "Método de pago"
+    },
+    "operationDetails": {
+        "operationDetailAddButtonLabel": "Añadir detalle operación",
+        "operationDetailDeleteButtonLabel": "Borrar detalle",
         "pricePlaceholder": "Precio",
         "amountPlaceholder": "Cantidad"
-
     },
     "table": {
         "users": {

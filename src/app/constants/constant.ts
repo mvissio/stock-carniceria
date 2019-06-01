@@ -25,4 +25,9 @@ export const toastPosition = {
   bottomRight: 'toast-bottom-right',
   topCenter: 'toast-top-center',
   bottomCenter: 'toast-bottom-center'
+};
+
+export const operationStatus = {
+  buy: "BUY",
+  canceled: "CANCELED"
 }
