@@ -21,6 +21,7 @@
         "@angular/platform-browser-dynamic": "~7.0.0",
         "@angular/router": "~7.0.0",
         "@auth0/angular-jwt": "^2.1.0",
+        "@ng-select/ng-select": "^2.20.0",
         "@ngx-translate/core": "^11.0.1",
         "@ngx-translate/http-loader": "^4.0.0",
         "bcryptjs": "^2.4.3",

@@ -3,7 +3,7 @@
         <h3 class="box-title m-b-0">{{'operations.childTitle' | translate}} {{operation?.operationId}}</h3>
         <div class="row">
             <div class="col-sm-12 col-xs-12">
-                <form class="form-material" [formGroup]="operationForm" (ngSubmit)="saveOperation()">
+                <form class="form-horizontal form-material" [formGroup]="operationForm" (ngSubmit)="saveOperation()">
                     <div class="form-group">
                         <label for="operationType" class="m-r-10">{{'operations.operationTypePlaceholder' | translate}}</label>
                         <select class="custom-select" formControlName="operationType" id="operationType">
@@ -29,28 +29,32 @@
                     <div class="form-group">
                         <button (click)="addOperationDetail()" class="btn btn-primary mdi mdi-plus">{{'operationDetails.operationDetailAddButtonLabel' | translate}}</button>
                     </div>
-                    <div class="row" formArrayName="operationDetails" *ngFor="let operationDetail of operationControls.operationDetails?.value; let i = index">
-                        <ng-container [formGroupName]="i">
-                            <div class="col-md-3">
-                                <input class="form-control" type="number" [placeholder]="'operationDetails.pricePlaceholder' | translate" formControlName="price">
-                                <div *ngIf="operationDetailControls(i).price.invalid && (operationDetailControls(i).price.dirty || operationDetailControls(i).price.touched)" class="error-label">
-                                    <small *ngIf="operationDetailControls(i).price.errors.required">
-                                    {{'generalValidations.required' | translate}}
-                                    </small>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <input class="form-control" type="number" [placeholder]="'operationDetails.amountPlaceholder' | translate" formControlName="amount">
-                                <div *ngIf="operationDetailControls(i).amount.invalid && (operationDetailControls(i).amount.dirty || operationDetailControls(i).amount.touched)" class="error-label">
-                                    <small *ngIf="operationDetailControls(i).amount.errors.required">
-                                        {{'generalValidations.required' | translate}}
+                    <div formArrayName="operationDetails">
+                        <div *ngFor="let operationDetail of operationDetails?.controls; let i = index">
+                            <div [formGroupName]="i" class="form-row border p-20">
+                                <div class="col">
+                                    <input class="form-control" type="number" [placeholder]="'operationDetails.amountPlaceholder' | translate" formControlName="amount">
+                                    <div *ngIf="operationDetailControls(i).amount.invalid && (operationDetailControls(i).amount.dirty || operationDetailControls(i).amount.touched)" class="error-label">
+                                        <small *ngIf="operationDetailControls(i).amount.errors.required">
+                                            {{'generalValidations.required' | translate}}
                                         </small>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <ng-select [items]="articles$ | async" [multiple]="false" [closeOnSelect]="true" [searchable]="true" bindLabel="brand" bindValue="articleId" placeholder="Seleccione Articulo" formControlName="articleId">
+                                    </ng-select>
+                                    <div *ngIf="operationDetailControls(i).articleId.invalid && (operationDetailControls(i).articleId.dirty || operationDetailControls(i).articleId.touched)" class="error-label">
+                                        <small *ngIf="operationDetailControls(i).articleId.errors.required">
+                                            {{'generalValidations.required' | translate}}
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <button (click)="deleteOperationDetail(i)" class="btn btn-danger mdi mdi-delete">{{'operationDetails.operationDetailDeleteButtonLabel' | translate}}</button>
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <button (click)="deleteOperationDetail(i)" class="btn btn-danger mdi mdi-delete">{{'operationDetails.operationDetailDeleteButtonLabel' | translate}}</button>
-                            </div>
-                        </ng-container>
+                            <!-- <input class="form-control" type="text" autocomplete [config]="config" [items]="articles" (inputChangedEvent)="getArticlesByName($event)" (selectEvent)="onSelectArticle($event)"> -->
+                        </div>
                     </div>
                     <div *ngIf="!disabledFields">
                         <button class="btn btn-primary m-r-10" type="submit" [disabled]="operationForm.invalid">

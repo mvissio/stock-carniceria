@@ -49,6 +49,29 @@
         "pricePlaceholder": "Precio",
         "amountPlaceholder": "Cantidad"
     },
+    "articles": {
+        "title": "Articulos",
+        "searchLabel": "Buscar articulo...",
+        "namePlaceholder": "Nombre",
+        "brandPlaceholder": "Marca",
+        "currentPricePlaceholder": "Precio actual",
+        "currentQuantityPlaceholder": "Cantidad actual",
+        "descriptionPlaceholder": "Descripción",
+        "expirationDatePlaceholder": "Fecha de Expiración",
+        "measurementUnitIdPlaceholder": "Undiad de medida",
+        "enabledPlaceholder": "Habilitado",
+        "createOk": "Articulo creado satisfactoriamente.",
+        "updateOk": "Articulo actualizado satisfactoriamente."
+    },
+    "measurementUnit": {
+        "title": "Unidades de medida",
+        "searchLabel": "Buscar unidad de medida...",
+        "namePlaceholder": "Nombre",
+        "symbolPlaceholder": "Simbolo",
+        "enabledPlaceholder": "Habilitado",
+        "createOk": "Unidad de medida creada satisfactoriamente.",
+        "updateOk": "Unidad de medida actualizada satisfactoriamente."
+    },
     "table": {
         "users": {
             "name": "Nombre",
@@ -67,6 +90,24 @@
         "status": "Estado",
         "accions": "Acciones"
     },
+    "measurementUnitTable": {
+        "name": "Nombre",
+        "symbol": "Symbolo",
+        "status": "Estado",
+        "accions": "Acciones"
+    },
+    "articleTable": {
+        "name": "Nombre",
+        "brand": "Marca",
+        "currentPrice": "Precio",
+        "currentQuantity": "Cantidad",
+        "description": "Descripción",
+        "expirationDate": "Fecha expiración",
+        "measurementUnitId": "Unidad medida",
+        "status": "Estado",
+        "accions": "Acciones"
+    },
+
     "forgotPassword": {
         "info": "Ingrese su correo electrónico y siga los pasos.",
         "emailPlaceholder": "Dirección de correo electrónico"
@@ -91,6 +132,12 @@
         },
         "cancelOperation": {
             "title": "¿Estas seguro que deseas cancelar la operación?"
+        },
+        "deleteArticle": {
+            "title": "¿Estas seguro que quieres dar de baja el articulo {{param}}?"
+        },
+        "deleteMeasurementUnit": {
+            "title": "¿Estas seguro que quieres dar de baja la unidad de medida {{param}}?"
         },
         "defaultConfirmButton": "Confirmar",
         "defaultCancelButton": "Cancelar"
@@ -123,6 +170,14 @@
     "paymentMethods": {
         "CC": "Tarjeta de Crédito",
         "CASH": "Efectivo"
+    },
+    "articleStatus": {
+        "enabled": "Alta",
+        "disabled": "Baja"
+    },
+    "measurementUnitStatus": {
+        "enabled": "Alta",
+        "disabled": "Baja"
     }
 
 }

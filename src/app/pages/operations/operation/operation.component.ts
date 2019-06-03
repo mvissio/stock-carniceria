@@ -1,15 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Operation } from '../../../models/operation.model';
-import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { OperationsService } from '../../../services/pages/operations.service';
 import { HandleErrorsService } from '../../../services/shared/handle-errors.service';
 import { CommonsService } from '../../../services/commons.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { forkJoin } from 'rxjs';
+import { forkJoin, Observable, of } from 'rxjs';
 import { OperationDetail } from '../../../models/operationDetail.model';
 import { operationStatus } from '../../../constants/constant';
+import { ArticleService } from '../../../services/articles/article.service';
+import { Article } from '../../../models/article.model';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-operation',
@@ -20,6 +23,7 @@ export class OperationComponent implements OnInit {
 
   id: number;
   operation: Operation = new Operation();
+  articles$: Observable<any[]>;
   operationTypes: any[]  = [];
   paymentMethods: any[]  = [];
   edit = false;
@@ -29,6 +33,7 @@ export class OperationComponent implements OnInit {
   constructor( private activateRoute: ActivatedRoute,
     private translate: TranslateService,
     private _operationService: OperationsService,
+    private _articleService: ArticleService,
     private _handleErrorsService: HandleErrorsService,
     private router: Router,
     private fb: FormBuilder,
@@ -45,6 +50,7 @@ export class OperationComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.articles$ = this._articleService.getAllArticlesNotPagging();
     forkJoin([this._operationService.getAllOperationTypes(),
       this._operationService.getAllPaymentMethods()
     ])
@@ -68,6 +74,11 @@ export class OperationComponent implements OnInit {
           );
         }
       }
+    } else {
+      operationDetails.push(this.fb.group({
+        amount: ['', Validators.required],
+        articleId: ['', Validators.required]
+      }));
     }
     this.operationForm = this.fb.group({
       operationType: [this.operation.operationType, Validators.required],
@@ -81,17 +92,10 @@ export class OperationComponent implements OnInit {
 
   get operationControls() { return this.operationForm.controls; }
 
-  operationDetailControls(i: number) { return this.operationForm.get("operationDetails")['controls'][i].controls; }
+  operationDetailControls(i: number) { return this.operationDetails.controls[i].controls; }
+  
+  get operationDetails() { return this.operationForm.get("operationDetails") as FormArray; }
 
-  getArticlesByName() {
-    this._operationService.getOperationById(this.id)
-      .subscribe((res: Operation) => {
-        this.operation = res;
-        this.initForm();
-      }, (err: HttpErrorResponse) => {
-        this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
-      });
-  }
 
   getOperation() {
     this._operationService.getOperationById(this.id)
@@ -104,45 +108,62 @@ export class OperationComponent implements OnInit {
   }
 
   saveOperation() {
-    if (this.operationForm.invalid) {
-      return;
-    }
-    this.setOperation();
-    if (this.edit) {
-      this._operationService.updateOperation(this.operation)
-        .subscribe(() => {
-          this.translate.get('users.updateOk')
-          .subscribe((res: string) => {
-            this._commonsService.showMessage('success', res);
-            this.back();
-          });
-        }, (err: HttpErrorResponse) => {
-          this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
-        });
-    } else {
-      this._operationService.addOperation(this.operation)
-        .subscribe(() => {
-          this.translate.get('users.createOk')
-          .subscribe((res: string) => { 
-            this._commonsService.showMessage('success', res);
-            this.back();
-          });
-        }, (err: HttpErrorResponse) => {
-          this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
-        });
-    }
+    console.log(this.operationForm.value);
+    // if (this.operationForm.invalid) {
+    //   return;
+    // }
+    // this.setOperation();
+    // if (this.edit) {
+    //   this._operationService.updateOperation(this.operation)
+    //     .subscribe(() => {
+    //       this.translate.get('users.updateOk')
+    //       .subscribe((res: string) => {
+    //         this._commonsService.showMessage('success', res);
+    //         this.back();
+    //       });
+    //     }, (err: HttpErrorResponse) => {
+    //       this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
+    //     });
+    // } else {
+    //   this._operationService.addOperation(this.operation)
+    //     .subscribe(() => {
+    //       this.translate.get('users.createOk')
+    //       .subscribe((res: string) => { 
+    //         this._commonsService.showMessage('success', res);
+    //         this.back();
+    //       });
+    //     }, (err: HttpErrorResponse) => {
+    //       this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
+    //     });
+    // }
   }
 
   setOperation() {
     this.operation.operationType = this.operationForm.value.operationType;
     this.operation.paymentMethod = this.operationForm.value.paymentMethod;
-    this.operation.operationDetails = this.operationForm.value.operationDetails;
+    this.setOperation();
     if (!this.edit) {
       this.operation.createDate = new Date();
       this.operation.operationStatus = operationStatus.buy;
       this.operation.subTotal = this.getTotal();
       this.operation.total = this.getTotal();
     }
+  }
+
+  setOperationDetails() {
+    this.operationDetails.array.forEach((operationDetailFormArray: FormArray) => {
+      let operationDetail = new OperationDetail();
+      operationDetail.amount = operationDetailFormArray.value.amount;
+      operationDetail.articleId = operationDetailFormArray.value.articleId;
+      this.articles$.subscribe((articles: Article []) => {
+        articles.filter((article: Article) => {
+          if (article.articleId === operationDetail.articleId) {
+            operationDetail.price = article.currentPrice * operationDetail.amount;
+            return article;
+          }
+        }); 
+      }); 
+    });
   }
 
   getTotal() {
@@ -159,17 +180,21 @@ export class OperationComponent implements OnInit {
     return (this.operation.paymentMethod && paymentMethod === this.operation.paymentMethod);
   }
 
+  onSelectArticle(article: Article) {
+    console.log(article);
+  }
+
   addOperationDetail() {
-    (<FormArray>this.operationForm.get('operationDetails')).push(
-      new FormGroup({
-        price: new FormControl(null, Validators.required),
-        amount: new FormControl(null, Validators.required)
+    this.operationDetails.push(
+      this.fb.group({
+        amount: ['', Validators.required],
+        articleId: ['', Validators.required]
       })
     );
   }
 
   deleteOperationDetail(index: number) {
-    (<FormArray>this.operationForm.get('operationDetails')).removeAt(index);
+    this.operationDetails.removeAt(index);
   }
  
   back() {

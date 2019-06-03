@@ -3,6 +3,8 @@ export class ApiURLs {
   user: UserURLs;
   operation: OperationURLs;
   OperationDetail: OperationDetailURLs;
+  article: ArticleURLs;
+  measurementUnit: MeasurementUnitURLs 
 }
 
 interface AuthURLs {
@@ -35,4 +37,21 @@ interface OperationDetailURLs {
   base: string;
   getOperationDetailsByOperationId: string;
 }
+
+interface ArticleURLs {
+  base: string;
+  getAllArticlesNotPagging?: string;
+  getArticleByName?: string;
+  getArticleByArticleId?: string;
+  getArticleByNameLike?: string;  
+  deleteArticle?: string;
+}
+
+interface MeasurementUnitURLs {
+  base: string;
+  getMeasurementUnitByName?: string;
+  getMeasurementUnitByMeasurementUnitId?: string;  
+  deleteMeasurementUnit?: string;
+}
+
 

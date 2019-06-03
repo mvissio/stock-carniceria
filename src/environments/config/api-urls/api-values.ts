@@ -26,5 +26,19 @@ export const applicationApiUrls: ApiURLs = {
   OperationDetail: {
     base: 'API_VERSION/operationDetail',
     getOperationDetailsByOperationId: '/operationId'
+  },  
+  article: {
+    base:'API_VERSION/articles',
+    getAllArticlesNotPagging: '/all',
+    getArticleByArticleId: '/id',
+    getArticleByName: '/name',
+    getArticleByNameLike: '/nameLike',
+    deleteArticle: '/id'
+  },
+  measurementUnit: {
+    base:'API_VERSION/measurementUnits',
+    getMeasurementUnitByMeasurementUnitId: '/id',
+    deleteMeasurementUnit: '/id'
   }
+
 };

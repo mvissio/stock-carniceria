@@ -12,7 +12,6 @@ import { PaginationComponent } from './pagination/pagination.component';
 import { LoadingComponent } from './loading/loading.component';
 import { DropdownTranslatePipe } from './pipes/dropdown-translate.pipe';
 
-
 @NgModule({
     imports: [
         CommonModule,
