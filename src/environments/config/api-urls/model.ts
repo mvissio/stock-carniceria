@@ -22,6 +22,7 @@ interface ArticleURLs {
   base: string;
   getArticleByName?: string;
   getArticleByArticleId?: string;  
+  getAllMeasurementUnits?: string;
   deleteArticle?: string;
 }
 

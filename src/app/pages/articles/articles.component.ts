@@ -10,6 +10,9 @@ import { forkJoin } from 'rxjs';
 import swal from 'sweetalert';
 import { CommonsService } from '../../services/commons.service';
 import { Router } from '@angular/router';
+import { MeasurementUnit } from '../../models/measurement-unit.model';
+import { MeasurementUnitService } from '../../services/measurement-units/measurement-unit.service';
+
 
 @Component({
   selector: 'app-articles',
@@ -23,11 +26,14 @@ export class ArticlesComponent implements OnInit {
   loading = false;
   pageConfig: PageConfig;
 
-  constructor(private _articleService: ArticleService,
+  constructor(
+              private _measurementUnitService: MeasurementUnitService,
+              private _articleService: ArticleService,
               private _handleErrorsService: HandleErrorsService,
               private translate: TranslateService,
               private router: Router,
-              private _commonsService: CommonsService) {
+              private _commonsService: CommonsService,             
+            ) {
   }
 
   ngOnInit() {
@@ -48,6 +54,7 @@ export class ArticlesComponent implements OnInit {
         (res: Page) => {
           this.page = res;
           this.articles = this.page.content;
+          console.log("estos son los articulos recup",this.articles);
           this.pages = new Array(this.page.totalPages);
           this.loading = false;
         },
@@ -120,4 +127,5 @@ export class ArticlesComponent implements OnInit {
     });
     return status;
   }
+  
 }
