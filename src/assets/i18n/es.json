@@ -4,7 +4,7 @@
         "email": "El correo electrónico debe ser una dirección de correo electrónico válida",
         "maxLength": "La logitud maxima es de {{param}}",
         "minLength": "La logitud minima es de {{param}}",
-        "min": "El mímimo es de {{param}}",
+        "min": "El mínimo es de {{param}}",
         "max": "El máximo es de {{param}}"
     },
     "generalHTTPErrors": {
@@ -46,8 +46,9 @@
     "operationDetails": {
         "operationDetailAddButtonLabel": "Añadir detalle operación",
         "operationDetailDeleteButtonLabel": "Borrar detalle",
-        "pricePlaceholder": "Precio",
-        "amountPlaceholder": "Cantidad"
+        "amountPlaceholder": "Cantidad",
+        "articlePlaceholder": "Seleccione Articulo",
+        "articleNotFoundLabel": "No hay articulos para la busqueda"
     },
     "articles": {
         "title": "Articulos",

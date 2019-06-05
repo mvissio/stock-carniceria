@@ -38,10 +38,12 @@
                                         <small *ngIf="operationDetailControls(i).amount.errors.required">
                                             {{'generalValidations.required' | translate}}
                                         </small>
+                                        <small *ngIf="operationDetailControls(i).amount.errors.min" [translate]="'generalValidations.min'" [translateParams]="{param: operationDetailControls(i).amount.errors.min.min}"></small>
                                     </div>
                                 </div>
                                 <div class="col">
-                                    <ng-select [items]="articles$ | async" [multiple]="false" [closeOnSelect]="true" [searchable]="true" bindLabel="brand" bindValue="articleId" placeholder="Seleccione Articulo" formControlName="articleId">
+                                    <ng-select [items]="articles$ | async" [multiple]="false" [closeOnSelect]="true" [searchable]="true" bindLabel="brand" bindValue="articleId" [placeholder]="'operationDetails.articlePlaceholder' | translate" [notFoundText]="'operationDetails.articleNotFoundLabel' | translate"
+                                        formControlName="articleId" (change)="onSelectArticle($event)" (search)="getArticlesByName($event)">
                                     </ng-select>
                                     <div *ngIf="operationDetailControls(i).articleId.invalid && (operationDetailControls(i).articleId.dirty || operationDetailControls(i).articleId.touched)" class="error-label">
                                         <small *ngIf="operationDetailControls(i).articleId.errors.required">
@@ -53,7 +55,6 @@
                                     <button (click)="deleteOperationDetail(i)" class="btn btn-danger mdi mdi-delete">{{'operationDetails.operationDetailDeleteButtonLabel' | translate}}</button>
                                 </div>
                             </div>
-                            <!-- <input class="form-control" type="text" autocomplete [config]="config" [items]="articles" (inputChangedEvent)="getArticlesByName($event)" (selectEvent)="onSelectArticle($event)"> -->
                         </div>
                     </div>
                     <div *ngIf="!disabledFields">

@@ -7,12 +7,11 @@ import { OperationsService } from '../../../services/pages/operations.service';
 import { HandleErrorsService } from '../../../services/shared/handle-errors.service';
 import { CommonsService } from '../../../services/commons.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { forkJoin, Observable, of } from 'rxjs';
+import { forkJoin, Observable, of, Observer } from 'rxjs';
 import { OperationDetail } from '../../../models/operationDetail.model';
 import { operationStatus } from '../../../constants/constant';
 import { ArticleService } from '../../../services/articles/article.service';
 import { Article } from '../../../models/article.model';
-import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-operation',
@@ -26,6 +25,7 @@ export class OperationComponent implements OnInit {
   articles$: Observable<any[]>;
   operationTypes: any[]  = [];
   paymentMethods: any[]  = [];
+  articleSelected: Article;
   edit = false;
   operationForm: FormGroup;
   disabledFields = false;
@@ -50,7 +50,6 @@ export class OperationComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.articles$ = this._articleService.getAllArticlesNotPagging();
     forkJoin([this._operationService.getAllOperationTypes(),
       this._operationService.getAllPaymentMethods()
     ])
@@ -75,8 +74,9 @@ export class OperationComponent implements OnInit {
         }
       }
     } else {
+      this.operation.operationDetails = [];
       operationDetails.push(this.fb.group({
-        amount: ['', Validators.required],
+        amount: ['', [Validators.required, Validators.min(1)]],
         articleId: ['', Validators.required]
       }));
     }
@@ -96,7 +96,6 @@ export class OperationComponent implements OnInit {
   
   get operationDetails() { return this.operationForm.get("operationDetails") as FormArray; }
 
-
   getOperation() {
     this._operationService.getOperationById(this.id)
       .subscribe((res: Operation) => {
@@ -107,67 +106,71 @@ export class OperationComponent implements OnInit {
       });
   }
 
+  getArticlesByName(query: any) {
+    if (query.term.length > 2) {
+      this.articles$ = this._articleService.getArticlesByNameLike(query.term);
+    }
+  }
+
   saveOperation() {
-    console.log(this.operationForm.value);
-    // if (this.operationForm.invalid) {
-    //   return;
-    // }
-    // this.setOperation();
-    // if (this.edit) {
-    //   this._operationService.updateOperation(this.operation)
-    //     .subscribe(() => {
-    //       this.translate.get('users.updateOk')
-    //       .subscribe((res: string) => {
-    //         this._commonsService.showMessage('success', res);
-    //         this.back();
-    //       });
-    //     }, (err: HttpErrorResponse) => {
-    //       this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
-    //     });
-    // } else {
-    //   this._operationService.addOperation(this.operation)
-    //     .subscribe(() => {
-    //       this.translate.get('users.createOk')
-    //       .subscribe((res: string) => { 
-    //         this._commonsService.showMessage('success', res);
-    //         this.back();
-    //       });
-    //     }, (err: HttpErrorResponse) => {
-    //       this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
-    //     });
-    // }
+    if (this.operationForm.invalid) {
+      return;
+    }
+    this.setOperation();
+    if (this.edit) {
+      this._operationService.updateOperation(this.operation)
+        .subscribe(() => {
+          this.translate.get('users.updateOk')
+          .subscribe((res: string) => {
+            this._commonsService.showMessage('success', res);
+            this.back();
+          });
+        }, (err: HttpErrorResponse) => {
+          this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
+        });
+    } else {
+      this._operationService.addOperation(this.operation)
+        .subscribe(() => {
+          this.translate.get('users.createOk')
+          .subscribe((res: string) => { 
+            this._commonsService.showMessage('success', res);
+            this.back();
+          });
+        }, (err: HttpErrorResponse) => {
+          this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
+        });
+    }
   }
 
   setOperation() {
     this.operation.operationType = this.operationForm.value.operationType;
     this.operation.paymentMethod = this.operationForm.value.paymentMethod;
-    this.setOperation();
     if (!this.edit) {
       this.operation.createDate = new Date();
       this.operation.operationStatus = operationStatus.buy;
-      this.operation.subTotal = this.getTotal();
-      this.operation.total = this.getTotal();
     }
+    this.setOperationDetails();
+    this.operation.subTotal = this.getTotal();
+    this.operation.total = this.getTotal();
   }
 
   setOperationDetails() {
-    this.operationDetails.array.forEach((operationDetailFormArray: FormArray) => {
+    this.operationDetails.value.forEach((odObject: {amount: number, articleId: number}, index: number) => {
       let operationDetail = new OperationDetail();
-      operationDetail.amount = operationDetailFormArray.value.amount;
-      operationDetail.articleId = operationDetailFormArray.value.articleId;
-      this.articles$.subscribe((articles: Article []) => {
-        articles.filter((article: Article) => {
-          if (article.articleId === operationDetail.articleId) {
-            operationDetail.price = article.currentPrice * operationDetail.amount;
-            return article;
-          }
-        }); 
-      }); 
+      operationDetail.amount = odObject.amount;
+      operationDetail.articleId = odObject.articleId;
+      operationDetail.price = this.articleSelected.currentPrice * operationDetail.amount;
+      const indexOperationDetail = this.operation.operationDetails.findIndex((od: OperationDetail) => od.articleId === odObject.articleId);
+      if (indexOperationDetail !== -1) {
+        this.operation.operationDetails[index] = operationDetail; 
+      } else {
+        this.operation.operationDetails.push(operationDetail);  
+      }
     });
   }
 
   getTotal() {
-    let total: number;
+    let total: number = 0;
     this.operation.operationDetails.forEach((operationDetail: OperationDetail) => total += operationDetail.price);
     return total;
   }
@@ -181,13 +184,13 @@ export class OperationComponent implements OnInit {
   }
 
   onSelectArticle(article: Article) {
-    console.log(article);
+    this.articleSelected = article;
   }
 
   addOperationDetail() {
     this.operationDetails.push(
       this.fb.group({
-        amount: ['', Validators.required],
+        amount: ['', [Validators.required, Validators.min(1)]],
         articleId: ['', Validators.required]
       })
     );

@@ -43,7 +43,7 @@ export class OperationsComponent implements OnInit {
   getOperations(nextPage: number) {
     this.loading = true;
     this.pageConfig.pageNumber = nextPage;
-    this._operationService.getAllOperation(this.pageConfig)
+    this._operationService.getOperationsByCreateDate(this.pageConfig)
       .subscribe(
         (res: Page) => {
           this.page = res;

@@ -24,10 +24,10 @@ interface OperationURLs {
   base: string;
   getOperationById?: string;
   getCompleteOperationById?: string;
-  getOperationByPaymentMethod?: string;
-  getOperationByCreateDate?: string;
-  getOperationByDateBetween?: string;
-  getOperationByTypeAndDate?: string;
+  getOperationsByPaymentMethod?: string;
+  getOperationsByCreateDate?: string;
+  getOperationsByDateBetween?: string;
+  getOperationsByTypeAndDate?: string;
   cancelOperation?: string;
   getAllOperationTypes?: string;
   getAllPaymentMethods?: string;
