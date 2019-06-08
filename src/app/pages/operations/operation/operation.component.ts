@@ -92,7 +92,9 @@ export class OperationComponent implements OnInit {
 
   get operationControls() { return this.operationForm.controls; }
 
-  operationDetailControls(i: number) { return this.operationDetails.controls[i].controls; }
+  operationDetailControls(i: number) { 
+    return this.operationDetails.controls[i]["controls"];
+  }
   
   get operationDetails() { return this.operationForm.get("operationDetails") as FormArray; }
 
