@@ -30,18 +30,10 @@ export class OperationsService {
   }
 
   getOperationById(id: number) {
-    const url = `${this.operationUrl.getOperationById}?id=${id}`;
+    const url = `${this.operationUrl.getOperationById}/${id}`;
     return this.httpClient.get(url)
       .pipe(map((response: Operation) => {
           this.operation = response;
-        return response;
-    }));
-  }
-  getOperationCompleteById(id: number) {
-    const url = `${this.operationUrl.getCompleteOperationById}?id=${id}`;
-    return this.httpClient.get(url)
-      .pipe(map((response: Operation) => {
-        this.operation = response;
         return response;
     }));
   }
@@ -52,8 +44,8 @@ export class OperationsService {
       .pipe(map((response: any) => response));
   }
 
-  cancelOperation(operationId: number) {
-    const url = `${this.operationUrl.cancelOperation}?operationId=${operationId}`;
+  cancelOperation(id: number) {
+    const url = `${this.operationUrl.cancelOperation}/${id}`;
     return this.httpClient.delete(url)
     .pipe(map((response) => response));
   }

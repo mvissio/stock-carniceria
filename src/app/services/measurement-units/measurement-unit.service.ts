@@ -33,6 +33,7 @@ export class MeasurementUnitService {
 
   getMeasurementUnitByMeasurementUnitId(id: number) {
     const url = `${this.measurementUnitUrl.getMeasurementUnitByMeasurementUnitId}/${id}`;
+    debugger
     return this.httpClient.get(url)
       .pipe(map((response: MeasurementUnit) => {
           this.measurementUnit = response;

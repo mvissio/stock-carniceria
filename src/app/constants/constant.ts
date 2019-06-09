@@ -28,6 +28,7 @@ export const toastPosition = {
 };
 
 export const operationStatus = {
-  buy: "BUY",
-  canceled: "CANCELED"
+  canceled: "CANCELED",
+  sold: "SOLD",
+  purchased: "PURCHASED"
 }

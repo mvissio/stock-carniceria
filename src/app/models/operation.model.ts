@@ -2,7 +2,7 @@ import { OperationDetail } from './operationDetail.model';
 
 export class Operation {
     operationId: number;
-    createDate?: Date;
+    createDateTime?: Date;
     disabledDate?: Date;
     disabled?: boolean;
     operationType?: string;
@@ -13,7 +13,7 @@ export class Operation {
     operationDetails?: OperationDetail[];  
     constructor(
         operationId?: number,
-        createDate?: Date,
+        createDateTime?: Date,
         disabledDate?: Date,
         disabled?: boolean,
         operationType?: string,
@@ -23,7 +23,7 @@ export class Operation {
         subTotal?: number
     ) {
         this.operationId = operationId;
-        this.createDate = createDate;
+        this.createDateTime = createDateTime;
         this.disabledDate = disabledDate;
         this.disabled = disabled || false;
         this.operationType = operationType;

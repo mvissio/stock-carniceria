@@ -15,7 +15,6 @@ export const applicationApiUrls: ApiURLs = {
   operation: {
     base: 'API_VERSION/operation',
     getOperationById: '/id',
-    getCompleteOperationById: '/complete/id',
     getOperationsByPaymentMethod: '/paymentMethod',
     getOperationsByCreateDate: '/creationDate',
     getOperationsByTypeAndDate: '/type',
@@ -33,6 +32,7 @@ export const applicationApiUrls: ApiURLs = {
     getArticleByArticleId: '/id',
     getArticleByName: '/name',
     getArticleByNameLike: '/nameLike',
+    getAllMeasurementUnits: '/measurementUnits',
     deleteArticle: '/id'
   },
   measurementUnit: {

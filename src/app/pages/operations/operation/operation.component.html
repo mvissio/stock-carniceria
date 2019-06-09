@@ -26,12 +26,22 @@
                             </small>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" *ngIf="!disabledFields">
                         <button (click)="addOperationDetail()" class="btn btn-primary mdi mdi-plus">{{'operationDetails.operationDetailAddButtonLabel' | translate}}</button>
                     </div>
                     <div formArrayName="operationDetails">
                         <div *ngFor="let operationDetail of operationDetails?.controls; let i = index">
                             <div [formGroupName]="i" class="form-row border p-20">
+                                <div class="col">
+                                    <ng-select [items]="articles$ | async" [multiple]="false" [closeOnSelect]="true" [searchable]="true" bindLabel="brand" [placeholder]="'operationDetails.articlePlaceholder' | translate" [notFoundText]="'operationDetails.articleNotFoundLabel' | translate"
+                                    formControlName="article" (search)="getArticlesByName($event)">
+                                    </ng-select>
+                                    <div *ngIf="operationDetailControls(i).article.invalid && (operationDetailControls(i).article.dirty || operationDetailControls(i).article.touched)" class="error-label">
+                                        <small *ngIf="operationDetailControls(i).article.errors.required">
+                                            {{'generalValidations.required' | translate}}
+                                        </small>
+                                    </div>
+                                </div>
                                 <div class="col">
                                     <input class="form-control" type="number" [placeholder]="'operationDetails.amountPlaceholder' | translate" formControlName="amount">
                                     <div *ngIf="operationDetailControls(i).amount.invalid && (operationDetailControls(i).amount.dirty || operationDetailControls(i).amount.touched)" class="error-label">
@@ -42,22 +52,12 @@
                                     </div>
                                 </div>
                                 <div class="col">
-                                    <ng-select [items]="articles$ | async" [multiple]="false" [closeOnSelect]="true" [searchable]="true" bindLabel="brand" bindValue="articleId" [placeholder]="'operationDetails.articlePlaceholder' | translate" [notFoundText]="'operationDetails.articleNotFoundLabel' | translate"
-                                        formControlName="articleId" (change)="onSelectArticle($event)" (search)="getArticlesByName($event)">
-                                    </ng-select>
-                                    <div *ngIf="operationDetailControls(i).articleId.invalid && (operationDetailControls(i).articleId.dirty || operationDetailControls(i).articleId.touched)" class="error-label">
-                                        <small *ngIf="operationDetailControls(i).articleId.errors.required">
-                                            {{'generalValidations.required' | translate}}
-                                        </small>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <button (click)="deleteOperationDetail(i)" class="btn btn-danger mdi mdi-delete">{{'operationDetails.operationDetailDeleteButtonLabel' | translate}}</button>
+                                    <button (click)="deleteOperationDetail(i)" class="btn btn-danger mdi mdi-delete" [disabled]="this.disabledFields">{{'operationDetails.operationDetailDeleteButtonLabel' | translate}}</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div *ngIf="!disabledFields">
+                    <div *ngIf="!disabledFields" class="m-t-10">
                         <button class="btn btn-primary m-r-10" type="submit" [disabled]="operationForm.invalid">
                         <i class="fa fa-save"></i>
                         {{'buttons.submit' | translate}}
@@ -66,7 +66,7 @@
                         {{'buttons.cancel' | translate}}
                         </button>
                     </div>
-                    <button *ngIf="disabledFields" class="btn btn-inverse mdi mdi-keyboard-backspace" (click)="back()">
+                    <button *ngIf="disabledFields" class="btn btn-inverse mdi mdi-keyboard-backspace m-t-10" (click)="back()">
                         {{'buttons.back' | translate}}
                     </button>
                 </form>

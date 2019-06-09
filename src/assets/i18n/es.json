@@ -41,7 +41,9 @@
         "childTitle": "Operación",
         "searchLabel": "Buscar operación...",
         "operationTypePlaceholder": "Tipo",
-        "paymentMethodPlaceholder": "Método de pago"
+        "paymentMethodPlaceholder": "Método de pago",
+        "createOk": "Operacion creada satisfactoriamente.",
+        "updateOk": "Operacion actualizada satisfactoriamente."
     },
     "operationDetails": {
         "operationDetailAddButtonLabel": "Añadir detalle operación",
@@ -80,10 +82,10 @@
             "role": "Role"
         },
         "operations": {
-            "creationDate": "Fecha de creación",
+            "createDateTime": "Fecha de creación",
             "disabledDate": "Fecha de baja",
             "disabled": "Deshabilitar",
-            "type": "Tipo de operación",
+            "operationType": "Tipo de operación",
             "paymentMethod": "Forma de pago",
             "total": "Total",
             "subTotal": "Total"
@@ -132,7 +134,10 @@
             "title": "¿Estas seguro que quieres deshabilitar el usuario {{param}}?"
         },
         "cancelOperation": {
-            "title": "¿Estas seguro que deseas cancelar la operación?"
+            "title": "¿Estas seguro que deseas cancelar la operación {{param}}?"
+        },
+        "confirmOperation": {
+            "title": "¿Estas seguro que deseas confirmar la operación?"
         },
         "deleteArticle": {
             "title": "¿Estas seguro que quieres dar de baja el articulo {{param}}?"
@@ -169,9 +174,14 @@
         "SALE": "Venta"
     },
     "paymentMethods": {
-        "CC": "Tarjeta de Crédito",
+        "CC": "Tarjeta de Debito",
         "CASH": "Efectivo"
     },
+    "OperationStatus": {
+        "CANCELED": "Operación Cancelada",
+        "SOLD": "Venta Realizada",
+        "PURCHASED": "Compra Realizada"
+    },    
     "articleStatus": {
         "enabled": "Alta",
         "disabled": "Baja"

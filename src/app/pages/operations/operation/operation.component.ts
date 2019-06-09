@@ -7,12 +7,12 @@ import { OperationsService } from '../../../services/pages/operations.service';
 import { HandleErrorsService } from '../../../services/shared/handle-errors.service';
 import { CommonsService } from '../../../services/commons.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { forkJoin, Observable, of, Observer } from 'rxjs';
+import { forkJoin, Observable } from 'rxjs';
 import { OperationDetail } from '../../../models/operationDetail.model';
 import { operationStatus } from '../../../constants/constant';
 import { ArticleService } from '../../../services/articles/article.service';
 import { Article } from '../../../models/article.model';
-
+import swal from 'sweetalert';
 @Component({
   selector: 'app-operation',
   templateUrl: './operation.component.html',
@@ -25,7 +25,6 @@ export class OperationComponent implements OnInit {
   articles$: Observable<any[]>;
   operationTypes: any[]  = [];
   paymentMethods: any[]  = [];
-  articleSelected: Article;
   edit = false;
   operationForm: FormGroup;
   disabledFields = false;
@@ -66,18 +65,22 @@ export class OperationComponent implements OnInit {
     if (this.edit) {
       if (this.operation.operationDetails) {
         for (let operationDetail of this.operation.operationDetails) {
-          operationDetails.push(this.fb.group({
-            price: [operationDetail.price, Validators.required],
-            amount: [operationDetail.amount, Validators.required]
-          })
-          );
+          this._articleService.getArticleByArticleId(operationDetail.articleId).subscribe((res: Article) => {
+            operationDetails.push(this.fb.group({
+              amount: [operationDetail.amount, [Validators.required, Validators.min(1)]],
+              article: [res, Validators.required]
+            }));
+            if(this.disabledFields) {
+              operationDetails.controls[operationDetails.controls.length -1].disable();
+            }
+          });
         }
       }
     } else {
       this.operation.operationDetails = [];
       operationDetails.push(this.fb.group({
         amount: ['', [Validators.required, Validators.min(1)]],
-        articleId: ['', Validators.required]
+        article: ['', Validators.required]
       }));
     }
     this.operationForm = this.fb.group({
@@ -119,37 +122,65 @@ export class OperationComponent implements OnInit {
       return;
     }
     this.setOperation();
-    if (this.edit) {
-      this._operationService.updateOperation(this.operation)
-        .subscribe(() => {
-          this.translate.get('users.updateOk')
-          .subscribe((res: string) => {
-            this._commonsService.showMessage('success', res);
-            this.back();
-          });
-        }, (err: HttpErrorResponse) => {
-          this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
-        });
-    } else {
-      this._operationService.addOperation(this.operation)
-        .subscribe(() => {
-          this.translate.get('users.createOk')
-          .subscribe((res: string) => { 
-            this._commonsService.showMessage('success', res);
-            this.back();
-          });
-        }, (err: HttpErrorResponse) => {
-          this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
-        });
+    forkJoin(
+      [this.translate.get('modals.confirmOperation.title'),
+      this.translate.get('modals')
+    ]).subscribe((result) => {
+    swal({
+      title: result[0],
+      icon: 'warning',
+      closeOnClickOutside: true,
+      buttons: {
+        confirm: {
+          text: result[1].defaultConfirmButton,
+          value: true,
+          visible: true,
+          closeModal: true
+        },
+        cancel: {
+          text: result[1].defaultCancelButton,
+          value: false,
+          visible: true,
+          closeModal: true,
+        }
+      }
     }
+    ).then((data) => {
+      if (data) {
+        if (this.edit) {
+          this._operationService.updateOperation(this.operation)
+            .subscribe(() => {
+              this.translate.get('operations.updateOk')
+              .subscribe((res: string) => {
+                this._commonsService.showMessage('success', res);
+                this.back();
+              });
+            }, (err: HttpErrorResponse) => {
+              this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
+            });
+        } else {
+          this._operationService.addOperation(this.operation)
+            .subscribe(() => {
+              this.translate.get('operations.createOk')
+              .subscribe((res: string) => { 
+                this._commonsService.showMessage('success', res);
+                this.back();
+              });
+            }, (err: HttpErrorResponse) => {
+              this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
+            });
+          }
+        }
+      });
+    });
   }
 
   setOperation() {
     this.operation.operationType = this.operationForm.value.operationType;
     this.operation.paymentMethod = this.operationForm.value.paymentMethod;
     if (!this.edit) {
-      this.operation.createDate = new Date();
-      this.operation.operationStatus = operationStatus.buy;
+      this.operation.createDateTime = new Date();
+      this.operation.operationStatus = (this.operation.operationType === 'SALE')? operationStatus.sold : operationStatus.purchased;
     }
     this.setOperationDetails();
     this.operation.subTotal = this.getTotal();
@@ -157,12 +188,12 @@ export class OperationComponent implements OnInit {
   }
 
   setOperationDetails() {
-    this.operationDetails.value.forEach((odObject: {amount: number, articleId: number}, index: number) => {
+    this.operationDetails.value.forEach((odObject: {amount: number, article: Article}, index: number) => {
       let operationDetail = new OperationDetail();
       operationDetail.amount = odObject.amount;
-      operationDetail.articleId = odObject.articleId;
-      operationDetail.price = this.articleSelected.currentPrice * operationDetail.amount;
-      const indexOperationDetail = this.operation.operationDetails.findIndex((od: OperationDetail) => od.articleId === odObject.articleId);
+      operationDetail.articleId = odObject.article.articleId;
+      operationDetail.price = odObject.article.currentPrice * operationDetail.amount;
+      const indexOperationDetail = this.operation.operationDetails.findIndex((od: OperationDetail) => od.articleId === odObject.article.articleId);
       if (indexOperationDetail !== -1) {
         this.operation.operationDetails[index] = operationDetail; 
       } else {
@@ -183,10 +214,6 @@ export class OperationComponent implements OnInit {
 
   selectedPaymentMethod(paymentMethod: string): boolean {
     return (this.operation.paymentMethod && paymentMethod === this.operation.paymentMethod);
-  }
-
-  onSelectArticle(article: Article) {
-    this.articleSelected = article;
   }
 
   addOperationDetail() {

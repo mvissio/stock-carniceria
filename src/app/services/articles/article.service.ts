@@ -12,6 +12,8 @@ import { Page } from '../../models/page.model';
 export class ArticleService {
 
   articleUrl = environment.apiUrls.article;
+  measurementUnitUrl = environment.apiUrls.measurementUnit;
+
   article : Article = new Article();
 
   constructor(private httpClient: HttpClient) { }
@@ -68,6 +70,12 @@ export class ArticleService {
       .pipe(map((response: any) => response));
   }
 
+
+  getAllMeasurementUnits() {
+    const url = this.measurementUnitUrl.base
+    return this.httpClient.get(url)
+      .pipe(map((response: any) => response));
+  }
   
   deleteArticle(id: number) {
     const url = `${this.articleUrl.deleteArticle}/${id}`;

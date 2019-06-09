@@ -34,6 +34,12 @@ export class UsersService {
       .pipe(map((response: Page) => response));
   }
 
+  getAllRoles() {
+    const url = this.userUrl.getAllRoles;
+    return this.httpClient.get(url)
+      .pipe(map((response: any) => response));
+  }
+
   getUserByUserId(id: number) {
     const url = `${this.userUrl.getUserByUserId}?id=${id}`;
     return this.httpClient.get(url)
@@ -57,11 +63,7 @@ export class UsersService {
       .pipe(map((response: any) => response));
   }
 
-  getAllRoles() {
-    const url = this.userUrl.getAllRoles;
-    return this.httpClient.get(url)
-      .pipe(map((response: any) => response));
-  }
+  
 
   deleteUser(username: string) {
     const url = `${this.userUrl.deleteUser}?username=${username}`;

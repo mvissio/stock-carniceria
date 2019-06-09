@@ -15,7 +15,7 @@ export class SidebarService {
       ]
     },
     {
-      titulo: 'Operaciones',
+      titulo: 'Transacciones',
       icono: 'mdi mdi-currency-usd',
       roles: [roles.sysAdmin, roles.admin],
       submenu: [

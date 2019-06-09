@@ -23,7 +23,6 @@ interface UserURLs {
 interface OperationURLs {
   base: string;
   getOperationById?: string;
-  getCompleteOperationById?: string;
   getOperationsByPaymentMethod?: string;
   getOperationsByCreateDate?: string;
   getOperationsByDateBetween?: string;
@@ -44,6 +43,7 @@ interface ArticleURLs {
   getArticleByName?: string;
   getArticleByArticleId?: string;
   getArticleByNameLike?: string;  
+  getAllMeasurementUnits?: string;
   deleteArticle?: string;
 }
 

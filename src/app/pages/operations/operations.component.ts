@@ -33,6 +33,7 @@ export class OperationsComponent implements OnInit {
 
   ngOnInit() {
     this.pageConfig = new PageConfig('operationId');
+    this.pageConfig.changeOrder();
     this.getOperations(0);
   }
 
@@ -87,10 +88,14 @@ export class OperationsComponent implements OnInit {
       }
       ).then((data) => {
         if (data) {
-          this._operationService.cancelOperation(operationId).subscribe();
+          this._operationService.cancelOperation(operationId).subscribe(() => this.getOperations(this.page.number));
         }
       });
     }); 
+  }
+
+  getOperationStatus(operation: Operation) {
+    return operation.operationStatus;
   }
 
 }

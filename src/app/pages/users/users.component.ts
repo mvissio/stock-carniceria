@@ -104,11 +104,11 @@ export class UsersComponent implements OnInit {
           }
         }
       }
-    ).then((data) => {
-      if (data) {
-        this._userService.deleteUser(username).subscribe();
-      }
-    });
+      ).then((data) => {
+        if (data) {
+          this._userService.deleteUser(username).subscribe(() => this.getUsers(this.page.number));
+        }
+      });
     });  
   }
 

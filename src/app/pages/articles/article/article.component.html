@@ -36,7 +36,14 @@
                         <div *ngIf="articleControls.currentQuantity.invalid && (articleControls.currentQuantity.dirty || articleControls.currentQuantity.touched)" class="error-label">                           
                         </div>
                     </div>
-
+                    
+                    <div class="form-group">
+                        <label for="measurementUnit" class="m-r-10">{{'articles.measurementUnitIdPlaceholder' | translate}}</label>
+                        <select class="custom-select" formControlName="measurementUnit" id="measurementUnit">
+                          <option [value]="measurementUnit.measurementUnitId" *ngFor="let measurementUnit of measurementUnits" [selected]="selectedMeasurementUnit(measurementUnit.measurementUnitId)">{{measurementUnit.name}}</option>
+                        </select>
+                    </div>
+                    
                     <div class="form-group">
                       <input class="form-control" type="text" formControlName="description" [placeholder]="'articles.descriptionPlaceholder' | translate">
                       <div *ngIf="articleControls.description.invalid && (articleControls.description.dirty || articleControls.description.touched)" class="error-label">                          
