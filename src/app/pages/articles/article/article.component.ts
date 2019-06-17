@@ -131,7 +131,7 @@ export class ArticleComponent implements OnInit {
   }
    
   back() {
-    this.router.navigate(['/configuracion/articulos']);
+    this.router.navigate(['/articulos']);
   }
 
   getAllMeasurementUnit() {

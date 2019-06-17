@@ -1,6 +1,6 @@
 
 import { NgModule } from '@angular/core';
-import { PAGES_ROUTES } from './pages.routes';
+import { PagesRoutingModule } from './pages.routes';
 
 import { SharedModule } from '../shared/shared.module';
 
@@ -60,7 +60,7 @@ import { MeasurementUnitComponent } from './measurement-units/measurement-unit/m
     ReactiveFormsModule,
     NgSelectModule,
     SharedModule,
-    PAGES_ROUTES,
+    PagesRoutingModule,
     ComponentsModule
   ]
 })

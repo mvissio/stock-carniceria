@@ -27,9 +27,9 @@ export class SidebarService {
       icono: 'mdi mdi-settings',
       roles: [roles.sysAdmin, roles.admin],
       submenu: [
-        { titulo: 'Usuarios', url: '/configuracion/usuarios', roles: [roles.sysAdmin] },
-        { titulo: 'Articulos', url: '/configuracion/articulos' },
-        { titulo: 'Unidades de medida', url: '/configuracion/unidadesMedida' }
+        { titulo: 'Usuarios', url: '/usuarios', roles: [roles.sysAdmin] },
+        { titulo: 'Articulos', url: '/articulos' },
+        { titulo: 'Unidades de medida', url: '/unidadesMedida' }
       ]
     }
   ];

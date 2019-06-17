@@ -15,8 +15,9 @@ import { ArticlesComponent } from './articles/articles.component';
 import { ArticleComponent } from './articles/article/article.component';
 import { MeasurementUnitsComponent } from './measurement-units/measurement-units.component';
 import { MeasurementUnitComponent } from './measurement-units/measurement-unit/measurement-unit.component';
+import { NgModule } from '@angular/core';
 
-const pagesRoutes: Routes = [
+const routes: Routes = [
   {
     path: '',
     component: PagesComponent,
@@ -35,9 +36,7 @@ const pagesRoutes: Routes = [
         path: 'operaciones',
         component: OperationsComponent,
         canActivate: [AuthGuard, GrantedAuthorityGuard],
-        data: {
-          titulo: 'Operaciones', roles: [roles.sysAdmin, roles.admin]
-        },
+        data: {titulo: 'Operaciones', roles: [roles.sysAdmin, roles.admin]},
       },
       { 
         path: 'operacion/:id', component: OperationComponent,
@@ -49,13 +48,6 @@ const pagesRoutes: Routes = [
         canActivate: [AuthGuard, GrantedAuthorityGuard],
         data: {titulo: 'Crear Operacion', roles: [roles.sysAdmin, roles.admin]}
       },
-      {path: '', redirectTo: '/inicio', pathMatch: 'full'}
-    ]
-  },
-  {
-    path: 'configuracion',
-    component: PagesComponent,
-    children: [
       {
         path: 'tema', component: AccoutSettingsComponent,
         canActivate: [AuthGuard, GrantedAuthorityGuard],
@@ -65,9 +57,7 @@ const pagesRoutes: Routes = [
         path: 'usuarios',
         component: UsersComponent,
         canActivate: [AuthGuard, GrantedAuthorityGuard],
-        data: {
-          titulo: 'Usuarios', roles: [roles.sysAdmin]
-        },
+        data: {titulo: 'Usuarios', roles: [roles.sysAdmin]},
       },
       { 
         path: 'usuario/:id', component: UserComponent,
@@ -79,48 +69,45 @@ const pagesRoutes: Routes = [
         canActivate: [AuthGuard, GrantedAuthorityGuard],
         data: {titulo: 'Crear Usuario', roles: [roles.sysAdmin]}
       },
-
       {
         path: 'articulos',
         component: ArticlesComponent,
         canActivate: [AuthGuard, GrantedAuthorityGuard],
-        data: {
-          titulo: 'Articulos', roles: [roles.admin]
-        },
+        data: {titulo: 'Articulos', roles: [roles.sysAdmin, roles.admin]},
       },
       { 
         path: 'articulo/:id', component: ArticleComponent,
         canActivate: [AuthGuard, GrantedAuthorityGuard],
-        data: {titulo: 'Actualizar Articulo', roles: [roles.admin]}
+        data: {titulo: 'Actualizar Articulo', roles: [roles.sysAdmin, roles.admin]}
       },
       { 
         path: 'articulo', component: ArticleComponent,
         canActivate: [AuthGuard, GrantedAuthorityGuard],
-        data: {titulo: 'Crear Articulo', roles: [roles.admin]}
+        data: {titulo: 'Crear Articulo', roles: [roles.sysAdmin, roles.admin]}
       },
-
       {
         path: 'unidadesMedida',
         component: MeasurementUnitsComponent,
         canActivate: [AuthGuard, GrantedAuthorityGuard],
-        data: {
-          titulo: 'Unidades de Medida', roles: [roles.admin]
-        },
+        data: {titulo: 'Unidades de Medida', roles: [roles.sysAdmin, roles.admin]},
       },
       { 
         path: 'unidadMedida/:id', component: MeasurementUnitComponent,
         canActivate: [AuthGuard, GrantedAuthorityGuard],
-        data: {titulo: 'Actualizar unidad de medida', roles: [roles.admin]}
+        data: {titulo: 'Actualizar unidad de medida', roles: [roles.sysAdmin, roles.admin]}
       },
       { 
         path: 'unidadMedida', component: MeasurementUnitComponent,
         canActivate: [AuthGuard, GrantedAuthorityGuard],
-        data: {titulo: 'Crear unidadMedida', roles: [roles.admin]}
-      }    
-      ,{path: '', redirectTo: '/inicio', pathMatch: 'full'}
+        data: {titulo: 'Crear unidadMedida', roles: [roles.sysAdmin, roles.admin]}
+      },
+      {path: '', redirectTo: '/inicio', pathMatch: 'full'},
     ]
   }
 ];
 
-
-export const PAGES_ROUTES = RouterModule.forChild(pagesRoutes);
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class PagesRoutingModule { }

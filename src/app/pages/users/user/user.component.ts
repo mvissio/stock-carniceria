@@ -127,7 +127,7 @@ export class UserComponent implements OnInit {
   }
  
   back() {
-    this.router.navigate(['/configuracion/usuarios']);
+    this.router.navigate(['/usuarios']);
   }
 
 }

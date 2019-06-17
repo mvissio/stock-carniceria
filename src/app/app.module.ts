@@ -10,7 +10,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 // Rutas
-import { APP_ROUTES } from './app.routes';
+import { AppRoutingModule } from './app.routes';
 
 // Modulos
 import { PagesModule } from './pages/pages.module';
@@ -30,6 +30,8 @@ import { TimeoutInterceptor, DEFAULT_TIMEOUT } from './interceptors/timeout.inte
 // Componentes
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
+import { NopagefoundComponent } from './shared/nopagefound/nopagefound.component';
+import { Router } from '@angular/router';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -38,12 +40,12 @@ export function createTranslateLoader(http: HttpClient) {
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    NopagefoundComponent
   ],
   imports: [
     BrowserModule,
-    APP_ROUTES,
-    PagesModule,
+    BrowserAnimationsModule, // required animations module
     ReactiveFormsModule,
     ServiceModule,
     HttpClientModule,
@@ -54,8 +56,9 @@ export function createTranslateLoader(http: HttpClient) {
         deps: [ HttpClient ]
       }
     }),
-    BrowserAnimationsModule, // required animations module
-    ToastrModule.forRoot() // ToastrModule added
+    ToastrModule.forRoot(), // ToastrModule added
+    PagesModule,
+    AppRoutingModule,
   ],
   providers: [
     AuthGuard,
@@ -76,4 +79,6 @@ export function createTranslateLoader(http: HttpClient) {
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+  constructor(router: Router) {}
+}
