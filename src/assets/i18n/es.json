@@ -36,6 +36,15 @@
         "createOk": "Usuario creado satisfactoriamente.",
         "updateOk": "Usuario actualizado satisfactoriamente."
     },
+    "boxs": {
+        "title": "Historico de Caja",
+        "childTitle": "Caja:",
+        "openBox": {
+          "titleModal": "Apertura de Caja",
+          "textModal": "¿Desea abrir una nueva caja?",
+          "inputCash": "Saldo de caja"
+        }
+    },
     "operations": {
         "title": "Operaciones",
         "childTitle": "Operación",

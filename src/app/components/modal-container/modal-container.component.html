@@ -1,0 +1,20 @@
+<div class="fondo-negro animated fadeIn">
+  <div class="modal" style="display: block;" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header" *ngIf="modalTitle">
+          <h5 class="modal-title">{{modalTitle}}</h5>
+          <button (click)="cerrarModal()" type="button" class="close" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body text-center">
+          <ng-content></ng-content>
+        </div>
+        <div class="modal-footer" *ngIf="enabledCloseButton">
+          <button (click)="cerrarModal()" type="button" class="btn btn-secondary">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

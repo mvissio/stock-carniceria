@@ -9,7 +9,6 @@ import { SharedModule } from '../shared/shared.module';
 import { PagesComponent } from './pages.component';
 
 import { HomeComponent } from './home/home.component';
-import { Graficas1Component } from './graficas1/graficas1.component';
 
 
 // temporal
@@ -32,13 +31,13 @@ import { OperationComponent } from './operations/operation/operation.component';
 import { OperationDetailsComponent } from './operations/operation-details/operation-details.component';
 import { MeasurementUnitsComponent } from './measurement-units/measurement-units.component';
 import { MeasurementUnitComponent } from './measurement-units/measurement-unit/measurement-unit.component';
+import { BoxsComponent } from './boxs/boxs.component';
 
 @NgModule({
     declarations: [
       PagesComponent,
       HomeComponent,
       AccoutSettingsComponent,
-      Graficas1Component,
       UsersComponent,
       UserComponent,
       OperationsComponent,
@@ -47,11 +46,11 @@ import { MeasurementUnitComponent } from './measurement-units/measurement-unit/m
       ArticlesComponent,      
       ArticleComponent,
       MeasurementUnitComponent,
-      MeasurementUnitsComponent
+      MeasurementUnitsComponent,
+      BoxsComponent
     ],
     exports: [
       HomeComponent,
-      Graficas1Component,
       TranslateModule
     ],
   imports: [

@@ -2,19 +2,19 @@ import {RouterModule, Routes} from '@angular/router';
 
 import {PagesComponent} from './pages.component';
 import {HomeComponent} from './home/home.component';
-import {Graficas1Component} from './graficas1/graficas1.component';
 import {AccoutSettingsComponent} from './accout-settings/accout-settings.component';
 import {roles} from '../constants/constant';
 import {AuthGuard} from '../guards/auth.guard';
 import {GrantedAuthorityGuard} from '../guards/granted-authority.guard';
-import { UsersComponent } from './users/users.component';
-import { UserComponent } from './users/user/user.component';
-import { OperationsComponent } from './operations/operations.component';
-import { OperationComponent } from './operations/operation/operation.component';
-import { ArticlesComponent } from './articles/articles.component';
-import { ArticleComponent } from './articles/article/article.component';
-import { MeasurementUnitsComponent } from './measurement-units/measurement-units.component';
-import { MeasurementUnitComponent } from './measurement-units/measurement-unit/measurement-unit.component';
+import {UsersComponent} from './users/users.component';
+import {UserComponent} from './users/user/user.component';
+import {OperationsComponent} from './operations/operations.component';
+import {OperationComponent} from './operations/operation/operation.component';
+import {ArticlesComponent} from './articles/articles.component';
+import {ArticleComponent} from './articles/article/article.component';
+import {MeasurementUnitsComponent} from './measurement-units/measurement-units.component';
+import {MeasurementUnitComponent} from './measurement-units/measurement-unit/measurement-unit.component';
+import {BoxsComponent} from './boxs/boxs.component';
 
 const pagesRoutes: Routes = [
   {
@@ -27,9 +27,9 @@ const pagesRoutes: Routes = [
         data: {titulo: 'Inicio', roles: [roles.sysAdmin, roles.admin]}
       },
       {
-        path: 'graficas1', component: Graficas1Component,
+        path: 'caja', component: BoxsComponent,
         canActivate: [AuthGuard, GrantedAuthorityGuard],
-        data: {titulo: 'Gráficas', roles: [roles.sysAdmin, roles.admin]}
+        data: {titulo: 'Caja', roles: [roles.sysAdmin, roles.admin]}
       },
       {
         path: 'operaciones',
@@ -39,12 +39,12 @@ const pagesRoutes: Routes = [
           titulo: 'Operaciones', roles: [roles.sysAdmin, roles.admin]
         },
       },
-      { 
+      {
         path: 'operacion/:id', component: OperationComponent,
         canActivate: [AuthGuard, GrantedAuthorityGuard],
         data: {titulo: 'Actualizar Operacion', roles: [roles.sysAdmin, roles.admin]}
       },
-      { 
+      {
         path: 'operacion', component: OperationComponent,
         canActivate: [AuthGuard, GrantedAuthorityGuard],
         data: {titulo: 'Crear Operacion', roles: [roles.sysAdmin, roles.admin]}
@@ -69,12 +69,12 @@ const pagesRoutes: Routes = [
           titulo: 'Usuarios', roles: [roles.sysAdmin]
         },
       },
-      { 
+      {
         path: 'usuario/:id', component: UserComponent,
         canActivate: [AuthGuard, GrantedAuthorityGuard],
         data: {titulo: 'Actualizar Usuario', roles: [roles.sysAdmin]}
       },
-      { 
+      {
         path: 'usuario', component: UserComponent,
         canActivate: [AuthGuard, GrantedAuthorityGuard],
         data: {titulo: 'Crear Usuario', roles: [roles.sysAdmin]}
@@ -88,12 +88,12 @@ const pagesRoutes: Routes = [
           titulo: 'Articulos', roles: [roles.admin]
         },
       },
-      { 
+      {
         path: 'articulo/:id', component: ArticleComponent,
         canActivate: [AuthGuard, GrantedAuthorityGuard],
         data: {titulo: 'Actualizar Articulo', roles: [roles.admin]}
       },
-      { 
+      {
         path: 'articulo', component: ArticleComponent,
         canActivate: [AuthGuard, GrantedAuthorityGuard],
         data: {titulo: 'Crear Articulo', roles: [roles.admin]}
@@ -107,17 +107,17 @@ const pagesRoutes: Routes = [
           titulo: 'Unidades de Medida', roles: [roles.admin]
         },
       },
-      { 
+      {
         path: 'unidadMedida/:id', component: MeasurementUnitComponent,
         canActivate: [AuthGuard, GrantedAuthorityGuard],
         data: {titulo: 'Actualizar unidad de medida', roles: [roles.admin]}
       },
-      { 
+      {
         path: 'unidadMedida', component: MeasurementUnitComponent,
         canActivate: [AuthGuard, GrantedAuthorityGuard],
         data: {titulo: 'Crear unidadMedida', roles: [roles.admin]}
-      }    
-      ,{path: '', redirectTo: '/inicio', pathMatch: 'full'}
+      }
+      , {path: '', redirectTo: '/inicio', pathMatch: 'full'}
     ]
   }
 ];
