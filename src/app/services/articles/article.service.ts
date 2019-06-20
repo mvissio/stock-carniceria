@@ -13,6 +13,7 @@ export class ArticleService {
 
   articleUrl = environment.apiUrls.article;
   measurementUnitUrl = environment.apiUrls.measurementUnit;
+  categoryUrl = environment.apiUrls.category;
 
   article : Article = new Article();
 
@@ -73,6 +74,12 @@ export class ArticleService {
 
   getAllMeasurementUnits() {
     const url = this.measurementUnitUrl.base
+    return this.httpClient.get(url)
+      .pipe(map((response: any) => response));
+  }
+
+  getAllCategories() {
+    const url = this.categoryUrl.base
     return this.httpClient.get(url)
       .pipe(map((response: any) => response));
   }

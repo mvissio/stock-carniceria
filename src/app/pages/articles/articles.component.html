@@ -23,7 +23,6 @@
                             <th>{{'articleTable.currentPrice' | translate}}</th>
                             <th>{{'articleTable.currentQuantity' | translate}}</th>
                             <th>{{'articleTable.description' | translate}}</th>
-                            <th>{{'articleTable.expirationDate' | translate}}</th>
                             <th>{{'articleTable.status' | translate}}</th>
                             <th>{{'articleTable.accions' | translate}}</th>
                         </tr>
@@ -35,7 +34,6 @@
                             <td>{{ article?.currentPrice }}</td>
                             <td>{{article?.currentQuantity}}</td>
                             <td>{{article?.description}}</td>
-                            <td>{{article?.expirationDate | date: 'dd/MM/yyyy'}}</td>
                             <td><span class="label label-rounded" [ngClass]="(!article.disabled)? 'label-success':'label-danger'">{{getArticleStatus(article)}}</span>
                             </td>
                             <td>

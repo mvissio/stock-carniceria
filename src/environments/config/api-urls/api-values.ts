@@ -39,6 +39,11 @@ export const applicationApiUrls: ApiURLs = {
     base:'API_VERSION/measurementUnits',
     getMeasurementUnitByMeasurementUnitId: '/id',
     deleteMeasurementUnit: '/id'
+  },
+  category:{
+    base:'API_VERSION/categories',
+    getCategoryByCategoryId: '/id',
+    deleteCategory: '/id'
   }
 
 };

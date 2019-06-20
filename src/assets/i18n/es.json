@@ -62,6 +62,7 @@
         "descriptionPlaceholder": "Descripción",
         "expirationDatePlaceholder": "Fecha de Expiración",
         "measurementUnitIdPlaceholder": "Undiad de medida",
+        "categoryPlaceholder": "Categoría",
         "enabledPlaceholder": "Habilitado",
         "createOk": "Articulo creado satisfactoriamente.",
         "updateOk": "Articulo actualizado satisfactoriamente."
@@ -74,6 +75,15 @@
         "enabledPlaceholder": "Habilitado",
         "createOk": "Unidad de medida creada satisfactoriamente.",
         "updateOk": "Unidad de medida actualizada satisfactoriamente."
+    },
+    "categories": {
+        "title": "Categorias",
+        "searchLabel": "Buscar categoria...",
+        "namePlaceholder": "Nombre",
+        "descriptionPlaceholder": "Descripción",
+        "enabledPlaceholder": "Habilitado",
+        "createOk": "Categoría creada satisfactoriamente.",
+        "updateOk": "Categoría actualizada satisfactoriamente."
     },
     "table": {
         "users": {
@@ -96,6 +106,12 @@
     "measurementUnitTable": {
         "name": "Nombre",
         "symbol": "Symbolo",
+        "status": "Estado",
+        "accions": "Acciones"
+    },
+    "categoryTable": {
+        "name": "Nombre",
+        "description": "Descripción",
         "status": "Estado",
         "accions": "Acciones"
     },
@@ -145,6 +161,9 @@
         "deleteMeasurementUnit": {
             "title": "¿Estas seguro que quieres dar de baja la unidad de medida {{param}}?"
         },
+        "deleteCategory": {
+            "title": "¿Estas seguro que quieres dar de baja la categoria {{param}}?"
+        },
         "defaultConfirmButton": "Confirmar",
         "defaultCancelButton": "Cancelar"
     },
@@ -187,6 +206,11 @@
         "disabled": "Baja"
     },
     "measurementUnitStatus": {
+        "enabled": "Alta",
+        "disabled": "Baja"
+    }
+    ,
+    "categoryStatus": {
         "enabled": "Alta",
         "disabled": "Baja"
     }

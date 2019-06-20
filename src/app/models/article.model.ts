@@ -1,5 +1,3 @@
-import { MeasurementUnit } from './measurement-unit.model';
-
 export class Article {
     articleId : number;
     brand : string;
@@ -11,7 +9,7 @@ export class Article {
     disabledDate : Date; 
     expirationDate : Date;
     measurementUnitId : number;
-    measurementUnit : MeasurementUnit;
+    categoryId : number;
     name : string;    
     constructor(
         articleId? : number,
@@ -23,8 +21,8 @@ export class Article {
         disabled? : boolean,
         disabledDate? : Date,
         expirationDate? : Date,
-        measurementUnit? : MeasurementUnit,
         measurementUnitId? : number,
+        categoryId? : number,
         name? : string) {
             this.articleId = articleId,
             this.brand = brand ,
@@ -35,8 +33,8 @@ export class Article {
             this.disabled = disabled || false,
             this.disabledDate = disabledDate,
             this.expirationDate = expirationDate,
-            this.measurementUnit = measurementUnit,
-            this.measurementUnitId = measurementUnitId,
+            this.measurementUnitId = measurementUnitId
+            this.categoryId = categoryId,
             this.name = name;
         }
 }

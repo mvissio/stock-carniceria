@@ -1,0 +1,54 @@
+<div class="row animated fadeIn">
+  <div class="col-12">
+      <div class="card">
+          <div class="card-body">
+              <input #input (keyup.enter)="findCategory(input.value)" type="search" class="form-control" [placeholder]="'categories.searchLabel' | translate">
+          </div>
+      </div>
+  </div>
+</div>
+<div class="row animated fadeIn" *ngIf="!loading">
+  <div class="col-12">
+      <div class="card">
+          <div class="card-body">
+              <h3 class="card-title">{{'categories.title' | translate}} (
+                  <small>{{ page.totalElements}}</small> )
+              </h3>
+              <button type="button" class="btn btn-primary float-right mdi mdi-plus" [routerLink]="['/categoria']"></button>
+              <table class="table table-hover">
+                  <thead>
+                      <tr>
+                          <th>{{'categoryTable.name' | translate}}</th>
+                          <th>{{'categoryTable.description' | translate}}</th>
+                          <th>{{'categoryTable.status' | translate}}</th>
+                          <th>{{'categoryTable.accions' | translate}}</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let category of categories">
+                          <td>{{ category?.name }}</td>
+                          <td>{{ category?.description }}</td>
+                          <td><span class="label label-rounded" [ngClass]="(!category.disabled)? 'label-success':'label-danger'">{{getCategoryStatus(category)}}</span>
+                          </td>
+                          <td>
+                              <div class="button-group">
+                                  <button class="btn btn-secondary" (click)="editOrShowCategory(category.categoryId)">
+                                      <i class="mdi mdi-eye-outline"></i>
+                                  </button>
+                                  <button class="btn btn-info" (click)="editOrShowCategory(category.categoryId, true)">
+                                      <i class="mdi mdi-account-edit"></i>
+                                      </button>
+                                  <button class="btn btn-danger" (click)="deleteCategory(category.name,category.categoryId)">
+                                      <i class="mdi mdi-account-remove"></i>
+                                  </button>
+                              </div>
+                          </td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+  </div>
+</div>
+<app-loading [loading]="loading"></app-loading>
+<app-pagination [page]="page" [pages]="pages" (pageNumber)="setPage($event)" *ngIf="categories"></app-pagination>
