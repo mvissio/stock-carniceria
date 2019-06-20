@@ -32,6 +32,7 @@ import { OperationDetailsComponent } from './operations/operation-details/operat
 import { MeasurementUnitsComponent } from './measurement-units/measurement-units.component';
 import { MeasurementUnitComponent } from './measurement-units/measurement-unit/measurement-unit.component';
 import { BoxsComponent } from './boxs/boxs.component';
+import {Graficas1Component} from './graficas1/graficas1.component';
 
 @NgModule({
     declarations: [
@@ -43,7 +44,8 @@ import { BoxsComponent } from './boxs/boxs.component';
       OperationsComponent,
       OperationComponent,
       OperationDetailsComponent,
-      ArticlesComponent,      
+      ArticlesComponent,
+      Graficas1Component,
       ArticleComponent,
       MeasurementUnitComponent,
       MeasurementUnitsComponent,

@@ -29,7 +29,7 @@
                         <tr *ngFor="let user of users">
                             <td>{{ user?.username }}</td>
                             <td>{{ user?.email }}</td>
-                            <td>{{user?.rol.nombre}}</td>
+                            <td>{{user?.rol.name}}</td>
                             <td><span class="label label-rounded" [ngClass]="(user.enabled)? 'label-success':'label-danger'">{{getUserStatus(user)}}</span>
                             </td>
                             <td>

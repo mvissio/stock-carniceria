@@ -4,7 +4,8 @@ export class ApiURLs {
   operation: OperationURLs;
   OperationDetail: OperationDetailURLs;
   article: ArticleURLs;
-  measurementUnit: MeasurementUnitURLs 
+  measurementUnit: MeasurementUnitURLs;
+  box: BoxURLs;
 }
 
 interface AuthURLs {
@@ -42,7 +43,7 @@ interface ArticleURLs {
   getAllArticlesNotPagging?: string;
   getArticleByName?: string;
   getArticleByArticleId?: string;
-  getArticleByNameLike?: string;  
+  getArticleByNameLike?: string;
   getAllMeasurementUnits?: string;
   deleteArticle?: string;
 }
@@ -50,8 +51,11 @@ interface ArticleURLs {
 interface MeasurementUnitURLs {
   base: string;
   getMeasurementUnitByName?: string;
-  getMeasurementUnitByMeasurementUnitId?: string;  
+  getMeasurementUnitByMeasurementUnitId?: string;
   deleteMeasurementUnit?: string;
 }
 
+interface BoxURLs {
+  base: string;
+}
 
