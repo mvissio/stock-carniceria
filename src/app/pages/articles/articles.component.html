@@ -2,7 +2,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <input #input (keyup.enter)="findArticle(input.value)" type="search" class="form-control" [placeholder]="'article.searchLabel' | translate">
+                <input #input (keyup.enter)="findArticle(input.value)" type="search" class="form-control" [placeholder]="'articles.searchLabel' | translate">
             </div>
         </div>
     </div>
@@ -14,7 +14,7 @@
                 <h3 class="card-title">{{'articles.title' | translate}} (
                     <small>{{ page.totalElements}}</small> )
                 </h3>
-                <button type="button" class="btn btn-primary float-right mdi mdi-plus" [routerLink]="['/configuracion/articulo']"></button>
+                <button type="button" class="btn btn-primary float-right mdi mdi-plus" [routerLink]="['/articulo']"></button>
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -24,7 +24,7 @@
                             <th>{{'articleTable.currentQuantity' | translate}}</th>
                             <th>{{'articleTable.description' | translate}}</th>
                             <th>{{'articleTable.expirationDate' | translate}}</th>
-                            <th>{{'articleTable.status' | translate}}</th>                            
+                            <th>{{'articleTable.status' | translate}}</th>
                             <th>{{'articleTable.accions' | translate}}</th>
                         </tr>
                     </thead>

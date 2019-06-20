@@ -84,7 +84,7 @@ export class ArticlesComponent implements OnInit {
   }
 
   editOrShowArticle(articleId: number, edit: boolean = false) {
-    this.router.navigate(['/configuracion/articulo', articleId], {queryParams: {edit: edit}, skipLocationChange: true});
+    this.router.navigate(['/articulo', articleId], {queryParams: {edit: edit}, skipLocationChange: true});
   }
 
   deleteArticle(name: string, id : number) {

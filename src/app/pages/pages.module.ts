@@ -1,6 +1,6 @@
 
 import { NgModule } from '@angular/core';
-import { PAGES_ROUTES } from './pages.routes';
+import { PagesRoutingModule } from './pages.routes';
 
 import { SharedModule } from '../shared/shared.module';
 
@@ -59,7 +59,7 @@ import { BoxsComponent } from './boxs/boxs.component';
     ReactiveFormsModule,
     NgSelectModule,
     SharedModule,
-    PAGES_ROUTES,
+    PagesRoutingModule,
     ComponentsModule
   ]
 })

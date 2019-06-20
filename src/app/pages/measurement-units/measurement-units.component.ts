@@ -78,7 +78,7 @@ export class MeasurementUnitsComponent implements OnInit {
   }
 
   editOrShowMeasurementUnit(measurementUnitId: number, edit: boolean = false) {
-    this.router.navigate(['/configuracion/unidadMedida', measurementUnitId], {queryParams: {edit: edit}, skipLocationChange: true});
+    this.router.navigate(['/unidadMedida', measurementUnitId], {queryParams: {edit: edit}, skipLocationChange: true});
   }
 
   deleteMeasurementUnit(name: string, id : number) {

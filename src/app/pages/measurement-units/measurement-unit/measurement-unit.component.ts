@@ -107,7 +107,7 @@ export class MeasurementUnitComponent implements OnInit {
   }
    
   back() {
-    this.router.navigate(['/configuracion/unidadesMedida']);
+    this.router.navigate(['/unidadesMedida']);
   }
 
 }
