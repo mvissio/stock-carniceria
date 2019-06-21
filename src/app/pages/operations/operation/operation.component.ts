@@ -88,6 +88,7 @@ export class OperationComponent implements OnInit {
     this.operationForm = this.fb.group({
       operationType: [this.operation.operationType, Validators.required],
       paymentMethod: [this.operation.paymentMethod, Validators.required],
+      discount: [this.operation.discount], 
       operationDetails: operationDetails
     }, {updateOn: 'blur'});
     if (this.disabledFields)  {
@@ -207,6 +208,9 @@ export class OperationComponent implements OnInit {
   getTotal() {
     let total: number = 0;
     this.operation.operationDetails.forEach((operationDetail: OperationDetail) => total += operationDetail.price);
+    if (this.operation.discount) {
+      total = total - this.operation.discount; 
+    }
     return total;
   }
 
@@ -221,7 +225,8 @@ export class OperationComponent implements OnInit {
   selectArticle(article: Article, index: number) {
     if (article) {
       this.operationDetailControls(index).price.patchValue(article.currentPrice);
-      if (article.categoryId === 1) {// si es de la categoria carne
+      //TODO: solo si la categoria no es carne(categoria carne es la con id 1) se debe sacar cuando este la funcionalidad de la balanza electronica
+      if (article.categoryId === 1 && this.operationControls.operationType.value === "SALE") {
         this.operationDetailControls(index).amount.disable();
       }
     }

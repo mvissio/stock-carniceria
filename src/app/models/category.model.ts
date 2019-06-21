@@ -1,22 +1,29 @@
 export class Category {
+
     categoryId : number;
-    createDate : Date;
+    name : string;
     description : string;
+    createDate : Date;
+    disabledDate : Date;
     disabled : boolean;
-    disabledDate? : Date; 
-    name : string;    
+
     constructor(
         categoryId? : number,
-        createDate? : Date,
+        name? : string,
         description? : string,
-        disabled? : boolean,
+        createDate? : Date,
         disabledDate? : Date,
-        name? : string) {
+        disabled? : boolean){
+
             this.categoryId = categoryId,
-            this.createDate = createDate || new Date(),
+            this.name = name,
             this.description = description,
-            this.disabled = disabled || false,
+            this.createDate = createDate,
             this.disabledDate = disabledDate,
-            this.name = name;
-        }
+            this.disabled = disabled
+    }
+
+
+
+
 }

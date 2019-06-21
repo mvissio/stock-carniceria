@@ -29,6 +29,12 @@ export class OperationsService {
       .pipe(map((response: Page) => response));
   }
 
+  getOperationsByOperationType(page: PageConfig) {
+    const url = this.operationUrl.getOperationsByCreateDate;
+    return this.httpClient.get(`${url}?creationDate=${new Date()}&page=${page.pageNumber}&size=${page.pageSize}&sort=${page.sortName},${page.orderDesc}`)
+      .pipe(map((response: Page) => response));
+  }
+
   getOperationById(id: number) {
     const url = `${this.operationUrl.getOperationById}/${id}`;
     return this.httpClient.get(url)

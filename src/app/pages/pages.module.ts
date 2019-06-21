@@ -32,6 +32,8 @@ import { OperationComponent } from './operations/operation/operation.component';
 import { OperationDetailsComponent } from './operations/operation-details/operation-details.component';
 import { MeasurementUnitsComponent } from './measurement-units/measurement-units.component';
 import { MeasurementUnitComponent } from './measurement-units/measurement-unit/measurement-unit.component';
+import { CategoriesComponent } from './categories/categories.component';
+import { CategoryComponent } from './categories/category/category.component';
 
 @NgModule({
     declarations: [
@@ -47,7 +49,9 @@ import { MeasurementUnitComponent } from './measurement-units/measurement-unit/m
       ArticlesComponent,      
       ArticleComponent,
       MeasurementUnitComponent,
-      MeasurementUnitsComponent
+      MeasurementUnitsComponent,
+      CategoriesComponent,
+      CategoryComponent
     ],
     exports: [
       HomeComponent,
