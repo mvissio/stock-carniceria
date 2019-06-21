@@ -49,6 +49,7 @@
         "operationDetailAddButtonLabel": "Añadir detalle operación",
         "operationDetailDeleteButtonLabel": "Borrar detalle",
         "amountPlaceholder": "Cantidad",
+        "pricePlaceholder": "Precio",
         "articlePlaceholder": "Seleccione Articulo",
         "articleNotFoundLabel": "No hay articulos para la busqueda"
     },
@@ -181,7 +182,7 @@
         "CANCELED": "Operación Cancelada",
         "SOLD": "Venta Realizada",
         "PURCHASED": "Compra Realizada"
-    },    
+    },
     "articleStatus": {
         "enabled": "Alta",
         "disabled": "Baja"

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Operation } from '../../../models/operation.model';
-import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { OperationsService } from '../../../services/pages/operations.service';
@@ -68,6 +68,7 @@ export class OperationComponent implements OnInit {
           this._articleService.getArticleByArticleId(operationDetail.articleId).subscribe((res: Article) => {
             operationDetails.push(this.fb.group({
               amount: [operationDetail.amount, [Validators.required, Validators.min(1)]],
+              price: [operationDetail.price, [Validators.required, Validators.min(1)]],
               article: [res, Validators.required]
             }));
             if(this.disabledFields) {
@@ -80,6 +81,7 @@ export class OperationComponent implements OnInit {
       this.operation.operationDetails = [];
       operationDetails.push(this.fb.group({
         amount: ['', [Validators.required, Validators.min(1)]],
+        price: ['', [Validators.required, Validators.min(1)]],
         article: ['', Validators.required]
       }));
     }
@@ -188,11 +190,11 @@ export class OperationComponent implements OnInit {
   }
 
   setOperationDetails() {
-    this.operationDetails.value.forEach((odObject: {amount: number, article: Article}, index: number) => {
+    this.operationDetails.value.forEach((odObject: {article: Article, price: number, amount?: number}, index: number) => {
       let operationDetail = new OperationDetail();
       operationDetail.amount = odObject.amount;
       operationDetail.articleId = odObject.article.articleId;
-      operationDetail.price = odObject.article.currentPrice * operationDetail.amount;
+      operationDetail.price = (operationDetail.amount)? odObject.price * operationDetail.amount : odObject.price;
       const indexOperationDetail = this.operation.operationDetails.findIndex((od: OperationDetail) => od.articleId === odObject.article.articleId);
       if (indexOperationDetail !== -1) {
         this.operation.operationDetails[index] = operationDetail; 
@@ -216,11 +218,21 @@ export class OperationComponent implements OnInit {
     return (this.operation.paymentMethod && paymentMethod === this.operation.paymentMethod);
   }
 
+  selectArticle(article: Article, index: number) {
+    if (article) {
+      this.operationDetailControls(index).price.patchValue(article.currentPrice);
+      if (article.categoryId === 1) {// si es de la categoria carne
+        this.operationDetailControls(index).amount.disable();
+      }
+    }
+  }
+
   addOperationDetail() {
     this.operationDetails.push(
       this.fb.group({
         amount: ['', [Validators.required, Validators.min(1)]],
-        articleId: ['', Validators.required]
+        price:['', [Validators.required, Validators.min(1)]],
+        article: ['', Validators.required]
       })
     );
   }
