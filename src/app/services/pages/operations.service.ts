@@ -23,9 +23,24 @@ export class OperationsService {
       .pipe(map((newOperation: any) => newOperation));
   }
 
-  getOperationsByCreateDate(page: PageConfig) {
+  //consulta por la fecha de hoy
+  getOperationsByTodayCreateDate(page: PageConfig) {
     const url = this.operationUrl.getOperationsByCreateDate;
     return this.httpClient.get(`${url}?creationDate=${new Date()}&page=${page.pageNumber}&size=${page.pageSize}&sort=${page.sortName},${page.orderDesc}`)
+      .pipe(map((response: Page) => response));
+  }
+
+  //consulta por la fecha pasada como parametro
+  getOperationsByCreateDate(page: PageConfig,createDate : Date ) {
+    const url = this.operationUrl.getOperationsByCreateDate;
+    return this.httpClient.get(`${url}?creationDate=${new Date()}&page=${page.pageNumber}&size=${page.pageSize}&sort=${page.sortName},${page.orderDesc}`)
+      .pipe(map((response: Page) => response));
+  }
+
+  getOperationsByPeriod(fromDate : Date, toDate: Date, page: PageConfig) {
+    const url = this.operationUrl.getOperationsByPeriod;
+    //console.log("esta es la url",`${url}?creationDate=${new Date()}&page=${page.pageNumber}&size=${page.pageSize}&sort=${page.sortName},${page.orderDesc}`)
+    return this.httpClient.get(`${url}?fromDate=${fromDate}&toDate=${toDate}&page=${page.pageNumber}&size=${page.pageSize}`)
       .pipe(map((response: Page) => response));
   }
 

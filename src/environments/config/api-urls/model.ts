@@ -25,6 +25,9 @@ interface OperationURLs {
   base: string;
   getOperationById?: string;
   getOperationsByPaymentMethod?: string;
+  getOperationsByDateAndPaymentMethod?: string;
+  getOperationsByDateAndOperationType?: string;
+  getOperationsByPeriod?: string;
   getOperationsByCreateDate?: string;
   getOperationsByDateBetween?: string;
   getOperationsByTypeAndDate?: string;

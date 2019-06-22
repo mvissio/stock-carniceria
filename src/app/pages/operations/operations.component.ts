@@ -10,6 +10,7 @@ import { CommonsService } from '../../services/commons.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { forkJoin } from 'rxjs';
 import swal from 'sweetalert';
+import { DatepickerOptions } from 'ng2-datepicker';
 
 @Component({
   selector: 'app-operations',
@@ -24,6 +25,11 @@ export class OperationsComponent implements OnInit {
   loading = false;
   pageConfig: PageConfig;
 
+  fromDate: Date;
+  toDate: Date;
+
+ 
+
   constructor(private _operationService: OperationsService,
               private _handleErrorsService: HandleErrorsService,
               private translate: TranslateService,
@@ -34,17 +40,18 @@ export class OperationsComponent implements OnInit {
   ngOnInit() {
     this.pageConfig = new PageConfig('operationId');
     this.pageConfig.changeOrder();
-    this.getOperations(0);
+    this.getTodayOperations(0);
   }
 
   setPage(nextPage: number) {
-    this.getOperations(nextPage);
+    this.getTodayOperations(nextPage);
   }
 
-  getOperations(nextPage: number) {
+  //consulta por la fecha de hoy
+  getTodayOperations(nextPage: number) {
     this.loading = true;
     this.pageConfig.pageNumber = nextPage;
-    this._operationService.getOperationsByCreateDate(this.pageConfig)
+    this._operationService.getOperationsByTodayCreateDate(this.pageConfig)
       .subscribe(
         (res: Page) => {
           this.page = res;
@@ -57,6 +64,33 @@ export class OperationsComponent implements OnInit {
           this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
         });
   }
+
+
+  getOperationsByPeriod(nextPage: number) {
+    //let today = new Date();
+    //fromDate = new Date(today.getFullYear(), today.getMonth(), today.getDay() - 5);
+    //toDate = new Date(today.getFullYear(), today.getMonth(), today.getDay() + 15)
+    
+    console.log(this.fromDate);
+    console.log(this.toDate);
+
+
+    this.loading = true;
+    this.pageConfig.pageNumber = nextPage;
+    this._operationService.getOperationsByPeriod(this.fromDate, this.toDate, this.pageConfig)
+      .subscribe(
+        (res: Page) => {
+          this.page = res;
+          this.operations = this.page.content;
+          this.pages = new Array(this.page.totalPages);
+          this.loading = false;
+        },
+        (err: HttpErrorResponse) => {
+          this.loading = false;
+          this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
+        });
+  }
+
 
   editOrShowOperation(operationId: number, edit: boolean = false) {
     this.router.navigate(['/operacion', operationId], {queryParams: {edit: edit}, skipLocationChange: true});
@@ -88,7 +122,7 @@ export class OperationsComponent implements OnInit {
       }
       ).then((data) => {
         if (data) {
-          this._operationService.cancelOperation(operationId).subscribe(() => this.getOperations(this.page.number));
+          this._operationService.cancelOperation(operationId).subscribe(() => this.getTodayOperations(this.page.number));
         }
       });
     }); 

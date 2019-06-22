@@ -35,6 +35,9 @@ import { MeasurementUnitComponent } from './measurement-units/measurement-unit/m
 import { CategoriesComponent } from './categories/categories.component';
 import { CategoryComponent } from './categories/category/category.component';
 
+import { NgDatepickerModule } from 'ng2-datepicker';
+import { BrowserModule } from '@angular/platform-browser';
+
 @NgModule({
     declarations: [
       PagesComponent,
@@ -65,7 +68,9 @@ import { CategoryComponent } from './categories/category/category.component';
     NgSelectModule,
     SharedModule,
     PagesRoutingModule,
-    ComponentsModule
+    ComponentsModule,
+    BrowserModule,
+    NgDatepickerModule
   ]
 })
 export class PagesModule { }
