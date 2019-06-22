@@ -40,8 +40,8 @@
   "boxs": {
     "title": "Historico de Caja",
     "childTitle": "Caja:",
+    "titleModal": "Gestion de Caja",
     "openBox": {
-      "titleModal": "Apertura de Caja",
       "textModal": "¿Desea abrir una nueva caja?",
       "inputCash": "Saldo en efectivo ({{param}})"
     }

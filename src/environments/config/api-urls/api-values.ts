@@ -41,7 +41,8 @@ export const applicationApiUrls: ApiURLs = {
     deleteMeasurementUnit: '/id'
   },
   box: {
-    base: 'API_VERSION/boxs'
+    base: 'API_VERSION/boxs',
+    getOpenBoxs: 'API_VERSION/checkBoxOpen'
   }
 
 };

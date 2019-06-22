@@ -21,6 +21,20 @@ button.btn-black {
     color: $general-white1;
 }
 
+button, a{
+  cursor: pointer;
+}
+
+div.button-group.row{
+  display:flex;
+}
+
+.table-responsive{
+  .table{
+    width: 95% !important;
+  }
+}
+
 img {
     &.logo-big {
         width: 150px;

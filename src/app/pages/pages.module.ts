@@ -33,6 +33,8 @@ import { MeasurementUnitsComponent } from './measurement-units/measurement-units
 import { MeasurementUnitComponent } from './measurement-units/measurement-unit/measurement-unit.component';
 import { BoxsComponent } from './boxs/boxs.component';
 import {Graficas1Component} from './graficas1/graficas1.component';
+import {AppModule} from '../app.module';
+import {DefaultValuePipe} from '../pipes/default-value.pipe';
 
 @NgModule({
     declarations: [
@@ -49,7 +51,8 @@ import {Graficas1Component} from './graficas1/graficas1.component';
       ArticleComponent,
       MeasurementUnitComponent,
       MeasurementUnitsComponent,
-      BoxsComponent
+      BoxsComponent,
+      DefaultValuePipe
     ],
     exports: [
       HomeComponent,

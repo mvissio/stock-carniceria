@@ -23,12 +23,24 @@ export class BoxsService {
     const newBox = Object.assign({}, box);
     const url = this.boxsUrl.base;
     return this.httpClient.post(url, newBox)
-      .pipe(map((newBox: any) => newBox));
+      .pipe(map((box: Box) => newBox));
   }
 
   getAllBoxs(page: PageConfig) {
     const url = this.boxsUrl.base;
     return this.httpClient.get(`${url}?page=${page.pageNumber}&size=${page.pageSize}&sort=${page.sortName},${page.orderDesc}`)
       .pipe(map((response: Page) => response));
+  }
+
+  getOpenBoxs(page?: PageConfig) {
+    const url = this.boxsUrl.getOpenBoxs;
+    return this.httpClient.get(`${url}?page=${page.pageNumber}&size=${page.pageSize}&sort=${page.sortName},${page.orderDesc}`)
+      .pipe(map((response: Page) => response));
+  }
+
+  checkOpenBox() {
+    const url = this.boxsUrl.getOpenBoxs;
+    return this.httpClient.get(url)
+      .pipe(map((response: Array<Box>) => response));
   }
 }

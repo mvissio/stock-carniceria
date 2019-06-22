@@ -8,6 +8,7 @@ import {Box} from '../../models/Box.model';
 import {HandleErrorsService} from '../../services/shared/handle-errors.service';
 import {CommonsService} from '../../services/commons.service';
 import {Rol} from '../../models/rol.model';
+import swal from 'sweetalert';
 
 
 @Component({
@@ -20,13 +21,15 @@ export class BoxsComponent implements OnInit {
   page: Page;
   pageConfig: PageConfig;
   pages: number[];
-
+  boxModal: Box;
   boxs: Box[];
   typeSelect: any;
   actionTitle: string;
   openForm: FormGroup;
   TYPEBOX = {
     OPEN: 'create',
+    SHOW_DETAILS: 'show details',
+    SWING: 'swing',
     CLOSE: 'close'
   };
 
@@ -42,7 +45,7 @@ export class BoxsComponent implements OnInit {
     this.getBoxs(0);
   }
 
-  onBoxAction(event) {
+  onBoxAction(event, box?: Box) {
     this.typeSelect = event;
     switch (this.typeSelect) {
       case this.TYPEBOX.OPEN:
@@ -50,6 +53,9 @@ export class BoxsComponent implements OnInit {
         break;
       case this.TYPEBOX.CLOSE:
         this.initCloseForm();
+        break;
+      case this.TYPEBOX.SHOW_DETAILS:
+        this.viewDetails(box);
         break;
     }
   }
@@ -64,14 +70,28 @@ export class BoxsComponent implements OnInit {
     });
   }
 
+  createBox() {
+    this._boxService.checkOpenBox().subscribe((data: Array<Box>) => {
+      if (data.length > 0) {
+        this._commonsService.showMessage('warning', 'Por favor cierre todas las cajas abiertas.');
+      } else {
+        this._boxService.addBox(this.getNewBox()).subscribe(
+          (res: Box) => {
+            this._commonsService.showMessage('success', 'Caja Creada');
+            this.getBoxs(0);
+            this.closeModal();
+          },
+          (err: HttpErrorResponse) => {
+            this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
+          });
+      }
+    });
+  }
+
   initOpenForm() {
     this.openForm = this.fb.group({
       cashInit: ['', [Validators.required, Validators.pattern('^\\d+(\\.\\d{1,2})?$')]]
     });
-  }
-
-  createBox() {
-    // this._boxService.addBox(this.box)
   }
 
   get openControls() {
@@ -81,6 +101,9 @@ export class BoxsComponent implements OnInit {
   getBoxs(nextPage: number) {
     this.loading = true;
     this.pageConfig.pageNumber = nextPage;
+    this._boxService.getOpenBoxs(this.pageConfig).subscribe(data => {
+      console.log(data);
+    });
     this._boxService.getAllBoxs(this.pageConfig)
       .subscribe(
         (res: Page) => {
@@ -94,10 +117,21 @@ export class BoxsComponent implements OnInit {
           this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
         });
   }
-  setNewBox() {
+
+  getNewBox() {
     let box = new Box();
     box.cashOpen = this.openForm.value.cashInit;
     box.dateOpen = new Date();
     box.open = true;
+    return box;
+  }
+
+
+  setPage(nextPage: number) {
+    this.getBoxs(nextPage);
+  }
+
+  viewDetails(box: Box) {
+    this.boxModal = box;
   }
 }
