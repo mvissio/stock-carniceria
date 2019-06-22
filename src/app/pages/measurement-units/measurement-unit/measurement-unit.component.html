@@ -7,7 +7,7 @@
                   <form class="form-horizontal form-material" [formGroup]="measurementUnitForm" (ngSubmit)="saveMeasurementUnit()">
                       
                     <div class="form-group">
-                          <input class="form-control" type="text" formControlName="name" [placeholder]="'measurementUnit.namePlaceholder' | translate">
+                          <input class="form-control" type="text" formControlName="name" [placeholder]="'measurementUnits.namePlaceholder' | translate">
                           <div *ngIf="measurementUnitControls.name.invalid && (measurementUnitControls.name.dirty || measurementUnitControls.name.touched)" class="error-label">
                               <small *ngIf="measurementUnitControls.name.errors.required">
                                 {{'generalValidations.required' | translate}}
@@ -17,7 +17,7 @@
                       </div>
                       
                       <div class="form-group">
-                          <input class="form-control" type="text" formControlName="symbol" [placeholder]="'measurementUnit.symbolPlaceholder' | translate">
+                          <input class="form-control" type="text" formControlName="symbol" [placeholder]="'measurementUnits.symbolPlaceholder' | translate">
                           <div *ngIf="measurementUnitControls.symbol.invalid && (measurementUnitControls.symbol.dirty || measurementUnitControls.symbol.touched)" class="error-label">
                               <small *ngIf="measurementUnitControls.symbol.errors.required">
                                 {{'generalValidations.required' | translate}}
@@ -28,7 +28,7 @@
                       
                       <div *ngIf="!disabledFields">
                           <button  class="btn btn-primary m-r-10" type="submit" [disabled]="measurementUnitForm.invalid">
-                          <i class="fa fa-save"></i>
+                          <em class="fa fa-save"></em>
                           {{'buttons.submit' | translate}}
                         </button>
                           <button (click)="back()" class="btn btn-danger" type="button">

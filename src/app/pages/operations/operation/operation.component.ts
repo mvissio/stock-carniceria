@@ -10,7 +10,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { forkJoin, Observable } from 'rxjs';
 import { OperationDetail } from '../../../models/operationDetail.model';
 import { operationStatus } from '../../../constants/constant';
-import { ArticleService } from '../../../services/articles/article.service';
+import { ArticleService } from '../../../services/pages/article.service';
 import { Article } from '../../../models/article.model';
 import swal from 'sweetalert';
 @Component({

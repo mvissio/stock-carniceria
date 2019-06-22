@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Article } from '../../../models/article.model';
-import { ArticleService } from '../../../services/articles/article.service';
+import { ArticleService } from '../../../services/pages/article.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -8,8 +8,6 @@ import { CommonsService } from '../../../services/commons.service';
 import { HandleErrorsService } from '../../../services/shared/handle-errors.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { formatDate } from '@angular/common';
-import { MeasurementUnit } from '../../../models/measurement-unit.model';
-import { Category } from '../../../models/category.model';
 
 @Component({
   selector: 'app-article',
@@ -88,7 +86,7 @@ export class ArticleComponent implements OnInit {
     if (this.edit) {      
       this._articleService.updateArticle(this.article)
         .subscribe(() => {
-          this.translate.get('article.updateOk')
+          this.translate.get('articles.updateOk')
           .subscribe((res: string) => {
             this._commonsService.showMessage('success', res);
             this.back();
