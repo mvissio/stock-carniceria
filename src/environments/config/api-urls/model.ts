@@ -24,13 +24,19 @@ interface UserURLs {
 interface OperationURLs {
   base: string;
   getOperationById?: string;
-  getOperationsByPaymentMethod?: string;
-  getOperationsByDateAndPaymentMethod?: string;
-  getOperationsByDateAndOperationType?: string;
-  getOperationsByPeriod?: string;
-  getOperationsByCreateDate?: string;
+  getOperationsByPaymentMethod?: string;  
   getOperationsByDateBetween?: string;
   getOperationsByTypeAndDate?: string;
+  
+  getOperationsByOneDate?: string;  
+  getOperationsByOneDateAndPaymentMethod?: string;
+  getOperationsByOneDateAndOperationType?: string;  
+  getOperationsByOneDateAndOperationTypeAndPaymentMethod?:string;
+  
+  getOperationsByPeriod?: string;
+  getOperationsByPeriodAndPaymentMethod;
+  getOperationsByPeriodAndOperationType;
+  getOperationsByPeriodAndOperationTypeAndPaymentMethod;
   cancelOperation?: string;
   getAllOperationTypes?: string;
   getAllPaymentMethods?: string;

@@ -9,24 +9,56 @@
 </div>
 
 <div class="row animated fadeIn">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    Opciones de Filtro:
+                    <button class="btn btn-link" (click)="showOneDateFilter()" style="display: inline-block;">Filtrar por fecha</button>
+                    <button class="btn btn-link" (click)="showPeriodFilter()" style="display: inline-block;">Filtrar por periodo</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="row animated fadeIn" *ngIf="showFilterPeriod">
     <div class="col-12">
         <div class="card">
-            <div class="card-body" style="height: 220px;" >
-                Filtros por periodo (entre fechas):
-            <br>
-            <br>
-            
-            <div class="form-group"  style="display: inline-block;">
+            <div class="card-body" style="height: 420px;" >            
+                     
+            <div class="form-group"  style="display: inline-block; margin-right: 130px;">
             <label class="m-r-10">Fecha desde:</label>
-                <ng-datepicker [(ngModel)]="fromDate"></ng-datepicker>            
+                <ng-datepicker [(ngModel)]="fromDate" [options]="options"></ng-datepicker>            
             </div>
 
             <div class="form-group" style="display: inline-block;">
                 Fecha hasta:
-                <ng-datepicker [(ngModel)]="toDate"></ng-datepicker>            
+                <ng-datepicker [(ngModel)]="toDate" [options]="options"></ng-datepicker>            
             </div>
 
-            <button class="btn btn-primary" (click)="getOperationsByPeriod(0)" style="display: inline-block;">Consultar</button>
+            <div class="btn-group float-right">
+                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                      Forma Pago
+                    </button>
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" [routerLink]="" (click)="setearPaymentMethodPeriod('CASH')">Contado</a>
+                      <a class="dropdown-item" [routerLink]="" (click)="setearPaymentMethodPeriod('CC')">Credito</a>
+                    </div>
+                  </div>
+
+                  <div class="btn-group float-right">
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                          Tipo Operación
+                        </button>
+                        <div class="dropdown-menu">
+                          <a class="dropdown-item" [routerLink]="" (click)="setearOperationTypePeriod('Sale')">Venta</a>
+                          <a class="dropdown-item" [routerLink]="" (click)="setearOperationTypePeriod('Buy')">Compra</a>
+                        </div>
+                      </div>
+
+
+            <button class="btn btn-primary" (click)="getOperationsByPeriodWithFilters()" style="display: inline-block;">Consultar</button>
 
 
                                
@@ -35,12 +67,39 @@
     </div>
 </div>
 
-<div class="row animated fadeIn">
+<div class="row animated fadeIn" *ngIf="showFilterOneDate">
         <div class="col-12">
             <div class="card">
-                <div class="card-body">
-                    Filtros por fecha:
-                    <button class="btn btn-primary" (click)="getOperationsByPeriod(0,null,null)">Consultar</button>                    
+                <div class="card-body" style="height: 420px;">
+                    <div class="form-group" style="display: inline-block;">
+                            <label class="m-r-10">Fecha:</label>
+                                <ng-datepicker [(ngModel)]="selectedDate" [options]="options"></ng-datepicker>            
+                    </div>
+
+                    <div class="btn-group float-right">
+                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                              Forma Pago
+                            </button>
+                            <div class="dropdown-menu">
+                              <a class="dropdown-item" [routerLink]="" (click)="setearPaymentMethodOneDate('CASH')">Contado</a>
+                              <a class="dropdown-item" [routerLink]="" (click)="setearPaymentMethodOneDate('CC')">Credito</a>
+                            </div>
+                          </div>
+
+                          <div class="btn-group float-right">
+                                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                  Tipo Operación
+                                </button>
+                                <div class="dropdown-menu">
+                                  <a class="dropdown-item" [routerLink]="" (click)="setearOperationTypeOneDate('SALE')">Venta</a>
+                                  <a class="dropdown-item" [routerLink]="" (click)="setearOperationTypeOneDate('BUY')">Compra</a>
+                                </div>
+                              </div>
+
+
+                    <button class="btn btn-primary" (click)="getOperationsOneDateWithFilters()" style="display: inline-block;">Consultar</button>                    
                 </div>
             </div>
         </div>

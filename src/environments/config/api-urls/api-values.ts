@@ -14,12 +14,18 @@ export const applicationApiUrls: ApiURLs = {
   },
   operation: {
     base: 'API_VERSION/operation',
-    getOperationById: '/id',    
-    getOperationsByCreateDate: '/creationDate',
+    getOperationById: '/id',        
     getOperationsByPaymentMethod: '/paymentMethod',
-    getOperationsByDateAndPaymentMethod: '/byDateAndPaymentMethod',
-    getOperationsByDateAndOperationType:'/byDateAndOperationType',
+    
+    getOperationsByOneDate: '/creationDate',
+    getOperationsByOneDateAndPaymentMethod: '/byDateAndPaymentMethod',
+    getOperationsByOneDateAndOperationType:'/byDateAndOperationType',
+    getOperationsByOneDateAndOperationTypeAndPaymentMethod: '//byDateAndPaymentMethodAndOperationType',
+    
     getOperationsByPeriod: '/byPeriod',
+    getOperationsByPeriodAndPaymentMethod: '/byPeriodAndPaymentMethod',
+    getOperationsByPeriodAndOperationType: '/byPeriodAndOperationType',
+    getOperationsByPeriodAndOperationTypeAndPaymentMethod: '/byPeriodAndPaymentMethodAndOperationType',
     getOperationsByTypeAndDate: '/type',
     getAllOperationTypes: '/operationTypes',
     getAllPaymentMethods: '/paymentMethods',

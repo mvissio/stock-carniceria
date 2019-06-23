@@ -25,27 +25,27 @@ export class OperationsService {
 
   //consulta por la fecha de hoy
   getOperationsByTodayCreateDate(page: PageConfig) {
-    const url = this.operationUrl.getOperationsByCreateDate;
+    const url = this.operationUrl.getOperationsByOneDate;
     return this.httpClient.get(`${url}?creationDate=${new Date()}&page=${page.pageNumber}&size=${page.pageSize}&sort=${page.sortName},${page.orderDesc}`)
       .pipe(map((response: Page) => response));
   }
 
   //consulta por la fecha pasada como parametro
-  getOperationsByCreateDate(page: PageConfig,createDate : Date ) {
-    const url = this.operationUrl.getOperationsByCreateDate;
+  getOperationsByCreateDate(page: PageConfig,createDate : Date, path : string ) {
+    const url = this.operationUrl[path];
     return this.httpClient.get(`${url}?creationDate=${new Date()}&page=${page.pageNumber}&size=${page.pageSize}&sort=${page.sortName},${page.orderDesc}`)
       .pipe(map((response: Page) => response));
   }
 
-  getOperationsByPeriod(fromDate : Date, toDate: Date, page: PageConfig) {
-    const url = this.operationUrl.getOperationsByPeriod;
-    //console.log("esta es la url",`${url}?creationDate=${new Date()}&page=${page.pageNumber}&size=${page.pageSize}&sort=${page.sortName},${page.orderDesc}`)
+  //consulto por un periodo de fechas, tipo de pago y tipo de operación
+  getOperationsByPeriod(fromDate : Date, toDate: Date, page: PageConfig, path : string) {
+    const url = this.operationUrl[path];
     return this.httpClient.get(`${url}?fromDate=${fromDate}&toDate=${toDate}&page=${page.pageNumber}&size=${page.pageSize}`)
       .pipe(map((response: Page) => response));
   }
 
   getOperationsByOperationType(page: PageConfig) {
-    const url = this.operationUrl.getOperationsByCreateDate;
+    const url = this.operationUrl.getOperationsByOneDate;
     return this.httpClient.get(`${url}?creationDate=${new Date()}&page=${page.pageNumber}&size=${page.pageSize}&sort=${page.sortName},${page.orderDesc}`)
       .pipe(map((response: Page) => response));
   }
