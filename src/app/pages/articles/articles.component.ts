@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ArticleService} from '../../services/articles/article.service';
+import {ArticleService} from '../../services/pages/article.service';
 import {Article} from '../../models/article.model';
 import {Page} from '../../models/page.model';
 import {HandleErrorsService} from '../../services/shared/handle-errors.service';
@@ -10,7 +10,6 @@ import { forkJoin } from 'rxjs';
 import swal from 'sweetalert';
 import { CommonsService } from '../../services/commons.service';
 import { Router } from '@angular/router';
-import { MeasurementUnit } from '../../models/measurement-unit.model';
 import { MeasurementUnitService } from '../../services/measurement-units/measurement-unit.service';
 
 
@@ -113,7 +112,7 @@ export class ArticlesComponent implements OnInit {
       }
     ).then((data) => {
       if (data) {
-        this._articleService.deleteArticle(id).subscribe();
+        this._articleService.deleteArticle(id).subscribe(() =>  this.getArticles(this.page.number));
       }
     });
     });  

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {CategoryService} from '../../services/categories/categories.service';
+import {CategoryService} from '../../services/pages/categories.service';
 import {Category} from '../../models/category.model';
 import {Page} from '../../models/page.model';
 import {HandleErrorsService} from '../../services/shared/handle-errors.service';

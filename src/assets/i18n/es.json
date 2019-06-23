@@ -2,8 +2,8 @@
     "generalValidations": {
         "required": "Es requerido",
         "email": "El correo electrónico debe ser una dirección de correo electrónico válida",
-        "maxLength": "La logitud maxima es de {{param}}",
-        "minLength": "La logitud minima es de {{param}}",
+        "maxLength": "La longitud máxima es de {{param}}",
+        "minLength": "La longitud mínima es de {{param}}",
         "min": "El mínimo es de {{param}}",
         "max": "El máximo es de {{param}}"
     },
@@ -42,6 +42,7 @@
         "searchLabel": "Buscar operación...",
         "operationTypePlaceholder": "Tipo",
         "paymentMethodPlaceholder": "Método de pago",
+        "discountPlaceholder": "Descuento",
         "createOk": "Operacion creada satisfactoriamente.",
         "updateOk": "Operacion actualizada satisfactoriamente."
     },
@@ -49,11 +50,12 @@
         "operationDetailAddButtonLabel": "Añadir detalle operación",
         "operationDetailDeleteButtonLabel": "Borrar detalle",
         "amountPlaceholder": "Cantidad",
+        "pricePlaceholder": "Precio",
         "articlePlaceholder": "Seleccione Articulo",
-        "articleNotFoundLabel": "No hay articulos para la busqueda"
+        "articleNotFoundLabel": "No hay artículos para la búsqueda"
     },
     "articles": {
-        "title": "Articulos",
+        "title": "Artículos",
         "searchLabel": "Buscar articulo...",
         "namePlaceholder": "Nombre",
         "brandPlaceholder": "Marca",
@@ -61,24 +63,24 @@
         "currentQuantityPlaceholder": "Cantidad actual",
         "descriptionPlaceholder": "Descripción",
         "expirationDatePlaceholder": "Fecha de Expiración",
-        "measurementUnitIdPlaceholder": "Undiad de medida",
+        "measurementUnitIdPlaceholder": "Unidad de medida",
         "categoryPlaceholder": "Categoría",
         "enabledPlaceholder": "Habilitado",
         "createOk": "Articulo creado satisfactoriamente.",
         "updateOk": "Articulo actualizado satisfactoriamente."
     },
-    "measurementUnit": {
+    "measurementUnits": {
         "title": "Unidades de medida",
         "searchLabel": "Buscar unidad de medida...",
         "namePlaceholder": "Nombre",
-        "symbolPlaceholder": "Simbolo",
+        "symbolPlaceholder": "Símbolo",
         "enabledPlaceholder": "Habilitado",
         "createOk": "Unidad de medida creada satisfactoriamente.",
         "updateOk": "Unidad de medida actualizada satisfactoriamente."
     },
     "categories": {
-        "title": "Categorias",
-        "searchLabel": "Buscar categoria...",
+        "title": "Categorías",
+        "searchLabel": "Buscar categoría...",
         "namePlaceholder": "Nombre",
         "descriptionPlaceholder": "Descripción",
         "enabledPlaceholder": "Habilitado",
@@ -105,7 +107,7 @@
     },
     "measurementUnitTable": {
         "name": "Nombre",
-        "symbol": "Symbolo",
+        "symbol": "Símbolo",
         "status": "Estado",
         "accions": "Acciones"
     },
@@ -135,7 +137,7 @@
         "logoutLabel": "Salir"
     },
     "sidebar": {
-        "menu": "Menu",
+        "menu": "Menú",
         "themeLabel": "Mi tema"
     },
     "spinner": {
@@ -144,25 +146,25 @@
     },
     "modals": {
         "logout": {
-            "title": "¿Estas seguro que quieres salir de la aplicación?"
+            "title": "¿Estás seguro que quieres salir de la aplicación?"
         },
         "deleteUser": {
-            "title": "¿Estas seguro que quieres deshabilitar el usuario {{param}}?"
+            "title": "¿Estás seguro que quieres deshabilitar el usuario {{param}}?"
         },
         "cancelOperation": {
-            "title": "¿Estas seguro que deseas cancelar la operación {{param}}?"
+            "title": "¿Estás seguro que deseas cancelar la operación {{param}}?"
         },
         "confirmOperation": {
-            "title": "¿Estas seguro que deseas confirmar la operación?"
+            "title": "¿Estás seguro que deseas confirmar la operación?"
         },
         "deleteArticle": {
-            "title": "¿Estas seguro que quieres dar de baja el articulo {{param}}?"
+            "title": "¿Estás seguro que quieres dar de baja el articulo {{param}}?"
         },
         "deleteMeasurementUnit": {
-            "title": "¿Estas seguro que quieres dar de baja la unidad de medida {{param}}?"
+            "title": "¿Estás seguro que quieres dar de baja la unidad de medida {{param}}?"
         },
         "deleteCategory": {
-            "title": "¿Estas seguro que quieres dar de baja la categoria {{param}}?"
+            "title": "¿Estás seguro que quieres dar de baja la categoría {{param}}?"
         },
         "defaultConfirmButton": "Confirmar",
         "defaultCancelButton": "Cancelar"
@@ -175,7 +177,7 @@
     },
     "toast": {
         "error": "Error!",
-        "success": "Exito!",
+        "success": "Éxito!",
         "warning": "Advertencia!",
         "info": "Información!"
     },
@@ -193,14 +195,14 @@
         "SALE": "Venta"
     },
     "paymentMethods": {
-        "CC": "Tarjeta de Debito",
+        "CC": "Tarjeta de Débito",
         "CASH": "Efectivo"
     },
     "OperationStatus": {
         "CANCELED": "Operación Cancelada",
         "SOLD": "Venta Realizada",
         "PURCHASED": "Compra Realizada"
-    },    
+    },
     "articleStatus": {
         "enabled": "Alta",
         "disabled": "Baja"
@@ -208,8 +210,7 @@
     "measurementUnitStatus": {
         "enabled": "Alta",
         "disabled": "Baja"
-    }
-    ,
+    },
     "categoryStatus": {
         "enabled": "Alta",
         "disabled": "Baja"

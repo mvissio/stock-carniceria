@@ -2,7 +2,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <input #input (keyup.enter)="findMeasurementUnit(input.value)" type="search" class="form-control" [placeholder]="'measurementUnit.searchLabel' | translate">
+                <input #input (keyup.enter)="findMeasurementUnit(input.value)" type="search" class="form-control" [placeholder]="'measurementUnits.searchLabel' | translate">
             </div>
         </div>
     </div>
@@ -11,7 +11,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h3 class="card-title">{{'measurementUnit.title' | translate}} (
+                <h3 class="card-title">{{'measurementUnits.title' | translate}} (
                     <small>{{ page.totalElements}}</small> )
                 </h3>
                 <button type="button" class="btn btn-primary float-right mdi mdi-plus" [routerLink]="['/unidadMedida']"></button>
@@ -33,13 +33,13 @@
                             <td>
                                 <div class="button-group">
                                     <button class="btn btn-secondary" (click)="editOrShowMeasurementUnit(measurementUnit.measurementUnitId)">
-                                        <i class="mdi mdi-eye-outline"></i>
+                                        <i class="mdi mdi-eye-outline" aria-hidden="true"></i>
                                     </button>
                                     <button class="btn btn-info" (click)="editOrShowMeasurementUnit(measurementUnit.measurementUnitId, true)">
-                                        <i class="mdi mdi-account-edit"></i>
+                                        <i class="mdi mdi-pencil" aria-hidden="true"></i>
                                         </button>
                                     <button class="btn btn-danger" (click)="deleteMeasurementUnit(measurementUnit.name,measurementUnit.measurementUnitId)">
-                                        <i class="mdi mdi-account-remove"></i>
+                                        <i class="mdi mdi-delete" aria-hidden="true"></i>
                                     </button>
                                 </div>
                             </td>
