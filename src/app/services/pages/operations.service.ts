@@ -33,7 +33,7 @@ export class OperationsService {
   //consulta por la fecha pasada como parametro
   getOperationsByCreateDate(page: PageConfig,createDate : Date, path : string ) {
     const url = this.operationUrl[path];
-    return this.httpClient.get(`${url}?creationDate=${new Date()}&page=${page.pageNumber}&size=${page.pageSize}&sort=${page.sortName},${page.orderDesc}`)
+    return this.httpClient.get(`${url}?creationDate=${createDate}&page=${page.pageNumber}&size=${page.pageSize}&sort=${page.sortName},${page.orderDesc}`)
       .pipe(map((response: Page) => response));
   }
 

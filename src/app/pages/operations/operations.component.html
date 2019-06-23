@@ -23,16 +23,18 @@
 <div class="row animated fadeIn" *ngIf="showFilterPeriod">
     <div class="col-12">
         <div class="card">
-            <div class="card-body" style="height: 420px;" >            
+            <div class="card-body" style="height: 270px;" >            
                      
             <div class="form-group"  style="display: inline-block; margin-right: 130px;">
-            <label class="m-r-10">Fecha desde:</label>
-                <ng-datepicker [(ngModel)]="fromDate" [options]="options"></ng-datepicker>            
+                <label for="fromDate">Fecha desde :</label>    
+                <my-date-picker name="mydateFechaDesde" [options]="myDatePickerOptions"
+                    [(ngModel)]="fromDate" required></my-date-picker>              
             </div>
 
             <div class="form-group" style="display: inline-block;">
-                Fecha hasta:
-                <ng-datepicker [(ngModel)]="toDate" [options]="options"></ng-datepicker>            
+                <label for="mydate">Fecha hasta :</label>    
+                <my-date-picker name="mydateFechaDesde" [options]="myDatePickerOptions"
+                    [(ngModel)]="toDate" required></my-date-picker>            
             </div>
 
             <div class="btn-group float-right">
@@ -58,7 +60,7 @@
                       </div>
 
 
-            <button class="btn btn-primary" (click)="getOperationsByPeriodWithFilters()" style="display: inline-block;">Consultar</button>
+            <button class="btn btn-primary" (click)="getOperationsByPeriodWithFilters()" style="display: block; ">Consultar</button>
 
 
                                
@@ -70,10 +72,11 @@
 <div class="row animated fadeIn" *ngIf="showFilterOneDate">
         <div class="col-12">
             <div class="card">
-                <div class="card-body" style="height: 420px;">
-                    <div class="form-group" style="display: inline-block;">
-                            <label class="m-r-10">Fecha:</label>
-                                <ng-datepicker [(ngModel)]="selectedDate" [options]="options"></ng-datepicker>            
+                <div class="card-body" style="height: 270px;">
+                    <div class="form-group">
+                        <label for="mydate">Fecha:</label>    
+                        <my-date-picker name="mydate" [options]="myDatePickerOptions"
+                            [(ngModel)]="oneDate" required></my-date-picker>            
                     </div>
 
                     <div class="btn-group float-right">

@@ -10,7 +10,9 @@ import { CommonsService } from '../../services/commons.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { forkJoin } from 'rxjs';
 import swal from 'sweetalert';
-import { DatepickerOptions } from 'ng2-datepicker';
+import { BrowserModule } from '@angular/platform-browser';
+import { MyDatePickerModule,IMyDpOptions,IMyDateModel } from 'mydatepicker';
+
 
 @Component({
   selector: 'app-operations',
@@ -24,9 +26,9 @@ export class OperationsComponent implements OnInit {
   pages: number[];
   loading = false;
   pageConfig: PageConfig;
-  fromDate: Date;
-  toDate: Date;
-  selectedDate: Date;
+  fromDate: IMyDateModel;
+  toDate: IMyDateModel;
+  oneDate: IMyDateModel;
 
   operationTypePeriod: string = "";
   paymentMethodPeriod: string = "";
@@ -36,7 +38,7 @@ export class OperationsComponent implements OnInit {
 
   showFilterOneDate: boolean;
   showFilterPeriod: boolean;
-
+  
   constructor(private _operationService: OperationsService,
     private _handleErrorsService: HandleErrorsService,
     private translate: TranslateService,
@@ -75,10 +77,10 @@ export class OperationsComponent implements OnInit {
         });
   }
 
-  getTodayOperationsByOneDate(nextPage: number, path: string) {
+  getOperationsByOneDate(nextPage: number, path: string) {
     this.loading = true;
     this.pageConfig.pageNumber = nextPage;
-    this._operationService.getOperationsByCreateDate(this.pageConfig, this.selectedDate, path)
+    this._operationService.getOperationsByCreateDate(this.pageConfig, new Date(this.oneDate.formatted), path)
       .subscribe(
         (res: Page) => {
           this.page = res;
@@ -95,7 +97,7 @@ export class OperationsComponent implements OnInit {
   getOperationsByPeriod(nextPage: number, path: string) {
     this.loading = true;
     this.pageConfig.pageNumber = nextPage;
-    this._operationService.getOperationsByPeriod(this.fromDate, this.toDate, this.pageConfig, path)
+    this._operationService.getOperationsByPeriod(new Date(this.fromDate.formatted), new Date(this.toDate.formatted), this.pageConfig, path)
       .subscribe(
         (res: Page) => {
           this.page = res;
@@ -189,16 +191,16 @@ export class OperationsComponent implements OnInit {
   getOperationsOneDateWithFilters() {
 
     if (this.operationTypeOneDate.length == 0 && this.paymentMethodOneDate.length == 0) {
-      this.getTodayOperationsByOneDate(0, "getOperationsByOneDate");
+      this.getOperationsByOneDate(0, "getOperationsByOneDate");
       return;
     } else if (this.operationTypeOneDate.length > 0 && this.paymentMethodOneDate.length > 0) {
-      this.getTodayOperationsByOneDate(0, "getOperationsByOneDateAndOperationTypeAndPaymentMethod");
+      this.getOperationsByOneDate(0, "getOperationsByOneDateAndOperationTypeAndPaymentMethod");
       return;
     } else if (this.operationTypeOneDate.length > 0) {
-      this.getTodayOperationsByOneDate(0, "getOperationsByOneDateAndOperationType");
+      this.getOperationsByOneDate(0, "getOperationsByOneDateAndOperationType");
       return;
     } else if (this.paymentMethodOneDate.length > 0) {
-      this.getTodayOperationsByOneDate(0, "getOperationsByOneDateAndPaymentMethod");
+      this.getOperationsByOneDate(0, "getOperationsByOneDateAndPaymentMethod");
       return;
     }
   }
@@ -219,16 +221,10 @@ export class OperationsComponent implements OnInit {
 
 
   }
-
-  options: DatepickerOptions = {
-    barTitleFormat: 'MMMM YYYY',
-    dayNamesFormat: 'dd',
-    firstCalendarDay: 0, // 0 - Sunday, 1 - Monday   
-    placeholder: 'Fecha de operación', // HTML input placeholder attribute (default: '')
-    addClass: 'form-control', // Optional, value to pass on to [ngClass] on the input field
-    addStyle: {}, // Optional, value to pass to [ngStyle] on the input field
-    fieldId: 'my-date-picker', // ID to assign to the input field. Defaults to datepicker-<counter>
-    useEmptyBarTitle: false, // Defaults to true. If set to false then barTitleIfEmpty will be disregarded and a date will always be shown 
-  };
+  
+  myDatePickerOptions: IMyDpOptions = {
+    dateFormat: 'yyyy-mm-dd',
+    editableDateField:false
+};
 
 }

@@ -34,9 +34,8 @@ import { MeasurementUnitsComponent } from './measurement-units/measurement-units
 import { MeasurementUnitComponent } from './measurement-units/measurement-unit/measurement-unit.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { CategoryComponent } from './categories/category/category.component';
-
-import { NgDatepickerModule } from 'ng2-datepicker';
 import { BrowserModule } from '@angular/platform-browser';
+import { MyDatePickerModule } from 'mydatepicker';
 
 @NgModule({
     declarations: [
@@ -70,7 +69,7 @@ import { BrowserModule } from '@angular/platform-browser';
     PagesRoutingModule,
     ComponentsModule,
     BrowserModule,
-    NgDatepickerModule
+    MyDatePickerModule
   ]
 })
 export class PagesModule { }
