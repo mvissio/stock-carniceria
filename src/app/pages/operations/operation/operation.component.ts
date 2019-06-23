@@ -181,13 +181,15 @@ export class OperationComponent implements OnInit {
   setOperation() {
     this.operation.operationType = this.operationForm.value.operationType;
     this.operation.paymentMethod = this.operationForm.value.paymentMethod;
+    this.operation.discount = this.operationForm.value.discount;
     if (!this.edit) {
       this.operation.createDateTime = new Date();
       this.operation.operationStatus = (this.operation.operationType === 'SALE')? operationStatus.sold : operationStatus.purchased;
     }
     this.setOperationDetails();
-    this.operation.subTotal = this.getTotal();
-    this.operation.total = this.getTotal();
+    const total = this.getTotal();
+    this.operation.subTotal = total;
+    this.operation.total = total;
   }
 
   setOperationDetails() {
