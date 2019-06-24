@@ -42,7 +42,8 @@ export const applicationApiUrls: ApiURLs = {
   },
   box: {
     base: 'API_VERSION/boxs',
-    getOpenBoxs: 'API_VERSION/checkBoxOpen'
+    getOpenBoxs: '/checkBoxOpen',
+    getOperationsBox: '/operationsBox'
   }
 
 };

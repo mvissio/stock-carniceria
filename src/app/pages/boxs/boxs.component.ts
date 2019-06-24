@@ -9,6 +9,8 @@ import {HandleErrorsService} from '../../services/shared/handle-errors.service';
 import {CommonsService} from '../../services/commons.service';
 import {Rol} from '../../models/rol.model';
 import swal from 'sweetalert';
+import {Operation} from '../../models/operation.model';
+import {Observable} from 'rxjs';
 
 
 @Component({
@@ -22,6 +24,9 @@ export class BoxsComponent implements OnInit {
   pageConfig: PageConfig;
   pages: number[];
   boxModal: Box;
+  pageOperation: Page;
+  pagesOperation: number[];
+  loadOperation = false;
   boxs: Box[];
   typeSelect: any;
   actionTitle: string;
@@ -29,7 +34,7 @@ export class BoxsComponent implements OnInit {
   TYPEBOX = {
     OPEN: 'create',
     SHOW_DETAILS: 'show details',
-    SWING: 'swing',
+    SHOW_OPERATIONS: 'show operations',
     CLOSE: 'close'
   };
 
@@ -53,6 +58,9 @@ export class BoxsComponent implements OnInit {
         break;
       case this.TYPEBOX.CLOSE:
         this.initCloseForm();
+        break;
+      case this.TYPEBOX.SHOW_OPERATIONS:
+        this.viewOperations(box);
         break;
       case this.TYPEBOX.SHOW_DETAILS:
         this.viewDetails(box);
@@ -101,9 +109,6 @@ export class BoxsComponent implements OnInit {
   getBoxs(nextPage: number) {
     this.loading = true;
     this.pageConfig.pageNumber = nextPage;
-    this._boxService.getOpenBoxs(this.pageConfig).subscribe(data => {
-      console.log(data);
-    });
     this._boxService.getAllBoxs(this.pageConfig)
       .subscribe(
         (res: Page) => {
@@ -126,12 +131,36 @@ export class BoxsComponent implements OnInit {
     return box;
   }
 
-
   setPage(nextPage: number) {
     this.getBoxs(nextPage);
   }
 
   viewDetails(box: Box) {
     this.boxModal = box;
+  }
+
+  viewOperations(box: Box, nextPage?: number) {
+    this.loadOperation = false;
+    this.boxModal = box;
+    this.pageConfig.pageNumber = (nextPage) ? nextPage : 0;
+    this.pageConfig.sortName = 'createDateTime';
+    this._boxService.getOperations(box.boxId, this.pageConfig)
+      .subscribe(
+        (resp: Page) => {
+          this.pageOperation = resp;
+          this.boxModal.operationList = this.pageOperation.content;
+          this.pagesOperation = new Array(this.pageOperation.totalPages);
+          this.loading = false;
+        },
+        (err: HttpErrorResponse) => {
+          this.loading = false;
+          this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
+        },
+        () => this.loadOperation = true
+      );
+  }
+
+  setPageOperation(nextPage: number) {
+    this.viewOperations(this.boxModal, nextPage);
   }
 }

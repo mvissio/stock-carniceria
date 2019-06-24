@@ -118,7 +118,6 @@ export class ArticleComponent implements OnInit {
     this.article.description = this.articleForm.value.description;
     this.article.expirationDate = new Date(this.articleForm.value.expirationDate);
     if ((this.article.measurementUnit && this.article.measurementUnit !== this.articleForm.value.measurementUnit) || !this.article.measurementUnit) {
-      debugger;
       this.article.measurementUnit = new MeasurementUnit(this.articleForm.value.measurementUnit);
       console.log("unidad medida",this.article.measurementUnit)
    

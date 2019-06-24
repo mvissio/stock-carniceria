@@ -44,6 +44,13 @@
     "openBox": {
       "textModal": "¿Desea abrir una nueva caja?",
       "inputCash": "Saldo en efectivo ({{param}})"
+    },
+    "operationBox": {
+      "notResult":  "No se encontraron operaciónes registradas.",
+      "createDate":  "Fecha y Hora",
+      "operationType": "Tipo de Operación",
+      "paymentMethod":  "Metodo de Pago",
+      "total": "Total"
     }
   },
   "operations": {

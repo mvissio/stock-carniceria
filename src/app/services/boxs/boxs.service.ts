@@ -8,6 +8,7 @@ import * as bcrypt from 'bcryptjs';
 import {PageConfig} from '../../models/pageConfig.model';
 import {Page} from '../../models/page.model';
 import {Box} from '../../models/Box.model';
+import {Operation} from '../../models/operation.model';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +33,7 @@ export class BoxsService {
       .pipe(map((response: Page) => response));
   }
 
-  getOpenBoxs(page?: PageConfig) {
+  getOpenBoxs(page: PageConfig) {
     const url = this.boxsUrl.getOpenBoxs;
     return this.httpClient.get(`${url}?page=${page.pageNumber}&size=${page.pageSize}&sort=${page.sortName},${page.orderDesc}`)
       .pipe(map((response: Page) => response));
@@ -42,5 +43,13 @@ export class BoxsService {
     const url = this.boxsUrl.getOpenBoxs;
     return this.httpClient.get(url)
       .pipe(map((response: Array<Box>) => response));
+  }
+
+  getOperations(boxId: number, page: PageConfig) {
+    const url = this.boxsUrl.getOperationsBox;
+    return this.httpClient.get(
+      `${url}?boxId=${boxId}&page=${page.pageNumber}&size=${page.pageSize}&sort=${page.sortName},${page.orderDesc}`
+    )
+      .pipe(map((response: Page) => response));
   }
 }

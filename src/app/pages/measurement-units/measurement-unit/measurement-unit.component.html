@@ -7,7 +7,7 @@
                   <form class="form-horizontal form-material" [formGroup]="measurementUnitForm" (ngSubmit)="saveMeasurementUnit()">
                       
                     <div class="form-group">
-                          <input class="form-control" type="text" formControlName="name" [placeholder]="'measurementUnit.namePlaceholder' | translate">
+                          <input class="form-control" type="text" formControlName="name" [placeholder]="'measurementUnit.namePlaceholder' | translate" [disabled]="edit">
                           <div *ngIf="measurementUnitControls.name.invalid && (measurementUnitControls.name.dirty || measurementUnitControls.name.touched)" class="error-label">
                               <small *ngIf="measurementUnitControls.name.errors.required">
                                 {{'generalValidations.required' | translate}}

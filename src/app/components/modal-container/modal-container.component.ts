@@ -9,6 +9,7 @@ export class ModalContainerComponent implements OnInit {
 
   @Input() modalTitle: string;
   @Input() enabledCloseButton = false;
+  @Input() bigModal: string;
   @Output() clickClose = new EventEmitter<void>();
 
   constructor() {

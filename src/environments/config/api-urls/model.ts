@@ -58,5 +58,6 @@ interface MeasurementUnitURLs {
 interface BoxURLs {
   base: string;
   getOpenBoxs?: string;
+  getOperationsBox?: string;
 }
 
