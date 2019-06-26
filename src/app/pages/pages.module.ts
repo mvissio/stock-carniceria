@@ -33,7 +33,6 @@ import { MeasurementUnitsComponent } from './measurement-units/measurement-units
 import { MeasurementUnitComponent } from './measurement-units/measurement-unit/measurement-unit.component';
 import { BoxsComponent } from './boxs/boxs.component';
 import {Graficas1Component} from './graficas1/graficas1.component';
-import {AppModule} from '../app.module';
 import {DefaultValuePipe} from '../pipes/default-value.pipe';
 import { CategoriesComponent } from './categories/categories.component';
 import { CategoryComponent } from './categories/category/category.component';
@@ -52,7 +51,7 @@ import { CategoryComponent } from './categories/category/category.component';
     Graficas1Component,
     ArticleComponent,
     MeasurementUnitComponent,
-    MeasurementUnitsComponent,,
+    MeasurementUnitsComponent,
     CategoriesComponent,
     CategoryComponent,
     BoxsComponent,

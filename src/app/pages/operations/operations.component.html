@@ -36,7 +36,7 @@
                     <td><span class="label label-rounded" [ngClass]="(operation?.disabled)? 'label-success':'label-danger'">{{getOperationStatus(operation) | dropdownTranslate:'OperationStatus'}}</span>
                     </td>
                     <td>
-                      <div class="button-group row">
+                      <div class="button-group">
                         <button class="btn btn-secondary" (click)="editOrShowOperation(operation.operationId)">
                           <i class="mdi mdi-eye-outline"></i>
                         </button>
