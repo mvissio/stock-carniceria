@@ -29,7 +29,8 @@ export class SidebarService {
       submenu: [
         { titulo: 'Usuarios', url: '/usuarios', roles: [roles.sysAdmin] },
         { titulo: 'Articulos', url: '/articulos' },
-        { titulo: 'Unidades de medida', url: '/unidadesMedida' }
+        { titulo: 'Unidades de medida', url: '/unidadesMedida' },
+        { titulo: 'Categorias', url: '/categorias' }
       ]
     }
   ];

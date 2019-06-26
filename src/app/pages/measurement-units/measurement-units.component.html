@@ -2,7 +2,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <input #input (keyup.enter)="findMeasurementUnit(input.value)" type="search" class="form-control" [placeholder]="'measurementUnit.searchLabel' | translate">
+                <input #input (keyup.enter)="findMeasurementUnit(input.value)" type="search" class="form-control" [placeholder]="'measurementUnits.searchLabel' | translate">
             </div>
         </div>
     </div>
@@ -11,43 +11,41 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h3 class="card-title">{{'measurementUnit.title' | translate}} (
+                <h3 class="card-title">{{'measurementUnits.title' | translate}} (
                     <small>{{ page.totalElements}}</small> )
                 </h3>
                 <button type="button" class="btn btn-primary float-right mdi mdi-plus" [routerLink]="['/unidadMedida']"></button>
-              <div class="table-responsive">
                 <table class="table table-hover">
-                  <thead>
-                  <tr>
-                    <th>{{'measurementUnitTable.name' | translate}}</th>
-                    <th>{{'measurementUnitTable.symbol' | translate}}</th>
-                    <th>{{'measurementUnitTable.status' | translate}}</th>
-                    <th>{{'measurementUnitTable.accions' | translate}}</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr *ngFor="let measurementUnit of measurementUnits">
-                    <td>{{ measurementUnit?.name }}</td>
-                    <td>{{ measurementUnit?.symbol }}</td>
-                    <td><span class="label label-rounded" [ngClass]="(!measurementUnit.disabled)? 'label-success':'label-danger'">{{getMeasurementUnitStatus(measurementUnit)}}</span>
-                    </td>
-                    <td>
-                      <div class="button-group row">
-                        <button class="btn btn-secondary" (click)="editOrShowMeasurementUnit(measurementUnit.measurementUnitId)">
-                          <i class="mdi mdi-eye-outline"></i>
-                        </button>
-                        <button class="btn btn-info" (click)="editOrShowMeasurementUnit(measurementUnit.measurementUnitId, true)">
-                          <i class="mdi mdi-account-edit"></i>
-                        </button>
-                        <button class="btn btn-danger" (click)="deleteMeasurementUnit(measurementUnit.name,measurementUnit.measurementUnitId)">
-                          <i class="mdi mdi-delete"></i>
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                  </tbody>
+                    <thead>
+                        <tr>
+                            <th>{{'measurementUnitTable.name' | translate}}</th>
+                            <th>{{'measurementUnitTable.symbol' | translate}}</th>
+                            <th>{{'measurementUnitTable.status' | translate}}</th>
+                            <th>{{'measurementUnitTable.accions' | translate}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let measurementUnit of measurementUnits">
+                            <td>{{ measurementUnit?.name }}</td>
+                            <td>{{ measurementUnit?.symbol }}</td>
+                            <td><span class="label label-rounded" [ngClass]="(!measurementUnit.disabled)? 'label-success':'label-danger'">{{getMeasurementUnitStatus(measurementUnit)}}</span>
+                            </td>
+                            <td>
+                                <div class="button-group">
+                                    <button class="btn btn-secondary" (click)="editOrShowMeasurementUnit(measurementUnit.measurementUnitId)">
+                                        <i class="mdi mdi-eye-outline" aria-hidden="true"></i>
+                                    </button>
+                                    <button class="btn btn-info" (click)="editOrShowMeasurementUnit(measurementUnit.measurementUnitId, true)">
+                                        <i class="mdi mdi-pencil" aria-hidden="true"></i>
+                                        </button>
+                                    <button class="btn btn-danger" (click)="deleteMeasurementUnit(measurementUnit.name,measurementUnit.measurementUnitId)">
+                                        <i class="mdi mdi-delete" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
-              </div>
             </div>
         </div>
     </div>

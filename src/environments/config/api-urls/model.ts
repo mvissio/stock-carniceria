@@ -5,6 +5,7 @@ export class ApiURLs {
   OperationDetail: OperationDetailURLs;
   article: ArticleURLs;
   measurementUnit: MeasurementUnitURLs;
+  category: CategoryURLs;
   box: BoxURLs;
 }
 
@@ -59,5 +60,11 @@ interface BoxURLs {
   base: string;
   getOpenBoxs?: string;
   getOperationsBox?: string;
+}
+interface CategoryURLs {
+  base: string;
+  getCategoryByName?: string;
+  getCategoryByCategoryId?: string;
+  deleteCategory?: string;
 }
 

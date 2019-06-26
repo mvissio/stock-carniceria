@@ -75,6 +75,7 @@ export class UserComponent implements OnInit {
   getAllRoles() {
     this._userService.getAllRoles()
       .subscribe((res: any) => {
+        console.log("resultado all roles",res);
         this.roles = res;
       }, (err: HttpErrorResponse) => {
         this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
@@ -122,7 +123,7 @@ export class UserComponent implements OnInit {
     }
   }
 
-  selectedRol(rol: string): boolean {
+  selectedRol(rol: string): boolean {    
     return (this.user.rol && rol === this.user.rol.name);
   }
  

@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {ArticleService} from '../../services/pages/article.service';
-import {Article} from '../../models/article.model';
+import { Component, OnInit } from '@angular/core';
+import {CategoryService} from '../../services/pages/categories.service';
+import {Category} from '../../models/category.model';
 import {Page} from '../../models/page.model';
 import {HandleErrorsService} from '../../services/shared/handle-errors.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -10,50 +10,44 @@ import { forkJoin } from 'rxjs';
 import swal from 'sweetalert';
 import { CommonsService } from '../../services/commons.service';
 import { Router } from '@angular/router';
-import { MeasurementUnitService } from '../../services/measurement-units/measurement-unit.service';
-
 
 @Component({
-  selector: 'app-articles',
-  templateUrl: './articles.component.html'
+  selector: 'app-categories',
+  templateUrl: './categories.component.html'
 })
-export class ArticlesComponent implements OnInit {
+export class CategoriesComponent implements OnInit {
 
   page: Page;
-  articles: Article[];
+  categories: Category[];
   pages: number[];
   loading = false;
   pageConfig: PageConfig;
 
-  constructor(
-              private _measurementUnitService: MeasurementUnitService,
-              private _articleService: ArticleService,
-              private _handleErrorsService: HandleErrorsService,
-              private translate: TranslateService,
-              private router: Router,
-              private _commonsService: CommonsService,             
-            ) {
-  }
+  constructor(private _categoryService: CategoryService,
+    private _handleErrorsService: HandleErrorsService,
+    private translate: TranslateService,
+    private router: Router,
+    private _commonsService: CommonsService) { }
 
   ngOnInit() {
-    this.pageConfig = new PageConfig('articleId');
-    this.getArticles(0);
+    this.pageConfig = new PageConfig('categoryId');
+    this.getCategories(0);
   }
 
   setPage(nextPage: number) {
 
-    this.getArticles(nextPage);
+    this.getCategories(nextPage);
   }
 
-  getArticles(nextPage: number) {
+  getCategories(nextPage: number) {
     this.loading = true;
     this.pageConfig.pageNumber = nextPage;
-    this._articleService.getAllArticles(this.pageConfig)
+    this._categoryService.getAllCategories(this.pageConfig)
       .subscribe(
         (res: Page) => {
           this.page = res;
-          this.articles = this.page.content;
-          console.log("estos son los articulos recup",this.articles);
+          this.categories = this.page.content;
+          console.log("resultado del request",this.page.content )
           this.pages = new Array(this.page.totalPages);
           this.loading = false;
         },
@@ -63,32 +57,32 @@ export class ArticlesComponent implements OnInit {
         });
   }
 
-  findUser(username: string) {
+  findCategory(category: string) {
     this.loading = true;
-    if(username !== null) {
-      this._articleService.getArticleByName(name).subscribe(
+    if(category !== null) {
+      this._categoryService.getCategoryByname(name).subscribe(
         (res: any) => {
           this.loading = false;
-          this.articles = [];
-          this.articles.push(res);
+          this.categories = [];
+          this.categories.push(res);
         },
         (err: HttpErrorResponse) => {
           this.loading = false;
           this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
         });
     } else {
-      this.getArticles(0);
+      this.getCategories(0);
     }
     
   }
 
-  editOrShowArticle(articleId: number, edit: boolean = false) {
-    this.router.navigate(['/articulo', articleId], {queryParams: {edit: edit}, skipLocationChange: true});
+  editOrShowCategory(categoryId: number, edit: boolean = false) {
+    this.router.navigate(['/categoria', categoryId], {queryParams: {edit: edit}, skipLocationChange: true});
   }
 
-  deleteArticle(name: string, id : number) {
+  deleteCategory(name: string, id : number) {
     forkJoin(
-      [this.translate.get('modals.deleteArticle.title', {param: name}),
+      [this.translate.get('modals.deleteCategory.title', {param: name}),
       this.translate.get('modals')
     ]).subscribe((result) => {
       swal({
@@ -112,19 +106,19 @@ export class ArticlesComponent implements OnInit {
       }
     ).then((data) => {
       if (data) {
-        this._articleService.deleteArticle(id).subscribe(() =>  this.getArticles(this.page.number));
+        this._categoryService.deleteCategory(id).subscribe();
       }
     });
     });  
   }
 
-  getArticleStatus(article: Article): string {
+  getCategoryStatus(category: Category): string {
     let status: string;
-    this.translate.get((article.disabled)? 'articleStatus.disabled': 'articleStatus.enabled')
+    this.translate.get((category.disabled)? 'categoryStatus.disabled': 'categoryStatus.enabled')
     .subscribe((res) => {
       status = res;
     });
     return status;
   }
-  
+
 }

@@ -10,6 +10,7 @@ export class Operation {
     operationStatus?: string;
     total?: number;
     subTotal?: number;
+    discount?: number;
     operationDetails?: OperationDetail[];  
     constructor(
         operationId?: number,
@@ -20,7 +21,8 @@ export class Operation {
         paymentMethod?: string,
         operationStatus?: string,
         total?: number,
-        subTotal?: number
+        subTotal?: number,
+        discount?: number
     ) {
         this.operationId = operationId;
         this.createDateTime = createDateTime;
@@ -31,5 +33,6 @@ export class Operation {
         this.operationStatus = operationStatus;
         this.total = total;
         this.subTotal = subTotal;
+        this.discount = discount;
     }
 }

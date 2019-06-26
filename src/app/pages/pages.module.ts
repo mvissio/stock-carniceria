@@ -35,29 +35,33 @@ import { BoxsComponent } from './boxs/boxs.component';
 import {Graficas1Component} from './graficas1/graficas1.component';
 import {AppModule} from '../app.module';
 import {DefaultValuePipe} from '../pipes/default-value.pipe';
+import { CategoriesComponent } from './categories/categories.component';
+import { CategoryComponent } from './categories/category/category.component';
 
 @NgModule({
-    declarations: [
-      PagesComponent,
-      HomeComponent,
-      AccoutSettingsComponent,
-      UsersComponent,
-      UserComponent,
-      OperationsComponent,
-      OperationComponent,
-      OperationDetailsComponent,
-      ArticlesComponent,
-      Graficas1Component,
-      ArticleComponent,
-      MeasurementUnitComponent,
-      MeasurementUnitsComponent,
-      BoxsComponent,
-      DefaultValuePipe
-    ],
-    exports: [
-      HomeComponent,
-      TranslateModule
-    ],
+  declarations: [
+    PagesComponent,
+    HomeComponent,
+    AccoutSettingsComponent,
+    UsersComponent,
+    UserComponent,
+    OperationsComponent,
+    OperationComponent,
+    OperationDetailsComponent,
+    ArticlesComponent,
+    Graficas1Component,
+    ArticleComponent,
+    MeasurementUnitComponent,
+    MeasurementUnitsComponent,,
+    CategoriesComponent,
+    CategoryComponent,
+    BoxsComponent,
+    DefaultValuePipe
+  ],
+  exports: [
+    HomeComponent,
+    TranslateModule
+  ],
   imports: [
     CommonModule,
     FormsModule,

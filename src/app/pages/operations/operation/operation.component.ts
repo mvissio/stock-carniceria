@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Operation } from '../../../models/operation.model';
-import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { OperationsService } from '../../../services/pages/operations.service';
@@ -10,7 +10,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { forkJoin, Observable } from 'rxjs';
 import { OperationDetail } from '../../../models/operationDetail.model';
 import { operationStatus } from '../../../constants/constant';
-import { ArticleService } from '../../../services/articles/article.service';
+import { ArticleService } from '../../../services/pages/article.service';
 import { Article } from '../../../models/article.model';
 import swal from 'sweetalert';
 @Component({
@@ -68,6 +68,7 @@ export class OperationComponent implements OnInit {
           this._articleService.getArticleByArticleId(operationDetail.articleId).subscribe((res: Article) => {
             operationDetails.push(this.fb.group({
               amount: [operationDetail.amount, [Validators.required, Validators.min(1)]],
+              price: [operationDetail.price, [Validators.required, Validators.min(1)]],
               article: [res, Validators.required]
             }));
             if(this.disabledFields) {
@@ -80,12 +81,14 @@ export class OperationComponent implements OnInit {
       this.operation.operationDetails = [];
       operationDetails.push(this.fb.group({
         amount: ['', [Validators.required, Validators.min(1)]],
+        price: ['', [Validators.required, Validators.min(1)]],
         article: ['', Validators.required]
       }));
     }
     this.operationForm = this.fb.group({
       operationType: [this.operation.operationType, Validators.required],
       paymentMethod: [this.operation.paymentMethod, Validators.required],
+      discount: [this.operation.discount], 
       operationDetails: operationDetails
     }, {updateOn: 'blur'});
     if (this.disabledFields)  {
@@ -178,21 +181,23 @@ export class OperationComponent implements OnInit {
   setOperation() {
     this.operation.operationType = this.operationForm.value.operationType;
     this.operation.paymentMethod = this.operationForm.value.paymentMethod;
+    this.operation.discount = this.operationForm.value.discount;
     if (!this.edit) {
       this.operation.createDateTime = new Date();
       this.operation.operationStatus = (this.operation.operationType === 'SALE')? operationStatus.sold : operationStatus.purchased;
     }
     this.setOperationDetails();
-    this.operation.subTotal = this.getTotal();
-    this.operation.total = this.getTotal();
+    const total = this.getTotal();
+    this.operation.subTotal = total;
+    this.operation.total = total;
   }
 
   setOperationDetails() {
-    this.operationDetails.value.forEach((odObject: {amount: number, article: Article}, index: number) => {
+    this.operationDetails.value.forEach((odObject: {article: Article, price: number, amount?: number}, index: number) => {
       let operationDetail = new OperationDetail();
       operationDetail.amount = odObject.amount;
       operationDetail.articleId = odObject.article.articleId;
-      operationDetail.price = odObject.article.currentPrice * operationDetail.amount;
+      operationDetail.price = (operationDetail.amount)? odObject.price * operationDetail.amount : odObject.price;
       const indexOperationDetail = this.operation.operationDetails.findIndex((od: OperationDetail) => od.articleId === odObject.article.articleId);
       if (indexOperationDetail !== -1) {
         this.operation.operationDetails[index] = operationDetail; 
@@ -205,6 +210,9 @@ export class OperationComponent implements OnInit {
   getTotal() {
     let total: number = 0;
     this.operation.operationDetails.forEach((operationDetail: OperationDetail) => total += operationDetail.price);
+    if (this.operation.discount) {
+      total = total - this.operation.discount; 
+    }
     return total;
   }
 
@@ -216,11 +224,22 @@ export class OperationComponent implements OnInit {
     return (this.operation.paymentMethod && paymentMethod === this.operation.paymentMethod);
   }
 
+  selectArticle(article: Article, index: number) {
+    if (article) {
+      this.operationDetailControls(index).price.patchValue(article.currentPrice);
+      //TODO: solo si la categoria no es carne(categoria carne es la con id 1) se debe sacar cuando este la funcionalidad de la balanza electronica
+      if (article.categoryId === 1 && this.operationControls.operationType.value === "SALE") {
+        this.operationDetailControls(index).amount.disable();
+      }
+    }
+  }
+
   addOperationDetail() {
     this.operationDetails.push(
       this.fb.group({
         amount: ['', [Validators.required, Validators.min(1)]],
-        articleId: ['', Validators.required]
+        price:['', [Validators.required, Validators.min(1)]],
+        article: ['', Validators.required]
       })
     );
   }

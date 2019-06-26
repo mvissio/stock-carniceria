@@ -1,0 +1,47 @@
+<div class="row">
+  <div class="col-md-6">
+      <div class="card card-body">
+          <h3 class="box-title m-b-0">Categoria: {{category.name}} </h3>
+          <div class="row">
+              <div class="col-sm-12 col-xs-12">
+                  <form class="form-horizontal form-material" [formGroup]="categoryForm" (ngSubmit)="saveCategory()">
+                      
+                    <div class="form-group">
+                          <input class="form-control" type="text" formControlName="name" [placeholder]="'categories.namePlaceholder' | translate">
+                          <div *ngIf="categoryControls.name.invalid && (categoryControls.name.dirty || categoryControls.name.touched)" class="error-label">
+                              <small *ngIf="categoryControls.name.errors.required">
+                                {{'generalValidations.required' | translate}}
+                              </small>
+                              <small *ngIf="categoryControls.name.errors.maxlength" [translate]="'generalValidations.maxLength'" [translateParams]="{param: categoryControls.name.errors.maxlength.requiredLength}"></small>
+                          </div>
+                      </div>
+                      
+                      <div class="form-group">
+                          <input class="form-control" type="text" formControlName="description" [placeholder]="'categories.descriptionPlaceholder' | translate">
+                          <div *ngIf="categoryControls.description.invalid && (categoryControls.description.dirty || categoryControls.description.touched)" class="error-label">
+                              <small *ngIf="categoryControls.description.errors.required">
+                                {{'generalValidations.required' | translate}}
+                              </small>
+                          </div>
+                      </div>
+                      
+                      
+                      <div *ngIf="!disabledFields">
+                          <button  class="btn btn-primary m-r-10" type="submit" [disabled]="categoryForm.invalid">
+                          <i class="fa fa-save"></i>
+                          {{'buttons.submit' | translate}}
+                        </button>
+                          <button (click)="back()" class="btn btn-danger" type="button">
+                          {{'buttons.cancel' | translate}}
+                        </button>
+                      </div>
+
+                      <button *ngIf="disabledFields" class="btn btn-inverse mdi mdi-keyboard-backspace" (click)="back()">
+                        {{'buttons.back' | translate}}
+                      </button>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

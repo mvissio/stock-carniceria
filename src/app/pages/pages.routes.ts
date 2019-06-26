@@ -15,8 +15,10 @@ import {ArticlesComponent} from './articles/articles.component';
 import {ArticleComponent} from './articles/article/article.component';
 import {MeasurementUnitsComponent} from './measurement-units/measurement-units.component';
 import {MeasurementUnitComponent} from './measurement-units/measurement-unit/measurement-unit.component';
-import {NgModule} from '@angular/core';
+import { CategoriesComponent } from './categories/categories.component';
+import { CategoryComponent } from './categories/category/category.component';
 import {BoxsComponent} from './boxs/boxs.component';
+import {NgModule} from '@angular/core';
 
 const routes: Routes = [
   {
@@ -106,6 +108,22 @@ const routes: Routes = [
         path: 'unidadMedida', component: MeasurementUnitComponent,
         canActivate: [AuthGuard, GrantedAuthorityGuard],
         data: {titulo: 'Crear unidadMedida', roles: [roles.sysAdmin, roles.admin]}
+      },
+      {
+        path: 'categorias',
+        component: CategoriesComponent,
+        canActivate: [AuthGuard, GrantedAuthorityGuard],
+        data: {titulo: 'Categorias', roles: [roles.sysAdmin, roles.admin]},
+      },
+      {
+        path: 'categoria/:id', component: CategoryComponent,
+        canActivate: [AuthGuard, GrantedAuthorityGuard],
+        data: {titulo: 'Actualizar categoria', roles: [roles.sysAdmin, roles.admin]}
+      },
+      {
+        path: 'categoria', component: CategoryComponent,
+        canActivate: [AuthGuard, GrantedAuthorityGuard],
+        data: {titulo: 'Crear categoria', roles: [roles.sysAdmin, roles.admin]}
       },
       {path: '', redirectTo: '/inicio', pathMatch: 'full'},
     ]
