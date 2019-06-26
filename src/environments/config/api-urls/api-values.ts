@@ -20,7 +20,7 @@ export const applicationApiUrls: ApiURLs = {
     getOperationsByOneDate: '/creationDate',
     getOperationsByOneDateAndPaymentMethod: '/byDateAndPaymentMethod',
     getOperationsByOneDateAndOperationType:'/byDateAndOperationType',
-    getOperationsByOneDateAndOperationTypeAndPaymentMethod: '//byDateAndPaymentMethodAndOperationType',
+    getOperationsByOneDateAndOperationTypeAndPaymentMethod: '/byDateAndPaymentMethodAndOperationType',
     
     getOperationsByPeriod: '/byPeriod',
     getOperationsByPeriodAndPaymentMethod: '/byPeriodAndPaymentMethod',

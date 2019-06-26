@@ -17,7 +17,7 @@ export class OperationsService {
   constructor(private httpClient: HttpClient) { }
 
   addOperation(operation: Operation) {
-    let newOperation = Object.assign({}, operation); 
+    let newOperation = Object.assign({}, operation);
     const url = this.operationUrl.base;
     return this.httpClient.post(url, newOperation)
       .pipe(map((newOperation: any) => newOperation));
@@ -31,17 +31,54 @@ export class OperationsService {
   }
 
   //consulta por la fecha pasada como parametro
-  getOperationsByCreateDate(page: PageConfig,createDate : Date, path : string ) {
+  getOperationsByCreateDate(page: PageConfig, createDate: Date, path: string, operationTypeOneDate: string, paymentMethodOneDate: string) {
+    console.log("llegue aca");
     const url = this.operationUrl[path];
-    return this.httpClient.get(`${url}?creationDate=${createDate}&page=${page.pageNumber}&size=${page.pageSize}&sort=${page.sortName},${page.orderDesc}`)
+    let urlComplete = `${url}?creationDate=${createDate}&page=${page.pageNumber}&size=${page.pageSize}`;
+    if(operationTypeOneDate == null && paymentMethodOneDate == null){
+      return this.httpClient.get(urlComplete)
       .pipe(map((response: Page) => response));
+    }
+    else if (operationTypeOneDate != null && paymentMethodOneDate != null) {
+      urlComplete = urlComplete.concat(`&operationType=${operationTypeOneDate}`).concat(`&paymentMethod=${paymentMethodOneDate}`);
+      return this.httpClient.get(urlComplete)
+        .pipe(map((response: Page) => response));
+    } else if (operationTypeOneDate != null) {
+      urlComplete = urlComplete.concat(`&operationType=${operationTypeOneDate}`);
+      return this.httpClient.get(urlComplete)
+        .pipe(map((response: Page) => response));
+    } else if (paymentMethodOneDate != null) {
+      urlComplete = urlComplete.concat(`&paymentMethod=${paymentMethodOneDate}`);
+      return this.httpClient.get(urlComplete)
+        .pipe(map((response: Page) => response));
+    }
+
   }
 
   //consulto por un periodo de fechas, tipo de pago y tipo de operación
-  getOperationsByPeriod(fromDate : Date, toDate: Date, page: PageConfig, path : string) {
+  getOperationsByPeriod(fromDate: Date, toDate: Date, page: PageConfig, path: string, operationTypePeriod: string, paymentMethodPeriod: string ) {
     const url = this.operationUrl[path];
-    return this.httpClient.get(`${url}?fromDate=${fromDate}&toDate=${toDate}&page=${page.pageNumber}&size=${page.pageSize}`)
+    let urlComplete = `${url}?fromDate=${fromDate}&toDate=${toDate}&page=${page.pageNumber}&size=${page.pageSize}`;
+    if(operationTypePeriod == null && paymentMethodPeriod == null){
+      console.log(urlComplete);
+      return this.httpClient.get(urlComplete)
       .pipe(map((response: Page) => response));
+    }else if (operationTypePeriod != null && paymentMethodPeriod != null) {
+      urlComplete = urlComplete.concat(`&operationType=${operationTypePeriod}`).concat(`&paymentMethod=${paymentMethodPeriod}`);
+      console.log(urlComplete);
+      return this.httpClient.get(urlComplete)
+        .pipe(map((response: Page) => response));
+    } else if (operationTypePeriod != null) {
+      urlComplete = urlComplete.concat(`&operationType=${operationTypePeriod}`);
+      console.log(urlComplete);
+      return this.httpClient.get(urlComplete)
+        .pipe(map((response: Page) => response));
+    } else if (paymentMethodPeriod != null) {
+      urlComplete = urlComplete.concat(`&paymentMethod=${paymentMethodPeriod}`);
+      console.log(urlComplete);
+      return this.httpClient.get(urlComplete)
+        .pipe(map((response: Page) => response));
+    }
   }
 
   getOperationsByOperationType(page: PageConfig) {
@@ -54,9 +91,9 @@ export class OperationsService {
     const url = `${this.operationUrl.getOperationById}/${id}`;
     return this.httpClient.get(url)
       .pipe(map((response: Operation) => {
-          this.operation = response;
+        this.operation = response;
         return response;
-    }));
+      }));
   }
 
   updateOperation(operation: Operation) {
@@ -68,7 +105,7 @@ export class OperationsService {
   cancelOperation(id: number) {
     const url = `${this.operationUrl.cancelOperation}/${id}`;
     return this.httpClient.delete(url)
-    .pipe(map((response) => response));
+      .pipe(map((response) => response));
   }
 
   getAllOperationTypes() {

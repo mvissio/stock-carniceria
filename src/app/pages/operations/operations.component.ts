@@ -77,10 +77,10 @@ export class OperationsComponent implements OnInit {
         });
   }
 
-  getOperationsByOneDate(nextPage: number, path: string) {
+  getOperationsByOneDate(nextPage: number, path: string,operationTypeOneDate:string,paymentMethodOneDate:string) {
     this.loading = true;
     this.pageConfig.pageNumber = nextPage;
-    this._operationService.getOperationsByCreateDate(this.pageConfig, new Date(this.oneDate.formatted), path)
+    this._operationService.getOperationsByCreateDate(this.pageConfig, new Date(this.oneDate.formatted), path,operationTypeOneDate,paymentMethodOneDate)
       .subscribe(
         (res: Page) => {
           this.page = res;
@@ -94,10 +94,10 @@ export class OperationsComponent implements OnInit {
         });
   }
 
-  getOperationsByPeriod(nextPage: number, path: string) {
+  getOperationsByPeriod(nextPage: number, path: string ,operationTypePeriod: string,paymentMethodPeriod: string) {
     this.loading = true;
     this.pageConfig.pageNumber = nextPage;
-    this._operationService.getOperationsByPeriod(new Date(this.fromDate.formatted), new Date(this.toDate.formatted), this.pageConfig, path)
+    this._operationService.getOperationsByPeriod(new Date(this.fromDate.formatted), new Date(this.toDate.formatted), this.pageConfig, path, operationTypePeriod,paymentMethodPeriod)
       .subscribe(
         (res: Page) => {
           this.page = res;
@@ -175,32 +175,40 @@ export class OperationsComponent implements OnInit {
   getOperationsByPeriodWithFilters() {
 
     if (this.operationTypePeriod.length == 0 && this.paymentMethodPeriod.length == 0) {
-      this.getOperationsByPeriod(0, "getOperationsByPeriod");
+      console.log("tipo de operacion","getOperationsByPeriod");
+      this.getOperationsByPeriod(0, "getOperationsByPeriod",null,null);
       return;
     } else if (this.operationTypePeriod.length > 0 && this.paymentMethodPeriod.length > 0) {
-      this.getOperationsByPeriod(0, "getOperationsByPeriodAndOperationTypeAndPaymentMethod");
+      console.log("tipo de operacion","getOperationsByPeriodAndOperationTypeAndPaymentMethod");
+      this.getOperationsByPeriod(0, "getOperationsByPeriodAndOperationTypeAndPaymentMethod", this.operationTypePeriod, this.paymentMethodPeriod);
       return;
     } else if (this.operationTypePeriod.length > 0) {
-      this.getOperationsByPeriod(0, "getOperationsByPeriodAndOperationType");
+      console.log("tipo de operacion","getOperationsByPeriodAndOperationType");
+      this.getOperationsByPeriod(0, "getOperationsByPeriodAndOperationType",this.operationTypePeriod,null);
       return;
     } else if (this.paymentMethodPeriod.length > 0) {
-      this.getOperationsByPeriod(0, "getOperationsByPeriodAndPaymentMethod");
+      console.log("tipo de operacion","getOperationsByPeriodAndPaymentMethod");
+      this.getOperationsByPeriod(0, "getOperationsByPeriodAndPaymentMethod",null,this.paymentMethodPeriod);
     }
   }
 
   getOperationsOneDateWithFilters() {
 
     if (this.operationTypeOneDate.length == 0 && this.paymentMethodOneDate.length == 0) {
-      this.getOperationsByOneDate(0, "getOperationsByOneDate");
+      console.log("tipo de operacion","getOperationsByOneDate");
+      this.getOperationsByOneDate(0, "getOperationsByOneDate",null,null);
       return;
     } else if (this.operationTypeOneDate.length > 0 && this.paymentMethodOneDate.length > 0) {
-      this.getOperationsByOneDate(0, "getOperationsByOneDateAndOperationTypeAndPaymentMethod");
+      console.log("tipo de operacion","getOperationsByOneDateAndOperationTypeAndPaymentMethod");
+      this.getOperationsByOneDate(0, "getOperationsByOneDateAndOperationTypeAndPaymentMethod", this.operationTypeOneDate, this.paymentMethodOneDate);
       return;
     } else if (this.operationTypeOneDate.length > 0) {
-      this.getOperationsByOneDate(0, "getOperationsByOneDateAndOperationType");
+      console.log("tipo de operacion","getOperationsByOneDateAndOperationType");
+      this.getOperationsByOneDate(0, "getOperationsByOneDateAndOperationType",this.operationTypeOneDate,null);
       return;
     } else if (this.paymentMethodOneDate.length > 0) {
-      this.getOperationsByOneDate(0, "getOperationsByOneDateAndPaymentMethod");
+      console.log("tipo de operacion","getOperationsByOneDateAndPaymentMethod");
+      this.getOperationsByOneDate(0, "getOperationsByOneDateAndPaymentMethod",null,this.paymentMethodOneDate);
       return;
     }
   }

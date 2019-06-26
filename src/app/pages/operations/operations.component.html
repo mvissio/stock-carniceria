@@ -13,8 +13,8 @@
             <div class="card">
                 <div class="card-body">
                     Opciones de Filtro:
-                    <button class="btn btn-link" (click)="showOneDateFilter()" style="display: inline-block;">Filtrar por fecha</button>
-                    <button class="btn btn-link" (click)="showPeriodFilter()" style="display: inline-block;">Filtrar por periodo</button>
+                    <button class="btn btn-link" (click)="showOneDateFilter()" style="display: inline; ">Filtrar por fecha</button>
+                    <button class="btn btn-link" (click)="showPeriodFilter()" style="display: inline; ">Filtrar por periodo</button>
                 </div>
             </div>
         </div>
@@ -54,14 +54,15 @@
                           Tipo Operación
                         </button>
                         <div class="dropdown-menu">
-                          <a class="dropdown-item" [routerLink]="" (click)="setearOperationTypePeriod('Sale')">Venta</a>
-                          <a class="dropdown-item" [routerLink]="" (click)="setearOperationTypePeriod('Buy')">Compra</a>
+                          <a class="dropdown-item" [routerLink]="" (click)="setearOperationTypePeriod('SALE')">Venta</a>
+                          <a class="dropdown-item" [routerLink]="" (click)="setearOperationTypePeriod('BUY')">Compra</a>
                         </div>
                       </div>
 
 
-            <button class="btn btn-primary" (click)="getOperationsByPeriodWithFilters()" style="display: block; ">Consultar</button>
-
+            <button class="btn btn-primary" (click)="getOperationsByPeriodWithFilters()" style="display: inline; ">Consultar</button>
+            <button class="btn btn-info"  style="display: inline; ">Quitar filtros</button>
+          
 
                                
             </div>
@@ -103,6 +104,8 @@
 
 
                     <button class="btn btn-primary" (click)="getOperationsOneDateWithFilters()" style="display: inline-block;">Consultar</button>                    
+                    <button class="btn btn-info" style="display: inline-block;">Quitar filtros</button>
+          
                 </div>
             </div>
         </div>
