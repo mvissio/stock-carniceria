@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Page} from '../../models/page.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {BoxsService} from '../../services/boxs/boxs.service';
+import {BoxsService} from '../../services/pages/boxs.service';
 import {PageConfig} from '../../models/pageConfig.model';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Box} from '../../models/Box.model';
@@ -124,7 +124,7 @@ export class BoxsComponent implements OnInit {
   }
 
   getNewBox() {
-    let box = new Box();
+    const box = new Box();
     box.cashOpen = this.openForm.value.cashInit;
     box.dateOpen = new Date();
     box.open = true;

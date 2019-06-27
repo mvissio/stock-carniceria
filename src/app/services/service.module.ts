@@ -8,7 +8,7 @@ import {
   AuthService
  } from './service.index';
 import {HttpClientModule} from '@angular/common/http';
-import {BoxsService} from './boxs/boxs.service';
+import {BoxsService} from './pages/boxs.service';
 
 
 @NgModule({
