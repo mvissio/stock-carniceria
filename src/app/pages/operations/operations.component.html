@@ -15,41 +15,43 @@
                     <small>{{ page?.totalElements}}</small> )
                 </h3>
                 <button type="button" class="btn btn-primary float-right mdi mdi-plus" [routerLink]="['/operacion']"></button>
+              <div class="table-responsive">
                 <table class="table table-hover" *ngIf="operations">
-                    <thead>
-                        <tr>
-                            <th>{{'table.operations.createDateTime' | translate}}</th>
-                            <th>{{'table.operations.operationType' | translate}}</th>
-                            <th>{{'table.operations.paymentMethod' | translate}}</th>
-                            <th>{{'table.operations.total' | translate}}</th>
-                            <th>{{'table.status' | translate}}</th>
-                            <th>{{'table.accions' | translate}}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let operation of operations">
-                            <td>{{ operation?.createDateTime | date: 'dd/MM/yyyy h:mm:ss a' }}</td>
-                            <td>{{ operation?.operationType | dropdownTranslate:'operationTypes' }}</td>
-                            <td>{{ operation?.paymentMethod | dropdownTranslate:'paymentMethods' }}</td>
-                            <td>{{operation?.total}}</td>
-                            <td><span class="label label-rounded" [ngClass]="(operation?.disabled)? 'label-success':'label-danger'">{{getOperationStatus(operation) | dropdownTranslate:'OperationStatus'}}</span>
-                            </td>
-                            <td>
-                                <div class="button-group">
-                                    <button class="btn btn-secondary" (click)="editOrShowOperation(operation.operationId)">
-                                      <i class="mdi mdi-eye-outline"></i>
-                                  </button>
-                                    <button class="btn btn-info" (click)="editOrShowOperation(operation.operationId, true)">
-                                      <i class="mdi mdi-pencil"></i>
-                                      </button>
-                                    <button class="btn btn-danger" (click)="cancelOperation(operation.operationId)">
-                                      <i class="mdi mdi-delete"></i>
-                                  </button>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
+                  <thead>
+                  <tr>
+                    <th>{{'table.operations.createDateTime' | translate}}</th>
+                    <th>{{'table.operations.operationType' | translate}}</th>
+                    <th>{{'table.operations.paymentMethod' | translate}}</th>
+                    <th>{{'table.operations.total' | translate}}</th>
+                    <th>{{'table.status' | translate}}</th>
+                    <th>{{'table.accions' | translate}}</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let operation of operations">
+                    <td>{{ operation?.createDateTime | date: 'dd/MM/yyyy h:mm:ss a' }}</td>
+                    <td>{{ operation?.operationType | dropdownTranslate:'operationTypes' }}</td>
+                    <td>{{ operation?.paymentMethod | dropdownTranslate:'paymentMethods' }}</td>
+                    <td>{{operation?.total}}</td>
+                    <td><span class="label label-rounded" [ngClass]="(operation?.disabled)? 'label-success':'label-danger'">{{getOperationStatus(operation) | dropdownTranslate:'OperationStatus'}}</span>
+                    </td>
+                    <td>
+                      <div class="button-group">
+                        <button class="btn btn-secondary" (click)="editOrShowOperation(operation.operationId)">
+                          <i class="mdi mdi-eye-outline"></i>
+                        </button>
+                        <button class="btn btn-info" (click)="editOrShowOperation(operation.operationId, true)">
+                          <i class="mdi mdi-pencil"></i>
+                        </button>
+                        <button class="btn btn-danger" (click)="cancelOperation(operation.operationId)">
+                          <i class="mdi mdi-delete"></i>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  </tbody>
                 </table>
+              </div>
             </div>
         </div>
     </div>

@@ -15,39 +15,41 @@
                     <small>{{ page?.totalElements}}</small> )
                 </h3>
                 <button type="button" class="btn btn-primary float-right mdi mdi-plus" [routerLink]="['/usuario']"></button>
+              <div class="table-responsive">
                 <table class="table table-hover" *ngIf="users">
-                    <thead>
-                        <tr>
-                            <th>{{'table.users.name' | translate}}</th>
-                            <th>{{'table.users.email' | translate}}</th>
-                            <th>{{'table.users.role' | translate}}</th>
-                            <th>{{'table.status' | translate}}</th>
-                            <th>{{'table.accions' | translate}}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let user of users">
-                            <td>{{ user?.username }}</td>
-                            <td>{{ user?.email }}</td>
-                            <td>{{user?.rol.nombre}}</td>
-                            <td><span class="label label-rounded" [ngClass]="(user.enabled)? 'label-success':'label-danger'">{{getUserStatus(user)}}</span>
-                            </td>
-                            <td>
-                                <div class="button-group">
-                                    <button class="btn btn-secondary" (click)="editOrShowUser(user.userId)">
-                                        <i class="mdi mdi-eye-outline" aria-hidden="true"></i>
-                                    </button>
-                                    <button class="btn btn-info" (click)="editOrShowUser(user.userId, true)">
-                                        <i class="mdi mdi-account-edit" aria-hidden="true"></i>
-                                        </button>
-                                    <button class="btn btn-danger" (click)="deleteUser(user.username)">
-                                        <i class="mdi mdi-account-remove" aria-hidden="true"></i>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
+                  <thead>
+                  <tr>
+                    <th>{{'table.users.name' | translate}}</th>
+                    <th>{{'table.users.email' | translate}}</th>
+                    <th>{{'table.users.role' | translate}}</th>
+                    <th>{{'table.status' | translate}}</th>
+                    <th>{{'table.accions' | translate}}</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let user of users">
+                    <td>{{ user?.username }}</td>
+                    <td>{{ user?.email }}</td>
+                    <td>{{user?.rol.name}}</td>
+                    <td><span class="label label-rounded" [ngClass]="(user.enabled)? 'label-success':'label-danger'">{{getUserStatus(user)}}</span>
+                    </td>
+                    <td>
+                      <div class="button-group row">
+                        <button class="btn btn-secondary" (click)="editOrShowUser(user.userId)">
+                          <i class="mdi mdi-eye-outline"></i>
+                        </button>
+                        <button class="btn btn-info" (click)="editOrShowUser(user.userId, true)">
+                          <i class="mdi mdi-account-edit"></i>
+                        </button>
+                        <button class="btn btn-danger" (click)="deleteUser(user.username)">
+                          <i class="mdi mdi-account-remove"></i>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  </tbody>
                 </table>
+              </div>
             </div>
         </div>
     </div>

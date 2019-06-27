@@ -11,7 +11,6 @@ export class SidebarService {
       roles: [roles.admin],
       submenu: [
         { titulo: 'Inicio', url: '/inicio' },
-        { titulo: 'Gráficas', url: '/graficas1' }
       ]
     },
     {
@@ -19,6 +18,7 @@ export class SidebarService {
       icono: 'mdi mdi-currency-usd',
       roles: [roles.sysAdmin, roles.admin],
       submenu: [
+        { titulo: 'Caja', url: '/caja' },
         { titulo: 'Operaciones', url: '/operaciones' },
       ]
     },

@@ -9,7 +9,6 @@ import { SharedModule } from '../shared/shared.module';
 import { PagesComponent } from './pages.component';
 
 import { HomeComponent } from './home/home.component';
-import { Graficas1Component } from './graficas1/graficas1.component';
 
 
 // temporal
@@ -32,32 +31,36 @@ import { OperationComponent } from './operations/operation/operation.component';
 import { OperationDetailsComponent } from './operations/operation-details/operation-details.component';
 import { MeasurementUnitsComponent } from './measurement-units/measurement-units.component';
 import { MeasurementUnitComponent } from './measurement-units/measurement-unit/measurement-unit.component';
+import { BoxsComponent } from './boxs/boxs.component';
+import {Graficas1Component} from './graficas1/graficas1.component';
+import {DefaultValuePipe} from '../pipes/default-value.pipe';
 import { CategoriesComponent } from './categories/categories.component';
 import { CategoryComponent } from './categories/category/category.component';
 
 @NgModule({
-    declarations: [
-      PagesComponent,
-      HomeComponent,
-      AccoutSettingsComponent,
-      Graficas1Component,
-      UsersComponent,
-      UserComponent,
-      OperationsComponent,
-      OperationComponent,
-      OperationDetailsComponent,
-      ArticlesComponent,      
-      ArticleComponent,
-      MeasurementUnitComponent,
-      MeasurementUnitsComponent,
-      CategoriesComponent,
-      CategoryComponent
-    ],
-    exports: [
-      HomeComponent,
-      Graficas1Component,
-      TranslateModule
-    ],
+  declarations: [
+    PagesComponent,
+    HomeComponent,
+    AccoutSettingsComponent,
+    UsersComponent,
+    UserComponent,
+    OperationsComponent,
+    OperationComponent,
+    OperationDetailsComponent,
+    ArticlesComponent,
+    Graficas1Component,
+    ArticleComponent,
+    MeasurementUnitComponent,
+    MeasurementUnitsComponent,
+    CategoriesComponent,
+    CategoryComponent,
+    BoxsComponent,
+    DefaultValuePipe
+  ],
+  exports: [
+    HomeComponent,
+    TranslateModule
+  ],
   imports: [
     CommonModule,
     FormsModule,

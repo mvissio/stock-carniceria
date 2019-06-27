@@ -8,6 +8,7 @@ import {
   AuthService
  } from './service.index';
 import {HttpClientModule} from '@angular/common/http';
+import {BoxsService} from './pages/boxs.service';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import {HttpClientModule} from '@angular/common/http';
     SettingsService,
     SidebarService,
     SharedService,
-    AuthService 
+    AuthService,
+    BoxsService
   ],
   declarations: []
 })
