@@ -5,17 +5,20 @@ import {InfoCardComponent} from './info-card/info-card.component';
 import {FormsModule} from '@angular/forms';
 import {ChartsModule} from 'ng2-charts';
 import {CommonModule} from '@angular/common';
+import { ModalContainerComponent } from './modal-container/modal-container.component';
 
 @NgModule({
   declarations: [
     GraficoDonaComponent,
     IncrementadorComponent,
     InfoCardComponent,
+    ModalContainerComponent,
   ],
   exports: [
     InfoCardComponent,
     GraficoDonaComponent,
-    IncrementadorComponent
+    IncrementadorComponent,
+    ModalContainerComponent
   ],
   imports: [
     FormsModule,

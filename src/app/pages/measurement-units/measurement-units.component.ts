@@ -3,17 +3,17 @@ import {MeasurementUnitService} from '../../services/measurement-units/measureme
 import {MeasurementUnit} from '../../models/measurement-unit.model';
 import {Page} from '../../models/page.model';
 import {HandleErrorsService} from '../../services/shared/handle-errors.service';
-import { TranslateService } from '@ngx-translate/core';
+import {TranslateService} from '@ngx-translate/core';
 import {HttpErrorResponse} from '@angular/common/http';
 import {PageConfig} from '../../models/pageConfig.model';
-import { forkJoin } from 'rxjs';
+import {forkJoin} from 'rxjs';
 import swal from 'sweetalert';
-import { CommonsService } from '../../services/commons.service';
-import { Router } from '@angular/router';
+import {CommonsService} from '../../services/commons.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-measurement-units',
-  templateUrl: './measurement-units.component.html'  
+  templateUrl: './measurement-units.component.html'
 })
 export class MeasurementUnitsComponent implements OnInit {
 
@@ -59,7 +59,7 @@ export class MeasurementUnitsComponent implements OnInit {
 
   findMeasurementUnit(username: string) {
     this.loading = true;
-    if(username !== null) {
+    if (username !== null) {
       this._measurementUnitService.getMeasurementUnitByname(name).subscribe(
         (res: any) => {
           this.loading = false;
@@ -73,51 +73,51 @@ export class MeasurementUnitsComponent implements OnInit {
     } else {
       this.getMeasurementUnits(0);
     }
-    
+
   }
 
   editOrShowMeasurementUnit(measurementUnitId: number, edit: boolean = false) {
     this.router.navigate(['/unidadMedida', measurementUnitId], {queryParams: {edit: edit}, skipLocationChange: true});
   }
 
-  deleteMeasurementUnit(name: string, id : number) {
+  deleteMeasurementUnit(name: string, id: number) {
     forkJoin(
       [this.translate.get('modals.deleteMeasurementUnit.title', {param: name}),
-      this.translate.get('modals')
-    ]).subscribe((result) => {
+        this.translate.get('modals')
+      ]).subscribe((result) => {
       swal({
-        title: result[0],
-        icon: 'warning',
-        closeOnClickOutside: true,
-        buttons: {
-          confirm: {
-            text: result[1].defaultConfirmButton,
-            value: true,
-            visible: true,
-            closeModal: true
-          },
-          cancel: {
-            text: result[1].defaultCancelButton,
-            value: false,
-            visible: true,
-            closeModal: true,
+          title: result[0],
+          icon: 'warning',
+          closeOnClickOutside: true,
+          buttons: {
+            confirm: {
+              text: result[1].defaultConfirmButton,
+              value: true,
+              visible: true,
+              closeModal: true
+            },
+            cancel: {
+              text: result[1].defaultCancelButton,
+              value: false,
+              visible: true,
+              closeModal: true,
+            }
           }
         }
-      }
-    ).then((data) => {
-      if (data) {
-        this._measurementUnitService.deleteMeasurementUnit(id).subscribe();
-      }
+      ).then((data) => {
+        if (data) {
+          this._measurementUnitService.deleteMeasurementUnit(id).subscribe(() => this.getMeasurementUnits(0));
+        }
+      });
     });
-    });  
   }
 
   getMeasurementUnitStatus(measurementUnit: MeasurementUnit): string {
     let status: string;
-    this.translate.get((measurementUnit.disabled)? 'measurementUnitStatus.disabled': 'measurementUnitStatus.enabled')
-    .subscribe((res) => {
-      status = res;
-    });
+    this.translate.get((measurementUnit.disabled) ? 'measurementUnitStatus.disabled' : 'measurementUnitStatus.enabled')
+      .subscribe((res) => {
+        status = res;
+      });
     return status;
   }
 }

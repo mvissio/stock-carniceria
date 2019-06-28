@@ -20,7 +20,7 @@ export class UsersService {
   constructor( private httpClient: HttpClient) { }
 
   addUser(user: User) {
-    let newUser = Object.assign({}, user); 
+    const newUser = Object.assign({}, user);
     newUser.enabled = true;
     newUser.password = bcrypt.hashSync(newUser.password, 10);
     const url = this.userUrl.base;

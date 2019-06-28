@@ -53,6 +53,11 @@ export const applicationApiUrls: ApiURLs = {
     base:'API_VERSION/categories',
     getCategoryByCategoryId: '/id',
     deleteCategory: '/id'
+  },
+  box: {
+    base: 'API_VERSION/boxs',
+    getOpenBoxs: '/checkBoxOpen',
+    getOperationsBox: '/operationsBox'
   }
 
 };
