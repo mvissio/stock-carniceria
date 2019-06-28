@@ -53,7 +53,6 @@ export class ArticlesComponent implements OnInit {
         (res: Page) => {
           this.page = res;
           this.articles = this.page.content;
-          console.log("estos son los articulos recup",this.articles);
           this.pages = new Array(this.page.totalPages);
           this.loading = false;
         },

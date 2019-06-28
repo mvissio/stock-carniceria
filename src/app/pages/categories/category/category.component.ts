@@ -68,10 +68,8 @@ export class CategoryComponent implements OnInit {
 
   saveCategory() {
     if (this.categoryForm.invalid) {
-      console.log("el formulario es invalido");
       return;
     }
-    console.log("el formulario es valido");
     this.setCategory();
     if (this.edit) {
       this._categoryService.updateCategory(this.category)

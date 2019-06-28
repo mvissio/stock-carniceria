@@ -9,108 +9,102 @@
 </div>
 
 <div class="row animated fadeIn">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    Opciones de Filtro:
-                    <button class="btn btn-link" (click)="showOneDateFilter()" style="display: inline; ">Filtrar por fecha</button>
-                    <button class="btn btn-link" (click)="showPeriodFilter()" style="display: inline; ">Filtrar por periodo</button>
-                </div>
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                Opciones de Filtro:
+                <button class="btn btn-link" (click)="showOneDateFilter()" style="display: inline; ">Filtrar por fecha</button>
+                <button class="btn btn-link" (click)="showPeriodFilter()" style="display: inline; ">Filtrar por periodo</button>
             </div>
         </div>
     </div>
+</div>
 
 <div class="row animated fadeIn" *ngIf="showFilterPeriod">
     <div class="col-12">
         <div class="card">
-            <div class="card-body" style="height: 270px;" >            
-                     
-            <div class="form-group"  style="display: inline-block; margin-right: 130px;">
-                <label for="fromDate">Fecha desde :</label>    
-                <my-date-picker name="mydateFechaDesde" [options]="myDatePickerOptions"
-                    [(ngModel)]="fromDate" required></my-date-picker>              
-            </div>
+            <div class="card-body" style="height: 270px;">
 
-            <div class="form-group" style="display: inline-block;">
-                <label for="mydate">Fecha hasta :</label>    
-                <my-date-picker name="mydateFechaDesde" [options]="myDatePickerOptions"
-                    [(ngModel)]="toDate" required></my-date-picker>            
-            </div>
+                <div class="form-group" style="display: inline-block; margin-right: 130px;">
+                    <label for="fromDate">Fecha desde :</label>
+                    <my-date-picker name="mydateFechaDesde" [options]="myDatePickerOptions" [(ngModel)]="fromDate" required></my-date-picker>
+                </div>
 
-            <div class="btn-group float-right">
-                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false">
-                      Forma Pago
+                <div class="form-group" style="display: inline-block;">
+                    <label for="mydate">Fecha hasta :</label>
+                    <my-date-picker name="mydateFechaDesde" [options]="myDatePickerOptions" [(ngModel)]="toDate" required></my-date-picker>
+                </div>
+
+                <div class="btn-group float-right">
+                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Forma Pago
                     </button>
                     <div class="dropdown-menu">
-                      <a class="dropdown-item" [routerLink]="" (click)="setearPaymentMethodPeriod('CASH')">Contado</a>
-                      <a class="dropdown-item" [routerLink]="" (click)="setearPaymentMethodPeriod('CC')">Credito</a>
+                        <a class="dropdown-item" [routerLink]="" (click)="setearPaymentMethodPeriod('CASH')">Contado</a>
+                        <a class="dropdown-item" [routerLink]="" (click)="setearPaymentMethodPeriod('CC')">Credito</a>
                     </div>
-                  </div>
+                </div>
 
-                  <div class="btn-group float-right">
-                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
-                          Tipo Operación
-                        </button>
-                        <div class="dropdown-menu">
-                          <a class="dropdown-item" [routerLink]="" (click)="setearOperationTypePeriod('SALE')">Venta</a>
-                          <a class="dropdown-item" [routerLink]="" (click)="setearOperationTypePeriod('BUY')">Compra</a>
-                        </div>
-                      </div>
+                <div class="btn-group float-right">
+                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Tipo Operación
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" [routerLink]="" (click)="setearOperationTypePeriod('SALE')">Venta</a>
+                        <a class="dropdown-item" [routerLink]="" (click)="setearOperationTypePeriod('BUY')">Compra</a>
+                    </div>
+                </div>
 
 
-            <button class="btn btn-primary" (click)="getOperationsByPeriodWithFilters()" style="display: inline; ">Consultar</button>
-            <button class="btn btn-info"  style="display: inline; ">Quitar filtros</button>
-          
+                <div>
+                    <button class="btn btn-primary" (click)="getOperationsByPeriodWithFilters()" style="display: inline; ">Consultar</button>
+                    <button class="btn btn-info" (click)="cleanPeriodFilter()" style="display: inline; ">Limpiar filtros</button>
+                </div>
 
-                               
+
             </div>
         </div>
     </div>
 </div>
 
 <div class="row animated fadeIn" *ngIf="showFilterOneDate">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body" style="height: 270px;">
-                    <div class="form-group">
-                        <label for="mydate">Fecha:</label>    
-                        <my-date-picker name="mydate" [options]="myDatePickerOptions"
-                            [(ngModel)]="oneDate" required></my-date-picker>            
-                    </div>
-
-                    <div class="btn-group float-right">
-                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="false">
-                              Forma Pago
-                            </button>
-                            <div class="dropdown-menu">
-                              <a class="dropdown-item" [routerLink]="" (click)="setearPaymentMethodOneDate('CASH')">Contado</a>
-                              <a class="dropdown-item" [routerLink]="" (click)="setearPaymentMethodOneDate('CC')">Credito</a>
-                            </div>
-                          </div>
-
-                          <div class="btn-group float-right">
-                                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false">
-                                  Tipo Operación
-                                </button>
-                                <div class="dropdown-menu">
-                                  <a class="dropdown-item" [routerLink]="" (click)="setearOperationTypeOneDate('SALE')">Venta</a>
-                                  <a class="dropdown-item" [routerLink]="" (click)="setearOperationTypeOneDate('BUY')">Compra</a>
-                                </div>
-                              </div>
-
-
-                    <button class="btn btn-primary" (click)="getOperationsOneDateWithFilters()" style="display: inline-block;">Consultar</button>                    
-                    <button class="btn btn-info" style="display: inline-block;">Quitar filtros</button>
-          
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body" style="height: 270px;">
+                <div class="form-group">
+                    <label for="mydate">Fecha:</label>
+                    <my-date-picker name="mydate" [options]="myDatePickerOptions" [(ngModel)]="oneDate" required></my-date-picker>
                 </div>
+
+                <div class="btn-group float-right">
+                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Forma Pago
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" [routerLink]="" (click)="setearPaymentMethodOneDate('CASH')">Contado</a>
+                        <a class="dropdown-item" [routerLink]="" (click)="setearPaymentMethodOneDate('CC')">Credito</a>
+                    </div>
+                </div>
+
+                <div class="btn-group float-right">
+                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Tipo Operación
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" [routerLink]="" (click)="setearOperationTypeOneDate('SALE')">Venta</a>
+                        <a class="dropdown-item" [routerLink]="" (click)="setearOperationTypeOneDate('BUY')">Compra</a>
+                    </div>
+                </div>
+
+
+                <button class="btn btn-primary" (click)="getOperationsOneDateWithFilters()" style="display: inline-block;">Consultar</button>
+                <button class="btn btn-info" (click)="cleanOneDateFilter()" style="display: inline-block;">Limpiar filtros</button>
+
             </div>
         </div>
     </div>
-    
+</div>
+
 
 
 
@@ -139,25 +133,26 @@
                             <td>{{ operation?.operationType | dropdownTranslate:'operationTypes' }}</td>
                             <td>{{ operation?.paymentMethod | dropdownTranslate:'paymentMethods' }}</td>
                             <td>{{operation?.total}}</td>
-                            <td><span class="label label-rounded" [ngClass]="(operation?.disabled)? 'label-success':'label-danger'">{{getOperationStatus(operation) | dropdownTranslate:'OperationStatus'}}</span>
+                            <td><span class="label label-rounded" [ngClass]="(operation?.disabled)? 'label-success':'label-danger'">{{getOperationStatus(operation)
+                                    | dropdownTranslate:'OperationStatus'}}</span>
                             </td>
                             <td>
                                 <div class="button-group">
                                     <button class="btn btn-secondary" (click)="editOrShowOperation(operation.operationId)">
-                                      <i class="mdi mdi-eye-outline"></i>
-                                  </button>
+                                        <i class="mdi mdi-eye-outline"></i>
+                                    </button>
                                     <button class="btn btn-info" (click)="editOrShowOperation(operation.operationId, true)">
-                                      <i class="mdi mdi-pencil"></i>
-                                      </button>
+                                        <i class="mdi mdi-pencil"></i>
+                                    </button>
                                     <button class="btn btn-danger" (click)="cancelOperation(operation.operationId)">
-                                      <i class="mdi mdi-delete"></i>
-                                  </button>
+                                        <i class="mdi mdi-delete"></i>
+                                    </button>
                                 </div>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-            </div>            
+            </div>
         </div>
     </div>
 </div>

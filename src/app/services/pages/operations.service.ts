@@ -32,7 +32,6 @@ export class OperationsService {
 
   //consulta por la fecha pasada como parametro
   getOperationsByCreateDate(page: PageConfig, createDate: Date, path: string, operationTypeOneDate: string, paymentMethodOneDate: string) {
-    console.log("llegue aca");
     const url = this.operationUrl[path];
     let urlComplete = `${url}?creationDate=${createDate}&page=${page.pageNumber}&size=${page.pageSize}`;
     if(operationTypeOneDate == null && paymentMethodOneDate == null){
@@ -60,22 +59,18 @@ export class OperationsService {
     const url = this.operationUrl[path];
     let urlComplete = `${url}?fromDate=${fromDate}&toDate=${toDate}&page=${page.pageNumber}&size=${page.pageSize}`;
     if(operationTypePeriod == null && paymentMethodPeriod == null){
-      console.log(urlComplete);
       return this.httpClient.get(urlComplete)
       .pipe(map((response: Page) => response));
     }else if (operationTypePeriod != null && paymentMethodPeriod != null) {
       urlComplete = urlComplete.concat(`&operationType=${operationTypePeriod}`).concat(`&paymentMethod=${paymentMethodPeriod}`);
-      console.log(urlComplete);
       return this.httpClient.get(urlComplete)
         .pipe(map((response: Page) => response));
     } else if (operationTypePeriod != null) {
       urlComplete = urlComplete.concat(`&operationType=${operationTypePeriod}`);
-      console.log(urlComplete);
       return this.httpClient.get(urlComplete)
         .pipe(map((response: Page) => response));
     } else if (paymentMethodPeriod != null) {
       urlComplete = urlComplete.concat(`&paymentMethod=${paymentMethodPeriod}`);
-      console.log(urlComplete);
       return this.httpClient.get(urlComplete)
         .pipe(map((response: Page) => response));
     }

@@ -86,7 +86,6 @@ export class ArticleService {
   
   deleteArticle(id: number) {
     const url = `${this.articleUrl.deleteArticle}/${id}`;
-    console.log("esta es la url" + url)
     return this.httpClient.delete(url)
     .pipe(map((response) => response));
   }

@@ -75,7 +75,6 @@ export class UserComponent implements OnInit {
   getAllRoles() {
     this._userService.getAllRoles()
       .subscribe((res: any) => {
-        console.log("resultado all roles",res);
         this.roles = res;
       }, (err: HttpErrorResponse) => {
         this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
@@ -83,7 +82,6 @@ export class UserComponent implements OnInit {
   }
 
   saveUser() {
-    console.log("guardo el usaurio")
     if (this.userForm.invalid) {
       return;
     }

@@ -139,7 +139,6 @@ export class ArticleComponent implements OnInit {
   getAllCategories() {
     this._articleService.getAllCategories()
       .subscribe((res: any) => { 
-        console.log("resultado all categories",res);      
         this.categories = res.content;
       }, (err: HttpErrorResponse) => {
         this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));

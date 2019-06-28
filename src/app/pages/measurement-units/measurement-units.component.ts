@@ -48,7 +48,6 @@ export class MeasurementUnitsComponent implements OnInit {
         (res: Page) => {
           this.page = res;
           this.measurementUnits = this.page.content;
-          console.log("resultado del request",this.page.content )
           this.pages = new Array(this.page.totalPages);
           this.loading = false;
         },
