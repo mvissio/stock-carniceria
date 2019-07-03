@@ -102,7 +102,8 @@
     "descriptionPlaceholder": "Descripción",
     "enabledPlaceholder": "Habilitado",
     "createOk": "Categoría creada satisfactoriamente.",
-    "updateOk": "Categoría actualizada satisfactoriamente."
+    "updateOk": "Categoría actualizada satisfactoriamente.",
+    "noContent": "No se encontraron categorias cargadas"
   },
   "table": {
     "users": {
@@ -214,7 +215,7 @@
     "error": "Inconsistente"
   },
   "roles": {
-    "SYSADMIN": "sistemas",
+    "SYSADMIN": "administrador de sistema",
     "ADMIN": "administrador",
     "USER": "usuario"
   },

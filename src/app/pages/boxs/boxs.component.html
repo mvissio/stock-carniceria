@@ -137,12 +137,18 @@
       <ng-container *ngIf="loadOperation; else loadingOperations">
         <ng-container *ngIf="boxModal.operationList.length>0; else notResults">
           <div class="row m-t-20" *ngFor="let operation of boxModal.operationList">
-            <div class="col-3">{{operation.createDateTime|date:'dd/MM/yyyy - hh:mm'| defaultValue: 'Sin Registro'}}</div>
-            <div class="col-3">{{operation.operationType| defaultValue: 'Sin Registro'}}</div>
-            <div class="col-3">{{operation.paymentMethod| defaultValue: 'Sin Registro'}}</div>
+            <div
+              class="col-3">{{operation.createDateTime|date:'dd/MM/yyyy - hh:mm'| defaultValue: 'Sin Registro'}}</div>
+            <div
+              class="col-3">{{operation.operationType| defaultValue: 'Sin Registro'| dropdownTranslate: 'operationTypes' }}</div>
+            <div
+              class="col-3">{{operation.paymentMethod| defaultValue: 'Sin Registro'| dropdownTranslate: 'paymentMethods'}}</div>
             <div class="col-3">{{operation.total|currency| defaultValue: 'Sin Registro'}}</div>
           </div>
-          <div class="m-t-40"><app-pagination [page]="pageOperation" [pages]="pagesOperation" (pageNumber)="setPageOperation($event)" *ngIf="boxModal.operationList"></app-pagination></div>
+          <div class="m-t-40">
+            <app-pagination [page]="pageOperation" [pages]="pagesOperation" (pageNumber)="setPageOperation($event)"
+                            *ngIf="boxModal.operationList"></app-pagination>
+          </div>
         </ng-container>
       </ng-container>
       <ng-template #notResults>

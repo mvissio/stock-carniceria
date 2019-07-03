@@ -1,12 +1,3 @@
-<div class="row animated fadeIn">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-body">
-                <input #input (keyup.enter)="findOperation(input.value)" type="search" class="form-control" [placeholder]="'operations.searchLabel' | translate">
-            </div>
-        </div>
-    </div>
-</div>
 
 <div class="row animated fadeIn">
     <div class="col-12">
@@ -134,7 +125,7 @@
                     <td>{{ operation?.operationType | dropdownTranslate:'operationTypes' }}</td>
                     <td>{{ operation?.paymentMethod | dropdownTranslate:'paymentMethods' }}</td>
                     <td>{{operation?.total}}</td>
-                    <td><span class="label label-rounded" [ngClass]="(operation?.disabled)? 'label-success':'label-danger'">{{getOperationStatus(operation) | dropdownTranslate:'OperationStatus'}}</span>
+                    <td><span class="label label-rounded" [ngClass]="(operation?.disabled)? 'label-danger':'label-success'">{{getOperationStatus(operation) | dropdownTranslate:'OperationStatus'}}</span>
                     </td>
                     <td>
                       <div class="button-group">

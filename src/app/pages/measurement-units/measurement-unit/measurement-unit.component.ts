@@ -51,7 +51,7 @@ export class MeasurementUnitComponent implements OnInit {
     const locale = 'en-US';
     this.measurementUnitForm = this.fb.group({
       name: [{value: this.measurementUnit.name, disabled: this.edit}, [Validators.required, Validators.maxLength(45)]],
-      symbol: [this.measurementUnit.symbol, [Validators.required, Validators.maxLength(2)]]
+      symbol: [this.measurementUnit.symbol, [Validators.required, Validators.maxLength(5)]]
     }, {updateOn: 'blur'});
     if (this.disabledFields) {
       this.measurementUnitForm.disable();

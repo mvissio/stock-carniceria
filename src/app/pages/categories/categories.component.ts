@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CategoryService} from '../../services/pages/categories.service';
 import {Category} from '../../models/category.model';
 import {Page} from '../../models/page.model';
 import {HandleErrorsService} from '../../services/shared/handle-errors.service';
-import { TranslateService } from '@ngx-translate/core';
+import {TranslateService} from '@ngx-translate/core';
 import {HttpErrorResponse} from '@angular/common/http';
 import {PageConfig} from '../../models/pageConfig.model';
-import { forkJoin } from 'rxjs';
+import {forkJoin} from 'rxjs';
 import swal from 'sweetalert';
-import { CommonsService } from '../../services/commons.service';
-import { Router } from '@angular/router';
+import {CommonsService} from '../../services/commons.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-categories',
@@ -24,10 +24,11 @@ export class CategoriesComponent implements OnInit {
   pageConfig: PageConfig;
 
   constructor(private _categoryService: CategoryService,
-    private _handleErrorsService: HandleErrorsService,
-    private translate: TranslateService,
-    private router: Router,
-    private _commonsService: CommonsService) { }
+              private _handleErrorsService: HandleErrorsService,
+              private translate: TranslateService,
+              private router: Router,
+              private _commonsService: CommonsService) {
+  }
 
   ngOnInit() {
     this.pageConfig = new PageConfig('categoryId');
@@ -45,9 +46,11 @@ export class CategoriesComponent implements OnInit {
     this._categoryService.getAllCategories(this.pageConfig)
       .subscribe(
         (res: Page) => {
-          this.page = res;
-          this.categories = this.page.content;
-          this.pages = new Array(this.page.totalPages);
+          if (res) {
+            this.page = res;
+            this.categories = this.page.content;
+            this.pages = new Array(this.page.totalPages);
+          }
           this.loading = false;
         },
         (err: HttpErrorResponse) => {
@@ -58,7 +61,7 @@ export class CategoriesComponent implements OnInit {
 
   findCategory(category: string) {
     this.loading = true;
-    if(category !== null) {
+    if (category !== null) {
       this._categoryService.getCategoryByname(name).subscribe(
         (res: any) => {
           this.loading = false;
@@ -72,51 +75,51 @@ export class CategoriesComponent implements OnInit {
     } else {
       this.getCategories(0);
     }
-    
+
   }
 
   editOrShowCategory(categoryId: number, edit: boolean = false) {
     this.router.navigate(['/categoria', categoryId], {queryParams: {edit: edit}, skipLocationChange: true});
   }
 
-  deleteCategory(name: string, id : number) {
+  deleteCategory(name: string, id: number) {
     forkJoin(
       [this.translate.get('modals.deleteCategory.title', {param: name}),
-      this.translate.get('modals')
-    ]).subscribe((result) => {
+        this.translate.get('modals')
+      ]).subscribe((result) => {
       swal({
-        title: result[0],
-        icon: 'warning',
-        closeOnClickOutside: true,
-        buttons: {
-          confirm: {
-            text: result[1].defaultConfirmButton,
-            value: true,
-            visible: true,
-            closeModal: true
-          },
-          cancel: {
-            text: result[1].defaultCancelButton,
-            value: false,
-            visible: true,
-            closeModal: true,
+          title: result[0],
+          icon: 'warning',
+          closeOnClickOutside: true,
+          buttons: {
+            confirm: {
+              text: result[1].defaultConfirmButton,
+              value: true,
+              visible: true,
+              closeModal: true
+            },
+            cancel: {
+              text: result[1].defaultCancelButton,
+              value: false,
+              visible: true,
+              closeModal: true,
+            }
           }
         }
-      }
-    ).then((data) => {
-      if (data) {
-        this._categoryService.deleteCategory(id).subscribe();
-      }
+      ).then((data) => {
+        if (data) {
+          this._categoryService.deleteCategory(id).subscribe();
+        }
+      });
     });
-    });  
   }
 
   getCategoryStatus(category: Category): string {
     let status: string;
-    this.translate.get((category.disabled)? 'categoryStatus.disabled': 'categoryStatus.enabled')
-    .subscribe((res) => {
-      status = res;
-    });
+    this.translate.get((category.disabled) ? 'categoryStatus.disabled' : 'categoryStatus.enabled')
+      .subscribe((res) => {
+        status = res;
+      });
     return status;
   }
 

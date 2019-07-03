@@ -17,7 +17,7 @@ export class SidebarComponent implements OnInit {
   userRol: string;
 
   constructor( public _sidebarService: SidebarService,
-    private _authService: AuthService,
+    public _authService: AuthService,
     private translate: TranslateService) { }
 
     ngOnInit() {

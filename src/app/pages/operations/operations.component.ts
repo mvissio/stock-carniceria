@@ -24,7 +24,7 @@ export class OperationsComponent implements OnInit {
   page: Page;
   operations: Operation[];
   pages: number[];
-  loading = false;
+  loading = false;f
   pageConfig: PageConfig;
   fromDate: IMyDateModel;
   toDate: IMyDateModel;

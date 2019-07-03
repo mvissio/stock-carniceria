@@ -73,7 +73,6 @@ export class UsersComponent implements OnInit {
     } else {
       this.getUsers(0);
     }
-    
   }
 
   editOrShowUser(userId: number, edit: boolean = false) {
