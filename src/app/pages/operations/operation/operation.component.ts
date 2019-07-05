@@ -9,7 +9,7 @@ import { CommonsService } from '../../../services/commons.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { forkJoin, Observable } from 'rxjs';
 import { OperationDetail } from '../../../models/operationDetail.model';
-import { operationStatus } from '../../../constants/constant';
+import { operationStatus, discountValues } from '../../../constants/constant';
 import { ArticleService } from '../../../services/pages/article.service';
 import { Article } from '../../../models/article.model';
 import swal from 'sweetalert';
@@ -28,6 +28,8 @@ export class OperationComponent implements OnInit {
   edit = false;
   operationForm: FormGroup;
   disabledFields = false;
+  articleAmountSizeError = false;
+  discounts = discountValues;
 
   constructor( private activateRoute: ActivatedRoute,
     private translate: TranslateService,
@@ -116,7 +118,7 @@ export class OperationComponent implements OnInit {
 
   getArticlesByName(query: any) {
     if (query.term.length > 2) {
-      this.articles$ = this._articleService.getArticlesByNameLike(query.term);
+      this.articles$ = this._articleService.getArticlesByNameOrBrandOrCodeLike(query.term);
     }
   }
 
@@ -125,57 +127,59 @@ export class OperationComponent implements OnInit {
       return;
     }
     this.setOperation();
-    forkJoin(
-      [this.translate.get('modals.confirmOperation.title'),
-      this.translate.get('modals')
-    ]).subscribe((result) => {
-    swal({
-      title: result[0],
-      icon: 'warning',
-      closeOnClickOutside: true,
-      buttons: {
-        confirm: {
-          text: result[1].defaultConfirmButton,
-          value: true,
-          visible: true,
-          closeModal: true
-        },
-        cancel: {
-          text: result[1].defaultCancelButton,
-          value: false,
-          visible: true,
-          closeModal: true,
-        }
-      }
-    }
-    ).then((data) => {
-      if (data) {
-        if (this.edit) {
-          this._operationService.updateOperation(this.operation)
-            .subscribe(() => {
-              this.translate.get('operations.updateOk')
-              .subscribe((res: string) => {
-                this._commonsService.showMessage('success', res);
-                this.back();
-              });
-            }, (err: HttpErrorResponse) => {
-              this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
-            });
-        } else {
-          this._operationService.addOperation(this.operation)
-            .subscribe(() => {
-              this.translate.get('operations.createOk')
-              .subscribe((res: string) => { 
-                this._commonsService.showMessage('success', res);
-                this.back();
-              });
-            }, (err: HttpErrorResponse) => {
-              this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
-            });
+    if (!this.articleAmountSizeError) {
+      forkJoin(
+        [this.translate.get('modals.confirmOperation.title'),
+        this.translate.get('modals')
+      ]).subscribe((result) => {
+      swal({
+        title: result[0],
+        icon: 'warning',
+        closeOnClickOutside: true,
+        buttons: {
+          confirm: {
+            text: result[1].defaultConfirmButton,
+            value: true,
+            visible: true,
+            closeModal: true
+          },
+          cancel: {
+            text: result[1].defaultCancelButton,
+            value: false,
+            visible: true,
+            closeModal: true,
           }
         }
+      }
+      ).then((data) => {
+        if (data) {
+          if (this.edit) {
+            this._operationService.updateOperation(this.operation)
+              .subscribe(() => {
+                this.translate.get('operations.updateOk')
+                .subscribe((res: string) => {
+                  this._commonsService.showMessage('success', res);
+                  this.back();
+                });
+              }, (err: HttpErrorResponse) => {
+                this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
+              });
+          } else {
+            this._operationService.addOperation(this.operation)
+              .subscribe(() => {
+                this.translate.get('operations.createOk')
+                .subscribe((res: string) => { 
+                  this._commonsService.showMessage('success', res);
+                  this.back();
+                });
+              }, (err: HttpErrorResponse) => {
+                this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
+              });
+            }
+          }
+        });
       });
-    });
+    }
   }
 
   setOperation() {
@@ -193,16 +197,25 @@ export class OperationComponent implements OnInit {
   }
 
   setOperationDetails() {
-    this.operationDetails.value.forEach((odObject: {article: Article, price: number, amount?: number}, index: number) => {
+    this.operationDetails.value.some((odObject: {article: Article, price: number, amount?: number}, index: number) => {
       let operationDetail = new OperationDetail();
-      operationDetail.amount = odObject.amount;
-      operationDetail.articleId = odObject.article.articleId;
-      operationDetail.price = (operationDetail.amount)? odObject.price * operationDetail.amount : odObject.price;
-      const indexOperationDetail = this.operation.operationDetails.findIndex((od: OperationDetail) => od.articleId === odObject.article.articleId);
-      if (indexOperationDetail !== -1) {
-        this.operation.operationDetails[index] = operationDetail; 
+      if (odObject.article.currentQuantity >= odObject.amount) {
+        operationDetail.amount = odObject.amount;
+        operationDetail.articleId = odObject.article.articleId;
+        operationDetail.price = (operationDetail.amount)? odObject.price * operationDetail.amount : odObject.price;
+        const indexOperationDetail = this.operation.operationDetails.findIndex((od: OperationDetail) => od.articleId === odObject.article.articleId);
+        if (indexOperationDetail !== -1) {
+          this.operation.operationDetails[index] = operationDetail; 
+        } else {
+          this.operation.operationDetails.push(operationDetail);  
+        }
       } else {
-        this.operation.operationDetails.push(operationDetail);  
+        this.translate.get('articles.amountInsuficient', {param: odObject.article.currentQuantity})
+          .subscribe((result) => {
+            this._commonsService.showMessage('error', result);
+            this.articleAmountSizeError = true;
+          });
+          return true;
       }
     });
   }
@@ -211,7 +224,7 @@ export class OperationComponent implements OnInit {
     let total: number = 0;
     this.operation.operationDetails.forEach((operationDetail: OperationDetail) => total += operationDetail.price);
     if (this.operation.discount) {
-      total = total - this.operation.discount; 
+      total = total - (total * (this.operation.discount/100)); 
     }
     return total;
   }
@@ -222,6 +235,10 @@ export class OperationComponent implements OnInit {
 
   selectedPaymentMethod(paymentMethod: string): boolean {
     return (this.operation.paymentMethod && paymentMethod === this.operation.paymentMethod);
+  }
+
+  selectedDiscount(discount: number): boolean {
+    return (this.operation.discount && discount === this.operation.discount);
   }
 
   selectArticle(article: Article, index: number) {

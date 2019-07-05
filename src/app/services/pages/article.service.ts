@@ -58,10 +58,15 @@ export class ArticleService {
     }));
   }
 
-  getArticlesByNameLike(nameLike) {
-    const url = `${this.articleUrl.getArticleByNameLike}?nameLike=${nameLike}`;
+  getArticlesByNameOrBrandOrCodeLike(search) {
+    const url = `${this.articleUrl.getArticlesByNameOrBrandOrCodeLike}?search=${search}`;
     return this.httpClient.get(url)
-    .pipe(map((response: Article[]) => response));
+    .pipe(map((response: Article[]) => {
+      return response.map((article) => {
+        article.label = article.name + ' - ' + article.brand;
+        return article;
+      });
+    }));
   }
   
   updateArticle(article: Article) {

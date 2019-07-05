@@ -33,9 +33,7 @@
                         <div *ngFor="let operationDetail of operationDetails?.controls; let i = index">
                             <div [formGroupName]="i" class="form-row border p-20">
                                 <div class="col">
-                                    <ng-select [items]="articles$ | async" [multiple]="false" [closeOnSelect]="true"
-                                               [searchable]="true" bindLabel="name" bindValue="articleId" [placeholder]="'operationDetails.articlePlaceholder' | translate"
-                                               [notFoundText]="'operationDetails.articleNotFoundLabel' | translate"
+                                    <ng-select [items]="articles$ | async" [multiple]="false" [closeOnSelect]="true" [searchable]="true" bindLabel="label" [placeholder]="'operationDetails.articlePlaceholder' | translate" [notFoundText]="'operationDetails.articleNotFoundLabel' | translate"
                                         formControlName="article" (search)="getArticlesByName($event)" (change)="selectArticle($event, i)">
                                     </ng-select>
                                     <div *ngIf="operationDetailControls(i).article.invalid && (operationDetailControls(i).article.dirty || operationDetailControls(i).article.touched)" class="error-label">
@@ -69,14 +67,14 @@
                         </div>
                     </div>
                     <div class="form-group m-t-10 col-sm-4 col-xs-4" *ngIf="operationControls.operationType.value === 'SALE'">
-                        <input class="form-control" type="number" [placeholder]="'operations.discountPlaceholder' | translate" formControlName="discount">
-                        <div *ngIf="operationControls.discount.invalid && (operationControls.discount.dirty || operationControls.discount.touched)" class="error-label">
-                            <small *ngIf="operationControls.discount.errors.min" [translate]="'generalValidations.min'" [translateParams]="{param: operationControls.discount.errors.min.min}"></small>
-                        </div>
+                        <label for="discount" class="m-r-10">{{'operations.discountPlaceholder' | translate}}</label>
+                        <select class="custom-select" formControlName="discount" id="discount">
+                            <option [value]="discount" *ngFor="let discount of discounts" [selected]="selectedDiscount(discount)">{{discount}}%</option>
+                            </select>
                     </div>
                     <div *ngIf="!disabledFields" class="m-t-10">
                         <button class="btn btn-primary m-r-10" type="submit" [disabled]="operationForm.invalid">
-                        <i class="fa fa-save"></i>
+                        <i class="fa fa-save" aria-hidden="true"></i>
                         {{'buttons.submit' | translate}}
                         </button>
                         <button (click)="back()" class="btn btn-danger" type="button">

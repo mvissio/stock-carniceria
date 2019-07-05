@@ -1,247 +1,248 @@
 {
-  "generalValidations": {
-    "required": "Es requerido",
-    "email": "El correo electrónico debe ser una dirección de correo electrónico válida",
-    "maxLength": "La logitud maxima es de {{param}}",
-    "minLength": "La logitud minima es de {{param}}",
-    "min": "El mínimo es de {{param}}",
-    "max": "El máximo es de {{param}}",
-    "pattern": "El valor ingresado no es correcto"
-  },
-  "generalHTTPErrors": {
-    "server": "Ha ocurrido un error en el servidor, intente nuevamente más tarde.",
-    "request": "Los datos ingresados son incorrectos.",
-    "notFound": "No se han encontrado datos.",
-    "conflict": "Ha habido un conflicto con los datos, intente nuevamente más tarde.",
-    "authorization": "No tiene permisos para acceder a los datos requeridos.",
-    "login": "Usuario o contraseña incorrecta.",
-    "cantConnect": "No se pudo conectar con el servidor.",
-    "timeOut": "El tiempo de espera es muy largo intente nuevamente mas tarde."
-  },
-  "login": {
-    "rememberMeCheck": "Recuérdame",
-    "forgotPasswordLink": "Olvide contraseña?",
-    "submitButton": "Ingresar",
-    "userPlaceholder": "Usuario",
-    "passwordPlaceholder": "Contraseña"
-  },
-  "users": {
-    "title": "Usuarios",
-    "childTitle": "Usuario: ",
-    "searchLabel": "Buscar usuario...",
-    "usernamePlaceholder": "Nombre",
-    "emailPlaceholder": "Dirección de correo electrónico",
-    "passwordPlaceholder": "Contraseña",
-    "enabledPlaceholder": "Habilitado",
-    "rolPlaceholder": "Rol",
-    "createOk": "Usuario creado satisfactoriamente.",
-    "updateOk": "Usuario actualizado satisfactoriamente."
-  },
-  "boxs": {
-    "title": "Historico de Caja",
-    "childTitle": "Caja:",
-    "titleModal": "Gestion de Caja",
-    "openBox": {
-      "textModal": "¿Desea abrir una nueva caja?",
-      "inputCash": "Saldo en efectivo ({{param}})"
+    "generalValidations": {
+        "required": "Es requerido",
+        "email": "El correo electrónico debe ser una dirección de correo electrónico válida",
+        "maxLength": "La logitud maxima es de {{param}}",
+        "minLength": "La logitud minima es de {{param}}",
+        "min": "El mínimo es de {{param}}",
+        "max": "El máximo es de {{param}}",
+        "pattern": "El valor ingresado no es correcto"
     },
-    "operationBox": {
-      "notResult": "No se encontraron operaciónes registradas.",
-      "createDate": "Fecha y Hora",
-      "operationType": "Tipo de Operación",
-      "paymentMethod": "Metodo de Pago",
-      "total": "Total"
-    }
-  },
-  "operations": {
-    "title": "Operaciones",
-    "childTitle": "Operación",
-    "searchLabel": "Buscar operación...",
-    "operationTypePlaceholder": "Tipo",
-    "paymentMethodPlaceholder": "Método de pago",
-    "discountPlaceholder": "Descuento",
-    "createOk": "Operacion creada satisfactoriamente.",
-    "updateOk": "Operacion actualizada satisfactoriamente."
-  },
-  "operationDetails": {
-    "operationDetailAddButtonLabel": "Añadir detalle operación",
-    "operationDetailDeleteButtonLabel": "Borrar detalle",
-    "amountPlaceholder": "Cantidad",
-    "pricePlaceholder": "Precio",
-    "articlePlaceholder": "Seleccione Articulo",
-    "articleNotFoundLabel": "No hay artículos para la búsqueda"
-  },
-  "articles": {
-    "title": "Artículos",
-    "searchLabel": "Buscar articulo...",
-    "namePlaceholder": "Nombre",
-    "brandPlaceholder": "Marca",
-    "currentPricePlaceholder": "Precio actual",
-    "currentQuantityPlaceholder": "Cantidad actual",
-    "descriptionPlaceholder": "Descripción",
-    "expirationDatePlaceholder": "Fecha de Expiración",
-    "measurementUnitIdPlaceholder": "Unidad de medida",
-    "categoryPlaceholder": "Categoría",
-    "enabledPlaceholder": "Habilitado",
-    "createOk": "Articulo creado satisfactoriamente.",
-    "updateOk": "Articulo actualizado satisfactoriamente."
-  },
-  "measurementUnits": {
-    "title": "Unidades de medida",
-    "searchLabel": "Buscar unidad de medida...",
-    "namePlaceholder": "Nombre",
-    "symbolPlaceholder": "Símbolo",
-    "enabledPlaceholder": "Habilitado",
-    "createOk": "Unidad de medida creada satisfactoriamente.",
-    "updateOk": "Unidad de medida actualizada satisfactoriamente."
-  },
-  "categories": {
-    "title": "Categorías",
-    "searchLabel": "Buscar categoría...",
-    "namePlaceholder": "Nombre",
-    "descriptionPlaceholder": "Descripción",
-    "enabledPlaceholder": "Habilitado",
-    "createOk": "Categoría creada satisfactoriamente.",
-    "updateOk": "Categoría actualizada satisfactoriamente.",
-    "noContent": "No se encontraron categorias cargadas"
-  },
-  "table": {
+    "generalHTTPErrors": {
+        "server": "Ha ocurrido un error en el servidor, intente nuevamente más tarde.",
+        "request": "Los datos ingresados son incorrectos.",
+        "notFound": "No se han encontrado datos.",
+        "conflict": "Ha habido un conflicto con los datos, intente nuevamente más tarde.",
+        "authorization": "No tiene permisos para acceder a los datos requeridos.",
+        "login": "Usuario o contraseña incorrecta.",
+        "cantConnect": "No se pudo conectar con el servidor.",
+        "timeOut": "El tiempo de espera es muy largo intente nuevamente mas tarde."
+    },
+    "login": {
+        "rememberMeCheck": "Recuérdame",
+        "forgotPasswordLink": "Olvide contraseña?",
+        "submitButton": "Ingresar",
+        "userPlaceholder": "Usuario",
+        "passwordPlaceholder": "Contraseña"
+    },
     "users": {
-      "name": "Nombre",
-      "email": "Correo",
-      "role": "Role"
-    },
-    "operations": {
-      "createDateTime": "Fecha de creación",
-      "disabledDate": "Fecha de baja",
-      "disabled": "Deshabilitar",
-      "operationType": "Tipo de operación",
-      "paymentMethod": "Forma de pago",
-      "total": "Total",
-      "subTotal": "Total"
+        "title": "Usuarios",
+        "childTitle": "Usuario: ",
+        "searchLabel": "Buscar usuario...",
+        "usernamePlaceholder": "Nombre",
+        "emailPlaceholder": "Dirección de correo electrónico",
+        "passwordPlaceholder": "Contraseña",
+        "enabledPlaceholder": "Habilitado",
+        "rolPlaceholder": "Rol",
+        "createOk": "Usuario creado satisfactoriamente.",
+        "updateOk": "Usuario actualizado satisfactoriamente."
     },
     "boxs": {
-      "dateOpen": "Fecha de Apertura",
-      "cashOpen": "Dinero de Apertura",
-      "dateClose": "Fecha de Cierre",
-      "cashClose": "Dinero de Cierre",
-      "cashDiff": "Diferencia"
+        "title": "Historico de Caja",
+        "childTitle": "Caja:",
+        "titleModal": "Gestion de Caja",
+        "openBox": {
+            "textModal": "¿Desea abrir una nueva caja?",
+            "inputCash": "Saldo en efectivo ({{param}})"
+        },
+        "operationBox": {
+            "notResult": "No se encontraron operaciónes registradas.",
+            "createDate": "Fecha y Hora",
+            "operationType": "Tipo de Operación",
+            "paymentMethod": "Metodo de Pago",
+            "total": "Total"
+        }
     },
-    "status": "Estado",
-    "accions": "Acciones"
-  },
-  "measurementUnitTable": {
-    "name": "Nombre",
-    "symbol": "Símbolo",
-    "status": "Estado",
-    "accions": "Acciones"
-  },
-  "categoryTable": {
-    "name": "Nombre",
-    "description": "Descripción",
-    "status": "Estado",
-    "accions": "Acciones"
-  },
-  "articleTable": {
-    "name": "Nombre",
-    "brand": "Marca",
-    "currentPrice": "Precio",
-    "currentQuantity": "Cantidad",
-    "description": "Descripción",
-    "expirationDate": "Fecha expiración",
-    "measurementUnitId": "Unidad medida",
-    "status": "Estado",
-    "accions": "Acciones"
-  },
-  "forgotPassword": {
-    "info": "Ingrese su correo electrónico y siga los pasos.",
-    "emailPlaceholder": "Dirección de correo electrónico"
-  },
-  "header": {
-    "logoutLabel": "Salir"
-  },
-  "sidebar": {
-    "menu": "Menú",
-    "themeLabel": "Mi tema"
-  },
-  "spinner": {
-    "title": "Cargando",
-    "message": "Espere por favor"
-  },
-  "modals": {
-    "logout": {
-      "title": "¿Estás seguro que quieres salir de la aplicación?"
+    "operations": {
+        "title": "Operaciones",
+        "childTitle": "Operación",
+        "searchLabel": "Buscar operación...",
+        "operationTypePlaceholder": "Tipo",
+        "paymentMethodPlaceholder": "Método de pago",
+        "discountPlaceholder": "Descuento",
+        "createOk": "Operacion creada satisfactoriamente.",
+        "updateOk": "Operacion actualizada satisfactoriamente."
     },
-    "deleteUser": {
-      "title": "¿Estás seguro que quieres deshabilitar el usuario {{param}}?"
+    "operationDetails": {
+        "operationDetailAddButtonLabel": "Añadir detalle operación",
+        "operationDetailDeleteButtonLabel": "Borrar detalle",
+        "amountPlaceholder": "Cantidad",
+        "pricePlaceholder": "Precio",
+        "articlePlaceholder": "Seleccione Articulo",
+        "articleNotFoundLabel": "No hay artículos para la búsqueda"
     },
-    "cancelOperation": {
-      "title": "¿Estás seguro que deseas cancelar la operación {{param}}?"
+    "articles": {
+        "title": "Artículos",
+        "searchLabel": "Buscar articulo...",
+        "namePlaceholder": "Nombre",
+        "brandPlaceholder": "Marca",
+        "currentPricePlaceholder": "Precio actual",
+        "currentQuantityPlaceholder": "Cantidad actual",
+        "descriptionPlaceholder": "Descripción",
+        "expirationDatePlaceholder": "Fecha de Expiración",
+        "measurementUnitIdPlaceholder": "Unidad de medida",
+        "categoryPlaceholder": "Categoría",
+        "enabledPlaceholder": "Habilitado",
+        "createOk": "Articulo creado satisfactoriamente.",
+        "updateOk": "Articulo actualizado satisfactoriamente.",
+        "amountInsuficient": "Cantidad insuficiente de articulos, actualmente quedan {{param}}"
     },
-    "confirmOperation": {
-      "title": "¿Estás seguro que deseas confirmar la operación?"
+    "measurementUnits": {
+        "title": "Unidades de medida",
+        "searchLabel": "Buscar unidad de medida...",
+        "namePlaceholder": "Nombre",
+        "symbolPlaceholder": "Símbolo",
+        "enabledPlaceholder": "Habilitado",
+        "createOk": "Unidad de medida creada satisfactoriamente.",
+        "updateOk": "Unidad de medida actualizada satisfactoriamente."
     },
-    "deleteArticle": {
-      "title": "¿Estás seguro que quieres dar de baja el articulo {{param}}?"
+    "categories": {
+        "title": "Categorías",
+        "searchLabel": "Buscar categoría...",
+        "namePlaceholder": "Nombre",
+        "descriptionPlaceholder": "Descripción",
+        "enabledPlaceholder": "Habilitado",
+        "createOk": "Categoría creada satisfactoriamente.",
+        "updateOk": "Categoría actualizada satisfactoriamente.",
+        "noContent": "No se encontraron categorias cargadas"
     },
-    "deleteMeasurementUnit": {
-      "title": "¿Estás seguro que quieres dar de baja la unidad de medida {{param}}?"
+    "table": {
+        "users": {
+            "name": "Nombre",
+            "email": "Correo",
+            "role": "Role"
+        },
+        "operations": {
+            "createDateTime": "Fecha de creación",
+            "disabledDate": "Fecha de baja",
+            "disabled": "Deshabilitar",
+            "operationType": "Tipo de operación",
+            "paymentMethod": "Forma de pago",
+            "total": "Total",
+            "subTotal": "Total"
+        },
+        "boxs": {
+            "dateOpen": "Fecha de Apertura",
+            "cashOpen": "Dinero de Apertura",
+            "dateClose": "Fecha de Cierre",
+            "cashClose": "Dinero de Cierre",
+            "cashDiff": "Diferencia"
+        },
+        "status": "Estado",
+        "accions": "Acciones"
     },
-    "deleteCategory": {
-      "title": "¿Estás seguro que quieres dar de baja la categoría {{param}}?"
+    "measurementUnitTable": {
+        "name": "Nombre",
+        "symbol": "Símbolo",
+        "status": "Estado",
+        "accions": "Acciones"
     },
-    "defaultConfirmButton": "Confirmar",
-    "defaultCancelButton": "Cancelar"
-  },
-  "buttons": {
-    "submit": "Guardar",
-    "back": "Volver",
-    "send": "Enviar",
-    "cancel": "Cancelar"
-  },
-  "toast": {
-    "error": "Error!",
-    "success": "Éxito!",
-    "warning": "Advertencia!",
-    "info": "Información!"
-  },
-  "userStatus": {
-    "enabled": "Habilitado",
-    "disabled": "Deshabilitado"
-  },
-  "boxStatus": {
-    "enabled": "Abierta",
-    "disabled": "Cerrada",
-    "error": "Inconsistente"
-  },
-  "roles": {
-    "SYSADMIN": "administrador de sistema",
-    "ADMIN": "administrador",
-    "USER": "usuario"
-  },
-  "operationTypes": {
-    "BUY": "Compra",
-    "SALE": "Venta"
-  },
-  "paymentMethods": {
-    "CC": "Tarjeta de Débito",
-    "CASH": "Efectivo"
-  },
-  "OperationStatus": {
-    "CANCELED": "Operación Cancelada",
-    "SOLD": "Venta Realizada",
-    "PURCHASED": "Compra Realizada"
-  },
-  "articleStatus": {
-    "enabled": "Alta",
-    "disabled": "Baja"
-  },
-  "measurementUnitStatus": {
-    "enabled": "Alta",
-    "disabled": "Baja"
-  },
-  "categoryStatus": {
-    "enabled": "Alta",
-    "disabled": "Baja"
-  }
+    "categoryTable": {
+        "name": "Nombre",
+        "description": "Descripción",
+        "status": "Estado",
+        "accions": "Acciones"
+    },
+    "articleTable": {
+        "name": "Nombre",
+        "brand": "Marca",
+        "currentPrice": "Precio",
+        "currentQuantity": "Cantidad",
+        "description": "Descripción",
+        "expirationDate": "Fecha expiración",
+        "measurementUnitId": "Unidad medida",
+        "status": "Estado",
+        "accions": "Acciones"
+    },
+    "forgotPassword": {
+        "info": "Ingrese su correo electrónico y siga los pasos.",
+        "emailPlaceholder": "Dirección de correo electrónico"
+    },
+    "header": {
+        "logoutLabel": "Salir"
+    },
+    "sidebar": {
+        "menu": "Menú",
+        "themeLabel": "Mi tema"
+    },
+    "spinner": {
+        "title": "Cargando",
+        "message": "Espere por favor"
+    },
+    "modals": {
+        "logout": {
+            "title": "¿Estás seguro que quieres salir de la aplicación?"
+        },
+        "deleteUser": {
+            "title": "¿Estás seguro que quieres deshabilitar el usuario {{param}}?"
+        },
+        "cancelOperation": {
+            "title": "¿Estás seguro que deseas cancelar la operación {{param}}?"
+        },
+        "confirmOperation": {
+            "title": "¿Estás seguro que deseas confirmar la operación?"
+        },
+        "deleteArticle": {
+            "title": "¿Estás seguro que quieres dar de baja el articulo {{param}}?"
+        },
+        "deleteMeasurementUnit": {
+            "title": "¿Estás seguro que quieres dar de baja la unidad de medida {{param}}?"
+        },
+        "deleteCategory": {
+            "title": "¿Estás seguro que quieres dar de baja la categoría {{param}}?"
+        },
+        "defaultConfirmButton": "Confirmar",
+        "defaultCancelButton": "Cancelar"
+    },
+    "buttons": {
+        "submit": "Guardar",
+        "back": "Volver",
+        "send": "Enviar",
+        "cancel": "Cancelar"
+    },
+    "toast": {
+        "error": "Error!",
+        "success": "Éxito!",
+        "warning": "Advertencia!",
+        "info": "Información!"
+    },
+    "userStatus": {
+        "enabled": "Habilitado",
+        "disabled": "Deshabilitado"
+    },
+    "boxStatus": {
+        "enabled": "Abierta",
+        "disabled": "Cerrada",
+        "error": "Inconsistente"
+    },
+    "roles": {
+        "SYSADMIN": "administrador de sistema",
+        "ADMIN": "administrador",
+        "USER": "usuario"
+    },
+    "operationTypes": {
+        "BUY": "Compra",
+        "SALE": "Venta"
+    },
+    "paymentMethods": {
+        "CC": "Tarjeta de Débito",
+        "CASH": "Efectivo"
+    },
+    "OperationStatus": {
+        "CANCELED": "Operación Cancelada",
+        "SOLD": "Venta Realizada",
+        "PURCHASED": "Compra Realizada"
+    },
+    "articleStatus": {
+        "enabled": "Alta",
+        "disabled": "Baja"
+    },
+    "measurementUnitStatus": {
+        "enabled": "Alta",
+        "disabled": "Baja"
+    },
+    "categoryStatus": {
+        "enabled": "Alta",
+        "disabled": "Baja"
+    }
 }

@@ -40,7 +40,7 @@ export const applicationApiUrls: ApiURLs = {
     getAllArticlesNotPagging: '/all',
     getArticleByArticleId: '/id',
     getArticleByName: '/name',
-    getArticleByNameLike: '/nameLike',
+    getArticlesByNameOrBrandOrCodeLike: '/search',
     getAllMeasurementUnits: '/measurementUnits',
     deleteArticle: '/id'
   },

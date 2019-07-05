@@ -32,3 +32,5 @@ export const operationStatus = {
   sold: "SOLD",
   purchased: "PURCHASED"
 }
+
+export const discountValues = [5, 10, 15, 20, 25, 30];

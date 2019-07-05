@@ -53,7 +53,7 @@ interface ArticleURLs {
   getAllArticlesNotPagging?: string;
   getArticleByName?: string;
   getArticleByArticleId?: string;
-  getArticleByNameLike?: string;
+  getArticlesByNameOrBrandOrCodeLike?: string;
   getAllMeasurementUnits?: string;
   deleteArticle?: string;
 }
