@@ -55,10 +55,10 @@ export class ArticleComponent implements OnInit {
       name: [this.article.name, [Validators.required, Validators.maxLength(45)]],
       brand: [this.article.brand, [Validators.required, Validators.maxLength(45)]],
       currentPrice: [this.article.currentPrice],       
-      measurementUnit : [this.article.measurementUnitId, Validators.required],           
+      measurementUnit : [this.article.measurementUnitId, Validators.required],
       category : [this.article.categoryId, Validators.required],
       currentQuantity: [this.article.currentQuantity],
-      description: [this.article.description, [Validators.required, Validators.maxLength(45)]],
+      description: [this.article.description, [Validators.maxLength(100)]],
       expirationDate: [(this.article.expirationDate != undefined) ? formatDate(this.article.expirationDate,format,locale) : null ]         
     }, {updateOn: 'blur'});
     if (this.disabledFields)  {

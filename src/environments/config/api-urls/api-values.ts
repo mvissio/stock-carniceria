@@ -17,7 +17,7 @@ export const applicationApiUrls: ApiURLs = {
     getOperationById: '/id',        
     getOperationsByPaymentMethod: '/paymentMethod',
     
-    getOperationsByOneDate: '/creationDate',
+    getOperationsByOneDate: '/createDate',
     getOperationsByOneDateAndPaymentMethod: '/byDateAndPaymentMethod',
     getOperationsByOneDateAndOperationType:'/byDateAndOperationType',
     getOperationsByOneDateAndOperationTypeAndPaymentMethod: '/byDateAndPaymentMethodAndOperationType',

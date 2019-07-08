@@ -1,47 +1,44 @@
 <div class="row">
-  <div class="col-md-6">
-      <div class="card card-body">
-          <h3 class="box-title m-b-0">Unidad de Medida: {{measurementUnit.name}} </h3>
-          <div class="row">
-              <div class="col-sm-12 col-xs-12">
-                  <form class="form-horizontal form-material" [formGroup]="measurementUnitForm" (ngSubmit)="saveMeasurementUnit()">
-                      
-                    <div class="form-group">
-                          <input class="form-control" type="text" formControlName="name" [placeholder]="'measurementUnits.namePlaceholder' | translate">
-                          <div *ngIf="measurementUnitControls.name.invalid && (measurementUnitControls.name.dirty || measurementUnitControls.name.touched)" class="error-label">
-                              <small *ngIf="measurementUnitControls.name.errors.required">
-                                {{'generalValidations.required' | translate}}
-                              </small>
-                              <small *ngIf="measurementUnitControls.name.errors.maxlength" [translate]="'generalValidations.maxLength'" [translateParams]="{param: measurementUnitControls.name.errors.maxlength.requiredLength}"></small>
-                          </div>
-                      </div>
-                      
-                      <div class="form-group">
-                          <input class="form-control" type="text" formControlName="symbol" [placeholder]="'measurementUnits.symbolPlaceholder' | translate">
-                          <div *ngIf="measurementUnitControls.symbol.invalid && (measurementUnitControls.symbol.dirty || measurementUnitControls.symbol.touched)" class="error-label">
-                              <small *ngIf="measurementUnitControls.symbol.errors.required">
-                                {{'generalValidations.required' | translate}}
-                              </small>
-                          </div>
-                      </div>
-                      
-                      
-                      <div *ngIf="!disabledFields">
-                          <button  class="btn btn-primary m-r-10" type="submit" [disabled]="measurementUnitForm.invalid">
-                          <em class="fa fa-save"></em>
-                          {{'buttons.submit' | translate}}
-                        </button>
-                          <button (click)="back()" class="btn btn-danger" type="button">
-                          {{'buttons.cancel' | translate}}
-                        </button>
-                      </div>
-
-                      <button *ngIf="disabledFields" class="btn btn-inverse mdi mdi-keyboard-backspace" (click)="back()">
-                        {{'buttons.back' | translate}}
+    <div class="col-md-6">
+        <div class="card card-body">
+            <h3 class="box-title m-b-0">Unidad de Medida: {{measurementUnit.name}} </h3>
+            <div class="row">
+                <div class="col-sm-12 col-xs-12">
+                    <form class="form-horizontal form-material" [formGroup]="measurementUnitForm" (ngSubmit)="saveMeasurementUnit()">
+                        <div class="form-label-group">
+                            <input class="form-control" type="text" id="name" formControlName="name" [placeholder]="'measurementUnits.namePlaceholder' | translate">
+                            <label for="name">{{'measurementUnits.namePlaceholder' | translate}}</label>
+                            <div *ngIf="measurementUnitControls.name.invalid && (measurementUnitControls.name.dirty || measurementUnitControls.name.touched)" class="error-label">
+                                <small *ngIf="measurementUnitControls.name.errors.required">
+                            {{'generalValidations.required' | translate}}
+                          </small>
+                                <small *ngIf="measurementUnitControls.name.errors.maxlength" [translate]="'generalValidations.maxLength'" [translateParams]="{param: measurementUnitControls.name.errors.maxlength.requiredLength}"></small>
+                            </div>
+                        </div>
+                        <div class="form-label-group">
+                            <input class="form-control" type="text" id="symbol" formControlName="symbol" [placeholder]="'measurementUnits.symbolPlaceholder' | translate">
+                            <label for="symbol">{{'measurementUnits.symbolPlaceholder' | translate}}</label>
+                            <div *ngIf="measurementUnitControls.symbol.invalid && (measurementUnitControls.symbol.dirty || measurementUnitControls.symbol.touched)" class="error-label">
+                                <small *ngIf="measurementUnitControls.symbol.errors.required">
+                            {{'generalValidations.required' | translate}}
+                          </small>
+                            </div>
+                        </div>
+                        <div *ngIf="!disabledFields">
+                            <button class="btn btn-primary m-r-10" type="submit" [disabled]="measurementUnitForm.invalid">
+                        <em class="fa fa-save"></em>
+                        {{'buttons.submit' | translate}}
                       </button>
-                  </form>
-              </div>
-          </div>
-      </div>
-  </div>
+                            <button (click)="back()" class="btn btn-danger" type="button">
+                        {{'buttons.cancel' | translate}}
+                      </button>
+                        </div>
+                        <button *ngIf="disabledFields" class="btn btn-inverse mdi mdi-keyboard-backspace" (click)="back()">
+                      {{'buttons.back' | translate}}
+                    </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

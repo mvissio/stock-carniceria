@@ -42,8 +42,9 @@
                                         </small>
                                     </div>
                                 </div>
-                                <div class="col">
-                                    <input class="form-control" type="number" [placeholder]="'operationDetails.amountPlaceholder' | translate" formControlName="amount">
+                                <div class="col form-label-group">
+                                    <input class="form-control" type="number" [placeholder]="'operationDetails.amountPlaceholder' | translate" id="amount" formControlName="amount">
+                                    <label for="amount">{{'operationDetails.amountPlaceholder' | translate}}</label>
                                     <div *ngIf="operationDetailControls(i).amount.invalid && (operationDetailControls(i).amount.dirty || operationDetailControls(i).amount.touched)" class="error-label">
                                         <small *ngIf="operationDetailControls(i).amount.errors.required">
                                             {{'generalValidations.required' | translate}}
@@ -51,8 +52,9 @@
                                         <small *ngIf="operationDetailControls(i).amount.errors.min" [translate]="'generalValidations.min'" [translateParams]="{param: operationDetailControls(i).amount.errors.min.min}"></small>
                                     </div>
                                 </div>
-                                <div class="col">
-                                    <input class="form-control" type="number" [placeholder]="'operationDetails.pricePlaceholder' | translate" formControlName="price">
+                                <div class="col form-label-group">
+                                    <input class="form-control" type="number" [placeholder]="'operationDetails.pricePlaceholder' | translate" id="price" formControlName="price">
+                                    <label for="price">{{'operationDetails.pricePlaceholder' | translate}}</label>
                                     <div *ngIf="operationDetailControls(i).price.invalid && (operationDetailControls(i).price.dirty || operationDetailControls(i).price.touched)" class="error-label">
                                         <small *ngIf="operationDetailControls(i).price.errors.required">
                                             {{'generalValidations.required' | translate}}
@@ -70,7 +72,7 @@
                         <label for="discount" class="m-r-10">{{'operations.discountPlaceholder' | translate}}</label>
                         <select class="custom-select" formControlName="discount" id="discount">
                             <option [value]="discount" *ngFor="let discount of discounts" [selected]="selectedDiscount(discount)">{{discount}}%</option>
-                            </select>
+                        </select>
                     </div>
                     <div *ngIf="!disabledFields" class="m-t-10">
                         <button class="btn btn-primary m-r-10" type="submit" [disabled]="operationForm.invalid">

@@ -104,7 +104,7 @@
         "enabledPlaceholder": "Habilitado",
         "createOk": "Categoría creada satisfactoriamente.",
         "updateOk": "Categoría actualizada satisfactoriamente.",
-        "noContent": "No se encontraron categorias cargadas"
+        "noContent": "No se encontraron categorias cargadas."
     },
     "table": {
         "users": {
@@ -156,7 +156,8 @@
     },
     "forgotPassword": {
         "info": "Ingrese su correo electrónico y siga los pasos.",
-        "emailPlaceholder": "Dirección de correo electrónico"
+        "emailPlaceholder": "Dirección de correo electrónico",
+        "sendOk": "El password se pudo restaurar."
     },
     "header": {
         "logoutLabel": "Salir"

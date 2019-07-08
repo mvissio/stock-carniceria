@@ -8,6 +8,7 @@ import { USUARIO_KEY } from '../constants/constant';
 import { HandleErrorsService } from '../services/shared/handle-errors.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CommonsService } from '../services/commons.service';
+import { TranslateService } from '@ngx-translate/core';
 
 declare function init_plugins();
 
@@ -32,6 +33,7 @@ export class LoginComponent implements OnInit {
     private _handleErrorsService: HandleErrorsService,
     private router: Router,
     private fb: FormBuilder,
+    private translate: TranslateService,
     private _commonsService: CommonsService) { }
 
   ngOnInit() {
@@ -77,8 +79,11 @@ export class LoginComponent implements OnInit {
       return;
     }
     this._authService.recoverPassword(this.forgotPasswordForm.value.email)
-    .subscribe((res: any) => {
-      this._commonsService.showMessage('success', res.result);
+    .subscribe(() => {
+      this.translate.get('forgotPassword.sendOk')
+          .subscribe((res: string) => {
+            this._commonsService.showMessage('success', res);
+          });
       },
       (err: HttpErrorResponse) => {
         this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));

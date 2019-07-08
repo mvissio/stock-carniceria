@@ -26,14 +26,14 @@ export class OperationsService {
   //consulta por la fecha de hoy
   getOperationsByTodayCreateDate(page: PageConfig) {
     const url = this.operationUrl.getOperationsByOneDate;
-    return this.httpClient.get(`${url}?creationDate=${new Date()}&page=${page.pageNumber}&size=${page.pageSize}&sort=${page.sortName},${page.orderDesc}`)
+    return this.httpClient.get(`${url}?createDate=${new Date()}&page=${page.pageNumber}&size=${page.pageSize}&sort=${page.sortName},${page.orderDesc}`)
       .pipe(map((response: Page) => response));
   }
 
   //consulta por la fecha pasada como parametro
   getOperationsByCreateDate(page: PageConfig, createDate: Date, path: string, operationTypeOneDate: string, paymentMethodOneDate: string) {
     const url = this.operationUrl[path];
-    let urlComplete = `${url}?creationDate=${createDate}&page=${page.pageNumber}&size=${page.pageSize}`;
+    let urlComplete = `${url}?createDate=${createDate}&page=${page.pageNumber}&size=${page.pageSize}`;
     if(operationTypeOneDate == null && paymentMethodOneDate == null){
       return this.httpClient.get(urlComplete)
       .pipe(map((response: Page) => response));
@@ -74,12 +74,6 @@ export class OperationsService {
       return this.httpClient.get(urlComplete)
         .pipe(map((response: Page) => response));
     }
-  }
-
-  getOperationsByOperationType(page: PageConfig) {
-    const url = this.operationUrl.getOperationsByOneDate;
-    return this.httpClient.get(`${url}?creationDate=${new Date()}&page=${page.pageNumber}&size=${page.pageSize}&sort=${page.sortName},${page.orderDesc}`)
-      .pipe(map((response: Page) => response));
   }
 
   getOperationById(id: number) {

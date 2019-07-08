@@ -1,60 +1,60 @@
 <div class="row animated fadeIn">
-  <div class="col-12">
-    <div class="card">
-      <div class="card-body">
-        <input #input (keyup.enter)="findArticle(input.value)" type="search" class="form-control" [placeholder]="'articles.searchLabel' | translate">
-      </div>
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <input #input (keyup.enter)="findArticle(input.value)" type="search" class="form-control" [placeholder]="'articles.searchLabel' | translate">
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 <div class="row animated fadeIn" *ngIf="!loading">
-  <div class="col-12">
-    <div class="card">
-      <div class="card-body">
-        <h3 class="card-title">{{'articles.title' | translate}} (
-          <small>{{ page.totalElements}}</small> )
-        </h3>
-        <button type="button" class="btn btn-primary float-right mdi mdi-plus" [routerLink]="['/articulo']"></button>
-        <table class="table table-hover">
-          <thead>
-          <tr>
-            <th>{{'articleTable.name' | translate}}</th>
-            <th>{{'articleTable.brand' | translate}}</th>
-            <th>{{'articleTable.currentPrice' | translate}}</th>
-            <th>{{'articleTable.currentQuantity' | translate}}</th>
-            <th>{{'articleTable.description' | translate}}</th>
-            <th>{{'articleTable.status' | translate}}</th>
-            <th>{{'articleTable.accions' | translate}}</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let article of articles">
-            <td>{{ article?.name }}</td>
-            <td>{{ article?.brand }}</td>
-            <td>{{ article?.currentPrice }}</td>
-            <td>{{article?.currentQuantity}}</td>
-            <td>{{article?.description}}</td>
-            <td><span class="label label-rounded" [ngClass]="(!article.disabled)? 'label-success':'label-danger'">{{getArticleStatus(article)}}</span>
-            </td>
-            <td>
-              <div class="button-group">
-                <button class="btn btn-secondary" (click)="editOrShowArticle(article.articleId)">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">{{'articles.title' | translate}} (
+                    <small>{{ page.totalElements}}</small> )
+                </h3>
+                <button type="button" class="btn btn-primary float-right mdi mdi-plus" [routerLink]="['/articulo']"></button>
+                <table class="table table-hover">
+                    <thead>
+                        <tr class="row">
+                            <th class="col-2">{{'articleTable.name' | translate}}</th>
+                            <th class="col-2">{{'articleTable.brand' | translate}}</th>
+                            <th class="col-1">{{'articleTable.currentPrice' | translate}}</th>
+                            <th class="col-1">{{'articleTable.currentQuantity' | translate}}</th>
+                            <th class="col-3">{{'articleTable.description' | translate}}</th>
+                            <th class="col-1">{{'articleTable.status' | translate}}</th>
+                            <th class="col-2">{{'articleTable.accions' | translate}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let article of articles" class="row">
+                            <td class="col-2">{{ article?.name }}</td>
+                            <td class="col-2">{{ article?.brand }}</td>
+                            <td class="col-1">{{ article?.currentPrice }}</td>
+                            <td class="col-1">{{article?.currentQuantity}}</td>
+                            <td class="col-3 text-truncate">{{article?.description}}</td>
+                            <td class="col-1"><span class="label label-rounded" [ngClass]="(!article.disabled)? 'label-success':'label-danger'">{{getArticleStatus(article)}}</span>
+                            </td>
+                            <td class="col-2">
+                                <div class="button-group">
+                                    <button class="btn btn-secondary" (click)="editOrShowArticle(article.articleId)">
                   <i class="mdi mdi-eye-outline" aria-hidden="true"></i>
                 </button>
-                <button class="btn btn-info" (click)="editOrShowArticle(article.articleId, true)">
+                                    <button class="btn btn-info" (click)="editOrShowArticle(article.articleId, true)">
                   <i class="mdi mdi-pencil" aria-hidden="true"></i>
                 </button>
-                <button class="btn btn-danger" (click)="deleteArticle(article.name,article.articleId)">
+                                    <button class="btn btn-danger" (click)="deleteArticle(article.name,article.articleId)">
                   <i class="mdi mdi-delete" aria-hidden="true"></i>
                 </button>
-              </div>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 <app-loading [loading]="loading"></app-loading>
 <app-pagination [page]="page" [pages]="pages" (pageNumber)="setPage($event)" *ngIf="articles"></app-pagination>
