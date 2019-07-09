@@ -1,3 +1,5 @@
+import {IMyDateModel } from 'mydatepicker';
+
 export class Article {
     articleId : number;
     brand : string;

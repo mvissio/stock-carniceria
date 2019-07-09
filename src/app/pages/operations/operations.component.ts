@@ -37,7 +37,12 @@ export class OperationsComponent implements OnInit {
   showFilterPeriod: boolean;
   lastUsedFilter: string = "ninguno";
 
-  constructor(private _operationService: OperationsService,
+  operationTypes: any[]  = [];
+  paymentMethods: any[]  = [];
+  
+
+  constructor(
+    private _operationService: OperationsService,
     private _handleErrorsService: HandleErrorsService,
     private translate: TranslateService,
     private router: Router,
@@ -53,6 +58,17 @@ export class OperationsComponent implements OnInit {
     this.pageConfig = new PageConfig('operationId');
     this.pageConfig.changeOrder();
     this.getTodayOperations(0);
+    
+    forkJoin([
+      this._operationService.getAllOperationTypes(),
+      this._operationService.getAllPaymentMethods()
+    ])
+    .subscribe((res: any) => {
+      this.operationTypes = res[0];
+      this.paymentMethods = res[1];
+    }, (err: HttpErrorResponse) => {
+      this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
+    });
   }
 
   setPage(nextPage: number) {
@@ -159,20 +175,24 @@ export class OperationsComponent implements OnInit {
     return operation.operationStatus;
   }
 
-  setearOperationTypePeriod(tipo: string) {
-    this.operationTypePeriod = tipo;
+  setearOperationTypePeriod(operationType : string) {
+    console.log("valor recibido en operationTypePeriod: ", operationType)
+    this.operationTypePeriod = operationType;
   }
 
-  setearPaymentMethodPeriod(tipo: string) {
-    this.paymentMethodPeriod = tipo;    
+  setearPaymentMethodPeriod(paymentMethod : string) {    
+    console.log("valor recibido en paymentMethodPeriod: ", paymentMethod)    
+    this.paymentMethodPeriod = paymentMethod;    
   }
 
-  setearOperationTypeOneDate(tipo: string) {
-    this.operationTypeOneDate = tipo;    
+  setearOperationTypeOneDate(operationType: string) {
+    console.log("valor recibido en operationTypeOneDate: ", operationType)    
+    this.operationTypeOneDate = operationType;    
   }
 
-  setearPaymentMethodOneDate(tipo: string) {
-    this.paymentMethodOneDate = tipo;    
+  setearPaymentMethodOneDate(paymentMethodOne: string) {
+    console.log("valor recibido en paymentMethodOneDate: ", paymentMethodOne)            
+    this.paymentMethodOneDate = paymentMethodOne;    
   }
 
   getOperationsByPeriodWithFilters(nextPage: number) {         

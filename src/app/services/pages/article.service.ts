@@ -20,7 +20,10 @@ export class ArticleService {
   constructor(private httpClient: HttpClient) { }
 
   addArticle(article : Article){
+    console.log("esta es la fecha de expiracion 1",article.expirationDate);
     let newArticle = Object.assign({}, article);
+    console.log("esta es la fecha de expiracion 12",newArticle.expirationDate);
+    
     newArticle.disabled = false;
     newArticle.createDate = new Date();
     const url = this.articleUrl.base;
@@ -45,6 +48,7 @@ export class ArticleService {
     return this.httpClient.get(url)
       .pipe(map((response: Article) => {
           this.article = response;
+          console.log("este es el articulo recup ",this.article )
         return response;
     }));
   }
@@ -70,7 +74,7 @@ export class ArticleService {
   }
   
   updateArticle(article: Article) {
-    article.expirationDate = new Date(article.expirationDate);
+    article.expirationDate = article.expirationDate;
     const url = this.articleUrl.base;
     return this.httpClient.put(url, article)
       .pipe(map((response: any) => response));

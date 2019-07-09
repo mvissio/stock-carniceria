@@ -61,7 +61,9 @@
         "paymentMethodPlaceholder": "Método de pago",
         "discountPlaceholder": "Descuento",
         "createOk": "Operacion creada satisfactoriamente.",
-        "updateOk": "Operacion actualizada satisfactoriamente."
+        "updateOk": "Operacion actualizada satisfactoriamente.",
+        "filterPlaceholderOperationType" : "Seleccione Tipo",
+        "filterPlaceholderPaymentMethod" : "Seleccione Medio"
     },
     "operationDetails": {
         "operationDetailAddButtonLabel": "Añadir detalle operación",

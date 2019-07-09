@@ -25,26 +25,19 @@
                     <my-date-picker name="mydateFechaDesde" [options]="myDatePickerOptions" [(ngModel)]="toDate" required></my-date-picker>
                 </div>
 
-                <div class="btn-group float-right">
-                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Forma Pago
-                    </button>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" [routerLink]="" (click)="setearPaymentMethodPeriod('CASH')">Contado</a>
-                        <a class="dropdown-item" [routerLink]="" (click)="setearPaymentMethodPeriod('CC')">Credito</a>
-                    </div>
+                <div class="float-right">
+                    <select (change)="setearOperationTypePeriod($event.target.value)"  class="custom-select" id="operationTypePeriod">
+                        <option [value]="operationType" *ngFor="let operationType of operationTypes">{{operationType
+                            | dropdownTranslate:'operationTypes'}}</option>
+                    </select>
                 </div>
 
-                <div class="btn-group float-right">
-                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Tipo Operación
-                    </button>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" [routerLink]="" (click)="setearOperationTypePeriod('SALE')">Venta</a>
-                        <a class="dropdown-item" [routerLink]="" (click)="setearOperationTypePeriod('BUY')">Compra</a>
-                    </div>
+                <div class="float-right">
+                    <select (change)="setearPaymentMethodPeriod($event.target.value)" class="custom-select" id="paymentMethodPeriod">
+                        <option [value]="paymentMethod" *ngFor="let paymentMethod of paymentMethods">{{paymentMethod
+                            | dropdownTranslate:'paymentMethods'}}</option>
+                    </select>
                 </div>
-
 
                 <div>
                     <button class="btn btn-primary" (click)="getOperationsByPeriodWithFilters()" style="display: inline; ">Consultar</button>
@@ -66,27 +59,20 @@
                     <my-date-picker name="mydate" [options]="myDatePickerOptions" [(ngModel)]="oneDate" required></my-date-picker>
                 </div>
 
-                <div class="btn-group float-right">
-                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Forma Pago
-                    </button>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" [routerLink]="" (click)="setearPaymentMethodOneDate('CASH')">Contado</a>
-                        <a class="dropdown-item" [routerLink]="" (click)="setearPaymentMethodOneDate('CC')">Credito</a>
-                    </div>
+                <div class="float-right">
+                    <select (change)="setearPaymentMethodOneDate($event.target.value)" class="custom-select" id="paymentMethodOneDate">
+                        <option [value]="paymentMethod" *ngFor="let paymentMethod of paymentMethods" >{{paymentMethod
+                            | dropdownTranslate:'paymentMethods'}}</option>
+                    </select>
                 </div>
 
-                <div class="btn-group float-right">
-                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Tipo Operación
-                    </button>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" [routerLink]="" (click)="setearOperationTypeOneDate('SALE')">Venta</a>
-                        <a class="dropdown-item" [routerLink]="" (click)="setearOperationTypeOneDate('BUY')">Compra</a>
-                    </div>
-                </div>
-
-
+                <div class="float-right">
+                    <select (change)="setearOperationTypeOneDate($event.target.value)" class="custom-select" id="operationTypeOneDate">
+                        <option [value]="operationType" *ngFor="let operationType of operationTypes">{{operationType
+                            | dropdownTranslate:'operationTypes'}}</option>
+                    </select>
+                </div>            
+                
                 <button class="btn btn-primary" (click)="getOperationsOneDateWithFilters()" style="display: inline-block;">Consultar</button>
                 <button class="btn btn-info" (click)="cleanOneDateFilter()" style="display: inline-block;">Limpiar filtros</button>
 
@@ -124,19 +110,20 @@
                                 <td class="col-2">{{ operation?.operationType | dropdownTranslate:'operationTypes' }}</td>
                                 <td class="col-2">{{ operation?.paymentMethod | dropdownTranslate:'paymentMethods' }}</td>
                                 <td class="col-2">{{operation?.total}}</td>
-                                <td class="col-1"><span class="label label-rounded" [ngClass]="(operation?.disabled)? 'label-danger':'label-success'">{{getOperationStatus(operation) | dropdownTranslate:'OperationStatus'}}</span>
+                                <td class="col-1"><span class="label label-rounded" [ngClass]="(operation?.disabled)? 'label-danger':'label-success'">{{getOperationStatus(operation)
+                                        | dropdownTranslate:'OperationStatus'}}</span>
                                 </td>
                                 <td class="col-3">
                                     <div class="button-group">
                                         <button class="btn btn-secondary" (click)="editOrShowOperation(operation.operationId)">
-                          <i class="mdi mdi-eye-outline" aria-hidden="true"></i>
-                        </button>
+                                            <i class="mdi mdi-eye-outline" aria-hidden="true"></i>
+                                        </button>
                                         <button class="btn btn-info" (click)="editOrShowOperation(operation.operationId, true)">
-                          <i class="mdi mdi-pencil" aria-hidden="true"></i>
-                        </button>
+                                            <i class="mdi mdi-pencil" aria-hidden="true"></i>
+                                        </button>
                                         <button class="btn btn-danger" (click)="cancelOperation(operation.operationId)">
-                          <i class="mdi mdi-delete" aria-hidden="true"></i>
-                        </button>
+                                            <i class="mdi mdi-delete" aria-hidden="true"></i>
+                                        </button>
                                     </div>
                                 </td>
                             </tr>

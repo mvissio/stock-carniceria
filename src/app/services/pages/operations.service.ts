@@ -34,9 +34,9 @@ export class OperationsService {
   getOperationsByCreateDate(page: PageConfig, createDate: Date, path: string, operationTypeOneDate: string, paymentMethodOneDate: string) {
     const url = this.operationUrl[path];
     let urlComplete = `${url}?createDate=${createDate}&page=${page.pageNumber}&size=${page.pageSize}`;
-    if(operationTypeOneDate == null && paymentMethodOneDate == null){
+    if (operationTypeOneDate == null && paymentMethodOneDate == null) {
       return this.httpClient.get(urlComplete)
-      .pipe(map((response: Page) => response));
+        .pipe(map((response: Page) => response));
     }
     else if (operationTypeOneDate != null && paymentMethodOneDate != null) {
       urlComplete = urlComplete.concat(`&operationType=${operationTypeOneDate}`).concat(`&paymentMethod=${paymentMethodOneDate}`);
@@ -55,13 +55,13 @@ export class OperationsService {
   }
 
   //consulto por un periodo de fechas, tipo de pago y tipo de operación
-  getOperationsByPeriod(fromDate: Date, toDate: Date, page: PageConfig, path: string, operationTypePeriod: string, paymentMethodPeriod: string ) {
+  getOperationsByPeriod(fromDate: Date, toDate: Date, page: PageConfig, path: string, operationTypePeriod: string, paymentMethodPeriod: string) {
     const url = this.operationUrl[path];
     let urlComplete = `${url}?fromDate=${fromDate}&toDate=${toDate}&page=${page.pageNumber}&size=${page.pageSize}`;
-    if(operationTypePeriod == null && paymentMethodPeriod == null){
+    if (operationTypePeriod == null && paymentMethodPeriod == null) {
       return this.httpClient.get(urlComplete)
-      .pipe(map((response: Page) => response));
-    }else if (operationTypePeriod != null && paymentMethodPeriod != null) {
+        .pipe(map((response: Page) => response));
+    } else if (operationTypePeriod != null && paymentMethodPeriod != null) {
       urlComplete = urlComplete.concat(`&operationType=${operationTypePeriod}`).concat(`&paymentMethod=${paymentMethodPeriod}`);
       return this.httpClient.get(urlComplete)
         .pipe(map((response: Page) => response));

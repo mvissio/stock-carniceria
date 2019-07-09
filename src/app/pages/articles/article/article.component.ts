@@ -8,6 +8,9 @@ import { CommonsService } from '../../../services/commons.service';
 import { HandleErrorsService } from '../../../services/shared/handle-errors.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { formatDate } from '@angular/common';
+import { MyDatePicker, IMyDpOptions, IMyDateModel,IMyDate } from 'mydatepicker';
+import { ViewChild} from '@angular/core';
+
 
 @Component({
   selector: 'app-article',
@@ -16,6 +19,8 @@ import { formatDate } from '@angular/common';
 })
 export class ArticleComponent implements OnInit {
 
+  @ViewChild('mydp') mydp; 
+
   id: number;
   article: Article = new Article();
   edit = false;
@@ -23,6 +28,9 @@ export class ArticleComponent implements OnInit {
   disabledFields = false;
   measurementUnits = [];
   categories = [];
+  dateExpirationIMyDateModel : IMyDateModel
+
+  
 
   constructor( 
     private activateRoute: ActivatedRoute,
@@ -43,14 +51,21 @@ export class ArticleComponent implements OnInit {
     this.initForm();
      }
 
-  ngOnInit() {
+     myDatePickerOptions: IMyDpOptions = {
+      dateFormat: 'yyyy-mm-dd',
+      editableDateField: false,
+      openSelectorTopOfInput: true
+      
+    };
+
+  ngOnInit() {   
     this.getAllCategories();
     this.getAllMeasurementUnit();   
   }
 
   initForm() {
     const format = 'dd/MM/yyyy';
-    const locale = 'en-US';
+    const locale = 'en-US';             
     this.articleForm = this.fb.group({           
       name: [this.article.name, [Validators.required, Validators.maxLength(45)]],
       brand: [this.article.brand, [Validators.required, Validators.maxLength(45)]],
@@ -64,6 +79,7 @@ export class ArticleComponent implements OnInit {
     if (this.disabledFields)  {
       this.articleForm.disable();
     }
+
   }
 
   get articleControls() { return this.articleForm.controls; }
@@ -73,6 +89,10 @@ export class ArticleComponent implements OnInit {
       .subscribe((res: Article) => {
         this.article = res;
         this.initForm();
+        let fechaRecup = new Date(this.article.expirationDate);
+        console.log("fecha recuperada",this.article.expirationDate )
+        let selDate: IMyDate = {year: fechaRecup.getFullYear(), month: fechaRecup.getMonth() + 1, day: fechaRecup.getDate()};
+        this.mydp.updateDateValue(selDate);  
       }, (err: HttpErrorResponse) => {
         this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
       });
@@ -95,6 +115,7 @@ export class ArticleComponent implements OnInit {
           this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
         });
     } else {
+      console.log("esta es la fecha de expiracion",this.article.expirationDate);
       this._articleService.addArticle(this.article)
         .subscribe(() => {
           this.translate.get('articles.createOk')
@@ -115,7 +136,7 @@ export class ArticleComponent implements OnInit {
     this.article.currentPrice = this.articleForm.value.currentPrice;
     this.article.currentQuantity = this.articleForm.value.currentQuantity;
     this.article.description = this.articleForm.value.description;
-    this.article.expirationDate = new Date(this.articleForm.value.expirationDate);       
+    this.article.expirationDate = new Date(this.dateExpirationIMyDateModel.formatted);       
     this.article.measurementUnitId = this.articleForm.value.measurementUnit;    
     this.article.categoryId = this.articleForm.value.category;
     
