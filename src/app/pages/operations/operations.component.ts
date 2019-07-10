@@ -39,6 +39,8 @@ export class OperationsComponent implements OnInit {
 
   operationTypes: any[]  = [];
   paymentMethods: any[]  = [];
+
+  
   
 
   constructor(
@@ -176,22 +178,18 @@ export class OperationsComponent implements OnInit {
   }
 
   setearOperationTypePeriod(operationType : string) {
-    console.log("valor recibido en operationTypePeriod: ", operationType)
     this.operationTypePeriod = operationType;
   }
 
   setearPaymentMethodPeriod(paymentMethod : string) {    
-    console.log("valor recibido en paymentMethodPeriod: ", paymentMethod)    
     this.paymentMethodPeriod = paymentMethod;    
   }
 
   setearOperationTypeOneDate(operationType: string) {
-    console.log("valor recibido en operationTypeOneDate: ", operationType)    
     this.operationTypeOneDate = operationType;    
   }
 
   setearPaymentMethodOneDate(paymentMethodOne: string) {
-    console.log("valor recibido en paymentMethodOneDate: ", paymentMethodOne)            
     this.paymentMethodOneDate = paymentMethodOne;    
   }
 
@@ -264,6 +262,7 @@ export class OperationsComponent implements OnInit {
 
   }
 
+  
 
 
 }

@@ -26,14 +26,14 @@
                 </div>
 
                 <div class="float-right">
-                    <select (change)="setearOperationTypePeriod($event.target.value)"  class="custom-select" id="operationTypePeriod">
+                    <select class="custom-select" (change)="setearOperationTypePeriod($event.target.value)"  id="operationTypePeriod">
                         <option [value]="operationType" *ngFor="let operationType of operationTypes">{{operationType
                             | dropdownTranslate:'operationTypes'}}</option>
                     </select>
                 </div>
 
                 <div class="float-right">
-                    <select (change)="setearPaymentMethodPeriod($event.target.value)" class="custom-select" id="paymentMethodPeriod">
+                    <select class="custom-select" (change)="setearPaymentMethodPeriod($event.target.value)" id="paymentMethodPeriod">
                         <option [value]="paymentMethod" *ngFor="let paymentMethod of paymentMethods">{{paymentMethod
                             | dropdownTranslate:'paymentMethods'}}</option>
                     </select>

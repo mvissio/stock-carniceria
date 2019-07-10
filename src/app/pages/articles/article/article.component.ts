@@ -8,8 +8,8 @@ import { CommonsService } from '../../../services/commons.service';
 import { HandleErrorsService } from '../../../services/shared/handle-errors.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { formatDate } from '@angular/common';
-import { MyDatePicker, IMyDpOptions, IMyDateModel,IMyDate } from 'mydatepicker';
-import { ViewChild} from '@angular/core';
+import { MyDatePicker, IMyDpOptions, IMyDateModel, IMyDate } from 'mydatepicker';
+import { ViewChild } from '@angular/core';
 
 
 @Component({
@@ -19,7 +19,7 @@ import { ViewChild} from '@angular/core';
 })
 export class ArticleComponent implements OnInit {
 
-  @ViewChild('mydp') mydp; 
+  @ViewChild('mydp') mydp;
 
   id: number;
   article: Article = new Article();
@@ -28,19 +28,19 @@ export class ArticleComponent implements OnInit {
   disabledFields = false;
   measurementUnits = [];
   categories = [];
-  dateExpirationIMyDateModel : IMyDateModel
+  dateExpirationIMyDateModel: IMyDateModel
 
-  
 
-  constructor( 
+
+  constructor(
     private activateRoute: ActivatedRoute,
     private translate: TranslateService,
-    private _articleService: ArticleService,       
+    private _articleService: ArticleService,
     private _handleErrorsService: HandleErrorsService,
     private router: Router,
     private fb: FormBuilder,
     private _commonsService: CommonsService) {
-      this.id = this.activateRoute.snapshot.params['id'];
+    this.id = this.activateRoute.snapshot.params['id'];
     this.disabledFields = this.activateRoute.snapshot.queryParams['edit'] && this.activateRoute.snapshot.queryParams['edit'] === 'false';
     if (this.id) {
       this.edit = true;
@@ -49,34 +49,34 @@ export class ArticleComponent implements OnInit {
       this.edit = false;
     }
     this.initForm();
-     }
+  }
 
-     myDatePickerOptions: IMyDpOptions = {
-      dateFormat: 'yyyy-mm-dd',
-      editableDateField: false,
-      openSelectorTopOfInput: true
-      
-    };
+  myDatePickerOptions: IMyDpOptions = {
+    dateFormat: 'yyyy-mm-dd',
+    editableDateField: false,
+    openSelectorTopOfInput: true
 
-  ngOnInit() {   
+  };
+
+  ngOnInit() {
     this.getAllCategories();
-    this.getAllMeasurementUnit();   
+    this.getAllMeasurementUnit();
   }
 
   initForm() {
     const format = 'dd/MM/yyyy';
-    const locale = 'en-US';             
-    this.articleForm = this.fb.group({           
+    const locale = 'en-US';
+    this.articleForm = this.fb.group({
       name: [this.article.name, [Validators.required, Validators.maxLength(45)]],
       brand: [this.article.brand, [Validators.required, Validators.maxLength(45)]],
-      currentPrice: [this.article.currentPrice],       
-      measurementUnit : [this.article.measurementUnitId, Validators.required],
-      category : [this.article.categoryId, Validators.required],
+      currentPrice: [this.article.currentPrice],
+      measurementUnit: [this.article.measurementUnitId, Validators.required],
+      category: [this.article.categoryId, Validators.required],
       currentQuantity: [this.article.currentQuantity],
       description: [this.article.description, [Validators.maxLength(100)]],
-      expirationDate: [(this.article.expirationDate != undefined) ? formatDate(this.article.expirationDate,format,locale) : null ]         
-    }, {updateOn: 'blur'});
-    if (this.disabledFields)  {
+      expirationDate: [(this.article.expirationDate != undefined) ? formatDate(this.article.expirationDate, format, locale) : null]
+    }, { updateOn: 'blur' });
+    if (this.disabledFields) {
       this.articleForm.disable();
     }
 
@@ -89,10 +89,11 @@ export class ArticleComponent implements OnInit {
       .subscribe((res: Article) => {
         this.article = res;
         this.initForm();
-        let fechaRecup = new Date(this.article.expirationDate);
-        console.log("fecha recuperada",this.article.expirationDate )
-        let selDate: IMyDate = {year: fechaRecup.getFullYear(), month: fechaRecup.getMonth() + 1, day: fechaRecup.getDate()};
-        this.mydp.updateDateValue(selDate);  
+        if (this.article.expirationDate != null && this.article.expirationDate != undefined) {
+          let fechaRecup = new Date(this.article.expirationDate);
+          let selDate: IMyDate = { year: fechaRecup.getFullYear(), month: fechaRecup.getMonth() + 1, day: fechaRecup.getDate() };
+          this.mydp.updateDateValue(selDate);
+        }
       }, (err: HttpErrorResponse) => {
         this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
       });
@@ -102,27 +103,27 @@ export class ArticleComponent implements OnInit {
     if (this.articleForm.invalid) {
       return;
     }
-    this.setArticle();    
-    if (this.edit) {      
+    this.setArticle();
+    if (this.edit) {
       this._articleService.updateArticle(this.article)
         .subscribe(() => {
           this.translate.get('articles.updateOk')
-          .subscribe((res: string) => {
-            this._commonsService.showMessage('success', res);
-            this.back();
-          });
+            .subscribe((res: string) => {
+              this._commonsService.showMessage('success', res);
+              this.back();
+            });
         }, (err: HttpErrorResponse) => {
           this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
         });
     } else {
-      console.log("esta es la fecha de expiracion",this.article.expirationDate);
+      console.log("esta es la fecha de expiracion", this.article.expirationDate);
       this._articleService.addArticle(this.article)
         .subscribe(() => {
           this.translate.get('articles.createOk')
-          .subscribe((res: string) => { 
-            this._commonsService.showMessage('success', res);
-            this.back();
-          });
+            .subscribe((res: string) => {
+              this._commonsService.showMessage('success', res);
+              this.back();
+            });
         }, (err: HttpErrorResponse) => {
           this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
         });
@@ -130,27 +131,27 @@ export class ArticleComponent implements OnInit {
   }
 
   setArticle() {
-    
+
     this.article.name = this.articleForm.value.name;
     this.article.brand = this.articleForm.value.brand;
     this.article.currentPrice = this.articleForm.value.currentPrice;
     this.article.currentQuantity = this.articleForm.value.currentQuantity;
     this.article.description = this.articleForm.value.description;
-    this.article.expirationDate = new Date(this.dateExpirationIMyDateModel.formatted);       
-    this.article.measurementUnitId = this.articleForm.value.measurementUnit;    
+    this.article.expirationDate = new Date(this.dateExpirationIMyDateModel.formatted);
+    this.article.measurementUnitId = this.articleForm.value.measurementUnit;
     this.article.categoryId = this.articleForm.value.category;
-    
-    
-                
+
+
+
   }
-   
+
   back() {
     this.router.navigate(['/articulos']);
   }
 
   getAllMeasurementUnit() {
     this._articleService.getAllMeasurementUnits()
-      .subscribe((res: any) => {       
+      .subscribe((res: any) => {
         this.measurementUnits = res.content;
       }, (err: HttpErrorResponse) => {
         this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
@@ -159,7 +160,7 @@ export class ArticleComponent implements OnInit {
 
   getAllCategories() {
     this._articleService.getAllCategories()
-      .subscribe((res: any) => { 
+      .subscribe((res: any) => {
         this.categories = res.content;
       }, (err: HttpErrorResponse) => {
         this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
@@ -170,11 +171,11 @@ export class ArticleComponent implements OnInit {
     return (this.article.measurementUnitId == measurementUnitId);
   }
 
-  selectedCategory(categoryId: number): boolean {    
-    return (this.article.categoryId == categoryId );
+  selectedCategory(categoryId: number): boolean {
+    return (this.article.categoryId == categoryId);
   }
 
-  
+
 
 
 }
