@@ -69,6 +69,7 @@ interface BoxURLs {
   base: string;
   getOpenBoxs?: string;
   getOperationsBox?: string;
+  closeBox?: string;
 }
 interface CategoryURLs {
   base: string;

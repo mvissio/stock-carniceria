@@ -1,93 +1,123 @@
 <div class="row">
-    <div class="card card-body">
-        <h3 class="box-title m-b-0">{{'operations.childTitle' | translate}} {{operation?.operationId}}</h3>
-        <div class="row">
-            <div class="col-sm-12 col-xs-12">
-                <form class="form-horizontal form-material" [formGroup]="operationForm" (ngSubmit)="saveOperation()">
-                    <div class="form-group">
-                        <label for="operationType" class="m-r-10">{{'operations.operationTypePlaceholder' | translate}}</label>
-                        <select class="custom-select" formControlName="operationType" id="operationType">
-                        <option [value]="operationType" *ngFor="let operationType of operationTypes" [selected]="selectedOperationType(operationType)">{{operationType | dropdownTranslate:'operationTypes'}}</option>
-                        </select>
-                        <div *ngIf="operationControls.operationType.invalid && (operationControls.operationType.dirty || operationControls.operationType.touched)" class="error-label">
-                            <small *ngIf="operationControls.operationType.errors.required">
-                            {{'generalValidations.required' | translate}}
-                            </small>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="paymentMethod" class="m-r-10">{{'operations.paymentMethodPlaceholder' | translate}}</label>
-                        <select class="custom-select" formControlName="paymentMethod" id="paymentMethod">
-                        <option [value]="paymentMethod" *ngFor="let paymentMethod of paymentMethods" [selected]="selectedPaymentMethod(paymentMethod)">{{paymentMethod | dropdownTranslate:'paymentMethods'}}</option>
-                        </select>
-                        <div *ngIf="operationControls.paymentMethod.invalid && (operationControls.paymentMethod.dirty || operationControls.paymentMethod.touched)" class="error-label">
-                            <small *ngIf="operationControls.paymentMethod.errors.required">
-                            {{'generalValidations.required' | translate}}
-                            </small>
-                        </div>
-                    </div>
-                    <div class="form-group" *ngIf="!disabledFields">
-                        <button (click)="addOperationDetail()" class="btn btn-primary mdi mdi-plus">{{'operationDetails.operationDetailAddButtonLabel' | translate}}</button>
-                    </div>
-                    <div formArrayName="operationDetails">
-                        <div *ngFor="let operationDetail of operationDetails?.controls; let i = index">
-                            <div [formGroupName]="i" class="form-row border p-20">
-                                <div class="col">
-                                    <ng-select [items]="articles$ | async" [multiple]="false" [closeOnSelect]="true" [searchable]="true" bindLabel="label" [placeholder]="'operationDetails.articlePlaceholder' | translate" [notFoundText]="'operationDetails.articleNotFoundLabel' | translate"
-                                        formControlName="article" (search)="getArticlesByName($event)" (change)="selectArticle($event, i)">
-                                    </ng-select>
-                                    <div *ngIf="operationDetailControls(i).article.invalid && (operationDetailControls(i).article.dirty || operationDetailControls(i).article.touched)" class="error-label">
-                                        <small *ngIf="operationDetailControls(i).article.errors.required">
-                                            {{'generalValidations.required' | translate}}
-                                        </small>
-                                    </div>
-                                </div>
-                                <div class="col form-label-group">
-                                    <input class="form-control" type="number" [placeholder]="'operationDetails.amountPlaceholder' | translate" id="amount" formControlName="amount">
-                                    <label for="amount">{{'operationDetails.amountPlaceholder' | translate}}</label>
-                                    <div *ngIf="operationDetailControls(i).amount.invalid && (operationDetailControls(i).amount.dirty || operationDetailControls(i).amount.touched)" class="error-label">
-                                        <small *ngIf="operationDetailControls(i).amount.errors.required">
-                                            {{'generalValidations.required' | translate}}
-                                        </small>
-                                        <small *ngIf="operationDetailControls(i).amount.errors.min" [translate]="'generalValidations.min'" [translateParams]="{param: operationDetailControls(i).amount.errors.min.min}"></small>
-                                    </div>
-                                </div>
-                                <div class="col form-label-group">
-                                    <input class="form-control" type="number" [placeholder]="'operationDetails.pricePlaceholder' | translate" id="price" formControlName="price">
-                                    <label for="price">{{'operationDetails.pricePlaceholder' | translate}}</label>
-                                    <div *ngIf="operationDetailControls(i).price.invalid && (operationDetailControls(i).price.dirty || operationDetailControls(i).price.touched)" class="error-label">
-                                        <small *ngIf="operationDetailControls(i).price.errors.required">
-                                            {{'generalValidations.required' | translate}}
-                                        </small>
-                                        <small *ngIf="operationDetailControls(i).price.errors.min" [translate]="'generalValidations.min'" [translateParams]="{param: operationDetailControls(i).price.errors.min.min}"></small>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <button (click)="deleteOperationDetail(i)" class="btn btn-danger mdi mdi-delete" [disabled]="this.disabledFields">{{'operationDetails.operationDetailDeleteButtonLabel' | translate}}</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group m-t-10 col-sm-4 col-xs-4" *ngIf="operationControls.operationType.value === 'SALE'">
-                        <label for="discount" class="m-r-10">{{'operations.discountPlaceholder' | translate}}</label>
-                        <select class="custom-select" formControlName="discount" id="discount">
-                            <option [value]="discount" *ngFor="let discount of discounts" [selected]="selectedDiscount(discount)">{{discount}}%</option>
-                        </select>
-                    </div>
-                    <div *ngIf="!disabledFields" class="m-t-10">
-                        <button class="btn btn-primary m-r-10" type="submit" [disabled]="operationForm.invalid">
-                        <i class="fa fa-save" aria-hidden="true"></i>
-                        {{'buttons.submit' | translate}}
-                        </button>
-                        <button (click)="back()" class="btn btn-danger" type="button">
-                        {{'buttons.cancel' | translate}}
-                        </button>
-                    </div>
-                    <button *ngIf="disabledFields" class="btn btn-inverse mdi mdi-keyboard-backspace m-t-10" (click)="back()">
-                        {{'buttons.back' | translate}}
-                    </button>
-                </form>
+  <div class="card card-body">
+    <h3 class="box-title m-b-0">{{'operations.childTitle' | translate}} {{operation?.operationId}}</h3>
+    <div class="row">
+      <div class="col-sm-12 col-xs-12">
+        <form class="form-horizontal form-material" [formGroup]="operationForm" (ngSubmit)="saveOperation()">
+          <div class="d-flex flex-row justify-content-start">
+            <div class="form-group m-t-10 col-lg-6 col-sm-12">
+              <label for="operationType">{{'operations.operationTypePlaceholder' | translate}}</label>
+              <select class="custom-select w-100" formControlName="operationType" id="operationType">
+                <option [value]="operationType" *ngFor="let operationType of operationTypes"
+                        [selected]="selectedOperationType(operationType)">{{operationType | dropdownTranslate:'operationTypes'}}</option>
+              </select>
+              <div
+                *ngIf="operationControls.operationType.invalid && (operationControls.operationType.dirty || operationControls.operationType.touched)"
+                class="error-label">
+                <small *ngIf="operationControls.operationType.errors.required">
+                  {{'generalValidations.required' | translate}}
+                </small>
+              </div>
             </div>
-        </div>
+            <div class="form-group m-t-10 col-lg-6 col-sm-12">
+              <label for="paymentMethod">{{'operations.paymentMethodPlaceholder' | translate}}</label>
+              <select class="custom-select w-100" formControlName="paymentMethod" id="paymentMethod">
+                <option [value]="paymentMethod" *ngFor="let paymentMethod of paymentMethods"
+                        [selected]="selectedPaymentMethod(paymentMethod)">{{paymentMethod | dropdownTranslate:'paymentMethods'}}</option>
+              </select>
+              <div
+                *ngIf="operationControls.paymentMethod.invalid && (operationControls.paymentMethod.dirty || operationControls.paymentMethod.touched)"
+                class="error-label">
+                <small *ngIf="operationControls.paymentMethod.errors.required">
+                  {{'generalValidations.required' | translate}}
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex flex-row justify-content-start">
+          <div class="form-group m-t-10 col-sm-12 col-lg-6" *ngIf="!disabledFields">
+            <button (click)="addOperationDetail()"
+                    class="btn btn-primary mdi mdi-plus">{{'operationDetails.operationDetailAddButtonLabel' | translate}}</button>
+          </div>
+          <div class="form-group col-sm-12 col-lg-6" *ngIf="operationControls.operationType.value === 'SALE'">
+            <label for="discount" class="w-25" >{{'operations.discountPlaceholder' | translate}}</label>
+            <select class="custom-select w-75" formControlName="discount" id="discount">
+              <option [value]="discount" *ngFor="let discount of discounts"
+                      [selected]="selectedDiscount(discount)">{{discount}}%
+              </option>
+            </select>
+          </div>
+          </div>
+
+          <div formArrayName="operationDetails">
+            <div *ngFor="let operationDetail of operationDetails?.controls; let i = index">
+              <div [formGroupName]="i" class="form-row border p-20">
+                <div class="col">
+                  <ng-select [items]="articles$ | async" [multiple]="false" [closeOnSelect]="true" [searchable]="true"
+                             bindLabel="label" [placeholder]="'operationDetails.articlePlaceholder' | translate"
+                             [notFoundText]="'operationDetails.articleNotFoundLabel' | translate"
+                             formControlName="article" (search)="getArticlesByName($event)"
+                             (change)="selectArticle($event, i)">
+                  </ng-select>
+                  <div
+                    *ngIf="operationDetailControls(i).article.invalid && (operationDetailControls(i).article.dirty || operationDetailControls(i).article.touched)"
+                    class="error-label">
+                    <small *ngIf="operationDetailControls(i).article.errors.required">
+                      {{'generalValidations.required' | translate}}
+                    </small>
+                  </div>
+                </div>
+                <div class="col form-label-group">
+                  <input class="form-control" type="number"
+                         [placeholder]="'operationDetails.amountPlaceholder' | translate" id="amount"
+                         formControlName="amount">
+                  <label for="amount">{{'operationDetails.amountPlaceholder' | translate}}</label>
+                  <div
+                    *ngIf="operationDetailControls(i).amount.invalid && (operationDetailControls(i).amount.dirty || operationDetailControls(i).amount.touched)"
+                    class="error-label">
+                    <small *ngIf="operationDetailControls(i).amount.errors.required">
+                      {{'generalValidations.required' | translate}}
+                    </small>
+                    <small *ngIf="operationDetailControls(i).amount.errors.min" [translate]="'generalValidations.min'"
+                           [translateParams]="{param: operationDetailControls(i).amount.errors.min.min}"></small>
+                  </div>
+                </div>
+                <div class="col form-label-group">
+                  <input class="form-control" type="number"
+                         [placeholder]="'operationDetails.pricePlaceholder' | translate" id="price"
+                         formControlName="price">
+                  <label for="price">{{'operationDetails.pricePlaceholder' | translate}}</label>
+                  <div
+                    *ngIf="operationDetailControls(i).price.invalid && (operationDetailControls(i).price.dirty || operationDetailControls(i).price.touched)"
+                    class="error-label">
+                    <small *ngIf="operationDetailControls(i).price.errors.required">
+                      {{'generalValidations.required' | translate}}
+                    </small>
+                    <small *ngIf="operationDetailControls(i).price.errors.min" [translate]="'generalValidations.min'"
+                           [translateParams]="{param: operationDetailControls(i).price.errors.min.min}"></small>
+                  </div>
+                </div>
+                <div class="col">
+                  <button (click)="deleteOperationDetail(i)" class="btn btn-danger mdi mdi-delete"
+                          [disabled]="this.disabledFields">{{'operationDetails.operationDetailDeleteButtonLabel' | translate}}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="!disabledFields" class="m-t-10">
+            <button class="btn btn-primary m-r-10" type="submit" [disabled]="operationForm.invalid">
+              <i class="fa fa-save" aria-hidden="true"></i>
+              {{'buttons.submit' | translate}}
+            </button>
+            <button (click)="back()" class="btn btn-danger" type="button">
+              {{'buttons.cancel' | translate}}
+            </button>
+          </div>
+          <button *ngIf="disabledFields" class="btn btn-inverse mdi mdi-keyboard-backspace m-t-10" (click)="back()">
+            {{'buttons.back' | translate}}
+          </button>
+        </form>
+      </div>
     </div>
+  </div>
 </div>
