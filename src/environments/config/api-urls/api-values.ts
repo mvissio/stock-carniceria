@@ -14,14 +14,12 @@ export const applicationApiUrls: ApiURLs = {
   },
   operation: {
     base: 'API_VERSION/operation',
-    getOperationById: '/id',        
+    getOperationById: '/id',
     getOperationsByPaymentMethod: '/paymentMethod',
-    
     getOperationsByOneDate: '/createDate',
     getOperationsByOneDateAndPaymentMethod: '/byDateAndPaymentMethod',
-    getOperationsByOneDateAndOperationType:'/byDateAndOperationType',
+    getOperationsByOneDateAndOperationType: '/byDateAndOperationType',
     getOperationsByOneDateAndOperationTypeAndPaymentMethod: '/byDateAndPaymentMethodAndOperationType',
-    
     getOperationsByPeriod: '/byPeriod',
     getOperationsByPeriodAndPaymentMethod: '/byPeriodAndPaymentMethod',
     getOperationsByPeriodAndOperationType: '/byPeriodAndOperationType',
@@ -29,14 +27,14 @@ export const applicationApiUrls: ApiURLs = {
     getOperationsByTypeAndDate: '/type',
     getAllOperationTypes: '/operationTypes',
     getAllPaymentMethods: '/paymentMethods',
-    cancelOperation: '/cancel/id' 
+    cancelOperation: '/cancel/id'
   },
   OperationDetail: {
     base: 'API_VERSION/operationDetail',
     getOperationDetailsByOperationId: '/operationId'
-  },  
+  },
   article: {
-    base:'API_VERSION/articles',
+    base: 'API_VERSION/articles',
     getAllArticlesNotPagging: '/all',
     getArticleByArticleId: '/id',
     getArticleByName: '/name',
@@ -45,12 +43,12 @@ export const applicationApiUrls: ApiURLs = {
     deleteArticle: '/id'
   },
   measurementUnit: {
-    base:'API_VERSION/measurementUnits',
+    base: 'API_VERSION/measurementUnits',
     getMeasurementUnitByMeasurementUnitId: '/id',
     deleteMeasurementUnit: '/id'
   },
-  category:{
-    base:'API_VERSION/categories',
+  category: {
+    base: 'API_VERSION/categories',
     getCategoryByCategoryId: '/id',
     deleteCategory: '/id'
   },
