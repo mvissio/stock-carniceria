@@ -52,4 +52,11 @@ export class BoxsService {
     )
       .pipe(map((response: Page) => response));
   }
+
+  closeBox(box: Box) {
+    const boxClose = Object.assign({}, box);
+    const url = this.boxsUrl.closeBox;
+    return this.httpClient.post(url,  Object.assign({}, boxClose))
+      .pipe(map((response: any) => response));
+  }
 }

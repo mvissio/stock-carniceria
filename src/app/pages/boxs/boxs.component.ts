@@ -7,10 +7,9 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {Box} from '../../models/Box.model';
 import {HandleErrorsService} from '../../services/shared/handle-errors.service';
 import {CommonsService} from '../../services/commons.service';
-import {Rol} from '../../models/rol.model';
 import swal from 'sweetalert';
-import {Operation} from '../../models/operation.model';
-import {Observable} from 'rxjs';
+import {forkJoin} from 'rxjs';
+import {TranslateService} from '@ngx-translate/core';
 
 
 @Component({
@@ -34,15 +33,8 @@ export class BoxsComponent implements OnInit {
   TYPEBOX = {
     OPEN: 'create',
     SHOW_DETAILS: 'show details',
-    SHOW_OPERATIONS: 'show operations',
-    CLOSE: 'close'
+    SHOW_OPERATIONS: 'show operations'
   };
-
-  constructor(private _boxService: BoxsService,
-              private fb: FormBuilder,
-              private _handleErrorsService: HandleErrorsService,
-              private _commonsService: CommonsService) {
-  }
 
   ngOnInit() {
     this.pageConfig = new PageConfig('dateOpen');
@@ -50,14 +42,18 @@ export class BoxsComponent implements OnInit {
     this.getBoxs(0);
   }
 
+  constructor(private _boxService: BoxsService,
+              private fb: FormBuilder,
+              private translate: TranslateService,
+              private _handleErrorsService: HandleErrorsService,
+              private _commonsService: CommonsService) {
+  }
+
   onBoxAction(event, box?: Box) {
     this.typeSelect = event;
     switch (this.typeSelect) {
       case this.TYPEBOX.OPEN:
         this.initOpenForm();
-        break;
-      case this.TYPEBOX.CLOSE:
-        this.initCloseForm();
         break;
       case this.TYPEBOX.SHOW_OPERATIONS:
         this.viewOperations(box);
@@ -70,12 +66,6 @@ export class BoxsComponent implements OnInit {
 
   closeModal() {
     this.typeSelect = undefined;
-  }
-
-  initCloseForm() {
-    this.openForm = this.fb.group({
-      cashInit: ['', Validators.required]
-    });
   }
 
   createBox() {
@@ -162,5 +152,42 @@ export class BoxsComponent implements OnInit {
 
   setPageOperation(nextPage: number) {
     this.viewOperations(this.boxModal, nextPage);
+  }
+
+  showCloseModal(box: Box) {
+    forkJoin(
+      [this.translate.get('modals.closeBox.title'),
+        this.translate.get('modals')
+      ]).subscribe((result) => {
+      swal({
+          title: result[0],
+          icon: 'warning',
+          closeOnClickOutside: true,
+          buttons: {
+            confirm: {
+              text: result[1].defaultConfirmButton,
+              value: true,
+              visible: true,
+              closeModal: true
+            },
+            cancel: {
+              text: result[1].defaultCancelButton,
+              value: false,
+              visible: true,
+              closeModal: true,
+            }
+          }
+        }
+      ).then((data) => {
+        if (data) {
+          this._boxService.closeBox(box).subscribe(
+            (resp: any) => {
+              console.log(resp);
+            }
+          );
+        }
+      });
+    });
+
   }
 }
