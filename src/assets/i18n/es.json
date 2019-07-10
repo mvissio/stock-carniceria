@@ -194,6 +194,9 @@
         "deleteCategory": {
             "title": "¿Estás seguro que quieres dar de baja la categoría {{param}}?"
         },
+        "closeBox": {
+            "title": "¿Estás seguro que quieres cerrar la caja actual?"
+        },
         "defaultConfirmButton": "Confirmar",
         "defaultCancelButton": "Cancelar"
     },
@@ -219,7 +222,7 @@
         "error": "Inconsistente"
     },
     "roles": {
-        "SYSADMIN": "administrador de sistema",
+        "SYSADMIN": "admin sistema",
         "ADMIN": "administrador",
         "USER": "usuario"
     },

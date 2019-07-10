@@ -9,7 +9,7 @@
         <button type="button" class="btn btn-primary float-right mdi mdi-plus"
                 (click)="onBoxAction(TYPEBOX.OPEN)"></button>
         <div class="table-responsive">
-          <table class="table table-hover" *ngIf="boxs">
+          <table class="table table-hover m-auto" *ngIf="boxs">
             <thead>
             <tr>
               <th>{{'table.boxs.dateOpen' | translate}}</th>
@@ -46,7 +46,7 @@
                     <i class="mdi mdi-pencil"></i>
                   </button>
                   <button class="btn btn-danger" *ngIf="box.open">
-                    <i class="mdi mdi-delete"></i>
+                    <i class="mdi mdi-delete" (click)="showCloseModal(box)" ></i>
                   </button>
                 </div>
               </td>
@@ -67,20 +67,19 @@
       <div class="form-group">
         <span class="help">{{'boxs.openBox.textModal'| translate}}</span>
       </div>
-      <div class="form-label-group m-t-10">
-        <label class="col-md-6" for="cashInit">{{'boxs.openBox.inputCash' | translate: "{param: '$'}"}}</label>
-        <input class="form-control col-md-6" type="text" id="cashInit" formControlName="cashInit">
+      <div class="form-group">
+        <label class="form-control m-t-10 col-md-6 m-r-30" for="cashInit">{{'boxs.openBox.inputCash' | translate: "{param: '$'}"}}</label>
+        <input class="form-control m-t-10 col-md-6" type="text" id="cashInit" formControlName="cashInit">
         <div
           *ngIf="(openControls.cashInit.touched && openControls.cashInit.errors )||
           (openControls.cashInit.invalid && (openControls.cashInit.dirty || openControls.cashInit.touched))"
-          class="error-label">
+          class="error-label col-12">
           <small *ngIf="openControls.cashInit.errors?.required">
             {{'generalValidations.required' | translate}}
           </small>
           <small *ngIf="openControls.cashInit.errors?.pattern">
             {{'generalValidations.pattern' | translate}}
           </small>
-
         </div>
       </div>
       <div class="form-group row button-group justify-content-between">
@@ -157,36 +156,6 @@
       <ng-template #loadingOperations>
         <app-loading [loading]="true"></app-loading>
       </ng-template>
-    </div>
-    <div class="form-group row button-group justify-content-center m-t-40">
-      <div class="col-md-5">
-        <button type="button" class="btn waves-effect waves-light btn-block btn-danger" (click)="closeModal()">Cerrar
-        </button>
-      </div>
-    </div>
-  </ng-container>
-  <ng-container *ngIf="typeSelect === TYPEBOX.CLOSE">
-    <div class="justify-content-between text-justify">
-      <div class="row m-t-20">
-        <div class="col-6">{{'table.boxs.cashOpen' | translate}}</div>
-        <div class="col-6">{{boxModal.cashOpen|currency| defaultValue: 'Sin Registro'}}</div>
-      </div>
-      <div class="row m-t-20">
-        <div class="col-6">{{'table.boxs.dateOpen' | translate }}</div>
-        <div class="col-6">{{boxModal.dateOpen| date:'dd/MM/yyyy'| defaultValue: 'Sin Registro'}}</div>
-      </div>
-      <div class="row m-t-20">
-        <div class="col-6">{{'table.boxs.cashClose' | translate }}</div>
-        <div class="col-6">{{boxModal.cashClose|currency| defaultValue: 'Sin Registro'}}</div>
-      </div>
-      <div class="row m-t-20">
-        <div class="col-6">{{'table.boxs.dateClose' | translate}}</div>
-        <div class="col-6">{{boxModal.dateClose| date:'dd/MM/yyyy'| defaultValue: 'Sin Registro'}}</div>
-      </div>
-      <div class="row m-t-20">
-        <div class="col-6">Detalle de Cierre</div>
-        <div class="col-6">{{boxModal.detailClose | defaultValue: 'Sin Registro'}}</div>
-      </div>
     </div>
     <div class="form-group row button-group justify-content-center m-t-40">
       <div class="col-md-5">

@@ -16,14 +16,14 @@
                 </h3>
                 <button type="button" class="btn btn-primary float-right mdi mdi-plus" [routerLink]="['/usuario']"></button>
                 <div class="table-responsive">
-                    <table class="table table-hover" *ngIf="users">
+                    <table class="table table-hover m-auto" *ngIf="users">
                         <thead>
                             <tr class="row">
                                 <th class="col-3">{{'table.users.name' | translate}}</th>
                                 <th class="col-3">{{'table.users.email' | translate}}</th>
                                 <th class="col-2">{{'table.users.role' | translate}}</th>
-                                <th class="col-1">{{'table.status' | translate}}</th>
-                                <th class="col-3">{{'table.accions' | translate}}</th>
+                                <th class="col-2">{{'table.status' | translate}}</th>
+                                <th class="col-2">{{'table.accions' | translate}}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -33,7 +33,7 @@
                                 <td class="col-2">{{user?.rol.name | dropdownTranslate:'roles'}}</td>
                                 <td class="col-2"><span class="label label-rounded" [ngClass]="(user.enabled)? 'label-success':'label-danger'">{{getUserStatus(user)}}</span>
                                 </td>
-                                <td class="col-3">
+                                <td class="col-2">
                                     <div class="button-group row flex-nowrap">
                                         <button class="btn btn-secondary" (click)="editOrShowUser(user.userId)">
                           <i class="mdi mdi-eye-outline" aria-hidden="true"></i>

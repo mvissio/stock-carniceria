@@ -13,6 +13,11 @@ export const roles = {
   user: 'USER'
 };
 
+export const operationTypes = {
+  buy: 'BUY',
+  sale: 'SALE'
+};
+
 export const toastType = {
   error: 'error',
   warning: 'warning',
