@@ -80,7 +80,7 @@ export class MeasurementUnitComponent implements OnInit {
     if (this.edit) {
       this._measurementUnitService.updateMeasurementUnit(this.measurementUnit)
         .subscribe(() => {
-          this.translate.get('measurementUnit.updateOk')
+          this.translate.get('measurementUnits.updateOk')
             .subscribe((res: string) => {
               this._commonsService.showMessage('success', res);
               this.back();
@@ -91,7 +91,7 @@ export class MeasurementUnitComponent implements OnInit {
     } else {
       this._measurementUnitService.addMeasurementUnit(this.measurementUnit)
         .subscribe(() => {
-          this.translate.get('measurementUnit.createOk')
+          this.translate.get('measurementUnits.createOk')
             .subscribe((res: string) => {
               this._commonsService.showMessage('success', res);
               this.back();
