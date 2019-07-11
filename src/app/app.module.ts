@@ -32,6 +32,7 @@ import {AppComponent} from './app.component';
 import {LoginComponent} from './login/login.component';
 import {NopagefoundComponent} from './shared/nopagefound/nopagefound.component';
 import {Router} from '@angular/router';
+import { TruncatePipe } from './pipes/truncate.pipe';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');

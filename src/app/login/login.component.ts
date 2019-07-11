@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { StorageService } from '../services/storage/storage.service';
-import { AuthService } from '../services/auth/auth.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Auth } from '../models/auth.model';
-import { USUARIO_KEY } from '../constants/constant';
-import { HandleErrorsService } from '../services/shared/handle-errors.service';
-import { HttpErrorResponse } from '@angular/common/http';
-import { CommonsService } from '../services/commons.service';
-import { TranslateService } from '@ngx-translate/core';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {StorageService} from '../services/storage/storage.service';
+import {AuthService} from '../services/auth/auth.service';
+import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+import {Auth} from '../models/auth.model';
+import {USUARIO_KEY} from '../constants/constant';
+import {HandleErrorsService} from '../services/shared/handle-errors.service';
+import {HttpErrorResponse} from '@angular/common/http';
+import {CommonsService} from '../services/commons.service';
+import {TranslateService} from '@ngx-translate/core';
 
 declare function init_plugins();
 
@@ -29,12 +29,13 @@ export class LoginComponent implements OnInit {
   forgotPasswordForm: FormGroup;
 
   constructor(private _storageService: StorageService,
-    private _authService: AuthService,
-    private _handleErrorsService: HandleErrorsService,
-    private router: Router,
-    private fb: FormBuilder,
-    private translate: TranslateService,
-    private _commonsService: CommonsService) { }
+              private _authService: AuthService,
+              private _handleErrorsService: HandleErrorsService,
+              private router: Router,
+              private fb: FormBuilder,
+              private translate: TranslateService,
+              private _commonsService: CommonsService) {
+  }
 
   ngOnInit() {
     init_plugins();
@@ -56,9 +57,13 @@ export class LoginComponent implements OnInit {
     }, {updateOn: 'blur'});
   }
 
-  get loginControls() { return this.loginForm.controls; }
+  get loginControls() {
+    return this.loginForm.controls;
+  }
 
-  get forgotPasswordControls() { return this.forgotPasswordForm.controls; }
+  get forgotPasswordControls() {
+    return this.forgotPasswordForm.controls;
+  }
 
   login() {
     if (this.loginForm.invalid) {
@@ -66,12 +71,12 @@ export class LoginComponent implements OnInit {
     }
     const auth: Auth = new Auth(this.loginForm.value.user, this.loginForm.value.password);
     this._authService.login(auth, this.loginForm.value.rememberMe)
-    .subscribe(() => {
-      this.router.navigate(['/inicio'])
-    },
-      (err: HttpErrorResponse) => {
-        this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err, 'login'));
-    });
+      .subscribe(() => {
+          this.router.navigate(['/inicio']);
+        },
+        (err: HttpErrorResponse) => {
+          this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err, 'login'));
+        });
   }
 
   recoverPassword() {
@@ -79,16 +84,16 @@ export class LoginComponent implements OnInit {
       return;
     }
     this._authService.recoverPassword(this.forgotPasswordForm.value.email)
-    .subscribe(() => {
-      this.translate.get('forgotPassword.sendOk')
-          .subscribe((res: string) => {
-            this._commonsService.showMessage('success', res);
-          });
-      },
-      (err: HttpErrorResponse) => {
-        this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
-      }
-    );
+      .subscribe(() => {
+          this.translate.get('forgotPassword.sendOk')
+            .subscribe((res: string) => {
+              this._commonsService.showMessage('success', res);
+            });
+        },
+        (err: HttpErrorResponse) => {
+          this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
+        }
+      );
   }
 
 }

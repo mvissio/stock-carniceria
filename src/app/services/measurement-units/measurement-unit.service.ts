@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { MeasurementUnit } from '../../models/measurement-unit.model';
-import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
-import { environment } from '../../../environments/environment';
+import {Injectable} from '@angular/core';
+import {MeasurementUnit} from '../../models/measurement-unit.model';
+import {HttpClient} from '@angular/common/http';
+import {map} from 'rxjs/operators';
+import {environment} from '../../../environments/environment';
 import {PageConfig} from '../../models/pageConfig.model';
-import { Page } from '../../models/page.model';
+import {Page} from '../../models/page.model';
 
 
 @Injectable({
@@ -13,12 +13,13 @@ import { Page } from '../../models/page.model';
 export class MeasurementUnitService {
 
   measurementUnitUrl = environment.apiUrls.measurementUnit;
-  measurementUnit: MeasurementUnit   = new MeasurementUnit ();
-  
-  constructor(private httpClient: HttpClient) { }
+  measurementUnit: MeasurementUnit = new MeasurementUnit();
+
+  constructor(private httpClient: HttpClient) {
+  }
 
   addMeasurementUnit(measurementUnit: MeasurementUnit) {
-    let newMeasurementUnit = Object.assign({}, measurementUnit); 
+    let newMeasurementUnit = Object.assign({}, measurementUnit);
     newMeasurementUnit.createDate = new Date();
     const url = this.measurementUnitUrl.base;
     return this.httpClient.post(url, newMeasurementUnit)
@@ -35,17 +36,15 @@ export class MeasurementUnitService {
     const url = `${this.measurementUnitUrl.getMeasurementUnitByMeasurementUnitId}/${id}`;
     return this.httpClient.get(url)
       .pipe(map((response: MeasurementUnit) => {
-          this.measurementUnit = response;
+        this.measurementUnit = response;
         return response;
-    }));
+      }));
   }
+
   getMeasurementUnitByname(name: string) {
     const url = `${this.measurementUnitUrl.getMeasurementUnitByName}?name=${name}`;
     return this.httpClient.get(url)
-      .pipe(map((response: MeasurementUnit) => {
-        this.measurementUnit = response;
-        return response;
-    }));
+      .pipe(map((response: Array<MeasurementUnit>) => response));
   }
 
   updateMeasurementUnit(measurementUnit: MeasurementUnit) {
@@ -53,12 +52,12 @@ export class MeasurementUnitService {
     return this.httpClient.put(url, measurementUnit)
       .pipe(map((response: any) => response));
   }
- 
 
-  deleteMeasurementUnit(id : number) {
+
+  deleteMeasurementUnit(id: number) {
     const url = `${this.measurementUnitUrl.deleteMeasurementUnit}/${id}`;
     return this.httpClient.delete(url)
-    .pipe(map((response) => response));
+      .pipe(map((response) => response));
   }
 
 }

@@ -20,6 +20,7 @@ export class MeasurementUnitsComponent implements OnInit {
   page: Page;
   measurementUnits: MeasurementUnit[];
   pages: number[];
+  pageNavEnabled = true;
   loading = false;
   pageConfig: PageConfig;
 
@@ -42,6 +43,7 @@ export class MeasurementUnitsComponent implements OnInit {
 
   getMeasurementUnits(nextPage: number) {
     this.loading = true;
+    this.pageNavEnabled = true;
     this.pageConfig.pageNumber = nextPage;
     this._measurementUnitService.getAllMeasurementUnits(this.pageConfig)
       .subscribe(
@@ -57,17 +59,17 @@ export class MeasurementUnitsComponent implements OnInit {
         });
   }
 
-  findMeasurementUnit(username: string) {
+  findMeasurementUnit(nameMeasurementUnit: string) {
     this.loading = true;
-    if (username !== null) {
-      this._measurementUnitService.getMeasurementUnitByname(name).subscribe(
+    if (nameMeasurementUnit !== null && nameMeasurementUnit !== '') {
+      this._measurementUnitService.getMeasurementUnitByname(nameMeasurementUnit).subscribe(
         (res: any) => {
           this.loading = false;
-          this.measurementUnits = [];
-          this.measurementUnits.push(res);
+          this.measurementUnits = res;
+          this.pageNavEnabled = false;
         },
         (err: HttpErrorResponse) => {
-          this.loading = false;
+          this.getMeasurementUnits(0);
           this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
         });
     } else {

@@ -103,10 +103,8 @@ export class MeasurementUnitComponent implements OnInit {
   }
 
   setMeasurementUnit() {
-
-    this.measurementUnit.name = this.measurementUnitForm.value.name;
+    this.measurementUnit.name = (!this.edit) ? this.measurementUnitForm.value.name : this.measurementUnitForm.controls.name.value;
     this.measurementUnit.symbol = this.measurementUnitForm.value.symbol;
-
   }
 
   back() {

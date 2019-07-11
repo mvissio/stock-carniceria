@@ -38,6 +38,8 @@ import { CategoriesComponent } from './categories/categories.component';
 import { CategoryComponent } from './categories/category/category.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { MyDatePickerModule } from 'mydatepicker';
+import {NopagefoundComponent} from '../shared/nopagefound/nopagefound.component';
+import {TruncatePipe} from '../pipes/truncate.pipe';
 
 @NgModule({
   declarations: [
@@ -57,7 +59,8 @@ import { MyDatePickerModule } from 'mydatepicker';
     CategoriesComponent,
     CategoryComponent,
     BoxsComponent,
-    DefaultValuePipe
+    DefaultValuePipe,
+    TruncatePipe
   ],
   exports: [
     HomeComponent,

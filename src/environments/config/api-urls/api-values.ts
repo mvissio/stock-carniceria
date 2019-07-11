@@ -45,6 +45,7 @@ export const applicationApiUrls: ApiURLs = {
   measurementUnit: {
     base: 'API_VERSION/measurementUnits',
     getMeasurementUnitByMeasurementUnitId: '/id',
+    getMeasurementUnitByName: '/name',
     deleteMeasurementUnit: '/id'
   },
   category: {

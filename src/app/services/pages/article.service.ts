@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Article } from '../../models/article.model';
-import { environment } from '../../../environments/environment';
-import { map } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Article} from '../../models/article.model';
+import {environment} from '../../../environments/environment';
+import {map} from 'rxjs/operators';
 import {PageConfig} from '../../models/pageConfig.model';
-import { Page } from '../../models/page.model';
+import {Page} from '../../models/page.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,15 +15,16 @@ export class ArticleService {
   measurementUnitUrl = environment.apiUrls.measurementUnit;
   categoryUrl = environment.apiUrls.category;
 
-  article : Article = new Article();
+  article: Article = new Article();
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {
+  }
 
-  addArticle(article : Article){
-    console.log("esta es la fecha de expiracion 1",article.expirationDate);
+  addArticle(article: Article) {
+    console.log('esta es la fecha de expiracion 1', article.expirationDate);
     let newArticle = Object.assign({}, article);
-    console.log("esta es la fecha de expiracion 12",newArticle.expirationDate);
-    
+    console.log('esta es la fecha de expiracion 12', newArticle.expirationDate);
+
     newArticle.disabled = false;
     newArticle.createDate = new Date();
     const url = this.articleUrl.base;
@@ -47,32 +48,29 @@ export class ArticleService {
     const url = `${this.articleUrl.getArticleByArticleId}/${id}`;
     return this.httpClient.get(url)
       .pipe(map((response: Article) => {
-          this.article = response;
-          console.log("este es el articulo recup ",this.article )
+        this.article = response;
         return response;
-    }));
+      }));
   }
 
   getArticleByName(name: string) {
     const url = `${this.articleUrl.getArticleByName}?name=${name}`;
     return this.httpClient.get(url)
-      .pipe(map((response: Article) => {
-        this.article = response;
-        return response;
-    }));
+      .pipe(map((response: Array<Article>) => response));
+
   }
 
   getArticlesByNameOrBrandOrCodeLike(search) {
     const url = `${this.articleUrl.getArticlesByNameOrBrandOrCodeLike}?search=${search}`;
     return this.httpClient.get(url)
-    .pipe(map((response: Article[]) => {
-      return response.map((article) => {
-        article.label = article.name + ' - ' + article.brand;
-        return article;
-      });
-    }));
+      .pipe(map((response: Article[]) => {
+        return response.map((article) => {
+          article.label = article.name + ' - ' + article.brand;
+          return article;
+        });
+      }));
   }
-  
+
   updateArticle(article: Article) {
     article.expirationDate = article.expirationDate;
     const url = this.articleUrl.base;
@@ -82,21 +80,21 @@ export class ArticleService {
 
 
   getAllMeasurementUnits() {
-    const url = this.measurementUnitUrl.base
+    const url = this.measurementUnitUrl.base;
     return this.httpClient.get(url)
       .pipe(map((response: any) => response));
   }
 
   getAllCategories() {
-    const url = this.categoryUrl.base
+    const url = this.categoryUrl.base;
     return this.httpClient.get(url)
       .pipe(map((response: any) => response));
   }
-  
+
   deleteArticle(id: number) {
     const url = `${this.articleUrl.deleteArticle}/${id}`;
     return this.httpClient.delete(url)
-    .pipe(map((response) => response));
+      .pipe(map((response) => response));
   }
 
 }
