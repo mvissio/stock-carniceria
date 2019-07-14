@@ -53,9 +53,11 @@ export class ArticlesComponent implements OnInit {
     this._articleService.getAllArticles(this.pageConfig)
       .subscribe(
         (res: Page) => {
-          this.page = res;
-          this.articles = this.page.content;
-          this.pages = new Array(this.page.totalPages);
+          if (res) {
+            this.page = res;
+            this.articles = this.page.content;
+            this.pages = new Array(this.page.totalPages);
+          }
           this.loading = false;
         },
         (err: HttpErrorResponse) => {

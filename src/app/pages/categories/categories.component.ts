@@ -22,6 +22,7 @@ export class CategoriesComponent implements OnInit {
   pages: number[];
   loading = false;
   pageConfig: PageConfig;
+  pageNavEnabled = true;
 
   constructor(private _categoryService: CategoryService,
               private _handleErrorsService: HandleErrorsService,
@@ -42,6 +43,7 @@ export class CategoriesComponent implements OnInit {
 
   getCategories(nextPage: number) {
     this.loading = true;
+    this.pageNavEnabled = true;
     this.pageConfig.pageNumber = nextPage;
     this._categoryService.getAllCategories(this.pageConfig)
       .subscribe(

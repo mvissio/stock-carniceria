@@ -48,9 +48,11 @@ export class MeasurementUnitsComponent implements OnInit {
     this._measurementUnitService.getAllMeasurementUnits(this.pageConfig)
       .subscribe(
         (res: Page) => {
-          this.page = res;
-          this.measurementUnits = this.page.content;
-          this.pages = new Array(this.page.totalPages);
+          if (res) {
+            this.page = res;
+            this.measurementUnits = this.page.content;
+            this.pages = new Array(this.page.totalPages);
+          }
           this.loading = false;
         },
         (err: HttpErrorResponse) => {

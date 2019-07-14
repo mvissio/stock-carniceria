@@ -52,7 +52,7 @@
           <div formArrayName="operationDetails">
             <div *ngFor="let operationDetail of operationDetails?.controls; let i = index">
               <div [formGroupName]="i" class="form-row border p-20">
-                <div class="col">
+                <div class="col-sm-12 col-md-3">
                   <ng-select [items]="articles$ | async" [multiple]="false" [closeOnSelect]="true" [searchable]="true"
                              bindLabel="label" [placeholder]="'operationDetails.articlePlaceholder' | translate"
                              [notFoundText]="'operationDetails.articleNotFoundLabel' | translate"
@@ -67,7 +67,7 @@
                     </small>
                   </div>
                 </div>
-                <div class="col form-label-group">
+                <div class="col-sm-12 col-md-3 form-label-group">
                   <input class="form-control" type="number"
                          [placeholder]="'operationDetails.amountPlaceholder' | translate" id="amount"
                          formControlName="amount">
@@ -82,7 +82,7 @@
                            [translateParams]="{param: operationDetailControls(i).amount.errors.min.min}"></small>
                   </div>
                 </div>
-                <div class="col form-label-group">
+                <div class="col-sm-12 col-md-3 form-label-group">
                   <input class="form-control" type="number"
                          [placeholder]="'operationDetails.pricePlaceholder' | translate" id="price"
                          formControlName="price">
@@ -97,7 +97,7 @@
                            [translateParams]="{param: operationDetailControls(i).price.errors.min.min}"></small>
                   </div>
                 </div>
-                <div class="col">
+                <div class="col-sm-12 col-md-3">
                   <button (click)="deleteOperationDetail(i)" class="btn btn-danger mdi mdi-delete"
                           [disabled]="this.disabledFields">{{'operationDetails.operationDetailDeleteButtonLabel' | translate}}</button>
                 </div>

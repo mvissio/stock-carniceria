@@ -244,7 +244,7 @@ export class OperationComponent implements OnInit {
   }
 
   selectedDiscount(discount: number): boolean {
-    return (this.operation.discount && discount === this.operation.discount);
+    return (this.operation.discount && discount === Number(this.operation.discount));
   }
 
   selectArticle(article: Article, index: number) {
