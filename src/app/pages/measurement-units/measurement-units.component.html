@@ -45,7 +45,7 @@
                           (click)="editOrShowMeasurementUnit(measurementUnit.measurementUnitId, true)">
                     <i class="mdi mdi-pencil" aria-hidden="true"></i>
                   </button>
-                  <button class="btn btn-danger"
+                  <button class="btn btn-danger" [disabled]="measurementUnit?.disabled"
                           (click)="deleteMeasurementUnit(measurementUnit.name,measurementUnit.measurementUnitId)">
                     <i class="mdi mdi-delete" aria-hidden="true"></i>
                   </button>

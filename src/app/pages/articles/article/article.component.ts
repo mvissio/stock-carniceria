@@ -52,7 +52,7 @@ export class ArticleComponent implements OnInit {
   }
 
   myDatePickerOptions: IMyDpOptions = {
-    dateFormat: 'yyyy-mm-dd',
+    dateFormat: 'dd-mm-yyyy',
     editableDateField: false,
     openSelectorTopOfInput: true
 
