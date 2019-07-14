@@ -44,12 +44,12 @@ const routes: Routes = [
       {
         path: 'operacion/:id', component: OperationComponent,
         canActivate: [AuthGuard, GrantedAuthorityGuard],
-        data: {titulo: 'Actualizar Operacion', roles: [roles.sysAdmin, roles.admin]}
+        data: {titulo: 'Actualizar Operación', roles: [roles.sysAdmin, roles.admin]}
       },
       {
         path: 'operacion', component: OperationComponent,
         canActivate: [AuthGuard, GrantedAuthorityGuard],
-        data: {titulo: 'Crear Operacion', roles: [roles.sysAdmin, roles.admin]}
+        data: {titulo: 'Crear Operación', roles: [roles.sysAdmin, roles.admin]}
       },
       {
         path: 'tema', component: AccoutSettingsComponent,
