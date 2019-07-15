@@ -20,9 +20,9 @@ export class MeasurementUnitsComponent implements OnInit {
   page: Page;
   measurementUnits: MeasurementUnit[];
   pages: number[];
-  pageNavEnabled = true;
   loading = false;
   pageConfig: PageConfig;
+  searchText: string;
 
   constructor(private _measurementUnitService: MeasurementUnitService,
               private _handleErrorsService: HandleErrorsService,
@@ -37,20 +37,24 @@ export class MeasurementUnitsComponent implements OnInit {
   }
 
   setPage(nextPage: number) {
-
-    this.getMeasurementUnits(nextPage);
+    if (this.searchText.length < 0) {
+      this.findMeasurementUnit(this.searchText, nextPage);
+    } else {
+      this.getMeasurementUnits(nextPage);
+    }
   }
 
   getMeasurementUnits(nextPage: number) {
     this.loading = true;
-    this.pageNavEnabled = true;
     this.pageConfig.pageNumber = nextPage;
     this._measurementUnitService.getAllMeasurementUnits(this.pageConfig)
       .subscribe(
         (res: Page) => {
-          this.page = res;
-          this.measurementUnits = this.page.content;
-          this.pages = new Array(this.page.totalPages);
+          if(res) {
+            this.page = res;
+            this.measurementUnits = this.page.content;
+            this.pages = new Array(this.page.totalPages);
+          }
           this.loading = false;
         },
         (err: HttpErrorResponse) => {
@@ -59,14 +63,20 @@ export class MeasurementUnitsComponent implements OnInit {
         });
   }
 
-  findMeasurementUnit(nameMeasurementUnit: string) {
+  findMeasurementUnit(nameMeasurementUnit: string, nextPage = 0) {
     this.loading = true;
+    this.pageConfig.pageNumber = nextPage;
     if (nameMeasurementUnit !== null && nameMeasurementUnit !== '') {
-      this._measurementUnitService.getMeasurementUnitByname(nameMeasurementUnit).subscribe(
-        (res: any) => {
+      this._measurementUnitService.getMeasurementUnitByname(nameMeasurementUnit, this.pageConfig)
+      .subscribe(
+        (res: Page) => {
+          if(res) {
+            this.measurementUnits = [];
+            this.page = res;
+            this.measurementUnits = this.page.content;
+            this.pages = new Array(this.page.totalPages);
+          }
           this.loading = false;
-          this.measurementUnits = res;
-          this.pageNavEnabled = false;
         },
         (err: HttpErrorResponse) => {
           this.getMeasurementUnits(0);

@@ -22,6 +22,7 @@ export class CategoriesComponent implements OnInit {
   pages: number[];
   loading = false;
   pageConfig: PageConfig;
+  searchText: string;
 
   constructor(private _categoryService: CategoryService,
               private _handleErrorsService: HandleErrorsService,
@@ -36,8 +37,11 @@ export class CategoriesComponent implements OnInit {
   }
 
   setPage(nextPage: number) {
-
-    this.getCategories(nextPage);
+    if (this.searchText.length > 0) {
+      this.findCategory(this.searchText, nextPage);
+    } else {
+      this.getCategories(nextPage);
+    }
   }
 
   getCategories(nextPage: number) {
@@ -59,14 +63,20 @@ export class CategoriesComponent implements OnInit {
         });
   }
 
-  findCategory(category: string) {
+  findCategory(name: string, nextPage = 0) {
     this.loading = true;
-    if (category !== null) {
-      this._categoryService.getCategoryByname(name).subscribe(
-        (res: any) => {
+    this.pageConfig.pageNumber = nextPage;
+    if (name !== null) {
+      this._categoryService.getCategoryByname(name, this.pageConfig)
+      .subscribe(
+        (res: Page) => {
+          if (res) {
+            this.categories = [];
+            this.page = res;
+            this.categories = this.page.content;
+            this.pages = new Array(this.page.totalPages);
+          }
           this.loading = false;
-          this.categories = [];
-          this.categories.push(res);
         },
         (err: HttpErrorResponse) => {
           this.loading = false;
@@ -108,7 +118,7 @@ export class CategoriesComponent implements OnInit {
         }
       ).then((data) => {
         if (data) {
-          this._categoryService.deleteCategory(id).subscribe();
+          this._categoryService.deleteCategory(id).subscribe(() => this.getCategories(0));
         }
       });
     });

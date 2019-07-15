@@ -41,10 +41,10 @@ export class MeasurementUnitService {
       }));
   }
 
-  getMeasurementUnitByname(name: string) {
-    const url = `${this.measurementUnitUrl.getMeasurementUnitByName}?name=${name}`;
+  getMeasurementUnitByname(name: string, page: PageConfig) {
+    const url = `${this.measurementUnitUrl.getMeasurementUnitByName}?name=${name}&page=${page.pageNumber}&size=${page.pageSize}&sort=${page.sortName},${page.orderDesc}`;
     return this.httpClient.get(url)
-      .pipe(map((response: Array<MeasurementUnit>) => response));
+      .pipe(map((response: Page) => response));
   }
 
   updateMeasurementUnit(measurementUnit: MeasurementUnit) {

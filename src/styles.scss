@@ -26,6 +26,11 @@ a {
     cursor: pointer;
 }
 
+.btn.disabled,
+.btn:disabled {
+    opacity: 0.25 !important;
+}
+
 div.button-group.row {
     display: flex;
 }

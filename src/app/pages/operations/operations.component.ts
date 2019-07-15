@@ -10,8 +10,7 @@ import { CommonsService } from '../../services/commons.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { forkJoin } from 'rxjs';
 import swal from 'sweetalert';
-import { BrowserModule } from '@angular/platform-browser';
-import { MyDatePickerModule, IMyDpOptions, IMyDateModel } from 'mydatepicker';
+import { IMyDpOptions, IMyDateModel } from 'mydatepicker';
 
 
 @Component({
@@ -24,7 +23,7 @@ export class OperationsComponent implements OnInit {
   page: Page;
   operations: Operation[];
   pages: number[];
-  loading = false;f
+  loading = false;
   pageConfig: PageConfig;
   fromDate: IMyDateModel;
   toDate: IMyDateModel;
@@ -39,9 +38,6 @@ export class OperationsComponent implements OnInit {
 
   operationTypes: any[]  = [];
   paymentMethods: any[]  = [];
-
-  
-  
 
   constructor(
     private _operationService: OperationsService,

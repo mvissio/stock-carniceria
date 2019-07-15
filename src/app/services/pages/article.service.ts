@@ -53,10 +53,10 @@ export class ArticleService {
       }));
   }
 
-  getArticleByName(name: string) {
-    const url = `${this.articleUrl.getArticleByName}?name=${name}`;
+  getArticleByName(name: string, page: PageConfig) {
+    const url = `${this.articleUrl.getArticleByName}?name=${name}&page=${page.pageNumber}&size=${page.pageSize}&sort=${page.sortName},${page.orderDesc}`;
     return this.httpClient.get(url)
-      .pipe(map((response: Array<Article>) => response));
+    .pipe(map((response: Page) => response));
 
   }
 
@@ -72,7 +72,6 @@ export class ArticleService {
   }
 
   updateArticle(article: Article) {
-    article.expirationDate = article.expirationDate;
     const url = this.articleUrl.base;
     return this.httpClient.put(url, article)
       .pipe(map((response: any) => response));

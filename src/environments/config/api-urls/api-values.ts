@@ -51,6 +51,7 @@ export const applicationApiUrls: ApiURLs = {
   category: {
     base: 'API_VERSION/categories',
     getCategoryByCategoryId: '/id',
+    getCategoryByName: '/name',
     deleteCategory: '/id'
   },
   box: {

@@ -48,13 +48,10 @@ export class UsersService {
         return response;
     }));
   }
-  getUserByUsername(username: string) {
-    const url = `${this.userUrl.getUserByUsername}?username=${username}`;
+  getUserByUsername(username: string, page: PageConfig) {
+    const url = `${this.userUrl.getUserByUsername}?username=${username}&page=${page.pageNumber}&size=${page.pageSize}&sort=${page.sortName},${page.orderDesc}`;
     return this.httpClient.get(url)
-      .pipe(map((response: User) => {
-        this.user = response;
-        return response;
-    }));
+      .pipe(map((response: Page) => response));
   }
 
   updateUser(user: User) {

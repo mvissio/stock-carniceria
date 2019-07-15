@@ -24,10 +24,9 @@ export class ArticlesComponent implements OnInit {
   pages: number[];
   loading = false;
   pageConfig: PageConfig;
-  pageNavEnabled = true;
+  searchText: string;
 
   constructor(
-    private _measurementUnitService: MeasurementUnitService,
     private _articleService: ArticleService,
     private _handleErrorsService: HandleErrorsService,
     private translate: TranslateService,
@@ -42,20 +41,24 @@ export class ArticlesComponent implements OnInit {
   }
 
   setPage(nextPage: number) {
-
-    this.getArticles(nextPage);
+    if (this.searchText.length < 0) {
+      this.findArticle(this.searchText, nextPage);
+    } else {
+      this.getArticles(nextPage);
+    }
   }
 
   getArticles(nextPage: number) {
     this.loading = true;
-    this.pageNavEnabled = true;
     this.pageConfig.pageNumber = nextPage;
     this._articleService.getAllArticles(this.pageConfig)
       .subscribe(
         (res: Page) => {
-          this.page = res;
-          this.articles = this.page.content;
-          this.pages = new Array(this.page.totalPages);
+          if(res) {
+            this.page = res;
+            this.articles = this.page.content;
+            this.pages = new Array(this.page.totalPages);
+          }
           this.loading = false;
         },
         (err: HttpErrorResponse) => {
@@ -109,14 +112,20 @@ export class ArticlesComponent implements OnInit {
     return status;
   }
 
-  findArticle(articleName: string) {
+  findArticle(articleName: string, nextPage = 0) {
     this.loading = true;
+    this.pageConfig.pageNumber = nextPage;
     if (articleName !== null && articleName !== '') {
-      this._articleService.getArticleByName(articleName).subscribe(
-        (res: any) => {
+      this._articleService.getArticleByName(articleName, this.pageConfig)
+      .subscribe(
+        (res: Page) => {
+          if(res) {
+            this.articles = [];
+            this.page = res;
+            this.articles = this.page.content;
+            this.pages = new Array(this.page.totalPages);
+          }
           this.loading = false;
-          this.articles = res;
-          this.pageNavEnabled = false;
         },
         (err: HttpErrorResponse) => {
           this.getArticles(0);

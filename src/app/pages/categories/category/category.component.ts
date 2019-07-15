@@ -43,11 +43,9 @@ export class CategoryComponent implements OnInit {
   }
 
   initForm() {
-    const format = 'dd/MM/yyyy';
-    const locale = 'en-US';
     this.categoryForm = this.fb.group({           
       name: [this.category.name, [Validators.required, Validators.maxLength(45)]],
-      description: [this.category.description, [Validators.required, Validators.maxLength(45)]]               
+      description: [this.category.description, [Validators.maxLength(45)]]               
     }, {updateOn: 'blur'});
     if (this.disabledFields)  {
       this.categoryForm.disable();

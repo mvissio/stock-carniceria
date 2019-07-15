@@ -2,7 +2,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <input #input (keyup.enter)="findUser(input.value)" type="search" class="form-control" [placeholder]="'users.searchLabel' | translate">
+                <input #input (keyup.enter)="findUser(input.value)" [(ngModel)]="searchText" type="search" class="form-control" [placeholder]="'users.searchLabel' | translate">
             </div>
         </div>
     </div>

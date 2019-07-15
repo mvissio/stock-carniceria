@@ -2,8 +2,8 @@
     "generalValidations": {
         "required": "Es requerido",
         "email": "El correo electrónico debe ser una dirección de correo electrónico válida",
-        "maxLength": "La logitud maxima es de {{param}}",
-        "minLength": "La logitud minima es de {{param}}",
+        "maxLength": "La longitud máxima es de {{param}}",
+        "minLength": "La longitud mínima es de {{param}}",
         "min": "El mínimo es de {{param}}",
         "max": "El máximo es de {{param}}",
         "pattern": "El valor ingresado no es correcto"
@@ -62,8 +62,8 @@
         "discountPlaceholder": "Descuento",
         "createOk": "Operacion creada satisfactoriamente.",
         "updateOk": "Operacion actualizada satisfactoriamente.",
-        "filterPlaceholderOperationType" : "Seleccione Tipo",
-        "filterPlaceholderPaymentMethod" : "Seleccione Medio"
+        "filterPlaceholderOperationType": "Seleccione Tipo",
+        "filterPlaceholderPaymentMethod": "Seleccione Medio"
     },
     "operationDetails": {
         "operationDetailAddButtonLabel": "Añadir detalle operación",

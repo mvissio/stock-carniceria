@@ -22,6 +22,7 @@ export class UsersComponent implements OnInit {
   pages: number[];
   loading = false;
   pageConfig: PageConfig;
+  searchText: string;
 
   constructor(private _userService: UsersService,
               private _handleErrorsService: HandleErrorsService,
@@ -36,8 +37,11 @@ export class UsersComponent implements OnInit {
   }
 
   setPage(nextPage: number) {
-
-    this.getUsers(nextPage);
+    if (this.searchText.length < 0) {
+      this.findUser(this.searchText, nextPage);
+    } else {
+      this.getUsers(nextPage);
+    }
   }
 
   getUsers(nextPage: number) {
@@ -46,9 +50,11 @@ export class UsersComponent implements OnInit {
     this._userService.getAllUsers(this.pageConfig)
       .subscribe(
         (res: Page) => {
-          this.page = res;
-          this.users = this.page.content;
-          this.pages = new Array(this.page.totalPages);
+          if (res) {
+            this.page = res;
+            this.users = this.page.content;
+            this.pages = new Array(this.page.totalPages);
+          }
           this.loading = false;
         },
         (err: HttpErrorResponse) => {
@@ -57,14 +63,20 @@ export class UsersComponent implements OnInit {
         });
   }
 
-  findUser(username: string) {
+  findUser(username: string, nextPage = 0) {
     this.loading = true;
+    this.pageConfig.pageNumber = nextPage;
     if(username !== null) {
-      this._userService.getUserByUsername(username).subscribe(
-        (res: any) => {
+      this._userService.getUserByUsername(username, this.pageConfig)
+      .subscribe(
+        (res: Page) => {
+          if(res) {
+            this.users = [];
+            this.page = res;
+            this.users = this.page.content;
+            this.pages = new Array(this.page.totalPages);
+          }
           this.loading = false;
-          this.users = [];
-          this.users.push(res);
         },
         (err: HttpErrorResponse) => {
           this.loading = false;

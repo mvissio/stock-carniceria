@@ -38,13 +38,10 @@ export class CategoryService {
         return response;
     }));
   }
-  getCategoryByname(name: string) {
-    const url = `${this.categoryUrl.getCategoryByName}?name=${name}`;
+  getCategoryByname(name: string, page: PageConfig) {
+    const url = `${this.categoryUrl.getCategoryByName}?name=${name}&page=${page.pageNumber}&size=${page.pageSize}&sort=${page.sortName},${page.orderDesc}`;
     return this.httpClient.get(url)
-      .pipe(map((response: Category) => {
-        this.category = response;
-        return response;
-    }));
+      .pipe(map((response: Page) => response));
   }
 
   updateCategory(category: Category) {
