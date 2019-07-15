@@ -54,7 +54,7 @@ export class ArticlesComponent implements OnInit {
     this._articleService.getAllArticles(this.pageConfig)
       .subscribe(
         (res: Page) => {
-          if(res) {
+          if (res) {
             this.page = res;
             this.articles = this.page.content;
             this.pages = new Array(this.page.totalPages);

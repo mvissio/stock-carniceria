@@ -24,6 +24,15 @@ button.btn-black {
 button,
 a {
     cursor: pointer;
+  &:disabled{
+    color: #1C1C1C;
+    background-color: #A0A0A0 !important;
+    border: 0rem;
+    &:hover{
+      background-color: #A0A0A0 !important;
+      border: 0rem;
+    }
+  }
 }
 
 .btn.disabled,

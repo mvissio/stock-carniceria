@@ -12,7 +12,7 @@
         <div class="card">
             <div class="card-body">
                 <h3 class="card-title">{{'measurementUnits.title' | translate}} (
-                    <small>{{ page.totalElements}}</small> )
+                    <small>{{ page?.totalElements | defaultValue : 0}}</small> )
                 </h3>
                 <button type="button" class="btn btn-primary float-right mdi mdi-plus" [routerLink]="['/unidadMedida']"></button>
                 <table class="table table-hover m-auto">
@@ -25,30 +25,38 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let measurementUnit of measurementUnits">
-                            <td>{{ measurementUnit?.name }}</td>
-                            <td>{{ measurementUnit?.symbol }}</td>
-                            <td><span class="label label-rounded" [ngClass]="(!measurementUnit.disabled)? 'label-success':'label-danger'">{{getMeasurementUnitStatus(measurementUnit)}}</span>
-                            </td>
-                            <td>
-                                <div class="button-group">
-                                    <button class="btn btn-secondary" (click)="editOrShowMeasurementUnit(measurementUnit.measurementUnitId)">
-                  <i class="mdi mdi-eye-outline" aria-hidden="true"></i>
-                </button>
-                                    <button class="btn btn-info" (click)="editOrShowMeasurementUnit(measurementUnit.measurementUnitId, true)">
-                  <i class="mdi mdi-pencil" aria-hidden="true"></i>
-                </button>
-                                    <button class="btn btn-danger" (click)="deleteMeasurementUnit(measurementUnit.name,measurementUnit.measurementUnitId)">
-                  <i class="mdi mdi-delete" aria-hidden="true"></i>
-                </button>
-                                </div>
-                            </td>
-                        </tr>
+                        <ng-container *ngIf="measurementUnits;else noContent">
+                            <tr *ngFor="let measurementUnit of measurementUnits">
+                                <td>{{ measurementUnit?.name }}</td>
+                                <td>{{ measurementUnit?.symbol }}</td>
+                                <td><span class="label label-rounded" [ngClass]="(!measurementUnit.disabled)? 'label-success':'label-danger'">{{getMeasurementUnitStatus(measurementUnit)}}</span>
+                                </td>
+                                <td>
+                                    <div class="button-group">
+                                        <button class="btn btn-secondary" (click)="editOrShowMeasurementUnit(measurementUnit.measurementUnitId)">
+                    <i class="mdi mdi-eye-outline" aria-hidden="true"></i>
+                  </button>
+                                        <button class="btn btn-info" (click)="editOrShowMeasurementUnit(measurementUnit.measurementUnitId, true)">
+                    <i class="mdi mdi-pencil" aria-hidden="true"></i>
+                  </button>
+                                        <button class="btn btn-danger" [disabled]="measurementUnit?.disabled" (click)="deleteMeasurementUnit(measurementUnit.name,measurementUnit.measurementUnitId)">
+                    <i class="mdi mdi-delete" aria-hidden="true"></i>
+                  </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-container>
+                        <ng-template #noContent>
+                            <tr class="alert alert-warning text-center font-20">
+                                <td colspan="4">
+                                    {{'measurementUnits.noContent' | translate}}
+                                </td>
+                            </tr>
+                        </ng-template>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-</div>
-<app-loading [loading]="loading"></app-loading>
-<app-pagination [page]="page" [pages]="pages" (pageNumber)="setPage($event)" *ngIf="measurementUnits"></app-pagination>
+    <app-loading [loading]="loading"></app-loading>
+    <app-pagination [page]="page" [pages]="pages" (pageNumber)="setPage($event)" *ngIf="measurementUnits"></app-pagination>

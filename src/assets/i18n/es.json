@@ -2,8 +2,8 @@
     "generalValidations": {
         "required": "Es requerido",
         "email": "El correo electrónico debe ser una dirección de correo electrónico válida",
-        "maxLength": "La longitud máxima es de {{param}}",
-        "minLength": "La longitud mínima es de {{param}}",
+        "maxLength": "La logitud máxima es de {{param}}",
+        "minLength": "La logitud mínima es de {{param}}",
         "min": "El mínimo es de {{param}}",
         "max": "El máximo es de {{param}}",
         "pattern": "El valor ingresado no es correcto"
@@ -87,7 +87,8 @@
         "enabledPlaceholder": "Habilitado",
         "createOk": "Articulo creado satisfactoriamente.",
         "updateOk": "Articulo actualizado satisfactoriamente.",
-        "amountInsuficient": "Cantidad insuficiente de articulos, actualmente quedan {{param}}"
+        "amountInsuficient": "Cantidad insuficiente de articulos, actualmente quedan {{param}}",
+        "noContent": "No se encontraron articulos cargados."
     },
     "measurementUnits": {
         "title": "Unidades de medida",
@@ -96,7 +97,8 @@
         "symbolPlaceholder": "Símbolo",
         "enabledPlaceholder": "Habilitado",
         "createOk": "Unidad de medida creada satisfactoriamente.",
-        "updateOk": "Unidad de medida actualizada satisfactoriamente."
+        "updateOk": "Unidad de medida actualizada satisfactoriamente.",
+        "noContent": "No se encontraron unidades de medida cargadas."
     },
     "categories": {
         "title": "Categorías",

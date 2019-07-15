@@ -50,7 +50,7 @@ export class MeasurementUnitsComponent implements OnInit {
     this._measurementUnitService.getAllMeasurementUnits(this.pageConfig)
       .subscribe(
         (res: Page) => {
-          if(res) {
+          if (res) {
             this.page = res;
             this.measurementUnits = this.page.content;
             this.pages = new Array(this.page.totalPages);
