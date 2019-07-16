@@ -1,34 +1,32 @@
 <div class="row animated fadeIn">
-  <div class="col-12">
-    <div class="card">
-      <div class="card-body">
-        Opciones de Filtro:
-        <button class="btn btn-link" (click)="showOneDateFilter()" style="display: inline; ">Filtrar por fecha</button>
-        <button class="btn btn-link" (click)="showPeriodFilter()" style="display: inline; ">Filtrar por periodo</button>
-      </div>
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                Opciones de Filtro:
+                <button class="btn btn-link" (click)="showOneDateFilter()" style="display: inline; ">Filtrar por fecha</button>
+                <button class="btn btn-link" (click)="showPeriodFilter()" style="display: inline; ">Filtrar por periodo</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 <div class="row animated fadeIn" *ngIf="showFilterPeriod">
-  <div class="col-12">
-    <div class="card">
-      <div class="card-body" style="height: 270px;">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body" style="height: 270px;">
 
-        <div class="form-group" style="display: inline-block; margin-right: 130px;">
-          <label>Fecha desde :</label>
-          <my-date-picker name="mydateFechaDesde" [options]="myDatePickerOptions" [(ngModel)]="fromDate"
-                          required></my-date-picker>
-        </div>
+                <div class="form-group" style="display: inline-block; margin-right: 130px;">
+                    <label>Fecha desde :</label>
+                    <my-date-picker name="mydateFechaDesde" [options]="myDatePickerOptions" [(ngModel)]="fromDate" required></my-date-picker>
+                </div>
 
-        <div class="form-group" style="display: inline-block;">
-          <label>Fecha hasta :</label>
-          <my-date-picker name="mydateFechaDesde" [options]="myDatePickerOptions" [(ngModel)]="toDate"
-                          required></my-date-picker>
-        </div>
+                <div class="form-group" style="display: inline-block;">
+                    <label>Fecha hasta :</label>
+                    <my-date-picker name="mydateFechaDesde" [options]="myDatePickerOptions" [(ngModel)]="toDate" required></my-date-picker>
+                </div>
 
                 <div class="float-right">
-                    <select class="custom-select" (change)="setearOperationTypePeriod($event.target.value)"  id="operationTypePeriod">
+                    <select class="custom-select" (change)="setearOperationTypePeriod($event.target.value)" id="operationTypePeriod">
                         <option [value]="operationType" *ngFor="let operationType of operationTypes">{{operationType
                             | dropdownTranslate:'operationTypes'}}</option>
                     </select>
@@ -42,24 +40,24 @@
                 </div>
 
                 <div>
-                    <button class="btn btn-primary" (click)="getOperationsByPeriodWithFilters()" style="display: inline; ">Consultar</button>
+                    <button class="btn btn-primary m-r-10" (click)="getOperationsByPeriodWithFilters()" style="display: inline; ">Consultar</button>
                     <button class="btn btn-info" (click)="cleanPeriodFilter()" style="display: inline; ">Limpiar filtros</button>
                 </div>
 
 
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 <div class="row animated fadeIn" *ngIf="showFilterOneDate">
-  <div class="col-12">
-    <div class="card">
-      <div class="card-body" style="height: 270px;">
-        <div class="form-group">
-          <label >Fecha:</label>
-          <my-date-picker name="mydate" [options]="myDatePickerOptions" [(ngModel)]="oneDate" required></my-date-picker>
-        </div>
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body" style="height: 270px;">
+                <div class="form-group">
+                    <label>Fecha:</label>
+                    <my-date-picker name="mydate" [options]="myDatePickerOptions" [(ngModel)]="oneDate" required></my-date-picker>
+                </div>
 
                 <div class="float-right">
                     <select (change)="setearPaymentMethodOneDate($event.target.value)" class="custom-select" id="paymentMethodOneDate">
@@ -73,67 +71,65 @@
                         <option [value]="operationType" *ngFor="let operationType of operationTypes">{{operationType
                             | dropdownTranslate:'operationTypes'}}</option>
                     </select>
-                </div>            
-                
-                <button class="btn btn-primary" (click)="getOperationsOneDateWithFilters()" style="display: inline-block;">Consultar</button>
+                </div>
+
+                <button class="btn btn-primary m-r-10" (click)="getOperationsOneDateWithFilters()" style="display: inline-block;">Consultar</button>
                 <button class="btn btn-info" (click)="cleanOneDateFilter()" style="display: inline-block;">Limpiar filtros</button>
 
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 
 <div class="row animated fadeIn" *ngIf="!loading">
-  <div class="col-12">
-    <div class="card">
-      <div class="card-body">
-        <h3 class="card-title">{{'operations.title' | translate}} (
-          <small>{{ page?.totalElements}}</small>
-          )
-        </h3>
-        <button type="button" class="btn btn-primary float-right mdi mdi-plus" [routerLink]="['/operacion']"></button>
-        <div class="table-responsive">
-          <table class="table table-hover m-auto" *ngIf="operations">
-            <thead>
-            <tr class="row">
-              <th class="col-2">{{'table.operations.createDateTime' | translate}}</th>
-              <th class="col-2">{{'table.operations.operationType' | translate}}</th>
-              <th class="col-2">{{'table.operations.paymentMethod' | translate}}</th>
-              <th class="col-2">{{'table.operations.total' | translate}}</th>
-              <th class="col-1">{{'table.status' | translate}}</th>
-              <th class="col-3">{{'table.accions' | translate}}</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let operation of operations" class="row">
-              <td class="col-2">{{ operation?.createDateTime | date: 'dd/MM/yyyy h:mm:ss a' }}</td>
-              <td class="col-2">{{ operation?.operationType | dropdownTranslate:'operationTypes' }}</td>
-              <td class="col-2">{{ operation?.paymentMethod | dropdownTranslate:'paymentMethods' }}</td>
-              <td class="col-2">{{operation?.total}}</td>
-              <td class="col-1"><span class="label label-rounded"
-                                      [ngClass]="(operation?.disabled)? 'label-danger':'label-success'">{{getOperationStatus(operation) | dropdownTranslate:'OperationStatus'}}</span>
-              </td>
-              <td class="col-3">
-                <div class="button-group">
-                  <button class="btn btn-secondary" (click)="editOrShowOperation(operation.operationId)">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">{{'operations.title' | translate}} (
+                    <small>{{ page?.totalElements}}</small> )
+                </h3>
+                <button type="button" class="btn btn-primary float-right mdi mdi-plus" [routerLink]="['/operacion']"></button>
+                <div class="table-responsive">
+                    <table class="table table-hover m-auto" *ngIf="operations">
+                        <thead>
+                            <tr class="row">
+                                <th class="col-2">{{'table.operations.createDateTime' | translate}}</th>
+                                <th class="col-2">{{'table.operations.operationType' | translate}}</th>
+                                <th class="col-2">{{'table.operations.paymentMethod' | translate}}</th>
+                                <th class="col-2">{{'table.operations.total' | translate}}</th>
+                                <th class="col-1">{{'table.status' | translate}}</th>
+                                <th class="col-3">{{'table.accions' | translate}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let operation of operations" class="row">
+                                <td class="col-2">{{ operation?.createDateTime | date: 'dd/MM/yyyy h:mm:ss a' }}</td>
+                                <td class="col-2">{{ operation?.operationType | dropdownTranslate:'operationTypes' }}</td>
+                                <td class="col-2">{{ operation?.paymentMethod | dropdownTranslate:'paymentMethods' }}</td>
+                                <td class="col-2">{{operation?.total}}</td>
+                                <td class="col-1"><span class="label label-rounded" [ngClass]="(operation?.disabled)? 'label-danger':'label-success'">{{getOperationStatus(operation) | dropdownTranslate:'OperationStatus'}}</span>
+                                </td>
+                                <td class="col-3">
+                                    <div class="button-group">
+                                        <button class="btn btn-secondary" (click)="editOrShowOperation(operation.operationId)">
                     <i class="mdi mdi-eye-outline" aria-hidden="true"></i>
                   </button>
-                  <button class="btn btn-info" (click)="editOrShowOperation(operation.operationId, true)">
+                                        <button class="btn btn-info" (click)="editOrShowOperation(operation.operationId, true)">
                     <i class="mdi mdi-pencil" aria-hidden="true"></i>
                   </button>
-                  <button [disabled]="operation?.disabled" class="btn btn-danger" (click)="cancelOperation(operation.operationId)">
+                                        <button [disabled]="operation?.disabled" class="btn btn-danger" (click)="cancelOperation(operation.operationId)">
                     <i class="mdi mdi-delete" aria-hidden="true"></i>
                   </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-              </td>
-            </tr>
-            </tbody>
-          </table>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
 <app-loading [loading]="loading"></app-loading>
 <app-pagination [page]="page" [pages]="pages" (pageNumber)="setPage($event)" *ngIf="operations"></app-pagination>

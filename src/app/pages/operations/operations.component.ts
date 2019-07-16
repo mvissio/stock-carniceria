@@ -98,10 +98,10 @@ export class OperationsComponent implements OnInit {
         });
   }
 
-  getOperationsByOneDate(nextPage: number, path: string, operationTypeOneDate: string, paymentMethodOneDate: string) {
+  getOperationsByOneDate(path: string, operationTypeOneDate: string, paymentMethodOneDate: string, nextPage = 0) {
     this.loading = true;
     this.pageConfig.pageNumber = nextPage;
-    this._operationService.getOperationsByCreateDate(this.pageConfig, new Date(this.oneDate.formatted), path, operationTypeOneDate, paymentMethodOneDate)
+    this._operationService.getOperationsByCreateDate(this.pageConfig, this.oneDate.jsdate, path, operationTypeOneDate, paymentMethodOneDate)
       .subscribe(
         (res: Page) => {
           this.page = res;
@@ -115,10 +115,10 @@ export class OperationsComponent implements OnInit {
         });
   }
 
-   getOperationsByPeriod(nextPage: number, path: string, operationTypePeriod: string, paymentMethodPeriod: string) {       
+   getOperationsByPeriod(path: string, operationTypePeriod: string, paymentMethodPeriod: string, nextPage = 0) {       
     this.loading = true;
     this.pageConfig.pageNumber = nextPage;    
-    this._operationService.getOperationsByPeriod(new Date(this.fromDate.formatted), new Date(this.toDate.formatted), this.pageConfig, path, operationTypePeriod, paymentMethodPeriod)
+    this._operationService.getOperationsByPeriod(this.fromDate.jsdate, this.toDate.jsdate, this.pageConfig, path, operationTypePeriod, paymentMethodPeriod)
       .subscribe(
         (res: Page) => {
           this.page = res;
@@ -193,16 +193,16 @@ export class OperationsComponent implements OnInit {
     this.cleanOneDateFilter();
     this.lastUsedFilter = "periodo";    
     if (this.operationTypePeriod.length == 0 && this.paymentMethodPeriod.length == 0) {      
-      this.getOperationsByPeriod(nextPage, "getOperationsByPeriod", null, null);
+      this.getOperationsByPeriod("getOperationsByPeriod", null, null, nextPage);
       return;
     } else if (this.operationTypePeriod.length > 0 && this.paymentMethodPeriod.length > 0) {
-      this.getOperationsByPeriod(nextPage, "getOperationsByPeriodAndOperationTypeAndPaymentMethod", this.operationTypePeriod, this.paymentMethodPeriod);
+      this.getOperationsByPeriod("getOperationsByPeriodAndOperationTypeAndPaymentMethod", this.operationTypePeriod, this.paymentMethodPeriod, nextPage);
       return;
     } else if (this.operationTypePeriod.length > 0) {
-      this.getOperationsByPeriod(nextPage, "getOperationsByPeriodAndOperationType", this.operationTypePeriod, null);
+      this.getOperationsByPeriod("getOperationsByPeriodAndOperationType", this.operationTypePeriod, null, nextPage);
       return;
     } else if (this.paymentMethodPeriod.length > 0) {
-      this.getOperationsByPeriod(nextPage, "getOperationsByPeriodAndPaymentMethod", null, this.paymentMethodPeriod);
+      this.getOperationsByPeriod("getOperationsByPeriodAndPaymentMethod", null, this.paymentMethodPeriod, nextPage);
     }
   }
 
@@ -210,16 +210,16 @@ export class OperationsComponent implements OnInit {
     this.cleanPeriodFilter();
     this.lastUsedFilter = "fecha";  
     if (this.operationTypeOneDate.length == 0 && this.paymentMethodOneDate.length == 0) {
-      this.getOperationsByOneDate(nextPage, "getOperationsByOneDate", null, null);
+      this.getOperationsByOneDate("getOperationsByOneDate", null, null, nextPage);
       return;
     } else if (this.operationTypeOneDate.length > 0 && this.paymentMethodOneDate.length > 0) {
-      this.getOperationsByOneDate(nextPage, "getOperationsByOneDateAndOperationTypeAndPaymentMethod", this.operationTypeOneDate, this.paymentMethodOneDate);
+      this.getOperationsByOneDate("getOperationsByOneDateAndOperationTypeAndPaymentMethod", this.operationTypeOneDate, this.paymentMethodOneDate, nextPage);
       return;
     } else if (this.operationTypeOneDate.length > 0) {
-      this.getOperationsByOneDate(nextPage, "getOperationsByOneDateAndOperationType", this.operationTypeOneDate, null);
+      this.getOperationsByOneDate("getOperationsByOneDateAndOperationType", this.operationTypeOneDate, null, nextPage);
       return;
     } else if (this.paymentMethodOneDate.length > 0) {
-      this.getOperationsByOneDate(nextPage, "getOperationsByOneDateAndPaymentMethod", null, this.paymentMethodOneDate);
+      this.getOperationsByOneDate("getOperationsByOneDateAndPaymentMethod", null, this.paymentMethodOneDate, nextPage);
       return;
     }
   }
