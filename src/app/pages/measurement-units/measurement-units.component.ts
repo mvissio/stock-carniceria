@@ -37,7 +37,7 @@ export class MeasurementUnitsComponent implements OnInit {
   }
 
   setPage(nextPage: number) {
-    if (this.searchText.length < 0) {
+    if (this.searchText && this.searchText.length > 0) {
       this.findMeasurementUnit(this.searchText, nextPage);
     } else {
       this.getMeasurementUnits(nextPage);

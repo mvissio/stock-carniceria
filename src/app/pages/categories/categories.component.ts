@@ -37,7 +37,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   setPage(nextPage: number) {
-    if (this.searchText.length > 0) {
+    if (this.searchText && this.searchText.length > 0) {
       this.findCategory(this.searchText, nextPage);
     } else {
       this.getCategories(nextPage);
