@@ -11,6 +11,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { forkJoin } from 'rxjs';
 import swal from 'sweetalert';
 import { IMyDpOptions, IMyDateModel } from 'mydatepicker';
+import { toastType } from '../../constants/constant';
 
 
 @Component({
@@ -65,7 +66,7 @@ export class OperationsComponent implements OnInit {
       this.operationTypes = res[0];
       this.paymentMethods = res[1];
     }, (err: HttpErrorResponse) => {
-      this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
+      this._commonsService.showMessage(toastType.error, this._handleErrorsService.handleErrors(err));
     });
   }
 
@@ -94,7 +95,7 @@ export class OperationsComponent implements OnInit {
         },
         (err: HttpErrorResponse) => {
           this.loading = false;
-          this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
+          this._commonsService.showMessage(toastType.error, this._handleErrorsService.handleErrors(err));
         });
   }
 
@@ -111,7 +112,7 @@ export class OperationsComponent implements OnInit {
         },
         (err: HttpErrorResponse) => {
           this.loading = false;
-          this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
+          this._commonsService.showMessage(toastType.error, this._handleErrorsService.handleErrors(err));
         });
   }
 
@@ -128,7 +129,7 @@ export class OperationsComponent implements OnInit {
         },
         (err: HttpErrorResponse) => {
           this.loading = false;
-          this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
+          this._commonsService.showMessage(toastType.error, this._handleErrorsService.handleErrors(err));
         });
   }
 

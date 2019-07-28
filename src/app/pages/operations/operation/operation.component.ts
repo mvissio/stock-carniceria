@@ -9,7 +9,7 @@ import {CommonsService} from '../../../services/commons.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {forkJoin, Observable} from 'rxjs';
 import {OperationDetail} from '../../../models/operationDetail.model';
-import {operationStatus, discountValues, operationTypes} from '../../../constants/constant';
+import { operationStatus, discountValues, operationTypes, toastType } from '../../../constants/constant';
 import {ArticleService} from '../../../services/pages/article.service';
 import {Article} from '../../../models/article.model';
 import swal from 'sweetalert';
@@ -59,7 +59,7 @@ export class OperationComponent implements OnInit {
         this.operationTypes = res[0];
         this.paymentMethods = res[1];
       }, (err: HttpErrorResponse) => {
-        this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
+        this._commonsService.showMessage(toastType.error, this._handleErrorsService.handleErrors(err));
       });
   }
 
@@ -117,7 +117,7 @@ export class OperationComponent implements OnInit {
         this.operation = res;
         this.initForm();
       }, (err: HttpErrorResponse) => {
-        this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
+        this._commonsService.showMessage(toastType.error, this._handleErrorsService.handleErrors(err));
       });
   }
 
@@ -163,22 +163,22 @@ export class OperationComponent implements OnInit {
                 .subscribe(() => {
                   this.translate.get('operations.updateOk')
                     .subscribe((res: string) => {
-                      this._commonsService.showMessage('success', res);
+                      this._commonsService.showMessage(toastType.success, res);
                       this.back();
                     });
                 }, (err: HttpErrorResponse) => {
-                  this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
+                  this._commonsService.showMessage(toastType.error, this._handleErrorsService.handleErrors(err));
                 });
             } else {
               this._operationService.addOperation(this.operation)
                 .subscribe(() => {
                   this.translate.get('operations.createOk')
                     .subscribe((res: string) => {
-                      this._commonsService.showMessage('success', res);
+                      this._commonsService.showMessage(toastType.success, res);
                       this.back();
                     });
                 }, (err: HttpErrorResponse) => {
-                  this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
+                  this._commonsService.showMessage(toastType.error, this._handleErrorsService.handleErrors(err));
                 });
             }
           }
@@ -218,7 +218,7 @@ export class OperationComponent implements OnInit {
       } else {
         this.translate.get('articles.amountInsuficient', {param: odObject.article.currentQuantity})
           .subscribe((result) => {
-            this._commonsService.showMessage('error', result);
+            this._commonsService.showMessage(toastType.error, result);
             this.articleAmountSizeError = true;
           });
         return true;

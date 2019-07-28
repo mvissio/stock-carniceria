@@ -2,8 +2,8 @@
     "generalValidations": {
         "required": "Es requerido",
         "email": "El correo electrónico debe ser una dirección de correo electrónico válida",
-        "maxLength": "La logitud máxima es de {{param}}",
-        "minLength": "La logitud mínima es de {{param}}",
+        "maxLength": "La longitud máxima es de {{param}}",
+        "minLength": "La longitud mínima es de {{param}}",
         "min": "El mínimo es de {{param}}",
         "max": "El máximo es de {{param}}",
         "pattern": "El valor ingresado no es correcto"
@@ -11,7 +11,7 @@
     "generalHTTPErrors": {
         "server": "Ha ocurrido un error en el servidor, intente nuevamente más tarde.",
         "request": "Los datos ingresados son incorrectos.",
-        "notFound": "No se han encontrado datos.",
+        "notFound": "No se han encontrado datos para la busqueda.",
         "conflict": "Ha habido un conflicto con los datos, intente nuevamente más tarde.",
         "authorization": "No tiene permisos para acceder a los datos requeridos.",
         "login": "Usuario o contraseña incorrecta.",

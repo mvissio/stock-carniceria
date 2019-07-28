@@ -2,13 +2,13 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <input #input (keyup.enter)="findMeasurementUnit(input.value)" [(ngModel)]="searchText" type="search" class="form-control" [placeholder]="'measurementUnits.searchLabel' | translate">
+                <input #input (keyup)="findMeasurementUnit(input.value)" [(ngModel)]="searchText" type="search" class="form-control" [placeholder]="'measurementUnits.searchLabel' | translate">
             </div>
         </div>
     </div>
 </div>
 <div class="row animated fadeIn" *ngIf="!loading">
-    <div class="col-12">
+    <div class="col-12 container-fluid">
         <div class="card">
             <div class="card-body">
                 <h3 class="card-title">{{'measurementUnits.title' | translate}} (
@@ -58,5 +58,6 @@
             </div>
         </div>
     </div>
-    <app-loading [loading]="loading"></app-loading>
-    <app-pagination [page]="page" [pages]="pages" (pageNumber)="setPage($event)" *ngIf="measurementUnits"></app-pagination>
+</div>
+<app-loading [loading]="loading"></app-loading>
+<app-pagination [page]="page" [pages]="pages" (pageNumber)="setPage($event)" *ngIf="measurementUnits"></app-pagination>

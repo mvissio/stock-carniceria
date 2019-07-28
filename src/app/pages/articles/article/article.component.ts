@@ -9,6 +9,7 @@ import { HandleErrorsService } from '../../../services/shared/handle-errors.serv
 import { HttpErrorResponse } from '@angular/common/http';
 import { formatDate } from '@angular/common';
 import { IMyDpOptions, IMyDate } from 'mydatepicker';
+import { toastType } from '../../../constants/constant';
 
 @Component({
   selector: 'app-article',
@@ -88,7 +89,7 @@ export class ArticleComponent implements OnInit {
           this.updateDate(selDate);
         }
       }, (err: HttpErrorResponse) => {
-        this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
+        this._commonsService.showMessage(toastType.error, this._handleErrorsService.handleErrors(err));
       });
   }
 
@@ -106,11 +107,11 @@ export class ArticleComponent implements OnInit {
         .subscribe(() => {
           this.translate.get('articles.updateOk')
             .subscribe((res: string) => {
-              this._commonsService.showMessage('success', res);
+              this._commonsService.showMessage(toastType.success, res);
               this.back();
             });
         }, (err: HttpErrorResponse) => {
-          this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
+          this._commonsService.showMessage(toastType.error, this._handleErrorsService.handleErrors(err));
         });
     } else {
       console.log("esta es la fecha de expiracion", this.article.expirationDate);
@@ -118,11 +119,11 @@ export class ArticleComponent implements OnInit {
         .subscribe(() => {
           this.translate.get('articles.createOk')
             .subscribe((res: string) => {
-              this._commonsService.showMessage('success', res);
+              this._commonsService.showMessage(toastType.success, res);
               this.back();
             });
         }, (err: HttpErrorResponse) => {
-          this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
+          this._commonsService.showMessage(toastType.error, this._handleErrorsService.handleErrors(err));
         });
     }
   }
@@ -147,7 +148,7 @@ export class ArticleComponent implements OnInit {
       .subscribe((res: any) => {
         this.measurementUnits = res.content;
       }, (err: HttpErrorResponse) => {
-        this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
+        this._commonsService.showMessage(toastType.error, this._handleErrorsService.handleErrors(err));
       });
   }
 
@@ -156,7 +157,7 @@ export class ArticleComponent implements OnInit {
       .subscribe((res: any) => {
         this.categories = res.content;
       }, (err: HttpErrorResponse) => {
-        this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
+        this._commonsService.showMessage(toastType.error, this._handleErrorsService.handleErrors(err));
       });
   }
 

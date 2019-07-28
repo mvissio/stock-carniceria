@@ -10,8 +10,7 @@ import {forkJoin} from 'rxjs';
 import swal from 'sweetalert';
 import {CommonsService} from '../../services/commons.service';
 import {Router} from '@angular/router';
-import {MeasurementUnitService} from '../../services/measurement-units/measurement-unit.service';
-
+import { toastType } from '../../constants/constant';
 
 @Component({
   selector: 'app-articles',
@@ -63,7 +62,7 @@ export class ArticlesComponent implements OnInit {
         },
         (err: HttpErrorResponse) => {
           this.loading = false;
-          this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
+          this._commonsService.showMessage(toastType.error, this._handleErrorsService.handleErrors(err));
         });
   }
 
@@ -113,26 +112,33 @@ export class ArticlesComponent implements OnInit {
   }
 
   findArticle(articleName: string, nextPage = 0) {
-    this.loading = true;
-    this.pageConfig.pageNumber = nextPage;
-    if (articleName !== null && articleName !== '') {
+    if (articleName.length > 2) {
+      this.loading = true;
+      this.pageConfig.pageNumber = nextPage;
       this._articleService.getArticleByName(articleName, this.pageConfig)
       .subscribe(
-        (res: Page) => {
-          if(res) {
+        (page: Page) => {
+          if(!page.empty) {
             this.articles = [];
-            this.page = res;
+            this.page = page;
             this.articles = this.page.content;
             this.pages = new Array(this.page.totalPages);
+          } else {
+            this.translate.get('generalHTTPErrors.notFound')
+            .subscribe((res) => {
+              this._commonsService.showMessage(toastType.warning, res);
+            });
           }
           this.loading = false;
         },
         (err: HttpErrorResponse) => {
           this.getArticles(0);
-          this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
+          this._commonsService.showMessage(toastType.error, this._handleErrorsService.handleErrors(err));
         });
     } else {
-      this.getArticles(0);
+      if (articleName.length === 0) {
+        this.getArticles(0);
+      }
     }
   }
 

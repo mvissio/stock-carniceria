@@ -8,6 +8,7 @@ import {CommonsService} from '../../../services/commons.service';
 import {HandleErrorsService} from '../../../services/shared/handle-errors.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {formatDate} from '@angular/common';
+import { toastType } from '../../../constants/constant';
 
 
 @Component({
@@ -68,7 +69,7 @@ export class MeasurementUnitComponent implements OnInit {
         this.measurementUnit = res;
         this.initForm();
       }, (err: HttpErrorResponse) => {
-        this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
+        this._commonsService.showMessage(toastType.error, this._handleErrorsService.handleErrors(err));
       });
   }
 
@@ -82,22 +83,22 @@ export class MeasurementUnitComponent implements OnInit {
         .subscribe(() => {
           this.translate.get('measurementUnits.updateOk')
             .subscribe((res: string) => {
-              this._commonsService.showMessage('success', res);
+              this._commonsService.showMessage(toastType.success, res);
               this.back();
             });
         }, (err: HttpErrorResponse) => {
-          this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
+          this._commonsService.showMessage(toastType.error, this._handleErrorsService.handleErrors(err));
         });
     } else {
       this._measurementUnitService.addMeasurementUnit(this.measurementUnit)
         .subscribe(() => {
           this.translate.get('measurementUnits.createOk')
             .subscribe((res: string) => {
-              this._commonsService.showMessage('success', res);
+              this._commonsService.showMessage(toastType.success, res);
               this.back();
             });
         }, (err: HttpErrorResponse) => {
-          this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
+          this._commonsService.showMessage(toastType.error, this._handleErrorsService.handleErrors(err));
         });
     }
   }

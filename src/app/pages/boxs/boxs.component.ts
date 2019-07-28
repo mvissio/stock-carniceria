@@ -10,6 +10,7 @@ import {CommonsService} from '../../services/commons.service';
 import swal from 'sweetalert';
 import {forkJoin} from 'rxjs';
 import {TranslateService} from '@ngx-translate/core';
+import { toastType } from '../../constants/constant';
 
 
 @Component({
@@ -71,16 +72,16 @@ export class BoxsComponent implements OnInit {
   createBox() {
     this._boxService.checkOpenBox().subscribe((data: Array<Box>) => {
       if (data.length > 0) {
-        this._commonsService.showMessage('warning', 'Por favor cierre todas las cajas abiertas.');
+        this._commonsService.showMessage(toastType.warning, 'Por favor cierre todas las cajas abiertas.');
       } else {
         this._boxService.addBox(this.getNewBox()).subscribe(
           (res: Box) => {
-            this._commonsService.showMessage('success', 'Caja Creada');
+            this._commonsService.showMessage(toastType.success, 'Caja Creada');
             this.getBoxs(0);
             this.closeModal();
           },
           (err: HttpErrorResponse) => {
-            this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
+            this._commonsService.showMessage(toastType.error, this._handleErrorsService.handleErrors(err));
           });
       }
     });
@@ -109,7 +110,7 @@ export class BoxsComponent implements OnInit {
         },
         (err: HttpErrorResponse) => {
           this.loading = false;
-          this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
+          this._commonsService.showMessage(toastType.error, this._handleErrorsService.handleErrors(err));
         });
   }
 
@@ -144,7 +145,7 @@ export class BoxsComponent implements OnInit {
         },
         (err: HttpErrorResponse) => {
           this.loading = false;
-          this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
+          this._commonsService.showMessage(toastType.error, this._handleErrorsService.handleErrors(err));
         },
         () => this.loadOperation = true
       );

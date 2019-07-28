@@ -4,7 +4,7 @@ import {StorageService} from '../services/storage/storage.service';
 import {AuthService} from '../services/auth/auth.service';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import {Auth} from '../models/auth.model';
-import {USUARIO_KEY} from '../constants/constant';
+import { USUARIO_KEY, toastType } from '../constants/constant';
 import {HandleErrorsService} from '../services/shared/handle-errors.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {CommonsService} from '../services/commons.service';
@@ -75,7 +75,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/inicio']);
         },
         (err: HttpErrorResponse) => {
-          this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err, 'login'));
+          this._commonsService.showMessage(toastType.error, this._handleErrorsService.handleErrors(err, 'login'));
         });
   }
 
@@ -87,11 +87,11 @@ export class LoginComponent implements OnInit {
       .subscribe(() => {
           this.translate.get('forgotPassword.sendOk')
             .subscribe((res: string) => {
-              this._commonsService.showMessage('success', res);
+              this._commonsService.showMessage(toastType.success, res);
             });
         },
         (err: HttpErrorResponse) => {
-          this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
+          this._commonsService.showMessage(toastType.error, this._handleErrorsService.handleErrors(err));
         }
       );
   }

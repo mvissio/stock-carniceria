@@ -10,6 +10,7 @@ import {forkJoin} from 'rxjs';
 import swal from 'sweetalert';
 import {CommonsService} from '../../services/commons.service';
 import {Router} from '@angular/router';
+import { toastType } from '../../constants/constant';
 
 @Component({
   selector: 'app-categories',
@@ -59,31 +60,38 @@ export class CategoriesComponent implements OnInit {
         },
         (err: HttpErrorResponse) => {
           this.loading = false;
-          this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
+          this._commonsService.showMessage(toastType.error, this._handleErrorsService.handleErrors(err));
         });
   }
 
   findCategory(name: string, nextPage = 0) {
-    this.loading = true;
-    this.pageConfig.pageNumber = nextPage;
-    if (name !== null) {
+    if (name.length > 2) {
+      this.loading = true;
+      this.pageConfig.pageNumber = nextPage;
       this._categoryService.getCategoryByname(name, this.pageConfig)
       .subscribe(
-        (res: Page) => {
-          if (res) {
+        (page: Page) => {
+          if (!page.empty) {
             this.categories = [];
-            this.page = res;
+            this.page = page;
             this.categories = this.page.content;
             this.pages = new Array(this.page.totalPages);
+          } else {
+            this.translate.get('generalHTTPErrors.notFound')
+            .subscribe((res) => {
+              this._commonsService.showMessage(toastType.warning, res);
+            });
           }
           this.loading = false;
         },
         (err: HttpErrorResponse) => {
           this.loading = false;
-          this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
+          this._commonsService.showMessage(toastType.error, this._handleErrorsService.handleErrors(err));
         });
     } else {
-      this.getCategories(0);
+      if (name.length === 0) {
+        this.getCategories(0);
+      }
     }
 
   }

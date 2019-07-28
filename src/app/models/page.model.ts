@@ -6,6 +6,7 @@ export class Page {
     number?: number;
     last?: boolean;
     first?: boolean;
+    empty?: boolean;
     constructor(
         content?: Array<any>,
         totalPages?: number,
@@ -13,7 +14,8 @@ export class Page {
         size?: number,
         number?: number,
         last?: boolean,
-        first?: boolean
+        first?: boolean,
+        empty?: boolean
     ) {
         this.content = content;
         this.totalPages = totalPages;
@@ -22,5 +24,6 @@ export class Page {
         this.number = number;
         this.last = last;
         this.first = first;
+        this.empty = empty;
     }
 }

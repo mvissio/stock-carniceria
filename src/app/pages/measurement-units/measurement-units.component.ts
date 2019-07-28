@@ -10,6 +10,7 @@ import {forkJoin} from 'rxjs';
 import swal from 'sweetalert';
 import {CommonsService} from '../../services/commons.service';
 import {Router} from '@angular/router';
+import { toastType } from '../../constants/constant';
 
 @Component({
   selector: 'app-measurement-units',
@@ -59,31 +60,39 @@ export class MeasurementUnitsComponent implements OnInit {
         },
         (err: HttpErrorResponse) => {
           this.loading = false;
-          this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
+          this._commonsService.showMessage(toastType.error, this._handleErrorsService.handleErrors(err));
         });
   }
 
   findMeasurementUnit(nameMeasurementUnit: string, nextPage = 0) {
-    this.loading = true;
-    this.pageConfig.pageNumber = nextPage;
-    if (nameMeasurementUnit !== null && nameMeasurementUnit !== '') {
+    if (nameMeasurementUnit.length > 2) {
+      this.loading = true;
+      this.pageConfig.pageNumber = nextPage;
       this._measurementUnitService.getMeasurementUnitByname(nameMeasurementUnit, this.pageConfig)
       .subscribe(
-        (res: Page) => {
-          if(res) {
+        (page: Page) => {
+          if(!page.empty) {
             this.measurementUnits = [];
-            this.page = res;
+            this.page = page;
             this.measurementUnits = this.page.content;
             this.pages = new Array(this.page.totalPages);
+          } else {
+            this.translate.get('generalHTTPErrors.notFound')
+            .subscribe((res) => {
+              this._commonsService.showMessage(toastType.warning, res);
+            });
           }
           this.loading = false;
         },
         (err: HttpErrorResponse) => {
+          this.loading = false;
           this.getMeasurementUnits(0);
-          this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
+          this._commonsService.showMessage(toastType.error, this._handleErrorsService.handleErrors(err));
         });
     } else {
-      this.getMeasurementUnits(0);
+      if (nameMeasurementUnit.length === 0) {
+        this.getMeasurementUnits(0);
+      }
     }
 
   }

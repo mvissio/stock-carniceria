@@ -8,6 +8,7 @@ import { CommonsService } from '../../../services/commons.service';
 import { HandleErrorsService } from '../../../services/shared/handle-errors.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { formatDate } from '@angular/common';
+import { toastType } from '../../../constants/constant';
 
 @Component({
   selector: 'app-category',
@@ -60,7 +61,7 @@ export class CategoryComponent implements OnInit {
         this.category = res;
         this.initForm();
       }, (err: HttpErrorResponse) => {
-        this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
+        this._commonsService.showMessage(toastType.error, this._handleErrorsService.handleErrors(err));
       });
   }
 
@@ -74,22 +75,22 @@ export class CategoryComponent implements OnInit {
         .subscribe(() => {
           this.translate.get('categories.updateOk')
           .subscribe((res: string) => {
-            this._commonsService.showMessage('success', res);
+            this._commonsService.showMessage(toastType.success, res);
             this.back();
           });
         }, (err: HttpErrorResponse) => {
-          this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
+          this._commonsService.showMessage(toastType.error, this._handleErrorsService.handleErrors(err));
         });
     } else {
       this._categoryService.addCategory(this.category)
         .subscribe(() => {
           this.translate.get('categories.createOk')
           .subscribe((res: string) => { 
-            this._commonsService.showMessage('success', res);
+            this._commonsService.showMessage(toastType.success, res);
             this.back();
           });
         }, (err: HttpErrorResponse) => {
-          this._commonsService.showMessage('error', this._handleErrorsService.handleErrors(err));
+          this._commonsService.showMessage(toastType.error, this._handleErrorsService.handleErrors(err));
         });
     }
   }
