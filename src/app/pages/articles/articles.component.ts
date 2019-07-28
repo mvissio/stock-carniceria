@@ -40,7 +40,7 @@ export class ArticlesComponent implements OnInit {
   }
 
   setPage(nextPage: number) {
-    if (this.searchText.length < 0) {
+    if (this.searchText && this.searchText.length > 0) {
       this.findArticle(this.searchText, nextPage);
     } else {
       this.getArticles(nextPage);
