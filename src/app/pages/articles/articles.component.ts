@@ -102,6 +102,11 @@ export class ArticlesComponent implements OnInit {
     });
   }
 
+  enabledArticle(id: number) {
+    this._articleService.enabledArticle(id)
+      .subscribe(() => this.getArticles(this.pageConfig.pageNumber));
+  }
+
   getArticleStatus(article: Article): string {
     let status: string;
     this.translate.get((article.disabled) ? 'articleStatus.disabled' : 'articleStatus.enabled')

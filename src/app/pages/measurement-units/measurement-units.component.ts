@@ -133,6 +133,11 @@ export class MeasurementUnitsComponent implements OnInit {
     });
   }
 
+  enabledMeasurementUnit(id: number) {
+    this._measurementUnitService.enabledMeasurementUnit(id)
+      .subscribe(() => this.getMeasurementUnits(this.pageConfig.pageNumber));
+  }
+
   getMeasurementUnitStatus(measurementUnit: MeasurementUnit): string {
     let status: string;
     this.translate.get((measurementUnit.disabled) ? 'measurementUnitStatus.disabled' : 'measurementUnitStatus.enabled')

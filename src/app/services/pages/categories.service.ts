@@ -49,7 +49,12 @@ export class CategoryService {
     return this.httpClient.put(url, category)
       .pipe(map((response: any) => response));
   }
- 
+
+  enabledCategory(id: number) {
+    const url = `${this.categoryUrl.enabledCategory}/${id}`;
+    return this.httpClient.patch(url, false)
+      .pipe(map((response) => response));
+  }
 
   deleteCategory(id : number) {
     const url = `${this.categoryUrl.deleteCategory}/${id}`;

@@ -39,8 +39,11 @@
                                         <button class="btn btn-info" (click)="editOrShowMeasurementUnit(measurementUnit.measurementUnitId, true)">
                     <i class="mdi mdi-pencil" aria-hidden="true"></i>
                   </button>
-                                        <button class="btn btn-danger" [disabled]="measurementUnit?.disabled" (click)="deleteMeasurementUnit(measurementUnit.name,measurementUnit.measurementUnitId)">
+                                        <button class="btn btn-danger" *ngIf="!measurementUnit?.disabled" (click)="deleteMeasurementUnit(measurementUnit.name,measurementUnit.measurementUnitId)">
                     <i class="mdi mdi-delete" aria-hidden="true"></i>
+                  </button>
+                                        <button class="btn btn-success" *ngIf="measurementUnit?.disabled" (click)="enabledMeasurementUnit(measurementUnit.measurementUnitId)">
+                    <i class="mdi mdi-toggle-switch" aria-hidden="true"></i>
                   </button>
                                     </div>
                                 </td>

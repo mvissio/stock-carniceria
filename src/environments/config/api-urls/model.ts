@@ -56,6 +56,8 @@ interface ArticleURLs {
   getArticlesByNameOrBrandOrCodeLike?: string;
   getAllMeasurementUnits?: string;
   deleteArticle?: string;
+  enabledArticle?: string;
+
 }
 
 interface MeasurementUnitURLs {
@@ -63,6 +65,7 @@ interface MeasurementUnitURLs {
   getMeasurementUnitByName?: string;
   getMeasurementUnitByMeasurementUnitId?: string;
   deleteMeasurementUnit?: string;
+  enabledMeasurementUnit?: string;
 }
 
 interface BoxURLs {
@@ -76,5 +79,6 @@ interface CategoryURLs {
   getCategoryByName?: string;
   getCategoryByCategoryId?: string;
   deleteCategory?: string;
+  enabledCategory?: string;
 }
 

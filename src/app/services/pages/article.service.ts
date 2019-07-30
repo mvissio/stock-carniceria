@@ -90,6 +90,12 @@ export class ArticleService {
       .pipe(map((response: any) => response));
   }
 
+  enabledArticle(id: number) {
+    const url = `${this.articleUrl.enabledArticle}/${id}`;
+    return this.httpClient.patch(url, false)
+      .pipe(map((response) => response));
+  }
+
   deleteArticle(id: number) {
     const url = `${this.articleUrl.deleteArticle}/${id}`;
     return this.httpClient.delete(url)

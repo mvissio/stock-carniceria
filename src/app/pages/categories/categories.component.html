@@ -39,8 +39,11 @@
                                         <button class="btn btn-info" (click)="editOrShowCategory(category.categoryId, true)">
                     <i class="mdi mdi-pencil" aria-hidden="true"></i>
                   </button>
-                                        <button class="btn btn-danger" [disabled]="category?.disabled" (click)="deleteCategory(category.name,category.categoryId)">
+                                        <button class="btn btn-danger" *ngIf="!category?.disabled" (click)="deleteCategory(category.name,category.categoryId)">
                     <i class="mdi mdi-delete" aria-hidden="true"></i>
+                  </button>
+                                        <button class="btn btn-success" *ngIf="category?.disabled" (click)="enabledCategory(category.categoryId)">
+                    <i class="mdi mdi-toggle-switch" aria-hidden="true"></i>
                   </button>
                                     </div>
                                 </td>

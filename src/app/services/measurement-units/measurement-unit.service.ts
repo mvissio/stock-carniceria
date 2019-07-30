@@ -53,6 +53,11 @@ export class MeasurementUnitService {
       .pipe(map((response: any) => response));
   }
 
+  enabledMeasurementUnit(id: number) {
+    const url = `${this.measurementUnitUrl.enabledMeasurementUnit}/${id}`;
+    return this.httpClient.patch(url, false)
+      .pipe(map((response) => response));
+  }
 
   deleteMeasurementUnit(id: number) {
     const url = `${this.measurementUnitUrl.deleteMeasurementUnit}/${id}`;

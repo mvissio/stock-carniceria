@@ -40,19 +40,22 @@ export const applicationApiUrls: ApiURLs = {
     getArticleByName: '/name',
     getArticlesByNameOrBrandOrCodeLike: '/search',
     getAllMeasurementUnits: '/measurementUnits',
-    deleteArticle: '/id'
+    deleteArticle: '/id',
+    enabledArticle: '/id'
   },
   measurementUnit: {
     base: 'API_VERSION/measurementUnits',
     getMeasurementUnitByMeasurementUnitId: '/id',
     getMeasurementUnitByName: '/name',
-    deleteMeasurementUnit: '/id'
+    deleteMeasurementUnit: '/id',
+    enabledMeasurementUnit: '/id'
   },
   category: {
     base: 'API_VERSION/categories',
     getCategoryByCategoryId: '/id',
     getCategoryByName: '/name',
-    deleteCategory: '/id'
+    deleteCategory: '/id',
+    enabledCategory: '/id'
   },
   box: {
     base: 'API_VERSION/boxs',

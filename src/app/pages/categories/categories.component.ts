@@ -132,6 +132,11 @@ export class CategoriesComponent implements OnInit {
     });
   }
 
+  enabledCategory(id: number) {
+    this._categoryService.enabledCategory(id)
+      .subscribe(() => this.getCategories(this.pageConfig.pageNumber));
+  }
+
   getCategoryStatus(category: Category): string {
     let status: string;
     this.translate.get((category.disabled) ? 'categoryStatus.disabled' : 'categoryStatus.enabled')
