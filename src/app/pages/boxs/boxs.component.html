@@ -114,9 +114,26 @@
         <div class="col-6">{{boxModal.dateClose| date:'dd/MM/yyyy'| defaultValue: 'Sin Registro'}}</div>
       </div>
       <div class="row m-t-20">
-        <div class="col-6">Detalle de Cierre</div>
+        <div class="col-6">{{'boxs.detailsClose' | translate}}</div>
         <div class="col-6">{{boxModal.detailClose | defaultValue: 'Sin Registro'}}</div>
       </div>
+      <div class="row m-t-20">
+        <div class="col-6">{{'boxs.buyCant' | translate}}</div>
+        <div class="col-6">{{boxOperation.buyOperation.cant | defaultValue: 'Sin Registro'}}</div>
+      </div>
+      <div class="row m-t-20">
+        <div class="col-6">{{'boxs.buyMont' | translate}}</div>
+        <div class="col-6">{{boxOperation.buyOperation.total | defaultValue: 'Sin Registro'}}</div>
+      </div>
+      <div class="row m-t-20">
+        <div class="col-6">{{'boxs.saleCant' | translate}}</div>
+        <div class="col-6">{{boxOperation.saleOperation.cant | defaultValue: 'Sin Registro'}}</div>
+      </div>
+      <div class="row m-t-20">
+        <div class="col-6">{{'boxs.saleMont' | translate}}</div>
+        <div class="col-6">{{boxOperation.saleOperation.total | defaultValue: 'Sin Registro'}}</div>
+      </div>
+
     </div>
     <div class="form-group row button-group justify-content-center m-t-40">
       <div class="col-md-5">

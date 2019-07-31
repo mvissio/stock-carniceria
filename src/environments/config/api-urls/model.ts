@@ -25,15 +25,15 @@ interface UserURLs {
 interface OperationURLs {
   base: string;
   getOperationById?: string;
-  getOperationsByPaymentMethod?: string;  
+  getOperationsByPaymentMethod?: string;
   getOperationsByDateBetween?: string;
   getOperationsByTypeAndDate?: string;
-  
-  getOperationsByOneDate?: string;  
+
+  getOperationsByOneDate?: string;
   getOperationsByOneDateAndPaymentMethod?: string;
-  getOperationsByOneDateAndOperationType?: string;  
+  getOperationsByOneDateAndOperationType?: string;
   getOperationsByOneDateAndOperationTypeAndPaymentMethod?:string;
-  
+
   getOperationsByPeriod?: string;
   getOperationsByPeriodAndPaymentMethod;
   getOperationsByPeriodAndOperationType;
@@ -71,6 +71,7 @@ interface MeasurementUnitURLs {
 interface BoxURLs {
   base: string;
   getOpenBoxs?: string;
+  getOperationsBoxPage?: string;
   getOperationsBox?: string;
   closeBox?: string;
 }

@@ -10,7 +10,8 @@ import {CommonsService} from '../../services/commons.service';
 import swal from 'sweetalert';
 import {forkJoin} from 'rxjs';
 import {TranslateService} from '@ngx-translate/core';
-import { toastType } from '../../constants/constant';
+import {toastType} from '../../constants/constant';
+import {Operation} from '../../models/operation.model';
 
 
 @Component({
@@ -36,6 +37,17 @@ export class BoxsComponent implements OnInit {
     SHOW_DETAILS: 'show details',
     SHOW_OPERATIONS: 'show operations'
   };
+  boxOperation = {
+    saleOperation: {
+      total: 0,
+      cant: 0
+    },
+    buyOperation: {
+      total: 0,
+      cant: 0
+    }
+  };
+
 
   ngOnInit() {
     this.pageConfig = new PageConfig('dateOpen');
@@ -72,7 +84,10 @@ export class BoxsComponent implements OnInit {
   createBox() {
     this._boxService.checkOpenBox().subscribe((data: Array<Box>) => {
       if (data.length > 0) {
-        this._commonsService.showMessage(toastType.warning, 'Por favor cierre todas las cajas abiertas.');
+        this.translate.get('boxs.errorOpenBox')
+          .subscribe((res: string) => {
+            this._commonsService.showMessage(toastType.warning, res);
+          });
       } else {
         this._boxService.addBox(this.getNewBox()).subscribe(
           (res: Box) => {
@@ -128,6 +143,20 @@ export class BoxsComponent implements OnInit {
 
   viewDetails(box: Box) {
     this.boxModal = box;
+    this._boxService.getOperations(box.boxId).subscribe((resp: Array<Operation>) => {
+      resp.forEach(operation => {
+        switch (operation.operationType) {
+          case 'BUY':
+            this.boxOperation.buyOperation.cant += 1;
+            this.boxOperation.buyOperation.total += operation.total;
+            break;
+          case 'SALE':
+            this.boxOperation.saleOperation.cant += 1;
+            this.boxOperation.saleOperation.total += operation.total;
+            break;
+        }
+      });
+    });
   }
 
   viewOperations(box: Box, nextPage?: number) {
@@ -135,7 +164,7 @@ export class BoxsComponent implements OnInit {
     this.boxModal = box;
     this.pageConfig.pageNumber = (nextPage) ? nextPage : 0;
     this.pageConfig.sortName = 'createDateTime';
-    this._boxService.getOperations(box.boxId, this.pageConfig)
+    this._boxService.getOperationsPage(box.boxId, this.pageConfig)
       .subscribe(
         (resp: Page) => {
           this.pageOperation = resp;
@@ -180,15 +209,20 @@ export class BoxsComponent implements OnInit {
           }
         }
       ).then((data) => {
-        if (data) {
-          this._boxService.closeBox(box).subscribe(
-            (resp: any) => {
-              console.log(resp);
-            }
-          );
+          if (data) {
+            this._boxService.closeBox(box).subscribe(
+              (resp: any) => {
+                this.translate.get('boxs.closeOk')
+                  .subscribe((res: string) => {
+                    this._commonsService.showMessage(toastType.success, res);
+                    this.getBoxs(0);
+                  });
+              }, (err: HttpErrorResponse) => {
+                this._commonsService.showMessage(toastType.error, this._handleErrorsService.handleErrors(err));
+              });
+          }
         }
-      });
+      );
     });
-
   }
 }

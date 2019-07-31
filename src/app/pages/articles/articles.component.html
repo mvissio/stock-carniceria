@@ -47,7 +47,7 @@
                 <i class="mdi mdi-pencil" aria-hidden="true"></i>
             </button>
                                             <button class="btn btn-danger" *ngIf="!article?.disabled" (click)="deleteArticle(article.name,article.articleId)">
-                <i class="mdi mdi-delete" aria-hidden="true"></i>
+                <i class="mdi mdi-toggle-switch-off" aria-hidden="true"></i>
             </button>
                                             <button class="btn btn-success" *ngIf="article?.disabled" (click)="enabledArticle(article.articleId)">
                 <i class="mdi mdi-toggle-switch" aria-hidden="true"></i>

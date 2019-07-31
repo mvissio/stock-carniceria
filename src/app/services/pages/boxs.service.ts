@@ -45,13 +45,21 @@ export class BoxsService {
       .pipe(map((response: Array<Box>) => response));
   }
 
-  getOperations(boxId: number, page: PageConfig) {
-    const url = this.boxsUrl.getOperationsBox;
+  getOperationsPage(boxId: number, page: PageConfig) {
+    const url = this.boxsUrl.getOperationsBoxPage;
     return this.httpClient.get(
       `${url}?boxId=${boxId}&page=${page.pageNumber}&size=${page.pageSize}&sort=${page.sortName},${page.orderDesc}`
     )
       .pipe(map((response: Page) => response));
   }
+
+  getOperations(boxId: number) {
+    const url = this.boxsUrl.getOperationsBox;
+    return this.httpClient.get(
+      `${url}?boxId=${boxId}`
+    );
+  }
+
 
   closeBox(box: Box) {
     const boxClose = Object.assign({}, box);
