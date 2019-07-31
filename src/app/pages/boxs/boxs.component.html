@@ -42,10 +42,7 @@
                   <button class="btn btn-secondary" (click)="onBoxAction(TYPEBOX.SHOW_OPERATIONS, box)">
                     <i class="mdi  mdi-clipboard-text"></i>
                   </button>
-                  <button class="btn btn-info" *ngIf="!box.open">
-                    <i class="mdi mdi-pencil"></i>
-                  </button>
-                  <button class="btn btn-danger" *ngIf="box.open">
+                  <button class="btn btn-danger" [disabled]="!box.open">
                     <i class="mdi mdi-close-box-outline" (click)="showCloseModal(box)" ></i>
                   </button>
                 </div>
