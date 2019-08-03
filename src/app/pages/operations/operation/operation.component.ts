@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterContentChecked, AfterViewInit, Component, OnInit} from '@angular/core';
 import {Operation} from '../../../models/operation.model';
 import {FormGroup, FormBuilder, Validators, FormArray, FormControl} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -9,7 +9,7 @@ import {CommonsService} from '../../../services/commons.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {forkJoin, Observable} from 'rxjs';
 import {OperationDetail} from '../../../models/operationDetail.model';
-import { operationStatus, discountValues, operationTypes, toastType } from '../../../constants/constant';
+import {operationStatus, discountValues, operationTypes, toastType} from '../../../constants/constant';
 import {ArticleService} from '../../../services/pages/article.service';
 import {Article} from '../../../models/article.model';
 import swal from 'sweetalert';
@@ -19,7 +19,7 @@ import swal from 'sweetalert';
   templateUrl: './operation.component.html',
   styleUrls: ['./operation.component.scss']
 })
-export class OperationComponent implements OnInit {
+export class OperationComponent implements OnInit, AfterContentChecked {
 
   id: number;
   operation: Operation = new Operation();
@@ -61,6 +61,10 @@ export class OperationComponent implements OnInit {
       }, (err: HttpErrorResponse) => {
         this._commonsService.showMessage(toastType.error, this._handleErrorsService.handleErrors(err));
       });
+  }
+
+  ngAfterContentChecked(): void {
+    console.log(this.operationDetails);
   }
 
   initForm() {

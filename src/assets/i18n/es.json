@@ -55,7 +55,7 @@
       "inputCash": "Saldo en efectivo ({{param}})"
     },
     "operationBox": {
-      "notResult": "No se encontraron operaciónes registradas.",
+      "notResult": "No se encontraron operaciones registradas.",
       "createDate": "Fecha y Hora",
       "operationType": "Tipo de Operación",
       "paymentMethod": "Metodo de Pago",
@@ -80,6 +80,7 @@
     "amountPlaceholder": "Cantidad",
     "pricePlaceholder": "Precio",
     "articlePlaceholder": "Seleccione Articulo",
+    "articleNameBrandPlaceholder": "Articulo/ Marca",
     "articleNotFoundLabel": "No hay artículos para la búsqueda"
   },
   "articles": {
@@ -199,11 +200,20 @@
     "deleteArticle": {
       "title": "¿Estás seguro que quieres dar de baja el articulo {{param}}?"
     },
+    "enableArticle": {
+      "title": "¿Estás seguro que quieres habilitar el articulo {{param}}?"
+    },
     "deleteMeasurementUnit": {
       "title": "¿Estás seguro que quieres dar de baja la unidad de medida {{param}}?"
     },
+    "enableMeasurementUnit": {
+      "title": "¿Estás seguro que quieres habilitar la unidad de medida {{param}}?"
+    },
     "deleteCategory": {
       "title": "¿Estás seguro que quieres dar de baja la categoría {{param}}?"
+    },
+    "enableCategory": {
+      "title": "¿Estás seguro que quieres habilitar la categoría {{param}}?"
     },
     "closeBox": {
       "title": "¿Estás seguro que quieres cerrar la caja actual?"

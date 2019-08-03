@@ -1,66 +1,70 @@
 <div class="row animated fadeIn">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-body">
-                <input #input (keyup)="findCategory(input.value)" [(ngModel)]="searchText" type="search" class="form-control" [placeholder]="'categories.searchLabel' | translate">
-            </div>
-        </div>
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <input #input (keyup)="findCategory(input.value)" [(ngModel)]="searchText" type="search" class="form-control"
+               [placeholder]="'categories.searchLabel' | translate">
+      </div>
     </div>
+  </div>
 </div>
 <div class="row animated fadeIn" *ngIf="!loading">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-body">
-                <h3 class="card-title">{{'categories.title' | translate}} (
-                    <small>{{ page?.totalElements| defaultValue: 0}}</small> )
-                </h3>
-                <button type="button" class="btn btn-primary float-right mdi mdi-plus" [routerLink]="['/categoria']"></button>
-                <table class="table table-hover m-auto">
-                    <thead>
-                        <tr>
-                            <th>{{'categoryTable.name' | translate}}</th>
-                            <th>{{'categoryTable.description' | translate}}</th>
-                            <th>{{'categoryTable.status' | translate}}</th>
-                            <th>{{'categoryTable.accions' | translate}}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <ng-container *ngIf="categories; else noContent">
-                            <tr *ngFor="let category of categories">
-                                <td>{{ category?.name }}</td>
-                                <td>{{ category?.description }}</td>
-                                <td><span class="label label-rounded" [ngClass]="(!category.disabled)? 'label-success':'label-danger'">{{getCategoryStatus(category)}}</span>
-                                </td>
-                                <td>
-                                    <div class="button-group">
-                                        <button class="btn btn-secondary" (click)="editOrShowCategory(category.categoryId)">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title">{{'categories.title' | translate}} (
+          <small>{{ page?.totalElements| defaultValue: 0}}</small> )
+        </h3>
+        <button type="button" class="btn btn-primary float-right mdi mdi-plus" [routerLink]="['/categoria']"></button>
+        <table class="table table-hover m-auto">
+          <thead>
+          <tr>
+            <th>{{'categoryTable.name' | translate}}</th>
+            <th>{{'categoryTable.description' | translate}}</th>
+            <th>{{'categoryTable.status' | translate}}</th>
+            <th>{{'categoryTable.accions' | translate}}</th>
+          </tr>
+          </thead>
+          <tbody>
+          <ng-container *ngIf="categories; else noContent">
+            <tr *ngFor="let category of categories">
+              <td>{{ category?.name }}</td>
+              <td>{{ category?.description }}</td>
+              <td><span class="label label-rounded"
+                        [ngClass]="(!category.disabled)? 'label-success':'label-danger'">{{getCategoryStatus(category)}}</span>
+              </td>
+              <td>
+                <div class="button-group">
+                  <button class="btn btn-secondary" (click)="editOrShowCategory(category.categoryId)">
                     <i class="mdi mdi-eye-outline" aria-hidden="true"></i>
                   </button>
-                                        <button class="btn btn-info" (click)="editOrShowCategory(category.categoryId, true)">
+                  <button class="btn btn-info" (click)="editOrShowCategory(category.categoryId, true)">
                     <i class="mdi mdi-pencil" aria-hidden="true"></i>
                   </button>
-                                        <button class="btn btn-danger" *ngIf="!category?.disabled" (click)="deleteCategory(category.name,category.categoryId)">
-                    <i class="mdi mdi-toggle-switch-off" aria-hidden="true"></i>
-                  </button>
-                                        <button class="btn btn-success" *ngIf="category?.disabled" (click)="enabledCategory(category.categoryId)">
+                  <button class="btn btn-success" *ngIf="!category?.disabled"
+                          (click)="deleteCategory(category.name,category.categoryId)">
                     <i class="mdi mdi-toggle-switch" aria-hidden="true"></i>
                   </button>
-                                    </div>
-                                </td>
-                            </tr>
-                        </ng-container>
-                        <ng-template #noContent>
-                            <tr class="alert alert-warning text-center font-20">
-                                <td colspan="4">
-                                    {{'categories.noContent' | translate}}
-                                </td>
-                            </tr>
-                        </ng-template>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+                  <button class="btn btn-danger" *ngIf="category?.disabled"
+                          (click)="enabledCategory(category.categoryId)">
+                    <i class="mdi mdi-toggle-switch-off" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </ng-container>
+          <ng-template #noContent>
+            <tr class="alert alert-warning text-center font-20">
+              <td colspan="4">
+                {{'categories.noContent' | translate}}
+              </td>
+            </tr>
+          </ng-template>
+          </tbody>
+        </table>
+      </div>
     </div>
+  </div>
 </div>
 <app-loading [loading]="loading"></app-loading>
 <app-pagination [page]="page" [pages]="pages" (pageNumber)="setPage($event)" *ngIf="categories"></app-pagination>

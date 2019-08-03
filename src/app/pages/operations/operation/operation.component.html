@@ -35,25 +35,26 @@
             </div>
           </div>
           <div class="d-flex flex-row justify-content-start">
-          <div class="form-group m-t-10 col-sm-12 col-lg-6" *ngIf="!disabledFields">
-            <button (click)="addOperationDetail()"
-                    class="btn btn-primary mdi mdi-plus">{{'operationDetails.operationDetailAddButtonLabel' | translate}}</button>
-          </div>
-          <div class="form-group col-sm-12 col-lg-6" *ngIf="operationControls.operationType.value === 'SALE'">
-            <label for="discount" class="w-25" >{{'operations.discountPlaceholder' | translate}}</label>
-            <select class="custom-select w-75" formControlName="discount" id="discount">
-              <option [value]="discount" *ngFor="let discount of discounts"
-                      [selected]="selectedDiscount(discount)">{{discount}}%
-              </option>
-            </select>
-          </div>
+            <div class="form-group m-t-10 col-sm-12 col-lg-6" *ngIf="!disabledFields">
+              <button (click)="addOperationDetail()"
+                      class="btn btn-primary mdi mdi-plus">{{'operationDetails.operationDetailAddButtonLabel' | translate}}</button>
+            </div>
+            <div class="form-group col-sm-12 col-lg-6" *ngIf="operationControls.operationType.value === 'SALE'">
+              <label for="discount" class="w-25">{{'operations.discountPlaceholder' | translate}}</label>
+              <select class="custom-select w-75" formControlName="discount" id="discount">
+                <option [value]="discount" *ngFor="let discount of discounts"
+                        [selected]="selectedDiscount(discount)">{{discount}}%
+                </option>
+              </select>
+            </div>
           </div>
 
           <div formArrayName="operationDetails">
             <div *ngFor="let operationDetail of operationDetails?.controls; let i = index">
               <div [formGroupName]="i" class="form-row border p-20">
-                <div class="col-sm-12 col-md-3">
-                  <ng-select [items]="articles$ | async" [multiple]="false" [closeOnSelect]="true" [searchable]="true"
+                <div class="col-sm-12 col-md-3" *ngIf="!disabledFields">
+                  <ng-select [items]="articles$ | async" [multiple]="false"
+                             [closeOnSelect]="true" [searchable]="true"
                              bindLabel="label" [placeholder]="'operationDetails.articlePlaceholder' | translate"
                              [notFoundText]="'operationDetails.articleNotFoundLabel' | translate"
                              formControlName="article" (search)="getArticlesByName($event)"
@@ -66,6 +67,12 @@
                       {{'generalValidations.required' | translate}}
                     </small>
                   </div>
+                </div>
+                <div class="col-sm-12 col-md-3 form-label-group"  *ngIf="disabledFields">
+                  <input class="form-control" type="text"
+                         [placeholder]="'operationDetails.articleNameBrandPlaceholder' | translate" id="articleDisable" [disabled]="disabledFields"
+                         [value]="operationDetail.value.article.name + '/ ' + operationDetail.value.article.brand">
+                  <label for="articleDisable">{{'operationDetails.articleNameBrandPlaceholder' | translate}}</label>
                 </div>
                 <div class="col-sm-12 col-md-3 form-label-group">
                   <input class="form-control" type="number"
