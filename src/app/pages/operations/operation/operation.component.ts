@@ -1,6 +1,6 @@
-import {AfterContentChecked, AfterViewInit, Component, OnInit} from '@angular/core';
+import {Component, OnInit, DoCheck} from '@angular/core';
 import {Operation} from '../../../models/operation.model';
-import {FormGroup, FormBuilder, Validators, FormArray, FormControl} from '@angular/forms';
+import {FormGroup, FormBuilder, Validators, FormArray} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 import {OperationsService} from '../../../services/pages/operations.service';
@@ -19,7 +19,7 @@ import swal from 'sweetalert';
   templateUrl: './operation.component.html',
   styleUrls: ['./operation.component.scss']
 })
-export class OperationComponent implements OnInit, AfterContentChecked {
+export class OperationComponent implements OnInit, DoCheck {
 
   id: number;
   operation: Operation = new Operation();
@@ -63,15 +63,11 @@ export class OperationComponent implements OnInit, AfterContentChecked {
       });
   }
 
-  ngAfterContentChecked(): void {
-    console.log(this.operationDetails);
-  }
-
   initForm() {
-    let operationDetails = this.fb.array([]);
+    const operationDetails = this.fb.array([]);
     if (this.edit) {
       if (this.operation.operationDetails) {
-        for (let operationDetail of this.operation.operationDetails) {
+        for (const operationDetail of this.operation.operationDetails) {
           this._articleService.getArticleByArticleId(operationDetail.articleId).subscribe((res: Article) => {
             operationDetails.push(this.fb.group({
               amount: [operationDetail.amount, [Validators.required, Validators.min(1)]],
@@ -197,7 +193,8 @@ export class OperationComponent implements OnInit, AfterContentChecked {
     this.operation.discount = this.operationForm.value.discount;
     if (!this.edit) {
       this.operation.createDateTime = new Date();
-      this.operation.operationStatus = (this.operation.operationType === 'SALE') ? operationStatus.sold : operationStatus.purchased;
+      this.operation.operationStatus = (this.operation.operationType === operationTypes.sale) ?
+       operationStatus.sold : operationStatus.purchased;
     }
     this.setOperationDetails();
     const total = this.getTotal();
@@ -207,7 +204,7 @@ export class OperationComponent implements OnInit, AfterContentChecked {
 
   setOperationDetails() {
     this.operationDetails.value.some((odObject: { article: Article, price: number, amount?: number }, index: number) => {
-      let operationDetail = new OperationDetail();
+      const operationDetail = new OperationDetail();
       if (odObject.article.currentQuantity >= odObject.amount || this.operationForm.value.operationType === operationTypes.buy) {
         operationDetail.amount = odObject.amount;
         operationDetail.articleId = odObject.article.articleId;
@@ -231,7 +228,7 @@ export class OperationComponent implements OnInit, AfterContentChecked {
   }
 
   getTotal() {
-    let total: number = 0;
+    let total = 0;
     this.operation.operationDetails.forEach((operationDetail: OperationDetail) => total += operationDetail.price);
     if (this.operation.discount) {
       total = total - (total * (this.operation.discount / 100));
@@ -273,6 +270,15 @@ export class OperationComponent implements OnInit, AfterContentChecked {
 
   deleteOperationDetail(index: number) {
     this.operationDetails.removeAt(index);
+  }
+
+  setOperationTypeIfSelected() {
+    this.operation.operationType = (this.activateRoute.snapshot.queryParams['sale']) ?
+      operationTypes.sale : (this.activateRoute.snapshot.queryParams['buy']) ? operationTypes.buy : '';
+  }
+
+  ngDoCheck() {
+    this.setOperationTypeIfSelected();
   }
 
   back() {

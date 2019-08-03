@@ -165,7 +165,9 @@
         "sendOk": "El password se pudo restaurar."
     },
     "header": {
-        "logoutLabel": "Salir"
+        "logoutLabel": "Salir",
+        "saleLabel": "Venta",
+        "buyLabel": "Compra"
     },
     "sidebar": {
         "menu": "Menú",

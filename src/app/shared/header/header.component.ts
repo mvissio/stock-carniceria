@@ -15,4 +15,12 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  createBuyOrSale(isBuy?: boolean) {
+    if (isBuy) {
+      this.router.navigate(['/operacion'], {queryParams: {buy: true}, skipLocationChange: true});
+    } else {
+      this.router.navigate(['/operacion'], {queryParams: {sale: true}, skipLocationChange: true});
+    }
+  }
 }

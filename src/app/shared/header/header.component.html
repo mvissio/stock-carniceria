@@ -3,13 +3,13 @@
         <div class="navbar-header">
             <a class="navbar-brand" (click)="router.navigate(['/inicio'])">
                 <b>
-          <img src="assets/images/page-images/logo.svg" class="dark-logo logo-small "/>
-          <img src="assets/images/page-images/logo-white.svg" alt="homepage" class="light-logo logo-small"/>
-        </b>
+                    <img src="assets/images/page-images/logo.svg" class="dark-logo logo-small" alt="logo" />
+                    <img src="assets/images/page-images/logo-white.svg" alt="homepage" class="light-logo logo-small" />
+                </b>
                 <span>
-          <img src="assets/images/page-images/logo-text.svg" class="dark-logo logo-small-rec"/>
-          <img src="assets/images/page-images/logo-text-white.svg" class="light-logo logo-small-rec"/>
-        </span>
+                    <img src="assets/images/page-images/logo-text.svg" class="dark-logo logo-small-rec" alt=""/>
+                    <img src="assets/images/page-images/logo-text-white.svg" class="light-logo logo-small-rec" alt=""/>
+                </span>
             </a>
         </div>
         <div class="navbar-collapse">
@@ -18,8 +18,8 @@
             <!-- ============================================================== -->
             <ul class="navbar-nav mr-auto">
                 <!-- This is  -->
-                <li class="nav-item"><a class="nav-link nav-toggler hidden-md-up waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a></li>
-                <li class="nav-item"><a class="nav-link sidebartoggler hidden-sm-down waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a></li>
+                <li class="nav-item"><a class="nav-link nav-toggler hidden-md-up waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu" aria-hidden="true"></i></a></li>
+                <li class="nav-item"><a class="nav-link sidebartoggler hidden-sm-down waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu" aria-hidden="true"></i></a></li>
                 <li class="nav-item hidden-sm-down"></li>
             </ul>
             <!-- ============================================================== -->
@@ -29,18 +29,19 @@
                 <!-- ============================================================== -->
                 <!-- Search -->
                 <!-- ============================================================== -->
-                <li class="nav-item hidden-xs-down search-box"><a class="nav-link hidden-sm-down waves-effect waves-dark" href="javascript:void(0)"><i class="ti-search"></i></a>
+                <li class="nav-item hidden-xs-down search-box"><a class="nav-link hidden-sm-down waves-effect waves-dark" href="javascript:void(0)"><i class="ti-search" aria-hidden="true"></i></a>
                     <form class="app-search">
                         <input type="text" class="form-control" placeholder="Search & enter"> <a class="srh-btn"><i
-            class="ti-close"></i></a></form>
+            class="ti-close" aria-hidden="true"></i></a></form>
                 </li>
-
+                <li class="nav-item"><a class="nav-link" (click)="createBuyOrSale(true)"><i class="fa fa-plus" aria-hidden="true"></i> {{ 'header.buyLabel' | translate }}</a></li>
+                <li class="nav-item"><a class="nav-link" (click)="createBuyOrSale()"><i class="fa fa-plus" aria-hidden="true"></i> {{ 'header.saleLabel' | translate }}</a></li>
                 <!-- ============================================================== -->
                 <!-- Profile -->
                 <!-- ============================================================== -->
                 <li class="nav-item dropdown">
                     <a class="nav-link" (click)="_authService.openLogoutModal()">
-                        <i class="fa fa-power-off"></i> {{ 'header.logoutLabel' | translate }}
+                        <i class="fa fa-power-off" aria-hidden="true"></i> {{ 'header.logoutLabel' | translate }}
                     </a>
                 </li>
             </ul>
