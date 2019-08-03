@@ -1,14 +1,10 @@
 import {Injectable} from '@angular/core';
 import {map} from 'rxjs/operators';
-import {Rol} from '../../models/rol.model';
-import {User} from '../../models/user.model';
 import {environment} from '../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
-import * as bcrypt from 'bcryptjs';
 import {PageConfig} from '../../models/pageConfig.model';
 import {Page} from '../../models/page.model';
 import {Box} from '../../models/Box.model';
-import {Operation} from '../../models/operation.model';
 
 @Injectable({
   providedIn: 'root'

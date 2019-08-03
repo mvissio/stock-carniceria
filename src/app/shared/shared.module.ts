@@ -10,6 +10,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { PaginationComponent } from './pagination/pagination.component';
 import { LoadingComponent } from './loading/loading.component';
 import { DropdownTranslatePipe } from './pipes/dropdown-translate.pipe';
+import { TruncatePipe } from './pipes/truncate.pipe';
+import { DefaultValuePipe } from './pipes/default-value.pipe';
 
 @NgModule({
     imports: [
@@ -23,7 +25,9 @@ import { DropdownTranslatePipe } from './pipes/dropdown-translate.pipe';
         BreadcrumbsComponent,
         PaginationComponent,
         LoadingComponent,
-        DropdownTranslatePipe
+        DropdownTranslatePipe,
+        TruncatePipe,
+        DefaultValuePipe
     ],
     exports: [
         CommonModule,
@@ -34,7 +38,9 @@ import { DropdownTranslatePipe } from './pipes/dropdown-translate.pipe';
         BreadcrumbsComponent,
         PaginationComponent,
         LoadingComponent,
-        DropdownTranslatePipe
+        DropdownTranslatePipe,
+        TruncatePipe,
+        DefaultValuePipe
     ]
 })
 export class SharedModule { }

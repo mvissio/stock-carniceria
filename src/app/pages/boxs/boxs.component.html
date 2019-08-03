@@ -1,182 +1,170 @@
 <div class="row animated fadeIn" *ngIf="!loading">
-  <div class="col-12 container-fluid">
-    <div class="card">
-      <div class="card-body">
-        <h3 class="card-title">{{'boxs.title' | translate}} (
-          <small>{{ page?.totalElements}}</small>
-          )
-        </h3>
-        <button type="button" class="btn btn-primary float-right mdi mdi-plus"
-                (click)="onBoxAction(TYPEBOX.OPEN)"></button>
-        <div class="table-responsive">
-          <table class="table table-hover m-auto" *ngIf="boxs">
-            <thead>
-            <tr>
-              <th>{{'table.boxs.dateOpen' | translate}}</th>
-              <th>{{'table.boxs.cashOpen' | translate}}</th>
-              <th>{{'table.boxs.dateClose' | translate}}</th>
-              <th>{{'table.boxs.cashClose' | translate}}</th>
-              <th>{{'table.boxs.cashDiff' | translate}}</th>
-              <th>{{'table.status' | translate}}</th>
-              <th>{{'table.accions' | translate}}</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let box of boxs ; let i = index"
-                [ngClass]="(box?.cashClose && (box?.cashClose - box?.cashOpen<0) )?'table-danger':''">
-              <td>{{ box?.dateOpen | date:'dd/MM/yyyy'| defaultValue: '-'}}</td>
-              <td>{{ box?.cashOpen | currency| defaultValue: '-'}}</td>
-              <td>{{ box?.dateClose | date:'dd/MM/yyyy'| defaultValue: '-'}}</td>
-              <td>{{ box?.cashClose | currency| defaultValue: '-'}}</td>
-              <td>{{ box?.cashClose - box?.cashOpen | currency| defaultValue: '-'}}</td>
-              <td>
-              <span class="label label-rounded"
-                    [ngClass]="(box.open)? 'label-success':'label-danger'">
+    <div class="col-12 container-fluid">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">{{'boxs.title' | translate}} (
+                    <small>{{ page?.totalElements}}</small> )
+                </h3>
+                <button type="button" class="btn btn-primary float-right mdi mdi-plus" (click)="onBoxAction(TYPEBOX.OPEN)"></button>
+                <div class="table-responsive">
+                    <table class="table table-hover m-auto" *ngIf="boxs">
+                        <thead>
+                            <tr>
+                                <th>{{'table.boxs.dateOpen' | translate}}</th>
+                                <th>{{'table.boxs.cashOpen' | translate}}</th>
+                                <th>{{'table.boxs.dateClose' | translate}}</th>
+                                <th>{{'table.boxs.cashClose' | translate}}</th>
+                                <th>{{'table.boxs.cashDiff' | translate}}</th>
+                                <th>{{'table.status' | translate}}</th>
+                                <th>{{'table.accions' | translate}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let box of boxs ; let i = index" [ngClass]="(box?.cashClose && (box?.cashClose - box?.cashOpen<0) )?'table-danger':''">
+                                <td>{{ box?.dateOpen | date:'dd/MM/yyyy'| defaultValue: '-'}}</td>
+                                <td>{{ box?.cashOpen | currency| defaultValue: '-'}}</td>
+                                <td>{{ box?.dateClose | date:'dd/MM/yyyy'| defaultValue: '-'}}</td>
+                                <td>{{ box?.cashClose | currency| defaultValue: '-'}}</td>
+                                <td>{{ box?.cashClose - box?.cashOpen | currency| defaultValue: '-'}}</td>
+                                <td>
+                                    <span class="label label-rounded" [ngClass]="(box.open)? 'label-success':'label-danger'">
                 {{(box.open) ? ('boxStatus.enabled'| translate) : ('boxStatus.disabled' | translate)}}
               </span>
-              <td>
-                <div class="button-group row flex-nowrap">
-                  <button class="btn btn-secondary" (click)="onBoxAction(TYPEBOX.SHOW_DETAILS, box)">
-                    <i class="mdi mdi-eye-outline"></i>
+                                    <td>
+                                        <div class="button-group row flex-nowrap">
+                                            <button class="btn btn-secondary" (click)="onBoxAction(TYPEBOX.SHOW_DETAILS, box)">
+                    <i class="mdi mdi-eye-outline" aria-hidden="true"></i>
                   </button>
-                  <button class="btn btn-secondary" (click)="onBoxAction(TYPEBOX.SHOW_OPERATIONS, box)">
-                    <i class="mdi  mdi-clipboard-text"></i>
+                                            <button class="btn btn-secondary" (click)="onBoxAction(TYPEBOX.SHOW_OPERATIONS, box)">
+                    <i class="mdi  mdi-clipboard-text" aria-hidden="true"></i>
                   </button>
-                  <button class="btn btn-danger" [disabled]="!box.open">
-                    <i class="mdi mdi-close-box-outline" (click)="showCloseModal(box)" ></i>
+                                            <button class="btn btn-danger" [disabled]="!box.open">
+                    <i class="mdi mdi-close-box-outline" (click)="showCloseModal(box)" aria-hidden="true"></i>
                   </button>
-                </div>
-              </td>
+                                        </div>
+                                    </td>
 
-            </tr>
-            </tbody>
-          </table>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
 <app-loading [loading]="loading"></app-loading>
-<app-modal-container [bigModal]="'modal-lg'" [modalTitle]="'boxs.titleModal'| translate" *ngIf="typeSelect"
-                     (clickClose)="closeModal()">
-  <ng-container *ngIf="typeSelect === TYPEBOX.OPEN">
-    <form class="form-horizontal form-material" [formGroup]="openForm" (ngSubmit)="createBox()">
-      <div class="form-group">
-        <span class="help">{{'boxs.openBox.textModal'| translate}}</span>
-      </div>
-      <div class="form-group">
-        <label class="form-control m-t-10 col-md-6 m-r-30" for="cashInit">{{'boxs.openBox.inputCash' | translate: "{param: '$'}"}}</label>
-        <input class="form-control m-t-10 col-md-6" type="text" id="cashInit" formControlName="cashInit">
-        <div
-          *ngIf="(openControls.cashInit.touched && openControls.cashInit.errors )||
-          (openControls.cashInit.invalid && (openControls.cashInit.dirty || openControls.cashInit.touched))"
-          class="error-label col-12">
-          <small *ngIf="openControls.cashInit.errors?.required">
+<app-modal-container [bigModal]="'modal-lg'" [modalTitle]="'boxs.titleModal'| translate" *ngIf="typeSelect" (clickClose)="closeModal()">
+    <ng-container *ngIf="typeSelect === TYPEBOX.OPEN">
+        <form class="form-horizontal form-material" [formGroup]="openForm" (ngSubmit)="createBox()">
+            <div class="form-group">
+                <span class="help">{{'boxs.openBox.textModal'| translate}}</span>
+            </div>
+            <div class="form-group">
+                <label class="form-control m-t-10 col-md-6 m-r-30" for="cashInit">{{'boxs.openBox.inputCash' | translate: "{param: '$'}"}}</label>
+                <input class="form-control m-t-10 col-md-6" type="text" id="cashInit" formControlName="cashInit">
+                <div *ngIf="(openControls.cashInit.touched && openControls.cashInit.errors )||
+          (openControls.cashInit.invalid && (openControls.cashInit.dirty || openControls.cashInit.touched))" class="error-label col-12">
+                    <small *ngIf="openControls.cashInit.errors?.required">
             {{'generalValidations.required' | translate}}
           </small>
-          <small *ngIf="openControls.cashInit.errors?.pattern">
+                    <small *ngIf="openControls.cashInit.errors?.pattern">
             {{'generalValidations.pattern' | translate}}
           </small>
-        </div>
-      </div>
-      <div class="form-group row button-group justify-content-between">
-        <div class="col-md-5">
-          <button type="button" class="btn waves-effect waves-light btn-block btn-red" (click)="closeModal()">Cancelar
+                </div>
+            </div>
+            <div class="form-group row button-group justify-content-between">
+                <div class="col-md-5">
+                    <button type="button" class="btn waves-effect waves-light btn-block btn-red" (click)="closeModal()">Cancelar
           </button>
-        </div>
-        <div class="col-md-5">
-          <button type="submit" class="btn waves-effect waves-light btn-block btn-success"
-                  [disabled]="openControls.cashInit.invalid">Confirmar
+                </div>
+                <div class="col-md-5">
+                    <button type="submit" class="btn waves-effect waves-light btn-block btn-success" [disabled]="openControls.cashInit.invalid">Confirmar
           </button>
-        </div>
-      </div>
-    </form>
-  </ng-container>
-  <ng-container *ngIf="typeSelect === TYPEBOX.SHOW_DETAILS">
-    <div class="justify-content-between text-justify">
-      <div class="row m-t-20">
-        <div class="col-6">{{'table.boxs.cashOpen' | translate}}</div>
-        <div class="col-6">{{boxModal.cashOpen|currency| defaultValue: 'Sin Registro'}}</div>
-      </div>
-      <div class="row m-t-20">
-        <div class="col-6">{{'table.boxs.dateOpen' | translate }}</div>
-        <div class="col-6">{{boxModal.dateOpen| date:'dd/MM/yyyy'| defaultValue: 'Sin Registro'}}</div>
-      </div>
-      <div class="row m-t-20">
-        <div class="col-6">{{'table.boxs.cashClose' | translate }}</div>
-        <div class="col-6">{{boxModal.cashClose|currency| defaultValue: 'Sin Registro'}}</div>
-      </div>
-      <div class="row m-t-20">
-        <div class="col-6">{{'table.boxs.dateClose' | translate}}</div>
-        <div class="col-6">{{boxModal.dateClose| date:'dd/MM/yyyy'| defaultValue: 'Sin Registro'}}</div>
-      </div>
-      <div class="row m-t-20">
-        <div class="col-6">{{'boxs.detailsClose' | translate}}</div>
-        <div class="col-6">{{boxModal.detailClose | defaultValue: 'Sin Registro'}}</div>
-      </div>
-      <div class="row m-t-20">
-        <div class="col-6">{{'boxs.buyCant' | translate}}</div>
-        <div class="col-6">{{boxOperation.buyOperation.cant | defaultValue: 'Sin Registro'}}</div>
-      </div>
-      <div class="row m-t-20">
-        <div class="col-6">{{'boxs.buyMont' | translate}}</div>
-        <div class="col-6">{{boxOperation.buyOperation.total | defaultValue: 'Sin Registro'}}</div>
-      </div>
-      <div class="row m-t-20">
-        <div class="col-6">{{'boxs.saleCant' | translate}}</div>
-        <div class="col-6">{{boxOperation.saleOperation.cant | defaultValue: 'Sin Registro'}}</div>
-      </div>
-      <div class="row m-t-20">
-        <div class="col-6">{{'boxs.saleMont' | translate}}</div>
-        <div class="col-6">{{boxOperation.saleOperation.total | defaultValue: 'Sin Registro'}}</div>
-      </div>
+                </div>
+            </div>
+        </form>
+    </ng-container>
+    <ng-container *ngIf="typeSelect === TYPEBOX.SHOW_DETAILS">
+        <div class="justify-content-between text-justify">
+            <div class="row m-t-20">
+                <div class="col-6">{{'table.boxs.cashOpen' | translate}}</div>
+                <div class="col-6">{{boxModal.cashOpen|currency| defaultValue: 'Sin Registro'}}</div>
+            </div>
+            <div class="row m-t-20">
+                <div class="col-6">{{'table.boxs.dateOpen' | translate }}</div>
+                <div class="col-6">{{boxModal.dateOpen| date:'dd/MM/yyyy'| defaultValue: 'Sin Registro'}}</div>
+            </div>
+            <div class="row m-t-20">
+                <div class="col-6">{{'table.boxs.cashClose' | translate }}</div>
+                <div class="col-6">{{boxModal.cashClose|currency| defaultValue: 'Sin Registro'}}</div>
+            </div>
+            <div class="row m-t-20">
+                <div class="col-6">{{'table.boxs.dateClose' | translate}}</div>
+                <div class="col-6">{{boxModal.dateClose| date:'dd/MM/yyyy'| defaultValue: 'Sin Registro'}}</div>
+            </div>
+            <div class="row m-t-20">
+                <div class="col-6">{{'boxs.detailsClose' | translate}}</div>
+                <div class="col-6">{{boxModal.detailClose | defaultValue: 'Sin Registro'}}</div>
+            </div>
+            <div class="row m-t-20">
+                <div class="col-6">{{'boxs.buyCant' | translate}}</div>
+                <div class="col-6">{{boxOperation.buyOperation.cant | defaultValue: 'Sin Registro'}}</div>
+            </div>
+            <div class="row m-t-20">
+                <div class="col-6">{{'boxs.buyMont' | translate}}</div>
+                <div class="col-6">{{boxOperation.buyOperation.total | defaultValue: 'Sin Registro'}}</div>
+            </div>
+            <div class="row m-t-20">
+                <div class="col-6">{{'boxs.saleCant' | translate}}</div>
+                <div class="col-6">{{boxOperation.saleOperation.cant | defaultValue: 'Sin Registro'}}</div>
+            </div>
+            <div class="row m-t-20">
+                <div class="col-6">{{'boxs.saleMont' | translate}}</div>
+                <div class="col-6">{{boxOperation.saleOperation.total | defaultValue: 'Sin Registro'}}</div>
+            </div>
 
-    </div>
-    <div class="form-group row button-group justify-content-center m-t-40">
-      <div class="col-md-5">
-        <button type="button" class="btn waves-effect waves-light btn-block btn-danger" (click)="closeModal()">Cerrar
+        </div>
+        <div class="form-group row button-group justify-content-center m-t-40">
+            <div class="col-md-5">
+                <button type="button" class="btn waves-effect waves-light btn-block btn-danger" (click)="closeModal()">Cerrar
         </button>
-      </div>
-    </div>
-  </ng-container>
-  <ng-container *ngIf="typeSelect === TYPEBOX.SHOW_OPERATIONS">
-    <div class="justify-content-between text-justify">
-      <div class="row m-t-2">
-        <div class="col-3 font-bold">{{'boxs.operationBox.createDate' | translate}}</div>
-        <div class="col-3 font-bold">{{'boxs.operationBox.operationType' | translate}}</div>
-        <div class="col-3 font-bold">{{'boxs.operationBox.paymentMethod' | translate}}</div>
-        <div class="col-3 font-bold">{{'boxs.operationBox.total' | translate}}</div>
-      </div>
-      <ng-container *ngIf="loadOperation; else loadingOperations">
-        <ng-container *ngIf="boxModal.operationList.length>0; else notResults">
-          <div class="row m-t-20" *ngFor="let operation of boxModal.operationList">
-            <div
-              class="col-3">{{operation.createDateTime|date:'dd/MM/yyyy - hh:mm'| defaultValue: 'Sin Registro'}}</div>
-            <div
-              class="col-3">{{operation.operationType| defaultValue: 'Sin Registro'| dropdownTranslate: 'operationTypes' }}</div>
-            <div
-              class="col-3">{{operation.paymentMethod| defaultValue: 'Sin Registro'| dropdownTranslate: 'paymentMethods'}}</div>
-            <div class="col-3">{{operation.total|currency| defaultValue: 'Sin Registro'}}</div>
-          </div>
-          <div class="m-t-40">
-            <app-pagination [page]="pageOperation" [pages]="pagesOperation" (pageNumber)="setPageOperation($event)"
-                            *ngIf="boxModal.operationList"></app-pagination>
-          </div>
-        </ng-container>
-      </ng-container>
-      <ng-template #notResults>
-        <div class="alert alert-warning text-center">{{'boxs.operationBox.notResult' | translate}}</div>
-      </ng-template>
-      <ng-template #loadingOperations>
-        <app-loading [loading]="true"></app-loading>
-      </ng-template>
-    </div>
-    <div class="form-group row button-group justify-content-center m-t-40">
-      <div class="col-md-5">
-        <button type="button" class="btn waves-effect waves-light btn-block btn-danger" (click)="closeModal()">Cerrar
+            </div>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="typeSelect === TYPEBOX.SHOW_OPERATIONS">
+        <div class="justify-content-between text-justify">
+            <div class="row m-t-2">
+                <div class="col-3 font-bold">{{'boxs.operationBox.createDate' | translate}}</div>
+                <div class="col-3 font-bold">{{'boxs.operationBox.operationType' | translate}}</div>
+                <div class="col-3 font-bold">{{'boxs.operationBox.paymentMethod' | translate}}</div>
+                <div class="col-3 font-bold">{{'boxs.operationBox.total' | translate}}</div>
+            </div>
+            <ng-container *ngIf="loadOperation; else loadingOperations">
+                <ng-container *ngIf="boxModal.operationList.length>0; else notResults">
+                    <div class="row m-t-20" *ngFor="let operation of boxModal.operationList">
+                        <div class="col-3">{{operation.createDateTime|date:'dd/MM/yyyy - hh:mm'| defaultValue: 'Sin Registro'}}</div>
+                        <div class="col-3">{{operation.operationType| defaultValue: 'Sin Registro'| dropdownTranslate: 'operationTypes' }}</div>
+                        <div class="col-3">{{operation.paymentMethod| defaultValue: 'Sin Registro'| dropdownTranslate: 'paymentMethods'}}</div>
+                        <div class="col-3">{{operation.total|currency| defaultValue: 'Sin Registro'}}</div>
+                    </div>
+                    <div class="m-t-40">
+                        <app-pagination [page]="pageOperation" [pages]="pagesOperation" (pageNumber)="setPageOperation($event)" *ngIf="boxModal.operationList"></app-pagination>
+                    </div>
+                </ng-container>
+            </ng-container>
+            <ng-template #notResults>
+                <div class="alert alert-warning text-center">{{'boxs.operationBox.notResult' | translate}}</div>
+            </ng-template>
+            <ng-template #loadingOperations>
+                <app-loading [loading]="true"></app-loading>
+            </ng-template>
+        </div>
+        <div class="form-group row button-group justify-content-center m-t-40">
+            <div class="col-md-5">
+                <button type="button" class="btn waves-effect waves-light btn-block btn-danger" (click)="closeModal()">Cerrar
         </button>
-      </div>
-    </div>
-  </ng-container>
+            </div>
+        </div>
+    </ng-container>
 </app-modal-container>
 <app-pagination [page]="page" [pages]="pages" (pageNumber)="setPage($event)" *ngIf="boxs"></app-pagination>

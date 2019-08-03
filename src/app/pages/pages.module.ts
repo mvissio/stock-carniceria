@@ -33,13 +33,10 @@ import { MeasurementUnitsComponent } from './measurement-units/measurement-units
 import { MeasurementUnitComponent } from './measurement-units/measurement-unit/measurement-unit.component';
 import { BoxsComponent } from './boxs/boxs.component';
 import {Graficas1Component} from './graficas1/graficas1.component';
-import {DefaultValuePipe} from '../pipes/default-value.pipe';
 import { CategoriesComponent } from './categories/categories.component';
 import { CategoryComponent } from './categories/category/category.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { MyDatePickerModule } from 'mydatepicker';
-import {NopagefoundComponent} from '../shared/nopagefound/nopagefound.component';
-import {TruncatePipe} from '../pipes/truncate.pipe';
 
 @NgModule({
   declarations: [
@@ -58,9 +55,7 @@ import {TruncatePipe} from '../pipes/truncate.pipe';
     MeasurementUnitsComponent,
     CategoriesComponent,
     CategoryComponent,
-    BoxsComponent,
-    DefaultValuePipe,
-    TruncatePipe
+    BoxsComponent
   ],
   exports: [
     HomeComponent,

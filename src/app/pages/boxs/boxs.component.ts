@@ -143,7 +143,7 @@ export class BoxsComponent implements OnInit {
 
   viewDetails(box: Box) {
     this.boxModal = box;
-    this._boxService.getOperations(box.boxId).subscribe((resp: Array<Operation>) => {
+    this._boxService.getOperations(box.boxId).subscribe((resp: Operation[]) => {
       resp.forEach(operation => {
         switch (operation.operationType) {
           case 'BUY':
