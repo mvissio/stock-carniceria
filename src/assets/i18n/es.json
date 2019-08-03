@@ -20,7 +20,7 @@
     },
     "login": {
         "rememberMeCheck": "Recuérdame",
-        "forgotPasswordLink": "¿Olvide contraseña?",
+        "forgotPasswordLink": "Olvide contraseña?",
         "submitButton": "Ingresar",
         "userPlaceholder": "Usuario",
         "passwordPlaceholder": "Contraseña"
@@ -38,9 +38,9 @@
         "updateOk": "Usuario actualizado satisfactoriamente."
     },
     "boxs": {
-        "title": "Histórico de Caja",
+        "title": "Historico de Caja",
         "childTitle": "Caja:",
-        "titleModal": "Gestión de Caja",
+        "titleModal": "Gestion de Caja",
         "createOk": "Caja creada satisfactoriamente.",
         "updateOk": "Caja actualizada satisfactoriamente.",
         "closeOk": "Caja cerrada satisfactoriamente.",
@@ -69,8 +69,8 @@
         "operationTypePlaceholder": "Tipo",
         "paymentMethodPlaceholder": "Método de pago",
         "discountPlaceholder": "Descuento",
-        "createOk": "Operacion creada satisfactoriamente.",
-        "updateOk": "Operacion actualizada satisfactoriamente.",
+        "createOk": "Operación creada satisfactoriamente.",
+        "updateOk": "Operación actualizada satisfactoriamente.",
         "filterPlaceholderOperationType": "Seleccione Tipo",
         "filterPlaceholderPaymentMethod": "Seleccione Medio"
     },
@@ -80,6 +80,7 @@
         "amountPlaceholder": "Cantidad",
         "pricePlaceholder": "Precio",
         "articlePlaceholder": "Seleccione Articulo",
+        "articleNameBrandPlaceholder": "Articulo/ Marca",
         "articleNotFoundLabel": "No hay artículos para la búsqueda"
     },
     "articles": {
@@ -117,11 +118,10 @@
         "enabledPlaceholder": "Habilitado",
         "createOk": "Categoría creada satisfactoriamente.",
         "updateOk": "Categoría actualizada satisfactoriamente.",
-        "noContent": "No se encontraron categorías cargadas."
+        "noContent": "No se encontraron categorias cargadas."
     },
     "table": {
         "users": {
-            "name": "Nombre",
             "email": "Correo",
             "role": "Role"
         },
@@ -141,36 +141,28 @@
             "cashClose": "Dinero de Cierre",
             "cashDiff": "Diferencia"
         },
-        "status": "Estado",
-        "accions": "Acciones"
-    },
-    "measurementUnitTable": {
+        "measurementUnitTable": {
+            "symbol": "Símbolo"
+        },
+        "categoryTable": {
+            "description": "Descripción"
+        },
+        "articleTable": {
+            "brand": "Marca",
+            "currentPrice": "Precio",
+            "currentQuantity": "Cantidad",
+            "description": "Descripción",
+            "expirationDate": "Fecha expiración",
+            "measurementUnitId": "Unidad medida"
+        },
         "name": "Nombre",
-        "symbol": "Símbolo",
-        "status": "Estado",
-        "accions": "Acciones"
-    },
-    "categoryTable": {
-        "name": "Nombre",
-        "description": "Descripción",
-        "status": "Estado",
-        "accions": "Acciones"
-    },
-    "articleTable": {
-        "name": "Nombre",
-        "brand": "Marca",
-        "currentPrice": "Precio",
-        "currentQuantity": "Cantidad",
-        "description": "Descripción",
-        "expirationDate": "Fecha expiración",
-        "measurementUnitId": "Unidad medida",
         "status": "Estado",
         "accions": "Acciones"
     },
     "forgotPassword": {
         "info": "Ingrese su correo electrónico y siga los pasos.",
         "emailPlaceholder": "Dirección de correo electrónico",
-        "sendOk": "La contraseña se pudo restaurar."
+        "sendOk": "El password se pudo restaurar."
     },
     "header": {
         "logoutLabel": "Salir"
@@ -199,11 +191,20 @@
         "deleteArticle": {
             "title": "¿Estás seguro que quieres dar de baja el articulo {{param}}?"
         },
+        "enableArticle": {
+            "title": "¿Estás seguro que quieres habilitar el articulo {{param}}?"
+        },
         "deleteMeasurementUnit": {
             "title": "¿Estás seguro que quieres dar de baja la unidad de medida {{param}}?"
         },
+        "enableMeasurementUnit": {
+            "title": "¿Estás seguro que quieres habilitar la unidad de medida {{param}}?"
+        },
         "deleteCategory": {
             "title": "¿Estás seguro que quieres dar de baja la categoría {{param}}?"
+        },
+        "enableCategory": {
+            "title": "¿Estás seguro que quieres habilitar la categoría {{param}}?"
         },
         "closeBox": {
             "title": "¿Estás seguro que quieres cerrar la caja actual?"

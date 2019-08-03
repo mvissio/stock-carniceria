@@ -33,17 +33,16 @@
                                     <td>
                                         <div class="button-group row flex-nowrap">
                                             <button class="btn btn-secondary" (click)="onBoxAction(TYPEBOX.SHOW_DETAILS, box)">
-                    <i class="mdi mdi-eye-outline" aria-hidden="true"></i>
-                  </button>
+                                              <i class="mdi mdi-eye-outline" aria-hidden="true"></i>
+                                            </button>
                                             <button class="btn btn-secondary" (click)="onBoxAction(TYPEBOX.SHOW_OPERATIONS, box)">
-                    <i class="mdi  mdi-clipboard-text" aria-hidden="true"></i>
-                  </button>
+                                              <i class="mdi  mdi-clipboard-text" aria-hidden="true"></i>
+                                            </button>
                                             <button class="btn btn-danger" [disabled]="!box.open">
-                    <i class="mdi mdi-close-box-outline" (click)="showCloseModal(box)" aria-hidden="true"></i>
-                  </button>
+                                              <i class="mdi mdi-close-box-outline" (click)="showCloseModal(box)" aria-hidden="true"></i>
+                                            </button>
                                         </div>
                                     </td>
-
                             </tr>
                         </tbody>
                     </table>

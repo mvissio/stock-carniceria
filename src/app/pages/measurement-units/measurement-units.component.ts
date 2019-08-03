@@ -134,8 +134,36 @@ export class MeasurementUnitsComponent implements OnInit {
   }
 
   enabledMeasurementUnit(id: number) {
-    this._measurementUnitService.enabledMeasurementUnit(id)
-      .subscribe(() => this.getMeasurementUnits(this.pageConfig.pageNumber));
+    forkJoin(
+      [this.translate.get('modals.enableMeasurementUnit.title', {param: name}),
+        this.translate.get('modals')
+      ]).subscribe((result) => {
+      swal({
+          title: result[0],
+          icon: 'warning',
+          closeOnClickOutside: true,
+          buttons: {
+            confirm: {
+              text: result[1].defaultConfirmButton,
+              value: true,
+              visible: true,
+              closeModal: true
+            },
+            cancel: {
+              text: result[1].defaultCancelButton,
+              value: false,
+              visible: true,
+              closeModal: true,
+            }
+          }
+        }
+      ).then((data) => {
+        if (data) {
+          this._measurementUnitService.enabledMeasurementUnit(id)
+            .subscribe(() => this.getMeasurementUnits(this.pageConfig.pageNumber));
+        }
+      });
+    });
   }
 
   getMeasurementUnitStatus(measurementUnit: MeasurementUnit): string {

@@ -103,8 +103,37 @@ export class ArticlesComponent implements OnInit {
   }
 
   enabledArticle(id: number) {
-    this._articleService.enabledArticle(id)
-      .subscribe(() => this.getArticles(this.pageConfig.pageNumber));
+    forkJoin(
+      [this.translate.get('modals.enableArticle.title', {param: name}),
+        this.translate.get('modals')
+      ]).subscribe((result) => {
+      swal({
+          title: result[0],
+          icon: 'warning',
+          closeOnClickOutside: true,
+          buttons: {
+            confirm: {
+              text: result[1].defaultConfirmButton,
+              value: true,
+              visible: true,
+              closeModal: true
+            },
+            cancel: {
+              text: result[1].defaultCancelButton,
+              value: false,
+              visible: true,
+              closeModal: true,
+            }
+          }
+        }
+      ).then((data) => {
+        if (data) {
+          this._articleService.enabledArticle(id)
+            .subscribe(() => this.getArticles(this.pageConfig.pageNumber));
+        }
+      });
+    });
+
   }
 
   getArticleStatus(article: Article): string {
