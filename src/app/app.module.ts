@@ -34,7 +34,7 @@ import {NopagefoundComponent} from './shared/nopagefound/nopagefound.component';
 import {Router} from '@angular/router';
 
 export function createTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+  return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
 }
 
 @NgModule({
