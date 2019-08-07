@@ -35,9 +35,9 @@ En pages estan los componentes del sistema.
 ## Paginations
 En shared pagination tenemos el componente paginación, ademas hay dos modelos de la paginación page y pageConfig. 
 
-# DEPLOY
+## DEPLOY
 
-## Rewrite engine tomcat
+### Rewrite engine tomcat
 1. Edite el `~/conf/server.xml` para agregar Valve a continuación dentro de la sección Host como se muestra a continuación:
 ```xml
 ...
@@ -54,5 +54,5 @@ RewriteCond %{REQUEST_PATH} !-f
 RewriteRule ^/lapinta/(.*) /lapinta/index.html
 ```
 
-## Deploy to server
+### Deploy to server
 Para hacer deploy en el server se debe ejecutar el comando `ng build --prod --base-href /lapinta/` luego copiar los archivos dentro del compilado de angular `dist/stock-carniceria` y pegarlos dentro de `webapps/lapinta` dentro del tomcat
