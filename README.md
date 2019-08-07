@@ -35,7 +35,7 @@ En pages estan los componentes del sistema.
 ## Paginations
 En shared pagination tenemos el componente paginación, ademas hay dos modelos de la paginación page y pageConfig. 
 
-#DEPLOY
+# DEPLOY
 
 ## Rewrite engine tomcat
 1. Edite el `~/conf/server.xml` para agregar Valve a continuación dentro de la sección Host como se muestra a continuación:
