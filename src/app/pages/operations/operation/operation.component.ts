@@ -65,6 +65,7 @@ export class OperationComponent implements OnInit, DoCheck {
 
   initForm() {
     const operationDetails = this.fb.array([]);
+    this.setOperationTypeIfSelected();
     if (this.edit) {
       if (this.operation.operationDetails) {
         for (const operationDetail of this.operation.operationDetails) {
