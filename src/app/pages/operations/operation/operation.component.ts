@@ -205,8 +205,10 @@ export class OperationComponent implements OnInit, DoCheck {
   setOperationDetails() {
     this.operationDetails.value.some((odObject: { article: Article, price: number, amount?: number }, index: number) => {
       const operationDetail = new OperationDetail();
-      if (odObject.article.currentQuantity >= odObject.amount || this.operationForm.value.operationType === operationTypes.buy) {
-        operationDetail.amount = odObject.amount;
+      if (odObject.article.currentQuantity >= odObject.amount || this.operationForm.value.operationType === operationTypes.buy
+        || odObject.article.categoryId === 1) {
+          //TODO: solo si la categoria no es carne(categoria carne es la con id 1) se debe sacar cuando este la funcionalidad de la balanza electronica
+        operationDetail.amount = (odObject.article.categoryId === 1) ? 0 : odObject.amount;
         operationDetail.articleId = odObject.article.articleId;
         operationDetail.price = (operationDetail.amount) ? odObject.price * operationDetail.amount : odObject.price;
         const indexOperationDetail = this.operation.operationDetails
