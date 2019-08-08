@@ -274,7 +274,7 @@ export class OperationComponent implements OnInit, DoCheck {
 
   setOperationTypeIfSelected() {
     this.operation.operationType = (this.activateRoute.snapshot.queryParams['sale']) ?
-      operationTypes.sale : (this.activateRoute.snapshot.queryParams['buy']) ? operationTypes.buy : '';
+      operationTypes.sale : (this.activateRoute.snapshot.queryParams['buy']) ? operationTypes.buy : this.operation.operationType;
   }
 
   ngDoCheck() {
