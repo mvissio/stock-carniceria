@@ -21,10 +21,7 @@ export class ArticleService {
   }
 
   addArticle(article: Article) {
-    console.log('esta es la fecha de expiracion 1', article.expirationDate);
-    let newArticle = Object.assign({}, article);
-    console.log('esta es la fecha de expiracion 12', newArticle.expirationDate);
-
+    let newArticle = Object.assign({}, article);    
     newArticle.disabled = false;
     newArticle.createDate = new Date();
     const url = this.articleUrl.base;

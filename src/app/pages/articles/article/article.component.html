@@ -6,91 +6,116 @@
                 <div class="col-sm-12 col-xs-12">
                     <form class="form-horizontal form-material" [formGroup]="articleForm" (ngSubmit)="saveArticle()">
                         <div class="form-label-group">
-                            <input class="form-control" type="text" id="name" formControlName="name" [placeholder]="'articles.namePlaceholder' | translate">
+                            <input class="form-control" type="text" id="name" formControlName="name"
+                                [placeholder]="'articles.namePlaceholder' | translate">
                             <label for="name">{{'articles.namePlaceholder' | translate}}</label>
-                            <div *ngIf="articleControls.name.invalid && (articleControls.name.dirty || articleControls.name.touched)" class="error-label">
+                            <div *ngIf="articleControls.name.invalid && (articleControls.name.dirty || articleControls.name.touched)"
+                                class="error-label">
                                 <small *ngIf="articleControls.name.errors.required">
-                  {{'generalValidations.required' | translate}}
-                </small>
-                                <small *ngIf="articleControls.name.errors.maxlength" [translate]="'generalValidations.maxLength'" [translateParams]="{param: articleControls.name.errors.maxlength.requiredLength}"></small>
+                                    {{'generalValidations.required' | translate}}
+                                </small>
+                                <small *ngIf="articleControls.name.errors.maxlength"
+                                    [translate]="'generalValidations.maxLength'"
+                                    [translateParams]="{param: articleControls.name.errors.maxlength.requiredLength}"></small>
                             </div>
                         </div>
                         <div class="form-label-group">
-                            <input class="form-control" type="text" id="brand" formControlName="brand" [placeholder]="'articles.brandPlaceholder' | translate">
+                            <input class="form-control" type="text" id="brand" formControlName="brand"
+                                [placeholder]="'articles.brandPlaceholder' | translate">
                             <label for="brand">{{'articles.brandPlaceholder' | translate}}</label>
-                            <div *ngIf="articleControls.brand.invalid && (articleControls.brand.dirty || articleControls.brand.touched)" class="error-label">
+                            <div *ngIf="articleControls.brand.invalid && (articleControls.brand.dirty || articleControls.brand.touched)"
+                                class="error-label">
                                 <small *ngIf="articleControls.brand.errors.required">
-                  {{'generalValidations.required' | translate}}
-                </small>
-                                <small *ngIf="articleControls.brand.errors.maxlength" [translate]="'generalValidations.maxLength'" [translateParams]="{param: articleControls.brand.errors.maxlength.requiredLength}"></small>
+                                    {{'generalValidations.required' | translate}}
+                                </small>
+                                <small *ngIf="articleControls.brand.errors.maxlength"
+                                    [translate]="'generalValidations.maxLength'"
+                                    [translateParams]="{param: articleControls.brand.errors.maxlength.requiredLength}"></small>
                             </div>
                         </div>
                         <div class="form-label-group">
-                            <input class="form-control" type="number" id="currentPrice" formControlName="currentPrice" [placeholder]="'articles.currentPricePlaceholder' | translate">
+                            <input class="form-control" type="number" id="currentPrice" formControlName="currentPrice"
+                                [placeholder]="'articles.currentPricePlaceholder' | translate">
                             <label for="currentPrice">{{'articles.currentPricePlaceholder' | translate}}</label>
-                            <div *ngIf="articleControls.currentPrice.invalid && (articleControls.currentPrice.dirty || articleControls.currentPrice.touched)" class="error-label">
+                            <div *ngIf="articleControls.currentPrice.invalid && (articleControls.currentPrice.dirty || articleControls.currentPrice.touched)"
+                                class="error-label">
                                 <small *ngIf="articleControls.currentPrice.errors.required">
-                  {{'generalValidations.required' | translate}}
-                </small>
-                                <small *ngIf="articleControls.currentPrice.errors.min" [translate]="'generalValidations.min'" [translateParams]="{param: articleControls.currentPrice.errors.min.min}"></small>
+                                    {{'generalValidations.required' | translate}}
+                                </small>
+                                <small *ngIf="articleControls.currentPrice.errors.min"
+                                    [translate]="'generalValidations.min'"
+                                    [translateParams]="{param: articleControls.currentPrice.errors.min.min}"></small>
                             </div>
                         </div>
                         <div class="form-label-group">
-                            <input class="form-control" type="number" id="currentQuantity" formControlName="currentQuantity" [placeholder]="'articles.currentQuantityPlaceholder' | translate">
+                            <input class="form-control" type="number" id="currentQuantity"
+                                formControlName="currentQuantity"
+                                [placeholder]="'articles.currentQuantityPlaceholder' | translate">
                             <label for="currentQuantity">{{'articles.currentQuantityPlaceholder' | translate}}</label>
-                            <div *ngIf="articleControls.currentQuantity.invalid && (articleControls.currentQuantity.dirty || articleControls.currentQuantity.touched)" class="error-label">
+                            <div *ngIf="articleControls.currentQuantity.invalid && (articleControls.currentQuantity.dirty || articleControls.currentQuantity.touched)"
+                                class="error-label">
                                 <small *ngIf="articleControls.currentQuantity.errors.required">
-                  {{'generalValidations.required' | translate}}
-                </small>
-                                <small *ngIf="articleControls.currentQuantity.errors.min" [translate]="'generalValidations.min'" [translateParams]="{param: articleControls.currentQuantity.errors.min.min}"></small>
+                                    {{'generalValidations.required' | translate}}
+                                </small>
+                                <small *ngIf="articleControls.currentQuantity.errors.min"
+                                    [translate]="'generalValidations.min'"
+                                    [translateParams]="{param: articleControls.currentQuantity.errors.min.min}"></small>
                             </div>
                         </div>
                         <div class="form-label-group">
-                            <input class="form-control" type="text" id="description" formControlName="description" [placeholder]="'articles.descriptionPlaceholder' | translate">
+                            <input class="form-control" type="text" id="description" formControlName="description"
+                                [placeholder]="'articles.descriptionPlaceholder' | translate">
                             <label for="description">{{'articles.descriptionPlaceholder' | translate}}</label>
-                            <div *ngIf="articleControls.description.invalid && (articleControls.description.dirty || articleControls.description.touched)" class="error-label">
-                                <small *ngIf="articleControls.description.errors.maxlength" [translate]="'generalValidations.maxLength'" [translateParams]="{param: articleControls.description.errors.maxlength.requiredLength}"></small>
+                            <div *ngIf="articleControls.description.invalid && (articleControls.description.dirty || articleControls.description.touched)"
+                                class="error-label">
+                                <small *ngIf="articleControls.description.errors.maxlength"
+                                    [translate]="'generalValidations.maxLength'"
+                                    [translateParams]="{param: articleControls.description.errors.maxlength.requiredLength}"></small>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="measurementUnit" class="m-r-10">{{'articles.measurementUnitIdPlaceholder' | translate}}</label>
+                            <label for="measurementUnit"
+                                class="m-r-10">{{'articles.measurementUnitIdPlaceholder' | translate}}</label>
                             <select class="custom-select" formControlName="measurementUnit" id="measurementUnit">
-                <option [value]="measurementUnit.measurementUnitId" *ngFor="let measurementUnit of measurementUnits"
-                        [selected]="selectedMeasurementUnit(measurementUnit.measurementUnitId)">{{measurementUnit.name}}</option>
-              </select>
-                            <div *ngIf="articleControls.measurementUnit.invalid && (articleControls.measurementUnit.dirty || articleControls.measurementUnit.touched)" class="error-label">
+                                <option [value]="measurementUnit.measurementUnitId"
+                                    *ngFor="let measurementUnit of measurementUnits"
+                                    [selected]="selectedMeasurementUnit(measurementUnit.measurementUnitId)">
+                                    {{measurementUnit.name}}</option>
+                            </select>
+                            <div *ngIf="articleControls.measurementUnit.invalid && (articleControls.measurementUnit.dirty || articleControls.measurementUnit.touched)"
+                                class="error-label">
                                 <small *ngIf="articleControls.measurementUnit.errors.required">
-                  {{'generalValidations.required' | translate}}
-                </small>
+                                    {{'generalValidations.required' | translate}}
+                                </small>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="category" class="m-r-10">{{'articles.categoryPlaceholder' | translate}}</label>
                             <select class="custom-select" formControlName="category" id="category">
-                <option [value]="category.categoryId" *ngFor="let category of categories"
-                        [selected]="selectedCategory(category.categoryId)">{{category.name}}</option>
-              </select>
-                            <div *ngIf="articleControls.category.invalid && (articleControls.category.dirty || articleControls.category.touched)" class="error-label">
+                                <option [value]="category.categoryId" *ngFor="let category of categories"
+                                    [selected]="selectedCategory(category.categoryId)">{{category.name}}</option>
+                            </select>
+                            <div *ngIf="articleControls.category.invalid && (articleControls.category.dirty || articleControls.category.touched)"
+                                class="error-label">
                                 <small *ngIf="articleControls.category.errors.required">
-                  {{'generalValidations.required' | translate}}
-                </small>
+                                    {{'generalValidations.required' | translate}}
+                                </small>
                             </div>
                         </div>
 
-                        <label for="mydate">{{'articles.expirationDatePlaceholder' | translate}}</label>
-                        <my-date-picker name="mydate" id="mydate" [options]="myDatePickerOptions" formControlName="expirationDate"></my-date-picker>
                         <div *ngIf="!disabledFields">
                             <button class="btn btn-primary m-r-10" type="submit" [disabled]="articleForm.invalid">
-                <i class="fa fa-save" aria-hidden="true"></i>
-                {{'buttons.submit' | translate}}
-              </button>
+                                <i class="fa fa-save" aria-hidden="true"></i>
+                                {{'buttons.submit' | translate}}
+                            </button>
                             <button (click)="back()" class="btn btn-danger" type="button">
-                {{'buttons.cancel' | translate}}
-              </button>
+                                {{'buttons.cancel' | translate}}
+                            </button>
                         </div>
-                        <button *ngIf="disabledFields" class="btn btn-inverse mdi mdi-keyboard-backspace" (click)="back()">
-              {{'buttons.back' | translate}}
-            </button>
+                        <button *ngIf="disabledFields" class="btn btn-inverse mdi mdi-keyboard-backspace"
+                            (click)="back()">
+                            {{'buttons.back' | translate}}
+                        </button>
                     </form>
                 </div>
             </div>

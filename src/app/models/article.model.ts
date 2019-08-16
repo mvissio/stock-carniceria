@@ -9,7 +9,6 @@ export class Article {
     description : string;
     disabled : boolean;
     disabledDate : Date; 
-    expirationDate : Date;
     measurementUnitId : number;
     categoryId : number;
     name : string;
@@ -23,7 +22,6 @@ export class Article {
         description? : string,
         disabled? : boolean,
         disabledDate? : Date,
-        expirationDate? : Date,
         measurementUnitId? : number,
         categoryId? : number,
         name? : string,
@@ -36,10 +34,9 @@ export class Article {
             this.description = description,
             this.disabled = disabled || false,
             this.disabledDate = disabledDate,
-            this.expirationDate = expirationDate,
-            this.measurementUnitId = measurementUnitId
+            this.measurementUnitId = measurementUnitId,
             this.categoryId = categoryId,
-            this.name = name
+            this.name = name,
             this.label = label;
         }
 }

@@ -67,8 +67,7 @@ export class ArticleComponent implements OnInit {
       measurementUnit: [this.article.measurementUnitId, Validators.required],
       category: [this.article.categoryId, Validators.required],
       currentQuantity: [this.article.currentQuantity, [Validators.required, Validators.min(0)]],
-      description: [this.article.description, [Validators.maxLength(100)]],
-      expirationDate: [(this.article.expirationDate != undefined) ? formatDate(this.article.expirationDate, format, locale) : null]
+      description: [this.article.description, [Validators.maxLength(100)]]      
     }, { updateOn: 'blur' });
     if (this.disabledFields) {
       this.articleForm.disable();
@@ -82,20 +81,12 @@ export class ArticleComponent implements OnInit {
     this._articleService.getArticleByArticleId(this.id)
       .subscribe((res: Article) => {
         this.article = res;
-        this.initForm();
-        if (this.article.expirationDate != null && this.article.expirationDate != undefined) {
-          let fechaRecup = new Date(this.article.expirationDate);
-          let selDate: IMyDate = { year: fechaRecup.getFullYear(), month: fechaRecup.getMonth() + 1, day: fechaRecup.getDate() };
-          this.updateDate(selDate);
-        }
+        this.initForm();        
       }, (err: HttpErrorResponse) => {
         this._commonsService.showMessage(toastType.error, this._handleErrorsService.handleErrors(err));
       });
   }
-
-  updateDate(date: IMyDate): void {
-    this.articleForm.patchValue({expirationDate: date});
-}
+  
 
   saveArticle() {
     if (this.articleForm.invalid) {
@@ -114,7 +105,6 @@ export class ArticleComponent implements OnInit {
           this._commonsService.showMessage(toastType.error, this._handleErrorsService.handleErrors(err));
         });
     } else {
-      console.log("esta es la fecha de expiracion", this.article.expirationDate);
       this._articleService.addArticle(this.article)
         .subscribe(() => {
           this.translate.get('articles.createOk')
@@ -134,7 +124,6 @@ export class ArticleComponent implements OnInit {
     this.article.currentPrice = this.articleForm.value.currentPrice;
     this.article.currentQuantity = this.articleForm.value.currentQuantity;
     this.article.description = this.articleForm.value.description;
-    this.article.expirationDate = new Date(this.articleForm.value.expirationDate.formatted);
     this.article.measurementUnitId = this.articleForm.value.measurementUnit;
     this.article.categoryId = this.articleForm.value.category;
   }

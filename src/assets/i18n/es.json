@@ -91,7 +91,6 @@
         "currentPricePlaceholder": "Precio actual",
         "currentQuantityPlaceholder": "Cantidad actual",
         "descriptionPlaceholder": "Descripción",
-        "expirationDatePlaceholder": "Fecha de Expiración",
         "measurementUnitIdPlaceholder": "Unidad de medida",
         "categoryPlaceholder": "Categoría",
         "enabledPlaceholder": "Habilitado",
@@ -151,8 +150,7 @@
             "brand": "Marca",
             "currentPrice": "Precio",
             "currentQuantity": "Cantidad",
-            "description": "Descripción",
-            "expirationDate": "Fecha expiración",
+            "description": "Descripción",           
             "measurementUnitId": "Unidad medida"
         },
         "name": "Nombre",
