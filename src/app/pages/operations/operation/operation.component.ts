@@ -65,6 +65,7 @@ export class OperationComponent implements OnInit, DoCheck {
 
   initForm() {
     const operationDetails = this.fb.array([]);
+    this.setOperationTypeIfSelected();
     if (this.edit) {
       if (this.operation.operationDetails) {
         for (const operationDetail of this.operation.operationDetails) {
@@ -205,8 +206,10 @@ export class OperationComponent implements OnInit, DoCheck {
   setOperationDetails() {
     this.operationDetails.value.some((odObject: { article: Article, price: number, amount?: number }, index: number) => {
       const operationDetail = new OperationDetail();
-      if (odObject.article.currentQuantity >= odObject.amount || this.operationForm.value.operationType === operationTypes.buy) {
-        operationDetail.amount = odObject.amount;
+      if (odObject.article.currentQuantity >= odObject.amount || this.operationForm.value.operationType === operationTypes.buy
+        || odObject.article.categoryId === 1) {
+          //TODO: solo si la categoria no es carne(categoria carne es la con id 1) se debe sacar cuando este la funcionalidad de la balanza electronica
+        operationDetail.amount = (odObject.article.categoryId === 1) ? 0 : odObject.amount;
         operationDetail.articleId = odObject.article.articleId;
         operationDetail.price = (operationDetail.amount) ? odObject.price * operationDetail.amount : odObject.price;
         const indexOperationDetail = this.operation.operationDetails
@@ -274,7 +277,7 @@ export class OperationComponent implements OnInit, DoCheck {
 
   setOperationTypeIfSelected() {
     this.operation.operationType = (this.activateRoute.snapshot.queryParams['sale']) ?
-      operationTypes.sale : (this.activateRoute.snapshot.queryParams['buy']) ? operationTypes.buy : '';
+      operationTypes.sale : (this.activateRoute.snapshot.queryParams['buy']) ? operationTypes.buy : this.operation.operationType;
   }
 
   ngDoCheck() {

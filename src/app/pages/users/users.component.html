@@ -1,60 +1,58 @@
 <div class="row animated fadeIn">
-  <div class="col-12">
-    <div class="card">
-      <div class="card-body">
-        <input #input (keyup)="findUser(input.value)" [(ngModel)]="searchText" type="search" class="form-control"
-               [placeholder]="'users.searchLabel' | translate">
-      </div>
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <input #input (keyup)="findUser(input.value)" [(ngModel)]="searchText" type="search" class="form-control" [placeholder]="'users.searchLabel' | translate">
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 <div class="row animated fadeIn" *ngIf="!loading">
-  <div class="col-12">
-    <div class="card">
-      <div class="card-body">
-        <h3 class="card-title">{{'users.title' | translate}} (
-          <small>{{ page?.totalElements}}</small> )
-        </h3>
-        <button type="button" class="btn btn-primary float-right mdi mdi-plus" [routerLink]="['/usuario']"></button>
-        <div class="table-responsive">
-          <table class="table table-hover m-auto" *ngIf="users">
-            <thead>
-            <tr class="row">
-              <th class="col-3">{{'table.users.name' | translate}}</th>
-              <th class="col-3">{{'table.users.email' | translate}}</th>
-              <th class="col-2">{{'table.users.role' | translate}}</th>
-              <th class="col-2">{{'table.status' | translate}}</th>
-              <th class="col-2">{{'table.accions' | translate}}</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let user of users" class="row">
-              <td class="col-3">{{ user?.username }}</td>
-              <td class="col-3">{{ user?.email }}</td>
-              <td class="col-2">{{user?.rol.name | dropdownTranslate:'roles'}}</td>
-              <td class="col-2"><span class="label label-rounded"
-                                      [ngClass]="(user.enabled)? 'label-success':'label-danger'">{{getUserStatus(user)}}</span>
-              </td>
-              <td class="col-2">
-                <div class="button-group row flex-nowrap">
-                  <button class="btn btn-secondary" (click)="editOrShowUser(user.userId)">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">{{'users.title' | translate}} (
+                    <small>{{ page?.totalElements}}</small> )
+                </h3>
+                <button type="button" class="btn btn-primary float-right mdi mdi-plus" [routerLink]="['/usuario']"></button>
+                <div class="table-responsive">
+                    <table class="table table-hover m-auto" *ngIf="users">
+                        <thead>
+                            <tr class="row">
+                                <th class="col-3">{{'table.name' | translate}}</th>
+                                <th class="col-3">{{'table.users.email' | translate}}</th>
+                                <th class="col-2">{{'table.users.role' | translate}}</th>
+                                <th class="col-2">{{'table.status' | translate}}</th>
+                                <th class="col-2">{{'table.accions' | translate}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let user of users" class="row">
+                                <td class="col-3">{{ user?.username }}</td>
+                                <td class="col-3">{{ user?.email }}</td>
+                                <td class="col-2">{{user?.rol.name | dropdownTranslate:'roles'}}</td>
+                                <td class="col-2"><span class="label label-rounded" [ngClass]="(user.enabled)? 'label-success':'label-danger'">{{getUserStatus(user)}}</span>
+                                </td>
+                                <td class="col-2">
+                                    <div class="button-group row flex-nowrap">
+                                        <button class="btn btn-secondary" (click)="editOrShowUser(user.userId)">
                     <i class="mdi mdi-eye-outline" aria-hidden="true"></i>
                   </button>
-                  <button class="btn btn-info" (click)="editOrShowUser(user.userId, true)">
+                                        <button class="btn btn-info" (click)="editOrShowUser(user.userId, true)">
                     <i class="mdi mdi-account-edit" aria-hidden="true"></i>
                   </button>
-                  <button class="btn btn-danger" [disabled]="!user.enabled" (click)="deleteUser(user.username)">
+                                        <button class="btn btn-danger" [disabled]="!user.enabled" (click)="deleteUser(user.username)">
                     <i class="mdi mdi-account-remove" aria-hidden="true"></i>
                   </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-              </td>
-            </tr>
-            </tbody>
-          </table>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
 <app-loading [loading]="loading"></app-loading>
 <app-pagination [page]="page" [pages]="pages" (pageNumber)="setPage($event)" *ngIf="users"></app-pagination>
