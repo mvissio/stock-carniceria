@@ -29,13 +29,13 @@ export class OperationsComponent implements OnInit {
   fromDate: IMyDateModel;
   toDate: IMyDateModel;
   oneDate: IMyDateModel;
-  operationTypePeriod: string = "";
-  paymentMethodPeriod: string = "";
-  operationTypeOneDate: string = "";
-  paymentMethodOneDate: string = "";
+  operationTypePeriod = '';
+  paymentMethodPeriod = '';
+  operationTypeOneDate = '';
+  paymentMethodOneDate = '';
   showFilterOneDate: boolean;
   showFilterPeriod: boolean;
-  lastUsedFilter: string = "ninguno";
+  lastUsedFilter = 'ninguno';
 
   operationTypes: any[]  = [];
   paymentMethods: any[]  = [];
@@ -57,7 +57,7 @@ export class OperationsComponent implements OnInit {
     this.pageConfig = new PageConfig('operationId');
     this.pageConfig.changeOrder();
     this.getTodayOperations(0);
-    
+
     forkJoin([
       this._operationService.getAllOperationTypes(),
       this._operationService.getAllPaymentMethods()
@@ -71,17 +71,17 @@ export class OperationsComponent implements OnInit {
   }
 
   setPage(nextPage: number) {
-    if (this.lastUsedFilter == "ninguno") {
+    if (this.lastUsedFilter === 'ninguno') {
       this.getTodayOperations(nextPage);
-    } else if (this.lastUsedFilter == "periodo") {
+    } else if (this.lastUsedFilter === 'periodo') {
       this.getOperationsByPeriodWithFilters(nextPage);
-    } else if (this.lastUsedFilter == "fecha") {
+    } else if (this.lastUsedFilter === 'fecha') {
       this.getOperationsOneDateWithFilters(nextPage);
     }
 
   }
 
-  //consulta por la fecha de hoy
+  // consulta por la fecha de hoy
   getTodayOperations(nextPage: number) {
     this.loading = true;
     this.pageConfig.pageNumber = nextPage;
@@ -118,8 +118,9 @@ export class OperationsComponent implements OnInit {
 
    getOperationsByPeriod(path: string, operationTypePeriod: string, paymentMethodPeriod: string, nextPage = 0) {       
     this.loading = true;
-    this.pageConfig.pageNumber = nextPage;    
-    this._operationService.getOperationsByPeriod(this.fromDate.jsdate, this.toDate.jsdate, this.pageConfig, path, operationTypePeriod, paymentMethodPeriod)
+    this.pageConfig.pageNumber = nextPage;
+    this._operationService.getOperationsByPeriod(this.fromDate.jsdate, this.toDate.jsdate, this.pageConfig,
+       path, operationTypePeriod, paymentMethodPeriod)
       .subscribe(
         (res: Page) => {
           this.page = res;
@@ -174,53 +175,55 @@ export class OperationsComponent implements OnInit {
     return operation.operationStatus;
   }
 
-  setearOperationTypePeriod(operationType : string) {
+  setearOperationTypePeriod(operationType: string) {
     this.operationTypePeriod = operationType;
   }
 
-  setearPaymentMethodPeriod(paymentMethod : string) {    
-    this.paymentMethodPeriod = paymentMethod;    
+  setearPaymentMethodPeriod(paymentMethod: string) {
+    this.paymentMethodPeriod = paymentMethod;
   }
 
   setearOperationTypeOneDate(operationType: string) {
-    this.operationTypeOneDate = operationType;    
+    this.operationTypeOneDate = operationType;
   }
 
   setearPaymentMethodOneDate(paymentMethodOne: string) {
-    this.paymentMethodOneDate = paymentMethodOne;    
+    this.paymentMethodOneDate = paymentMethodOne;
   }
 
-  getOperationsByPeriodWithFilters(nextPage: number) {         
+  getOperationsByPeriodWithFilters(nextPage: number) {
     this.cleanOneDateFilter();
-    this.lastUsedFilter = "periodo";    
-    if (this.operationTypePeriod.length == 0 && this.paymentMethodPeriod.length == 0) {      
-      this.getOperationsByPeriod("getOperationsByPeriod", null, null, nextPage);
+    this.lastUsedFilter = 'periodo';
+    if (this.operationTypePeriod.length === 0 && this.paymentMethodPeriod.length === 0) {
+      this.getOperationsByPeriod('getOperationsByPeriod', null, null, nextPage);
       return;
     } else if (this.operationTypePeriod.length > 0 && this.paymentMethodPeriod.length > 0) {
-      this.getOperationsByPeriod("getOperationsByPeriodAndOperationTypeAndPaymentMethod", this.operationTypePeriod, this.paymentMethodPeriod, nextPage);
+      this.getOperationsByPeriod('getOperationsByPeriodAndOperationTypeAndPaymentMethod',
+       this.operationTypePeriod, this.paymentMethodPeriod, nextPage);
       return;
     } else if (this.operationTypePeriod.length > 0) {
-      this.getOperationsByPeriod("getOperationsByPeriodAndOperationType", this.operationTypePeriod, null, nextPage);
+      this.getOperationsByPeriod('getOperationsByPeriodAndOperationType', this.operationTypePeriod, null, nextPage);
       return;
     } else if (this.paymentMethodPeriod.length > 0) {
-      this.getOperationsByPeriod("getOperationsByPeriodAndPaymentMethod", null, this.paymentMethodPeriod, nextPage);
+      this.getOperationsByPeriod('getOperationsByPeriodAndPaymentMethod', null, this.paymentMethodPeriod, nextPage);
     }
   }
 
   getOperationsOneDateWithFilters(nextPage: number) {
     this.cleanPeriodFilter();
-    this.lastUsedFilter = "fecha";  
-    if (this.operationTypeOneDate.length == 0 && this.paymentMethodOneDate.length == 0) {
-      this.getOperationsByOneDate("getOperationsByOneDate", null, null, nextPage);
+    this.lastUsedFilter = 'fecha';
+    if (this.operationTypeOneDate.length === 0 && this.paymentMethodOneDate.length === 0) {
+      this.getOperationsByOneDate('getOperationsByOneDate', null, null, nextPage);
       return;
     } else if (this.operationTypeOneDate.length > 0 && this.paymentMethodOneDate.length > 0) {
-      this.getOperationsByOneDate("getOperationsByOneDateAndOperationTypeAndPaymentMethod", this.operationTypeOneDate, this.paymentMethodOneDate, nextPage);
+      this.getOperationsByOneDate('getOperationsByOneDateAndOperationTypeAndPaymentMethod',
+       this.operationTypeOneDate, this.paymentMethodOneDate, nextPage);
       return;
     } else if (this.operationTypeOneDate.length > 0) {
-      this.getOperationsByOneDate("getOperationsByOneDateAndOperationType", this.operationTypeOneDate, null, nextPage);
+      this.getOperationsByOneDate('getOperationsByOneDateAndOperationType', this.operationTypeOneDate, null, nextPage);
       return;
     } else if (this.paymentMethodOneDate.length > 0) {
-      this.getOperationsByOneDate("getOperationsByOneDateAndPaymentMethod", null, this.paymentMethodOneDate, nextPage);
+      this.getOperationsByOneDate('getOperationsByOneDateAndPaymentMethod', null, this.paymentMethodOneDate, nextPage);
       return;
     }
   }
@@ -241,9 +244,9 @@ export class OperationsComponent implements OnInit {
   }
 
   cleanPeriodFilter() {
-    this.lastUsedFilter = "ninguno";
-    this.operationTypePeriod = "";
-    this.paymentMethodPeriod = "";
+    this.lastUsedFilter = 'ninguno';
+    this.operationTypePeriod = '';
+    this.paymentMethodPeriod = '';
     this.fromDate = null;
     this.toDate = null;
     this.getTodayOperations(0);
@@ -251,15 +254,12 @@ export class OperationsComponent implements OnInit {
   }
 
   cleanOneDateFilter() {
-    this.lastUsedFilter = "ninguno";
-    this.operationTypeOneDate = "";
-    this.paymentMethodOneDate = "";
+    this.lastUsedFilter = 'ninguno';
+    this.operationTypeOneDate = '';
+    this.paymentMethodOneDate = '';
     this.oneDate = null;
     this.getTodayOperations(0);
 
   }
-
-  
-
 
 }

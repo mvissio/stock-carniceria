@@ -33,9 +33,9 @@ export const toastPosition = {
 };
 
 export const operationStatus = {
-  canceled: "CANCELED",
-  sold: "SOLD",
-  purchased: "PURCHASED"
-}
+  canceled: 'CANCELED',
+  sold: 'SOLD',
+  purchased: 'PURCHASED'
+};
 
 export const discountValues = [5, 10, 15, 20, 25, 30];

@@ -21,12 +21,12 @@ export class ArticleService {
   }
 
   addArticle(article: Article) {
-    let newArticle = Object.assign({}, article);    
+    const newArticle = Object.assign({}, article);
     newArticle.disabled = false;
     newArticle.createDate = new Date();
     const url = this.articleUrl.base;
     return this.httpClient.post(url, newArticle)
-      .pipe(map((newArticle: any) => newArticle));
+      .pipe(map((response: any) => response));
   }
 
   getAllArticles(page?: PageConfig) {
@@ -46,12 +46,14 @@ export class ArticleService {
     return this.httpClient.get(url)
       .pipe(map((response: Article) => {
         this.article = response;
-        return response;
+        this.article.label = this.article.name + ' - ' + this.article.brand;
+        return this.article;
       }));
   }
 
   getArticleByName(name: string, page: PageConfig) {
-    const url = `${this.articleUrl.getArticleByName}?name=${name}&page=${page.pageNumber}&size=${page.pageSize}&sort=${page.sortName},${page.orderDesc}`;
+    const url = `${this.articleUrl.getArticleByName}?name=${name}
+      &page=${page.pageNumber}&size=${page.pageSize}&sort=${page.sortName},${page.orderDesc}`;
     return this.httpClient.get(url)
     .pipe(map((response: Page) => response));
 

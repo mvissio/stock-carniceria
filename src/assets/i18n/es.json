@@ -57,9 +57,10 @@
         "operationBox": {
             "notResult": "No se encontraron operaciones registradas.",
             "createDate": "Fecha y Hora",
-            "operationType": "Tipo de Operación",
+            "operationType": "Tipo",
             "paymentMethod": "Método de Pago",
-            "total": "Total"
+            "total": "Total",
+            "operationStatus": "Estado"
         }
     },
     "operations": {
@@ -150,7 +151,7 @@
             "brand": "Marca",
             "currentPrice": "Precio",
             "currentQuantity": "Cantidad",
-            "description": "Descripción",           
+            "description": "Descripción",
             "measurementUnitId": "Unidad medida"
         },
         "name": "Nombre",
@@ -246,7 +247,7 @@
         "CC": "Tarjeta de Débito",
         "CASH": "Efectivo"
     },
-    "OperationStatus": {
+    "operationStatus": {
         "CANCELED": "Operación Cancelada",
         "SOLD": "Venta Realizada",
         "PURCHASED": "Compra Realizada"

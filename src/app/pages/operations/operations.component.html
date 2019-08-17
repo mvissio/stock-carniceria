@@ -108,14 +108,14 @@
                                 <td class="col-2">{{ operation?.operationType | dropdownTranslate:'operationTypes' }}</td>
                                 <td class="col-2">{{ operation?.paymentMethod | dropdownTranslate:'paymentMethods' }}</td>
                                 <td class="col-2">{{operation?.total}}</td>
-                                <td class="col-1"><span class="label label-rounded" [ngClass]="(operation?.disabled)? 'label-danger':'label-success'">{{getOperationStatus(operation) | dropdownTranslate:'OperationStatus'}}</span>
+                                <td class="col-1"><span class="label label-rounded" [ngClass]="(operation?.disabled)? 'label-danger':'label-success'">{{getOperationStatus(operation) | dropdownTranslate:'operationStatus'}}</span>
                                 </td>
                                 <td class="col-3">
                                     <div class="button-group">
                                         <button class="btn btn-secondary" (click)="editOrShowOperation(operation.operationId)">
                     <i class="mdi mdi-eye-outline" aria-hidden="true"></i>
                   </button>
-                                        <button class="btn btn-info" (click)="editOrShowOperation(operation.operationId, true)">
+                                        <button class="btn btn-info" [disabled]="operation?.disabled" (click)="editOrShowOperation(operation.operationId, true)">
                     <i class="mdi mdi-pencil" aria-hidden="true"></i>
                   </button>
                                         <button [disabled]="operation?.disabled" class="btn btn-danger" (click)="cancelOperation(operation.operationId)">

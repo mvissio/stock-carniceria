@@ -72,7 +72,7 @@ export class OperationComponent implements OnInit, DoCheck {
           this._articleService.getArticleByArticleId(operationDetail.articleId).subscribe((res: Article) => {
             operationDetails.push(this.fb.group({
               amount: [operationDetail.amount, [Validators.required, Validators.min(1)]],
-              price: [operationDetail.price, [Validators.required, Validators.min(1)]],
+              price: [res.currentPrice, [Validators.required, Validators.min(1)]],
               article: [res, Validators.required]
             }));
             if (this.disabledFields) {
@@ -93,6 +93,7 @@ export class OperationComponent implements OnInit, DoCheck {
       operationType: [this.operation.operationType, Validators.required],
       paymentMethod: [this.operation.paymentMethod, Validators.required],
       discount: [this.operation.discount],
+      enabledDiscount: [(this.operation.discount)],
       operationDetails: operationDetails
     }, {updateOn: 'blur'});
     if (this.disabledFields) {
@@ -282,6 +283,12 @@ export class OperationComponent implements OnInit, DoCheck {
 
   ngDoCheck() {
     this.setOperationTypeIfSelected();
+  }
+
+  toggleDiscount(value: any) {
+    if (!value.currentTarget.checked) {
+      this.operationForm.value.discount = null;
+    }
   }
 
   back() {
