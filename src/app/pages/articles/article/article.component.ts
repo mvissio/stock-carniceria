@@ -66,6 +66,7 @@ export class ArticleComponent implements OnInit {
       currentPrice: [this.article.currentPrice, [Validators.required, Validators.min(0)]],
       measurementUnit: [this.article.measurementUnitId, Validators.required],
       category: [this.article.categoryId, Validators.required],
+      code:[this.article.code],
       currentQuantity: [this.article.currentQuantity, [Validators.required, Validators.min(0)]],
       description: [this.article.description, [Validators.maxLength(100)]]      
     }, { updateOn: 'blur' });
@@ -126,6 +127,7 @@ export class ArticleComponent implements OnInit {
     this.article.description = this.articleForm.value.description;
     this.article.measurementUnitId = this.articleForm.value.measurementUnit;
     this.article.categoryId = this.articleForm.value.category;
+    this.article.code = this.articleForm.value.code;
   }
 
   back() {

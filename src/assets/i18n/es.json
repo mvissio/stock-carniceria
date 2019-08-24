@@ -94,6 +94,7 @@
         "descriptionPlaceholder": "Descripción",
         "measurementUnitIdPlaceholder": "Unidad de medida",
         "categoryPlaceholder": "Categoría",
+        "codePlaceholder": "Código",
         "enabledPlaceholder": "Habilitado",
         "createOk": "Articulo creado satisfactoriamente.",
         "updateOk": "Articulo actualizado satisfactoriamente.",

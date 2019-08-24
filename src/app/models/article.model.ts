@@ -12,7 +12,8 @@ export class Article {
     measurementUnitId : number;
     categoryId : number;
     name : string;
-    label: string;    
+    label: string;
+    code: string;    
     constructor(
         articleId? : number,
         brand? : string,
@@ -25,7 +26,8 @@ export class Article {
         measurementUnitId? : number,
         categoryId? : number,
         name? : string,
-        label? : string) {
+        label? : string,
+        code? : string) {
             this.articleId = articleId,
             this.brand = brand ,
             this.createDate = createDate || new Date(),
@@ -38,5 +40,6 @@ export class Article {
             this.categoryId = categoryId,
             this.name = name,
             this.label = label;
+            this.code = code;
         }
 }

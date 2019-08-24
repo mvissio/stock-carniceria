@@ -73,6 +73,20 @@
                                     [translateParams]="{param: articleControls.description.errors.maxlength.requiredLength}"></small>
                             </div>
                         </div>
+                        <div class="form-label-group">
+                            <input class="form-control" type="text" id="code" formControlName="code"
+                                [placeholder]="'articles.codePlaceholder' | translate">
+                            <label for="code">{{'articles.codePlaceholder' | translate}}</label>
+                            <div *ngIf="articleControls.brand.invalid && (articleControls.code.dirty || articleControls.code.touched)"
+                                class="error-label">
+                                <small *ngIf="articleControls.brand.errors.required">
+                                    {{'generalValidations.required' | translate}}
+                                </small>
+                                <small *ngIf="articleControls.code.errors.maxlength"
+                                    [translate]="'generalValidations.maxLength'"
+                                    [translateParams]="{param: articleControls.code.errors.maxlength.requiredLength}"></small>
+                            </div>
+                        </div>                       
                         <div class="form-group">
                             <label for="measurementUnit"
                                 class="m-r-10">{{'articles.measurementUnitIdPlaceholder' | translate}}</label>
@@ -103,6 +117,7 @@
                             </div>
                         </div>
 
+                        
                         <div *ngIf="!disabledFields">
                             <button class="btn btn-primary m-r-10" type="submit" [disabled]="articleForm.invalid">
                                 <i class="fa fa-save" aria-hidden="true"></i>
