@@ -11,7 +11,7 @@ export class Operation {
     total?: number;
     subTotal?: number;
     discount?: number;
-    operationDetails?: OperationDetail[];  
+    operationDetails?: OperationDetail[];
     constructor(
         operationId?: number,
         createDateTime?: Date,

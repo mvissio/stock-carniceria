@@ -97,7 +97,7 @@
         "enabledPlaceholder": "Habilitado",
         "createOk": "Articulo creado satisfactoriamente.",
         "updateOk": "Articulo actualizado satisfactoriamente.",
-        "amountInsuficient": "Cantidad insuficiente de artículos, actualmente quedan {{param}}",
+        "amountInsuficient": "Cantidad insuficiente del artículo {{param1}}, actualmente quedan {{param2}}",
         "noContent": "No se encontraron artículos cargados."
     },
     "measurementUnits": {

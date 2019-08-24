@@ -1,31 +1,31 @@
 import {IMyDateModel } from 'mydatepicker';
 
 export class Article {
-    articleId : number;
-    brand : string;
-    createDate : Date;
-    currentPrice : number
-    currentQuantity
-    description : string;
-    disabled : boolean;
-    disabledDate : Date; 
-    measurementUnitId : number;
-    categoryId : number;
-    name : string;
-    label: string;    
+    articleId: number;
+    brand: string;
+    createDate: Date;
+    currentPrice: number;
+    currentQuantity: number;
+    description: string;
+    disabled: boolean;
+    disabledDate: Date;
+    measurementUnitId: number;
+    categoryId: number;
+    name: string;
+    label: string;
     constructor(
-        articleId? : number,
-        brand? : string,
-        createDate? : Date,
-        currentPrice? : number,
-        currentQuantity? : number,
-        description? : string,
-        disabled? : boolean,
-        disabledDate? : Date,
-        measurementUnitId? : number,
-        categoryId? : number,
-        name? : string,
-        label? : string) {
+        articleId?: number,
+        brand?: string,
+        createDate?: Date,
+        currentPrice?: number,
+        currentQuantity?: number,
+        description?: string,
+        disabled?: boolean,
+        disabledDate?: Date,
+        measurementUnitId?: number,
+        categoryId?: number,
+        name?: string,
+        label?: string) {
             this.articleId = articleId,
             this.brand = brand ,
             this.createDate = createDate || new Date(),

@@ -205,27 +205,22 @@ export class OperationComponent implements OnInit, DoCheck {
   }
 
   setOperationDetails() {
-    this.operationDetails.value.some((odObject: { article: Article, price: number, amount?: number }, index: number) => {
+    this.operationDetails.value.some((odObject: {article: Article, price: number, amount?: number}, index: number) => {
       const operationDetail = new OperationDetail();
-      if (odObject.article.currentQuantity >= odObject.amount || this.operationForm.value.operationType === operationTypes.buy
-        || odObject.article.categoryId === 1) {
+      const indexOperationDetail = this.operation.operationDetails
+        .findIndex((od: OperationDetail) => od.articleId === odObject.article.articleId);
+      if (this.checkValidOperationDetail(odObject, indexOperationDetail)) {
           //TODO: solo si la categoria no es carne(categoria carne es la con id 1) se debe sacar cuando este la funcionalidad de la balanza electronica
         operationDetail.amount = (odObject.article.categoryId === 1) ? 0 : odObject.amount;
         operationDetail.articleId = odObject.article.articleId;
         operationDetail.price = (operationDetail.amount) ? odObject.price * operationDetail.amount : odObject.price;
-        const indexOperationDetail = this.operation.operationDetails
-          .findIndex((od: OperationDetail) => od.articleId === odObject.article.articleId);
         if (indexOperationDetail !== -1) {
           this.operation.operationDetails[index] = operationDetail;
         } else {
           this.operation.operationDetails.push(operationDetail);
         }
       } else {
-        this.translate.get('articles.amountInsuficient', {param: odObject.article.currentQuantity})
-          .subscribe((result) => {
-            this._commonsService.showMessage(toastType.error, result);
-            this.articleAmountSizeError = true;
-          });
+        this.showErrorInvalidOperationDetail(odObject.article.label, odObject.article.currentQuantity);
         return true;
       }
     });
@@ -289,6 +284,30 @@ export class OperationComponent implements OnInit, DoCheck {
     if (!value.currentTarget.checked) {
       this.operationForm.value.discount = null;
     }
+  }
+
+  checkValidOperationDetail(odObject: any, index: number): boolean {
+    const operationDetail = this.operation.operationDetails[index];
+    const isvalid = (odObject.article.currentQuantity >= odObject.amount) ||
+      (this.edit && operationDetail.amount > odObject.amount) ||
+      (this.edit && operationDetail.amount < odObject.amount &&
+        ((operationDetail.amount + odObject.article.currentQuantity) - odObject.amount) > 0);
+    return isvalid;
+  }
+
+  validateOperationDetail(odObject: any) {
+    const index = this.operation.operationDetails.findIndex((od: OperationDetail) => od.articleId === odObject.article.articleId);
+    if (!this.checkValidOperationDetail(odObject, index)) {
+      this.showErrorInvalidOperationDetail(odObject.article.label, odObject.article.currentQuantity);
+    }
+  }
+
+  showErrorInvalidOperationDetail(label: string, quantity: number) {
+    this.translate.get('articles.amountInsuficient', {param1: label, param2: quantity})
+      .subscribe((result) => {
+        this._commonsService.showMessage(toastType.error, result);
+        this.articleAmountSizeError = true;
+      });
   }
 
   back() {
