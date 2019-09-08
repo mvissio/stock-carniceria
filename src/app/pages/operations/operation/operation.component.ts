@@ -210,8 +210,7 @@ export class OperationComponent implements OnInit, DoCheck {
       const indexOperationDetail = this.operation.operationDetails
         .findIndex((od: OperationDetail) => od.articleId === odObject.article.articleId);
       if (this.checkValidOperationDetail(odObject, indexOperationDetail)) {
-          //TODO: solo si la categoria no es carne(categoria carne es la con id 1) se debe sacar cuando este la funcionalidad de la balanza electronica
-        operationDetail.amount = (odObject.article.categoryId === 1) ? 0 : odObject.amount;
+        operationDetail.amount = odObject.amount;
         operationDetail.articleId = odObject.article.articleId;
         operationDetail.price = (operationDetail.amount) ? odObject.price * operationDetail.amount : odObject.price;
         if (indexOperationDetail !== -1) {
@@ -250,10 +249,6 @@ export class OperationComponent implements OnInit, DoCheck {
   selectArticle(article: Article, index: number) {
     if (article) {
       this.operationDetailControls(index).price.patchValue(article.currentPrice);
-      //TODO: solo si la categoria no es carne(categoria carne es la con id 1) se debe sacar cuando este la funcionalidad de la balanza electronica
-      if (article.categoryId === 1 && this.operationControls.operationType.value === operationTypes.sale) {
-        this.operationDetailControls(index).amount.disable();
-      }
     }
   }
 
@@ -288,10 +283,10 @@ export class OperationComponent implements OnInit, DoCheck {
 
   checkValidOperationDetail(odObject: any, index: number): boolean {
     const operationDetail = this.operation.operationDetails[index];
-    const isvalid = (odObject.article.currentQuantity >= odObject.amount) ||
+    const isvalid = (this.operation.operationType === operationTypes.buy || (odObject.article.currentQuantity >= odObject.amount) ||
       (this.edit && operationDetail.amount > odObject.amount) ||
       (this.edit && operationDetail.amount < odObject.amount &&
-        ((operationDetail.amount + odObject.article.currentQuantity) - odObject.amount) > 0);
+        ((operationDetail.amount + odObject.article.currentQuantity) - odObject.amount) > 0));
     return isvalid;
   }
 
