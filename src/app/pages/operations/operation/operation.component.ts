@@ -283,7 +283,7 @@ export class OperationComponent implements OnInit, DoCheck {
 
   checkValidOperationDetail(odObject: any, index: number): boolean {
     const operationDetail = this.operation.operationDetails[index];
-    const isvalid = (this.operation.operationType === operationTypes.buy || (odObject.article.currentQuantity >= odObject.amount) ||
+    const isvalid = (this.operation.operationType === operationTypes.sale || (odObject.article.currentQuantity >= odObject.amount) ||
       (this.edit && operationDetail.amount > odObject.amount) ||
       (this.edit && operationDetail.amount < odObject.amount &&
         ((operationDetail.amount + odObject.article.currentQuantity) - odObject.amount) > 0));
