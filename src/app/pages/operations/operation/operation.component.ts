@@ -70,9 +70,10 @@ export class OperationComponent implements OnInit, DoCheck {
       if (this.operation.operationDetails) {
         for (const operationDetail of this.operation.operationDetails) {
           this._articleService.getArticleByArticleId(operationDetail.articleId).subscribe((res: Article) => {
+            const priceOperationDetail = operationDetail.price / operationDetail.amount;
             operationDetails.push(this.fb.group({
               amount: [operationDetail.amount, [Validators.required, Validators.min(1)]],
-              price: [res.currentPrice, [Validators.required, Validators.min(1)]],
+              price: [priceOperationDetail, [Validators.required, Validators.min(1)]],
               article: [res, Validators.required]
             }));
             if (this.disabledFields) {
@@ -283,7 +284,8 @@ export class OperationComponent implements OnInit, DoCheck {
 
   checkValidOperationDetail(odObject: any, index: number): boolean {
     const operationDetail = this.operation.operationDetails[index];
-    const isvalid = (this.operation.operationType === operationTypes.sale || (odObject.article.currentQuantity >= odObject.amount) ||
+    const operationType = (this.operation.operationType) ? this.operation.operationType : this.operationForm.value.operationType;
+    const isvalid = (operationType === operationTypes.buy || (odObject.article.currentQuantity >= odObject.amount) ||
       (this.edit && operationDetail.amount > odObject.amount) ||
       (this.edit && operationDetail.amount < odObject.amount &&
         ((operationDetail.amount + odObject.article.currentQuantity) - odObject.amount) > 0));
@@ -294,6 +296,8 @@ export class OperationComponent implements OnInit, DoCheck {
     const index = this.operation.operationDetails.findIndex((od: OperationDetail) => od.articleId === odObject.article.articleId);
     if (!this.checkValidOperationDetail(odObject, index)) {
       this.showErrorInvalidOperationDetail(odObject.article.label, odObject.article.currentQuantity);
+    } else {
+      this.articleAmountSizeError = false;
     }
   }
 
