@@ -72,7 +72,7 @@ export class OperationComponent implements OnInit, DoCheck {
           this._articleService.getArticleByArticleId(operationDetail.articleId).subscribe((res: Article) => {
             const priceOperationDetail = operationDetail.price / operationDetail.amount;
             operationDetails.push(this.fb.group({
-              amount: [operationDetail.amount, [Validators.required, Validators.min(1)]],
+              amount: [operationDetail.amount, Validators.required],
               price: [priceOperationDetail, [Validators.required, Validators.min(1)]],
               article: [res, Validators.required]
             }));
@@ -85,7 +85,7 @@ export class OperationComponent implements OnInit, DoCheck {
     } else {
       this.operation.operationDetails = [];
       operationDetails.push(this.fb.group({
-        amount: ['', [Validators.required, Validators.min(1)]],
+        amount: ['', Validators.required],
         price: ['', [Validators.required, Validators.min(1)]],
         article: ['', Validators.required]
       }));
