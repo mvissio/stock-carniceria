@@ -64,6 +64,7 @@ export class ArticleService {
     return this.httpClient.get(url)
       .pipe(map((response: Article[]) => {
         return response.map((article) => {
+          console.log("articulo recup en el serach",article)
           article.label = article.name + ' - ' + article.brand;
           return article;
         });
