@@ -3,8 +3,10 @@
         <div class="card">
             <div class="card-body">
                 Opciones de Filtro:
-                <button class="btn btn-link" (click)="showOneDateFilter()" style="display: inline; ">Filtrar por fecha</button>
-                <button class="btn btn-link" (click)="showPeriodFilter()" style="display: inline; ">Filtrar por periodo</button>
+                <button class="btn btn-link" (click)="showOneDateFilter()" style="display: inline; ">Filtrar por
+                    fecha</button>
+                <button class="btn btn-link" (click)="showPeriodFilter()" style="display: inline; ">Filtrar por
+                    periodo</button>
             </div>
         </div>
     </div>
@@ -17,31 +19,37 @@
 
                 <div class="form-group" style="display: inline-block; margin-right: 130px;">
                     <label>Fecha desde :</label>
-                    <my-date-picker name="mydateFechaDesde" [options]="myDatePickerOptions" [(ngModel)]="fromDate" required></my-date-picker>
+                    <my-date-picker name="mydateFechaDesde" [options]="myDatePickerOptions" [(ngModel)]="fromDate"
+                        required></my-date-picker>
                 </div>
 
                 <div class="form-group" style="display: inline-block;">
                     <label>Fecha hasta :</label>
-                    <my-date-picker name="mydateFechaDesde" [options]="myDatePickerOptions" [(ngModel)]="toDate" required></my-date-picker>
+                    <my-date-picker name="mydateFechaDesde" [options]="myDatePickerOptions" [(ngModel)]="toDate"
+                        required></my-date-picker>
                 </div>
 
                 <div class="float-right">
-                    <select class="custom-select" (change)="setearOperationTypePeriod($event.target.value)" id="operationTypePeriod">
+                    <select class="custom-select" (change)="setearOperationTypePeriod($event.target.value)"
+                        id="operationTypePeriod">
                         <option [value]="operationType" *ngFor="let operationType of operationTypes">{{operationType
                             | dropdownTranslate:'operationTypes'}}</option>
                     </select>
                 </div>
 
                 <div class="float-right">
-                    <select class="custom-select" (change)="setearPaymentMethodPeriod($event.target.value)" id="paymentMethodPeriod">
+                    <select class="custom-select" (change)="setearPaymentMethodPeriod($event.target.value)"
+                        id="paymentMethodPeriod">
                         <option [value]="paymentMethod" *ngFor="let paymentMethod of paymentMethods">{{paymentMethod
                             | dropdownTranslate:'paymentMethods'}}</option>
                     </select>
                 </div>
 
                 <div>
-                    <button class="btn btn-primary m-r-10" (click)="getOperationsByPeriodWithFilters()" style="display: inline; ">Consultar</button>
-                    <button class="btn btn-info" (click)="cleanPeriodFilter()" style="display: inline; ">Limpiar filtros</button>
+                    <button class="btn btn-primary m-r-10" (click)="getOperationsByPeriodWithFilters()"
+                        style="display: inline; ">Consultar</button>
+                    <button class="btn btn-info" (click)="cleanPeriodFilter()" style="display: inline; ">Limpiar
+                        filtros</button>
                 </div>
 
 
@@ -56,25 +64,30 @@
             <div class="card-body" style="height: 270px;">
                 <div class="form-group">
                     <label>Fecha:</label>
-                    <my-date-picker name="mydate" [options]="myDatePickerOptions" [(ngModel)]="oneDate" required></my-date-picker>
+                    <my-date-picker name="mydate" [options]="myDatePickerOptions" [(ngModel)]="oneDate" required>
+                    </my-date-picker>
                 </div>
 
                 <div class="float-right">
-                    <select (change)="setearPaymentMethodOneDate($event.target.value)" class="custom-select" id="paymentMethodOneDate">
-                        <option [value]="paymentMethod" *ngFor="let paymentMethod of paymentMethods" >{{paymentMethod
+                    <select (change)="setearPaymentMethodOneDate($event.target.value)" class="custom-select"
+                        id="paymentMethodOneDate">
+                        <option [value]="paymentMethod" *ngFor="let paymentMethod of paymentMethods">{{paymentMethod
                             | dropdownTranslate:'paymentMethods'}}</option>
                     </select>
                 </div>
 
                 <div class="float-right">
-                    <select (change)="setearOperationTypeOneDate($event.target.value)" class="custom-select" id="operationTypeOneDate">
+                    <select (change)="setearOperationTypeOneDate($event.target.value)" class="custom-select"
+                        id="operationTypeOneDate">
                         <option [value]="operationType" *ngFor="let operationType of operationTypes">{{operationType
                             | dropdownTranslate:'operationTypes'}}</option>
                     </select>
                 </div>
 
-                <button class="btn btn-primary m-r-10" (click)="getOperationsOneDateWithFilters()" style="display: inline-block;">Consultar</button>
-                <button class="btn btn-info" (click)="cleanOneDateFilter()" style="display: inline-block;">Limpiar filtros</button>
+                <button class="btn btn-primary m-r-10" (click)="getOperationsOneDateWithFilters()"
+                    style="display: inline-block;">Consultar</button>
+                <button class="btn btn-info" (click)="cleanOneDateFilter()" style="display: inline-block;">Limpiar
+                    filtros</button>
 
             </div>
         </div>
@@ -89,7 +102,11 @@
                 <h3 class="card-title">{{'operations.title' | translate}} (
                     <small>{{ page?.totalElements}}</small> )
                 </h3>
-                <button type="button" class="btn btn-primary float-right mdi mdi-plus" [routerLink]="['/operacion']"></button>
+                <button type="button" class="btn btn-danger float-right mdi mdi-plus"
+                    (click)="onBoxAction(TYPEOPERATIONS.SHOW_OPERATIONS)"></button>
+                <button type="button" class="btn btn-primary float-right mdi mdi-plus"
+                    [routerLink]="['/operacion']"></button>
+
                 <div class="table-responsive">
                     <table class="table table-hover m-auto" *ngIf="operations">
                         <thead>
@@ -105,22 +122,28 @@
                         <tbody>
                             <tr *ngFor="let operation of operations" class="row">
                                 <td class="col-2">{{ operation?.createDateTime | date: 'dd/MM/yyyy h:mm:ss a' }}</td>
-                                <td class="col-2">{{ operation?.operationType | dropdownTranslate:'operationTypes' }}</td>
-                                <td class="col-2">{{ operation?.paymentMethod | dropdownTranslate:'paymentMethods' }}</td>
+                                <td class="col-2">{{ operation?.operationType | dropdownTranslate:'operationTypes' }}
+                                </td>
+                                <td class="col-2">{{ operation?.paymentMethod | dropdownTranslate:'paymentMethods' }}
+                                </td>
                                 <td class="col-2">{{operation?.total}}</td>
-                                <td class="col-1"><span class="label label-rounded" [ngClass]="(operation?.disabled)? 'label-danger':'label-success'">{{getOperationStatus(operation) | dropdownTranslate:'operationStatus'}}</span>
+                                <td class="col-1"><span class="label label-rounded"
+                                        [ngClass]="(operation?.disabled)? 'label-danger':'label-success'">{{getOperationStatus(operation) | dropdownTranslate:'operationStatus'}}</span>
                                 </td>
                                 <td class="col-3">
                                     <div class="button-group">
-                                        <button class="btn btn-secondary" (click)="editOrShowOperation(operation.operationId)">
-                    <i class="mdi mdi-eye-outline" aria-hidden="true"></i>
-                  </button>
-                                        <button class="btn btn-info" [disabled]="operation?.disabled" (click)="editOrShowOperation(operation.operationId, true)">
-                    <i class="mdi mdi-pencil" aria-hidden="true"></i>
-                  </button>
-                                        <button [disabled]="operation?.disabled" class="btn btn-danger" (click)="cancelOperation(operation.operationId)">
-                    <i class="mdi mdi-toggle-switch-off" aria-hidden="true"></i>
-                  </button>
+                                        <button class="btn btn-secondary"
+                                            (click)="editOrShowOperation(operation.operationId)">
+                                            <i class="mdi mdi-eye-outline" aria-hidden="true"></i>
+                                        </button>
+                                        <button class="btn btn-info" [disabled]="operation?.disabled"
+                                            (click)="editOrShowOperation(operation.operationId, true)">
+                                            <i class="mdi mdi-pencil" aria-hidden="true"></i>
+                                        </button>
+                                        <button [disabled]="operation?.disabled" class="btn btn-danger"
+                                            (click)="cancelOperation(operation.operationId)">
+                                            <i class="mdi mdi-toggle-switch-off" aria-hidden="true"></i>
+                                        </button>
                                     </div>
                                 </td>
                             </tr>
@@ -133,3 +156,47 @@
 </div>
 <app-loading [loading]="loading"></app-loading>
 <app-pagination [page]="page" [pages]="pages" (pageNumber)="setPage($event)" *ngIf="operations"></app-pagination>
+
+<app-modal-container [bigModal]="'modal-lg'" [modalTitle]="'operations.monthyOperationsReportTitle'| translate" *ngIf="typeSelect"
+    (clickClose)="closeModal()">
+    <ng-container *ngIf="typeSelect === TYPEOPERATIONS.SHOW_OPERATIONS">
+        <div class="justify-content-between text-justify">
+            <p class="h2">Datos de la consulta:</p>
+            <br>
+
+            <div class="row">
+
+            <div class="col">    
+            <label for="month">Mes a consultar:</label>
+            <select class="custom-select input-lg" id="month" name="month" (change)="setSelectedMonth($event.target.value)">
+                <option *ngFor="let month of availableMonths">{{month}}</option>
+            </select>
+            <br>
+            </div>
+
+            <div class="col">                
+            <label for="year">Año a consultar:</label>
+            <input class="input-lg" type="number" id="year" name="year" min="2019" value="2019"
+                (change)="setSelectedYear($event.target.value)">
+                </div>
+
+            </div>          
+
+            <div *ngIf="monthlyOperationsReport != undefined">
+                <br>
+                <p class="h4">Total de ventas: ${{monthlyOperationsReport.totalSale}}</p>
+                <p class="h4">Total de compras: ${{monthlyOperationsReport.totalBuy}}</p>
+                <p class="h2">Resultado del mes:
+                ${{monthlyOperationsReport.totalSale - monthlyOperationsReport.totalBuy}}</p>
+
+            </div>
+
+            <button type="button" class="btn btn-danger float-right mdi"
+            (click)="viewMonthlyOperationReport()">Consultar</button>
+
+
+
+
+        </div>
+    </ng-container>
+</app-modal-container>

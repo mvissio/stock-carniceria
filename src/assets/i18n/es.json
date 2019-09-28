@@ -73,7 +73,8 @@
         "createOk": "Operación creada satisfactoriamente.",
         "updateOk": "Operación actualizada satisfactoriamente.",
         "filterPlaceholderOperationType": "Seleccione Tipo",
-        "filterPlaceholderPaymentMethod": "Seleccione Medio"
+        "filterPlaceholderPaymentMethod": "Seleccione Medio",
+        "monthyOperationsReportTitle": "Reporte mensual de operaciones"
     },
     "operationDetails": {
         "operationDetailAddButtonLabel": "Añadir detalle operación",

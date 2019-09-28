@@ -108,4 +108,12 @@ export class OperationsService {
     return this.httpClient.get(url)
       .pipe(map((response: any) => response));
   }
+
+  getMonthlyOperationsReport(year:number,month:number){
+    const url = `${this.operationUrl.getMonthlyOperationsReport}/${year}/${month}`;
+    return this.httpClient.get(url)
+      .pipe(map((response) => response));
+
+  }
+
 }

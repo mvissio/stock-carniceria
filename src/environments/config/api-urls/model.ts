@@ -41,6 +41,7 @@ interface OperationURLs {
   cancelOperation?: string;
   getAllOperationTypes?: string;
   getAllPaymentMethods?: string;
+  getMonthlyOperationsReport?:string;
 }
 
 interface OperationDetailURLs {

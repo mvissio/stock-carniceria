@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PageConfig } from '../../models/pageConfig.model';
 import { Page } from '../../models/page.model';
 import { Operation } from '../../models/operation.model';
+import { MonthlyOperationsReport } from '../../models/monthlyOperationsReport.model';
 import { OperationsService } from '../../services/pages/operations.service';
 import { HandleErrorsService } from '../../services/shared/handle-errors.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -36,9 +37,16 @@ export class OperationsComponent implements OnInit {
   showFilterOneDate: boolean;
   showFilterPeriod: boolean;
   lastUsedFilter = 'ninguno';
-
-  operationTypes: any[]  = [];
-  paymentMethods: any[]  = [];
+  operationTypes: any[] = [];
+  paymentMethods: any[] = [];
+  typeSelect: any;
+  TYPEOPERATIONS = {
+    SHOW_OPERATIONS: 'show operations'
+  };
+  monthlyOperationsReport: MonthlyOperationsReport[];
+  yearOperationsReport: number = new Date().getFullYear();
+  monthOperationsReport: number = new Date().getMonth();
+  availableMonths: string[] = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
 
   constructor(
     private _operationService: OperationsService,
@@ -62,12 +70,12 @@ export class OperationsComponent implements OnInit {
       this._operationService.getAllOperationTypes(),
       this._operationService.getAllPaymentMethods()
     ])
-    .subscribe((res: any) => {
-      this.operationTypes = res[0];
-      this.paymentMethods = res[1];
-    }, (err: HttpErrorResponse) => {
-      this._commonsService.showMessage(toastType.error, this._handleErrorsService.handleErrors(err));
-    });
+      .subscribe((res: any) => {
+        this.operationTypes = res[0];
+        this.paymentMethods = res[1];
+      }, (err: HttpErrorResponse) => {
+        this._commonsService.showMessage(toastType.error, this._handleErrorsService.handleErrors(err));
+      });
   }
 
   setPage(nextPage: number) {
@@ -116,11 +124,11 @@ export class OperationsComponent implements OnInit {
         });
   }
 
-   getOperationsByPeriod(path: string, operationTypePeriod: string, paymentMethodPeriod: string, nextPage = 0) {       
+  getOperationsByPeriod(path: string, operationTypePeriod: string, paymentMethodPeriod: string, nextPage = 0) {
     this.loading = true;
     this.pageConfig.pageNumber = nextPage;
     this._operationService.getOperationsByPeriod(this.fromDate.jsdate, this.toDate.jsdate, this.pageConfig,
-       path, operationTypePeriod, paymentMethodPeriod)
+      path, operationTypePeriod, paymentMethodPeriod)
       .subscribe(
         (res: Page) => {
           this.page = res;
@@ -199,7 +207,7 @@ export class OperationsComponent implements OnInit {
       return;
     } else if (this.operationTypePeriod.length > 0 && this.paymentMethodPeriod.length > 0) {
       this.getOperationsByPeriod('getOperationsByPeriodAndOperationTypeAndPaymentMethod',
-       this.operationTypePeriod, this.paymentMethodPeriod, nextPage);
+        this.operationTypePeriod, this.paymentMethodPeriod, nextPage);
       return;
     } else if (this.operationTypePeriod.length > 0) {
       this.getOperationsByPeriod('getOperationsByPeriodAndOperationType', this.operationTypePeriod, null, nextPage);
@@ -217,7 +225,7 @@ export class OperationsComponent implements OnInit {
       return;
     } else if (this.operationTypeOneDate.length > 0 && this.paymentMethodOneDate.length > 0) {
       this.getOperationsByOneDate('getOperationsByOneDateAndOperationTypeAndPaymentMethod',
-       this.operationTypeOneDate, this.paymentMethodOneDate, nextPage);
+        this.operationTypeOneDate, this.paymentMethodOneDate, nextPage);
       return;
     } else if (this.operationTypeOneDate.length > 0) {
       this.getOperationsByOneDate('getOperationsByOneDateAndOperationType', this.operationTypeOneDate, null, nextPage);
@@ -261,5 +269,76 @@ export class OperationsComponent implements OnInit {
     this.getTodayOperations(0);
 
   }
+
+  onBoxAction(event) {
+    this.typeSelect = event;
+  }
+
+
+  viewMonthlyOperationReport() {
+    this._operationService.getMonthlyOperationsReport(this.yearOperationsReport, this.monthOperationsReport)
+      .subscribe(
+        (resp: any) => {
+          this.monthlyOperationsReport = resp;
+          console.log("resultado", this.page.content);
+        },
+        (err: HttpErrorResponse) => {
+          this.loading = false;
+          this._commonsService.showMessage(toastType.error, this._handleErrorsService.handleErrors(err));
+        }
+      );
+  }
+
+  closeModal() {
+    this.typeSelect = undefined;
+  }
+
+  setSelectedMonth(month: string) {
+    switch (month) {
+      case 'Enero':
+        this.monthOperationsReport = 0;
+        break;
+      case 'Febrero':
+        this.monthOperationsReport = 1;
+        break;
+      case 'Marzo':
+        this.monthOperationsReport = 2;
+        break;
+      case 'Abril':
+        this.monthOperationsReport = 3;
+        break;
+      case 'Mayo':
+        this.monthOperationsReport = 4;
+        break;
+      case 'Junio':
+        this.monthOperationsReport = 5;
+        break;
+      case 'Julio':
+        this.monthOperationsReport = 6;
+        break;
+      case 'Agosto':
+        this.monthOperationsReport = 7;
+        break;
+      case 'Septiembre':
+        this.monthOperationsReport = 8;
+        break;
+      case 'Octubre':
+        this.monthOperationsReport = 9;
+        break;
+      case 'Noviembre':
+        this.monthOperationsReport = 10;
+        break;
+      case 'Diciembre':
+        this.monthOperationsReport = 11;
+        break;
+    }
+    console.log("mes seleccionado", this.monthOperationsReport);
+  }
+
+  setSelectedYear(year: number) {
+    this.yearOperationsReport = year;  
+    console.log("año seleccionado", this.yearOperationsReport);
+  }
+
 
 }

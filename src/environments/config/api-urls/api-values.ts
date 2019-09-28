@@ -27,7 +27,8 @@ export const applicationApiUrls: ApiURLs = {
     getOperationsByTypeAndDate: '/type',
     getAllOperationTypes: '/operationTypes',
     getAllPaymentMethods: '/paymentMethods',
-    cancelOperation: '/cancel/id'
+    cancelOperation: '/cancel/id',
+    getMonthlyOperationsReport:'/monthlyOperationsReport'
   },
   OperationDetail: {
     base: 'API_VERSION/operationDetail',
