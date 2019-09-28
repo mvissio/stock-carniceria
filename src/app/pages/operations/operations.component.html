@@ -102,10 +102,10 @@
                 <h3 class="card-title">{{'operations.title' | translate}} (
                     <small>{{ page?.totalElements}}</small> )
                 </h3>
-                <button type="button" class="btn btn-danger float-right mdi mdi-plus"
-                    (click)="onBoxAction(TYPEOPERATIONS.SHOW_OPERATIONS)"></button>
-                <button type="button" class="btn btn-primary float-right mdi mdi-plus"
-                    [routerLink]="['/operacion']"></button>
+                <button type="button" class="btn btn-danger float-right mdi"
+                    (click)="onBoxAction(TYPEOPERATIONS.SHOW_OPERATIONS)">Historico</button>
+                <button type="button" class="btn btn-primary float-right mdi"
+                    [routerLink]="['/operacion']">Nueva</button>
 
                 <div class="table-responsive">
                     <table class="table table-hover m-auto" *ngIf="operations">
@@ -157,8 +157,8 @@
 <app-loading [loading]="loading"></app-loading>
 <app-pagination [page]="page" [pages]="pages" (pageNumber)="setPage($event)" *ngIf="operations"></app-pagination>
 
-<app-modal-container [bigModal]="'modal-lg'" [modalTitle]="'operations.monthyOperationsReportTitle'| translate" *ngIf="typeSelect"
-    (clickClose)="closeModal()">
+<app-modal-container [bigModal]="'modal-lg'" [modalTitle]="'operations.monthyOperationsReportTitle'| translate"
+    *ngIf="typeSelect" (clickClose)="closeModal()">
     <ng-container *ngIf="typeSelect === TYPEOPERATIONS.SHOW_OPERATIONS">
         <div class="justify-content-between text-justify">
             <p class="h2">Datos de la consulta:</p>
@@ -166,33 +166,52 @@
 
             <div class="row">
 
-            <div class="col">    
-            <label for="month">Mes a consultar:</label>
-            <select class="custom-select input-lg" id="month" name="month" (change)="setSelectedMonth($event.target.value)">
-                <option *ngFor="let month of availableMonths">{{month}}</option>
-            </select>
-            <br>
-            </div>
-
-            <div class="col">                
-            <label for="year">Año a consultar:</label>
-            <input class="input-lg" type="number" id="year" name="year" min="2019" value="2019"
-                (change)="setSelectedYear($event.target.value)">
+                <div class="col">
+                    <label for="month">Mes a consultar:</label>
+                    <select class="custom-select input-lg" id="month" name="month"
+                        (change)="setSelectedMonth($event.target.value)">
+                        <option *ngFor="let month of availableMonths">{{month}}</option>
+                    </select>
+                    <br>
                 </div>
 
-            </div>          
+                <div class="col">
+                    <label for="year">Año a consultar:</label>
+                    <input class="input-lg" type="number" id="year" name="year" min="2019" value="2019"
+                        (change)="setSelectedYear($event.target.value)">
+                </div>
+
+            </div>
 
             <div *ngIf="monthlyOperationsReport != undefined">
                 <br>
-                <p class="h4">Total de ventas: ${{monthlyOperationsReport.totalSale}}</p>
-                <p class="h4">Total de compras: ${{monthlyOperationsReport.totalBuy}}</p>
-                <p class="h2">Resultado del mes:
-                ${{monthlyOperationsReport.totalSale - monthlyOperationsReport.totalBuy}}</p>
+
+                <div class="row">
+                    <div class="col">
+                        <p class="h5">Total de ventas: {{monthlyOperationsReport.totalCountSale}}</p>
+                    </div>
+                    <div class="col">
+                        <p class="h5">Total de dinero por ventas: ${{monthlyOperationsReport.totalMoneySale}}</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <p class="h5">Total de compras: {{monthlyOperationsReport.totalCountBuy}}</p>
+                    </div>
+                    <div class="col">
+                        <p class="h5">Total de dinero por compras: ${{monthlyOperationsReport.totalMoneyBuy}}</p>
+                    </div>
+                </div>
+
+                <br>
+                <p class="h3">Resultado del mes:
+                    ${{monthlyOperationsReport.totalMoneySale - monthlyOperationsReport.totalMoneyBuy}}</p>
 
             </div>
 
             <button type="button" class="btn btn-danger float-right mdi"
-            (click)="viewMonthlyOperationReport()">Consultar</button>
+                (click)="viewMonthlyOperationReport()">Consultar</button>
 
 
 
