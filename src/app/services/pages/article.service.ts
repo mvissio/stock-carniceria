@@ -55,7 +55,7 @@ export class ArticleService {
     const url = `${this.articleUrl.getArticleByName}?name=${name}
       &page=${page.pageNumber}&size=${page.pageSize}&sort=${page.sortName},${page.orderDesc}`;
     return this.httpClient.get(url)
-    .pipe(map((response: Page) => response));
+      .pipe(map((response: Page) => response));
 
   }
 
@@ -101,4 +101,9 @@ export class ArticleService {
       .pipe(map((response) => response));
   }
 
+  findArticleByCodebar(codeArticle: string) {
+    const url = `${this.articleUrl.codeBarArticle}/${parseInt(codeArticle, 0)}`;
+    return this.httpClient.get(url)
+      .pipe(map((response: Article) => response));
+  }
 }

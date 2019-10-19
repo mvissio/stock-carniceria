@@ -76,7 +76,8 @@
         "filterPlaceholderPaymentMethod": "Seleccione Medio"
     },
     "operationDetails": {
-        "operationDetailAddButtonLabel": "Añadir detalle operación",
+        "operationDetailAddButtonLabel": "Añadir Articulo",
+        "operationDetailAddButtonBarcodeLabel": "Añadir Articulo CB",
         "operationDetailDeleteButtonLabel": "Borrar detalle",
         "amountPlaceholder": "Cantidad",
         "pricePlaceholder": "Precio",
@@ -89,6 +90,7 @@
         "searchLabel": "Buscar articulo...",
         "namePlaceholder": "Nombre",
         "brandPlaceholder": "Marca",
+        "codeArticlePlaceholder": "Codigo de Articulo (Balanza)",
         "currentPricePlaceholder": "Precio actual",
         "currentQuantityPlaceholder": "Cantidad actual",
         "descriptionPlaceholder": "Descripción",
@@ -98,7 +100,8 @@
         "createOk": "Articulo creado satisfactoriamente.",
         "updateOk": "Articulo actualizado satisfactoriamente.",
         "amountInsuficient": "Cantidad insuficiente del artículo {{param1}}, actualmente quedan {{param2}}",
-        "noContent": "No se encontraron artículos cargados."
+        "noContent": "No se encontraron artículos cargados.",
+        "noArticle": "No se encontro el articulo {{param1}}."
     },
     "measurementUnits": {
         "title": "Unidades de medida",
@@ -148,6 +151,7 @@
             "description": "Descripción"
         },
         "articleTable": {
+            "codeArticle": "Codigo",
             "brand": "Marca",
             "currentPrice": "Precio",
             "currentQuantity": "Cantidad",

@@ -57,7 +57,7 @@ interface ArticleURLs {
   getAllMeasurementUnits?: string;
   deleteArticle?: string;
   enabledArticle?: string;
-
+  codeBarArticle?: string;
 }
 
 interface MeasurementUnitURLs {

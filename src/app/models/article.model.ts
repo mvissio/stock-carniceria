@@ -1,4 +1,4 @@
-import {IMyDateModel } from 'mydatepicker';
+import {IMyDateModel} from 'mydatepicker';
 
 export class Article {
     articleId: number;
@@ -13,6 +13,8 @@ export class Article {
     categoryId: number;
     name: string;
     label: string;
+    codeArticle: number;
+
     constructor(
         articleId?: number,
         brand?: string,
@@ -25,8 +27,9 @@ export class Article {
         measurementUnitId?: number,
         categoryId?: number,
         name?: string,
-        label?: string) {
-            this.articleId = articleId,
+        label?: string,
+        codeArticle?: number) {
+        this.articleId = articleId,
             this.brand = brand ,
             this.createDate = createDate || new Date(),
             this.currentPrice = currentPrice,
@@ -38,5 +41,6 @@ export class Article {
             this.categoryId = categoryId,
             this.name = name,
             this.label = label;
-        }
+        this.codeArticle = codeArticle;
+    }
 }

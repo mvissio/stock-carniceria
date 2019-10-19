@@ -41,7 +41,8 @@ export const applicationApiUrls: ApiURLs = {
     getArticlesByNameOrBrandOrCodeLike: '/search',
     getAllMeasurementUnits: '/measurementUnits',
     deleteArticle: '/id',
-    enabledArticle: '/id'
+    enabledArticle: '/id',
+    codeBarArticle: '/barcode'
   },
   measurementUnit: {
     base: 'API_VERSION/measurementUnits',
