@@ -15,6 +15,7 @@ import { IMyDpOptions, IMyDateModel } from 'mydatepicker';
 import { toastType } from '../../constants/constant';
 
 
+
 @Component({
   selector: 'app-operations',
   templateUrl: './operations.component.html',
@@ -39,14 +40,15 @@ export class OperationsComponent implements OnInit {
   lastUsedFilter = 'ninguno';
   operationTypes: any[] = [];
   paymentMethods: any[] = [];
-  typeSelect: any;
+  typeSelect : any;
   TYPEOPERATIONS = {
     SHOW_OPERATIONS: 'show operations'
   };
-  monthlyOperationsReport: MonthlyOperationsReport[];
+  monthlyOperationsReport : any = this.limpiarMonthlyOperationsReport();
   yearOperationsReport: number = new Date().getFullYear();
   monthOperationsReport: number = new Date().getMonth();
   availableMonths: string[] = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
+  isMonthSelected:boolean;
 
   constructor(
     private _operationService: OperationsService,
@@ -271,16 +273,23 @@ export class OperationsComponent implements OnInit {
   }
 
   onBoxAction(event) {
+    this.limpiarMonthlyOperationsReport();
     this.typeSelect = event;
   }
 
 
   viewMonthlyOperationReport() {
+   
+    if(!this.isMonthSelected){
+      return;
+    }
+   
     this._operationService.getMonthlyOperationsReport(this.yearOperationsReport, this.monthOperationsReport)
       .subscribe(
         (resp: any) => {
           this.monthlyOperationsReport = resp;
           console.log("resultado", this.page.content);
+          this.isMonthSelected = false;
         },
         (err: HttpErrorResponse) => {
           this.loading = false;
@@ -291,9 +300,13 @@ export class OperationsComponent implements OnInit {
 
   closeModal() {
     this.typeSelect = undefined;
+    this.limpiarMonthlyOperationsReport();
   }
 
   setSelectedMonth(month: string) {
+    
+    this.isMonthSelected = true;
+
     switch (month) {
       case 'Enero':
         this.monthOperationsReport = 0;
@@ -338,6 +351,17 @@ export class OperationsComponent implements OnInit {
   setSelectedYear(year: number) {
     this.yearOperationsReport = year;  
     console.log("año seleccionado", this.yearOperationsReport);
+  }
+  
+  limpiarMonthlyOperationsReport(){
+    this.monthlyOperationsReport = {
+      totalMoneySale : 0.0,
+      totalMoneyBuy : 0.0,
+      totalCountSale : 0.0,
+      totalCountBuy : 0.0
+
+    
+    };
   }
 
 

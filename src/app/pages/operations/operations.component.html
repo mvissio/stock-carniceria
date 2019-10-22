@@ -188,19 +188,19 @@
 
                 <div class="row">
                     <div class="col">
-                        <p class="h5">Total de ventas: {{monthlyOperationsReport.totalCountSale}}</p>
+                        <p class="h5">Cantidad de ventas: {{monthlyOperationsReport.totalCountSale}}</p>
                     </div>
                     <div class="col">
-                        <p class="h5">Total de dinero por ventas: ${{monthlyOperationsReport.totalMoneySale}}</p>
+                        <p class="h5">Dinero por ventas: ${{monthlyOperationsReport.totalMoneySale}}</p>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col">
-                        <p class="h5">Total de compras: {{monthlyOperationsReport.totalCountBuy}}</p>
+                        <p class="h5">Cantidad de compras: {{monthlyOperationsReport.totalCountBuy}}</p>
                     </div>
                     <div class="col">
-                        <p class="h5">Total de dinero por compras: ${{monthlyOperationsReport.totalMoneyBuy}}</p>
+                        <p class="h5">Dinero por compras: ${{monthlyOperationsReport.totalMoneyBuy}}</p>
                     </div>
                 </div>
 
@@ -210,7 +210,7 @@
 
             </div>
 
-            <button type="button" class="btn btn-danger float-right mdi"
+            <button [disabled]="(!isMonthSelected)" type="button" class="btn btn-danger float-right mdi"
                 (click)="viewMonthlyOperationReport()">Consultar</button>
 
 
