@@ -2,7 +2,8 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <input #input (keyup)="findArticle(input.value)" [(ngModel)]="searchText" type="search" class="form-control" [placeholder]="'articles.searchLabel' | translate">
+                <input #input (keyup)="findArticle(input.value)" [(ngModel)]="searchText" type="search"
+                       class="form-control" [placeholder]="'articles.searchLabel' | translate">
             </div>
         </div>
     </div>
@@ -14,55 +15,63 @@
                 <h3 class="card-title">{{'articles.title' | translate}} (
                     <small>{{ page?.totalElements| defaultValue: 0}}</small> )
                 </h3>
-                <button type="button" class="btn btn-primary float-right mdi mdi-plus" [routerLink]="['/articulo']"></button>
+                <button type="button" class="btn btn-primary float-right mdi mdi-plus"
+                        [routerLink]="['/articulo']"></button>
                 <div class="table-responsive">
                     <table class="table table-hover m-auto">
                         <thead>
-                            <tr>
-                                <th>{{'table.name' | translate}}</th>
-                                <th>{{'table.articleTable.brand' | translate}}</th>
-                                <th>{{'table.articleTable.currentPrice' | translate}}</th>
-                                <th>{{'table.articleTable.currentQuantity' | translate}}</th>
-                                <th>{{'table.articleTable.description' | translate}}</th>
-                                <th>{{'table.status' | translate}}</th>
-                                <th>{{'table.accions' | translate}}</th>
-                            </tr>
+                        <tr>
+                            <th>{{'table.name' | translate}}</th>
+                            <th>{{'table.articleTable.codeArticle' | translate}}</th>
+                            <th>{{'table.articleTable.brand' | translate}}</th>
+                            <th>{{'table.articleTable.currentPrice' | translate}}</th>
+                            <th>{{'table.articleTable.currentQuantity' | translate}}</th>
+                            <th>{{'table.articleTable.description' | translate}}</th>
+                            <th>{{'table.status' | translate}}</th>
+                            <th>{{'table.accions' | translate}}</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            <ng-container *ngIf="articles;else noContent">
-                                <tr *ngFor="let article of articles">
-                                    <td>{{ article?.name }}</td>
-                                    <td>{{ article?.brand }}</td>
-                                    <td>{{ article?.currentPrice }}</td>
-                                    <td>{{article?.currentQuantity}}</td>
-                                    <td>{{article?.description| truncate: 10}}</td>
-                                    <td><span class="label label-rounded" [ngClass]="(!article.disabled)? 'label-success':'label-danger'">{{getArticleStatus(article)}}</span>
-                                    </td>
-                                    <td>
-                                        <div class="button-group row flex-nowrap">
-                                            <button class="btn btn-secondary" (click)="editOrShowArticle(article.articleId)">
-                      <i class="mdi mdi-eye-outline" aria-hidden="true"></i>
-                    </button>
-                                            <button class="btn btn-info" (click)="editOrShowArticle(article.articleId, true)">
-                      <i class="mdi mdi-pencil" aria-hidden="true"></i>
-                    </button>
-                                            <button class="btn btn-danger" *ngIf="!article?.disabled" (click)="deleteArticle(article.name,article.articleId)">
-                      <i class="mdi mdi-toggle-switch-off" aria-hidden="true"></i>
-                    </button>
-                                            <button class="btn  btn-success" *ngIf="article?.disabled" (click)="enabledArticle(article.articleId)">
-                      <i class="mdi mdi-toggle-switch" aria-hidden="true"></i>
-                    </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </ng-container>
-                            <ng-template #noContent>
-                                <tr class="alert alert-warning text-center font-20">
-                                    <td colspan="7">
-                                        {{'articles.noContent' | translate}}
-                                    </td>
-                                </tr>
-                            </ng-template>
+                        <ng-container *ngIf="articles;else noContent">
+                            <tr *ngFor="let article of articles">
+                                <td>{{ article?.name }}</td>
+                                <td>{{ article?.codeArticle |defaultValue: '-'}}</td>
+                                <td>{{ article?.brand }}</td>
+                                <td>{{ article?.currentPrice }}</td>
+                                <td>{{article?.currentQuantity}}</td>
+                                <td>{{article?.description|defaultValue: '-'| truncate: 10}}</td>
+                                <td><span class="label label-rounded"
+                                          [ngClass]="(!article.disabled)? 'label-success':'label-danger'">{{getArticleStatus(article)}}</span>
+                                </td>
+                                <td>
+                                    <div class="button-group row flex-nowrap">
+                                        <button class="btn btn-secondary"
+                                                (click)="editOrShowArticle(article.articleId)">
+                                            <i class="mdi mdi-eye-outline" aria-hidden="true"></i>
+                                        </button>
+                                        <button class="btn btn-info"
+                                                (click)="editOrShowArticle(article.articleId, true)">
+                                            <i class="mdi mdi-pencil" aria-hidden="true"></i>
+                                        </button>
+                                        <button class="btn btn-danger" *ngIf="!article?.disabled"
+                                                (click)="deleteArticle(article.name,article.articleId)">
+                                            <i class="mdi mdi-toggle-switch-off" aria-hidden="true"></i>
+                                        </button>
+                                        <button class="btn  btn-success" *ngIf="article?.disabled"
+                                                (click)="enabledArticle(article.articleId)">
+                                            <i class="mdi mdi-toggle-switch" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-container>
+                        <ng-template #noContent>
+                            <tr class="alert alert-warning text-center font-20">
+                                <td colspan="7">
+                                    {{'articles.noContent' | translate}}
+                                </td>
+                            </tr>
+                        </ng-template>
                         </tbody>
                     </table>
                 </div>

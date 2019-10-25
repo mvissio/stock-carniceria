@@ -58,7 +58,7 @@ export function createTranslateLoader(http: HttpClient) {
     }),
     ToastrModule.forRoot(), // ToastrModule added
     PagesModule,
-    AppRoutingModule,
+    AppRoutingModule
   ],
   providers: [
     AuthGuard,

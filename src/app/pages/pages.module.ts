@@ -32,7 +32,7 @@ import { OperationDetailsComponent } from './operations/operation-details/operat
 import { MeasurementUnitsComponent } from './measurement-units/measurement-units.component';
 import { MeasurementUnitComponent } from './measurement-units/measurement-unit/measurement-unit.component';
 import { BoxsComponent } from './boxs/boxs.component';
-import {Graficas1Component} from './graficas1/graficas1.component';
+import {ReportComponent} from './report/report.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { CategoryComponent } from './categories/category/category.component';
 import { BrowserModule } from '@angular/platform-browser';
@@ -49,7 +49,7 @@ import { MyDatePickerModule } from 'mydatepicker';
     OperationComponent,
     OperationDetailsComponent,
     ArticlesComponent,
-    Graficas1Component,
+    ReportComponent,
     ArticleComponent,
     MeasurementUnitComponent,
     MeasurementUnitsComponent,

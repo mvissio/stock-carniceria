@@ -1,0 +1,16 @@
+.main-element {
+  position: relative;
+  height: 70%;
+  max-height: 70%;
+
+  app-lottie-viewer {
+    width: 50%;
+  }
+
+  input.input-invisible {
+    border-color: rgba(111,111,111,0) !important;
+    color: rgba(111, 111, 111, 0) !important;
+    outline: none;
+    appearance: none;
+  }
+}

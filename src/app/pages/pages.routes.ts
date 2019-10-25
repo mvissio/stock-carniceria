@@ -2,7 +2,7 @@ import {RouterModule, Routes} from '@angular/router';
 
 import {PagesComponent} from './pages.component';
 import {HomeComponent} from './home/home.component';
-import {Graficas1Component} from './graficas1/graficas1.component';
+import {ReportComponent} from './report/report.component';
 import {AccoutSettingsComponent} from './accout-settings/accout-settings.component';
 import {roles} from '../constants/constant';
 import {AuthGuard} from '../guards/auth.guard';
@@ -31,7 +31,7 @@ const routes: Routes = [
         data: {titulo: 'Inicio', roles: [roles.sysAdmin, roles.admin]}
       },
       {
-        path: 'graficas1', component: Graficas1Component,
+        path: 'report', component: ReportComponent,
         canActivate: [AuthGuard, GrantedAuthorityGuard],
         data: {titulo: 'Gráficas', roles: [roles.sysAdmin, roles.admin]}
       },
@@ -50,6 +50,11 @@ const routes: Routes = [
         path: 'operacion', component: OperationComponent,
         canActivate: [AuthGuard, GrantedAuthorityGuard],
         data: {titulo: 'Crear Operación', roles: [roles.sysAdmin, roles.admin]}
+      },
+        {
+        path: 'informes', component: ReportComponent,
+        canActivate: [AuthGuard, GrantedAuthorityGuard],
+        data: {titulo: 'Informes', roles: [roles.sysAdmin, roles.admin]}
       },
       {
         path: 'tema', component: AccoutSettingsComponent,

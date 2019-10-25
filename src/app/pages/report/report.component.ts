@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-graficas1',
-  templateUrl: './graficas1.component.html',
+  selector: 'app-informes',
+  templateUrl: './report.component.html',
   styles: []
 })
-export class Graficas1Component implements OnInit {
+export class ReportComponent implements OnInit {
 
 
   graficos: any = {
