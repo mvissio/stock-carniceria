@@ -11,6 +11,7 @@
     },
     "private": true,
     "dependencies": {
+        "@angular-devkit/build-angular": "^0.13.0",
         "@angular/animations": "^7.0.4",
         "@angular/common": "~7.0.0",
         "@angular/compiler": "~7.0.0",
@@ -30,14 +31,13 @@
         "core-js": "^2.5.4",
         "mydatepicker": "^2.6.6",
         "ng-lottie": "^0.3.2",
-        "ng2-charts": "^2.3.0",
+        "ng2-charts": "^2.2.3",
         "ngx-toastr": "^10.0.4",
         "rxjs": "~6.3.3",
         "sweetalert": "^2.1.0",
         "zone.js": "~0.8.26"
     },
     "devDependencies": {
-        "@angular-devkit/build-angular": "^0.13.9",
         "@angular/cli": "~7.0.3",
         "@angular/compiler-cli": "^7.2.14",
         "@angular/language-service": "~7.0.0",
