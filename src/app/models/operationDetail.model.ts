@@ -4,7 +4,7 @@ export class OperationDetail {
     operationId?: number;
     articleId?: number;
     price?: number;
-    amount?: number;  
+    amount?: number;
     constructor(
         operationDetailId?: number,
         operationId?: number,

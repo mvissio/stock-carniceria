@@ -28,7 +28,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { OperationsComponent } from './operations/operations.component';
 import { OperationComponent } from './operations/operation/operation.component';
-import { OperationDetailsComponent } from './operations/operation-details/operation-details.component';
 import { MeasurementUnitsComponent } from './measurement-units/measurement-units.component';
 import { MeasurementUnitComponent } from './measurement-units/measurement-unit/measurement-unit.component';
 import { BoxsComponent } from './boxs/boxs.component';
@@ -47,7 +46,6 @@ import { MyDatePickerModule } from 'mydatepicker';
     UserComponent,
     OperationsComponent,
     OperationComponent,
-    OperationDetailsComponent,
     ArticlesComponent,
     ReportComponent,
     ArticleComponent,

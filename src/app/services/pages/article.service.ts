@@ -104,6 +104,9 @@ export class ArticleService {
   findArticleByCodebar(codeArticle: string) {
     const url = `${this.articleUrl.codeBarArticle}/${parseInt(codeArticle, 0)}`;
     return this.httpClient.get(url)
-      .pipe(map((response: Article) => response));
+      .pipe(map((response: Article) => {
+        response.label = response.name + ' - ' + response.brand;
+        return response;
+      }));
   }
 }

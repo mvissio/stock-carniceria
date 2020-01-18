@@ -331,6 +331,7 @@ export class OperationComponent implements OnInit, DoCheck {
         codebarObj.typeArticle = event.target.value.substring(0, 2);
         codebarObj.codeArticle = event.target.value.substring(2, 6);
         codebarObj.price = `${event.target.value.substring(6, 10)}.${event.target.value.substring(10, 12)}`;
+
         await this._articleService.findArticleByCodebar(codebarObj.codeArticle).toPromise().then(res => {
             if (res) {
                 if (this.operationDetails.value[this.operationDetails.length - 1].article === '') {
@@ -347,7 +348,7 @@ export class OperationComponent implements OnInit, DoCheck {
                             disabled: true
                         }, [Validators.required, Validators.min(1)]],
                         article: [{
-                            value: `${res.name} - ${res.brand}`,
+                            value: res,
                             disabled: true
                         }, Validators.required]
                     })
