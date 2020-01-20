@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { PageConfig } from '../../models/pageConfig.model';
 import { Page } from '../../models/page.model';
 import { Operation } from '../../models/operation.model';
-import { MonthlyOperationsReport } from '../../models/monthlyOperationsReport.model';
 import { OperationsService } from '../../services/pages/operations.service';
 import { HandleErrorsService } from '../../services/shared/handle-errors.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -40,15 +39,17 @@ export class OperationsComponent implements OnInit {
   lastUsedFilter = 'ninguno';
   operationTypes: any[] = [];
   paymentMethods: any[] = [];
-  typeSelect : any;
+  typeSelect: any;
   TYPEOPERATIONS = {
     SHOW_OPERATIONS: 'show operations'
   };
-  monthlyOperationsReport : any = this.limpiarMonthlyOperationsReport();
+  monthlyOperationsReport: any;
   yearOperationsReport: number = new Date().getFullYear();
   monthOperationsReport: number = new Date().getMonth();
-  availableMonths: string[] = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
-  isMonthSelected:boolean;
+  availableMonths: string[] = [
+    'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+  ];
+  isMonthSelected: boolean;
 
   constructor(
     private _operationService: OperationsService,
@@ -67,6 +68,7 @@ export class OperationsComponent implements OnInit {
     this.pageConfig = new PageConfig('operationId');
     this.pageConfig.changeOrder();
     this.getTodayOperations(0);
+    this.limpiarMonthlyOperationsReport();
 
     forkJoin([
       this._operationService.getAllOperationTypes(),
@@ -279,16 +281,16 @@ export class OperationsComponent implements OnInit {
 
 
   viewMonthlyOperationReport() {
-   
-    if(!this.isMonthSelected){
+
+    if (!this.isMonthSelected) {
       return;
     }
-   
+
     this._operationService.getMonthlyOperationsReport(this.yearOperationsReport, this.monthOperationsReport)
       .subscribe(
         (resp: any) => {
           this.monthlyOperationsReport = resp;
-          console.log("resultado", this.page.content);
+          console.log('resultado', this.page.content);
           this.isMonthSelected = false;
         },
         (err: HttpErrorResponse) => {
@@ -304,7 +306,7 @@ export class OperationsComponent implements OnInit {
   }
 
   setSelectedMonth(month: string) {
-    
+
     this.isMonthSelected = true;
 
     switch (month) {
@@ -345,22 +347,22 @@ export class OperationsComponent implements OnInit {
         this.monthOperationsReport = 11;
         break;
     }
-    console.log("mes seleccionado", this.monthOperationsReport);
+    console.log('mes seleccionado', this.monthOperationsReport);
   }
 
   setSelectedYear(year: number) {
-    this.yearOperationsReport = year;  
-    console.log("año seleccionado", this.yearOperationsReport);
+    this.yearOperationsReport = year;
+    console.log('año seleccionado', this.yearOperationsReport);
   }
-  
-  limpiarMonthlyOperationsReport(){
-    this.monthlyOperationsReport = {
-      totalMoneySale : 0.0,
-      totalMoneyBuy : 0.0,
-      totalCountSale : 0.0,
-      totalCountBuy : 0.0
 
-    
+  limpiarMonthlyOperationsReport() {
+    this.monthlyOperationsReport = {
+      totalMoneySale: 0.0,
+      totalMoneyBuy: 0.0,
+      totalCountSale: 0.0,
+      totalCountBuy: 0.0
+
+
     };
   }
 
