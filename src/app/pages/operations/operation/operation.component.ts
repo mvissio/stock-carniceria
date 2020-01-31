@@ -1,17 +1,17 @@
-import {Component, OnInit, DoCheck} from '@angular/core';
-import {Operation} from '../../../models/operation.model';
-import {FormGroup, FormBuilder, Validators, FormArray} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
-import {TranslateService} from '@ngx-translate/core';
-import {OperationsService} from '../../../services/pages/operations.service';
-import {HandleErrorsService} from '../../../services/shared/handle-errors.service';
-import {CommonsService} from '../../../services/commons.service';
-import {HttpErrorResponse} from '@angular/common/http';
-import {forkJoin, Observable} from 'rxjs';
-import {OperationDetail} from '../../../models/operationDetail.model';
-import {operationStatus, discountValues, operationTypes, toastType} from '../../../constants/constant';
-import {ArticleService} from '../../../services/pages/article.service';
-import {Article} from '../../../models/article.model';
+import { Component, OnInit, DoCheck } from '@angular/core';
+import { Operation } from '../../../models/operation.model';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { OperationsService } from '../../../services/pages/operations.service';
+import { HandleErrorsService } from '../../../services/shared/handle-errors.service';
+import { CommonsService } from '../../../services/commons.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { forkJoin, Observable } from 'rxjs';
+import { OperationDetail } from '../../../models/operationDetail.model';
+import { operationStatus, discountValues, operationTypes, toastType } from '../../../constants/constant';
+import { ArticleService } from '../../../services/pages/article.service';
+import { Article } from '../../../models/article.model';
 import swal from 'sweetalert';
 
 @Component({
@@ -31,18 +31,20 @@ export class OperationComponent implements OnInit, DoCheck {
     disabledFields = false;
     articleAmountSizeError = false;
     openCodeModal = false;
+    untilAsync = false;
     discounts = discountValues;
 
     constructor(private activateRoute: ActivatedRoute,
-                private translate: TranslateService,
-                private _operationService: OperationsService,
-                private _articleService: ArticleService,
-                private _handleErrorsService: HandleErrorsService,
-                private router: Router,
-                private fb: FormBuilder,
-                private _commonsService: CommonsService) {
+        private translate: TranslateService,
+        private _operationService: OperationsService,
+        private _articleService: ArticleService,
+        private _handleErrorsService: HandleErrorsService,
+        private router: Router,
+        private fb: FormBuilder,
+        private _commonsService: CommonsService) {
         this.id = this.activateRoute.snapshot.params['id'];
-        this.disabledFields = this.activateRoute.snapshot.queryParams['edit'] && this.activateRoute.snapshot.queryParams['edit'] === 'false';
+        const isEdit = this.activateRoute.snapshot.queryParams['edit'];
+        this.disabledFields = isEdit && isEdit === 'false';
         if (this.id) {
             this.edit = true;
             this.getOperation();
@@ -54,7 +56,7 @@ export class OperationComponent implements OnInit, DoCheck {
 
     ngOnInit() {
         forkJoin([this._operationService.getAllOperationTypes(),
-            this._operationService.getAllPaymentMethods()
+        this._operationService.getAllPaymentMethods()
         ])
             .subscribe((res: any) => {
                 this.operationTypes = res[0];
@@ -97,7 +99,7 @@ export class OperationComponent implements OnInit, DoCheck {
             discount: [this.operation.discount],
             enabledDiscount: [(this.operation.discount)],
             operationDetails: operationDetails
-        }, {updateOn: 'blur'});
+        }, { updateOn: 'blur' });
         if (this.disabledFields) {
             this.operationForm.disable();
         }
@@ -139,9 +141,9 @@ export class OperationComponent implements OnInit, DoCheck {
         if (!this.articleAmountSizeError) {
             forkJoin(
                 [this.translate.get('modals.confirmOperation.title'),
-                    this.translate.get('modals')
+                this.translate.get('modals')
                 ]).subscribe((result) => {
-                swal({
+                    swal({
                         title: result[0],
                         icon: 'warning',
                         closeOnClickOutside: true,
@@ -160,34 +162,34 @@ export class OperationComponent implements OnInit, DoCheck {
                             }
                         }
                     }
-                ).then((data) => {
-                    if (data) {
-                        if (this.edit) {
-                            this._operationService.updateOperation(this.operation)
-                                .subscribe(() => {
-                                    this.translate.get('operations.updateOk')
-                                        .subscribe((res: string) => {
-                                            this._commonsService.showMessage(toastType.success, res);
-                                            this.back();
-                                        });
-                                }, (err: HttpErrorResponse) => {
-                                    this._commonsService.showMessage(toastType.error, this._handleErrorsService.handleErrors(err));
-                                });
-                        } else {
-                            this._operationService.addOperation(this.operation)
-                                .subscribe(() => {
-                                    this.translate.get('operations.createOk')
-                                        .subscribe((res: string) => {
-                                            this._commonsService.showMessage(toastType.success, res);
-                                            this.back();
-                                        });
-                                }, (err: HttpErrorResponse) => {
-                                    this._commonsService.showMessage(toastType.error, this._handleErrorsService.handleErrors(err));
-                                });
+                    ).then((data) => {
+                        if (data) {
+                            if (this.edit) {
+                                this._operationService.updateOperation(this.operation)
+                                    .subscribe(() => {
+                                        this.translate.get('operations.updateOk')
+                                            .subscribe((res: string) => {
+                                                this._commonsService.showMessage(toastType.success, res);
+                                                this.back();
+                                            });
+                                    }, (err: HttpErrorResponse) => {
+                                        this._commonsService.showMessage(toastType.error, this._handleErrorsService.handleErrors(err));
+                                    });
+                            } else {
+                                this._operationService.addOperation(this.operation)
+                                    .subscribe(() => {
+                                        this.translate.get('operations.createOk')
+                                            .subscribe((res: string) => {
+                                                this._commonsService.showMessage(toastType.success, res);
+                                                this.back();
+                                            });
+                                    }, (err: HttpErrorResponse) => {
+                                        this._commonsService.showMessage(toastType.error, this._handleErrorsService.handleErrors(err));
+                                    });
+                            }
                         }
-                    }
+                    });
                 });
-            });
         }
     }
 
@@ -307,7 +309,7 @@ export class OperationComponent implements OnInit, DoCheck {
     }
 
     showErrorInvalidOperationDetail(label: string, quantity: number) {
-        this.translate.get('articles.amountInsuficient', {param1: label, param2: quantity})
+        this.translate.get('articles.amountInsuficient', { param1: label, param2: quantity })
             .subscribe((result) => {
                 this._commonsService.showMessage(toastType.error, result);
                 this.articleAmountSizeError = true;
@@ -323,6 +325,7 @@ export class OperationComponent implements OnInit, DoCheck {
     }
 
     async findCodebar(event) {
+        this.untilAsync = true;
         const codebarObj = {
             typeArticle: '',
             codeArticle: '',
@@ -331,7 +334,6 @@ export class OperationComponent implements OnInit, DoCheck {
         codebarObj.typeArticle = event.target.value.substring(0, 2);
         codebarObj.codeArticle = event.target.value.substring(2, 6);
         codebarObj.price = `${event.target.value.substring(6, 10)}.${event.target.value.substring(10, 12)}`;
-
         await this._articleService.findArticleByCodebar(codebarObj.codeArticle).toPromise().then(res => {
             if (res) {
                 if (this.operationDetails.value[this.operationDetails.length - 1].article === '') {
@@ -340,11 +342,11 @@ export class OperationComponent implements OnInit, DoCheck {
                 this.operationDetails.push(
                     this.fb.group({
                         amount: [{
-                            value: `${parseFloat(codebarObj.price) / res.currentPrice}`,
+                            value: `${(parseFloat(codebarObj.price) / res.currentPrice).toFixed(2)}`,
                             disabled: true
                         }, [Validators.required, Validators.min(1)]],
                         price: [{
-                            value: `${parseFloat(codebarObj.price)}`,
+                            value: `${parseFloat(codebarObj.price).toFixed(2)}`,
                             disabled: true
                         }, [Validators.required, Validators.min(1)]],
                         article: [{
@@ -353,8 +355,9 @@ export class OperationComponent implements OnInit, DoCheck {
                         }, Validators.required]
                     })
                 );
+                this.untilAsync = false;
             } else {
-                this.translate.get('articles.noContent', {param1: event.target.value})
+                this.translate.get('articles.noContent', { param1: event.target.value })
                     .subscribe((result) => {
                         this._commonsService.showMessage(toastType.warning, result);
                     });
@@ -364,6 +367,7 @@ export class OperationComponent implements OnInit, DoCheck {
         }).finally(() => {
             event.target.value = '';
             this.openCodeModal = false;
+            this.untilAsync = false;
         });
         // await
     }

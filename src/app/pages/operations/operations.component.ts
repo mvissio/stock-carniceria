@@ -47,7 +47,19 @@ export class OperationsComponent implements OnInit {
   yearOperationsReport: number = new Date().getFullYear();
   monthOperationsReport: number = new Date().getMonth();
   availableMonths: string[] = [
-    'Sin seleccionar','Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+    'Sin seleccionar',
+    'Enero',
+    'Febrero',
+    'Marzo',
+    'Abril',
+    'Mayo',
+    'Junio',
+    'Julio',
+    'Agosto',
+    'Septiembre',
+    'Octubre',
+    'Noviembre',
+    'Diciembre'
   ];
   isMonthSelected: boolean;
 
@@ -307,11 +319,11 @@ export class OperationsComponent implements OnInit {
 
   setSelectedMonth(month: string) {
 
-    if(month === "Sin seleccionar"){
+    if (month === 'Sin seleccionar') {
       this.isMonthSelected = false;
       return;
-    }else{
-    this.isMonthSelected = true;
+    } else {
+      this.isMonthSelected = true;
     }
 
     switch (month) {
@@ -370,7 +382,7 @@ export class OperationsComponent implements OnInit {
     };
   }
 
-  getCurrentYear() : number{
+  getCurrentYear(): number {
     return new Date().getFullYear();
   }
 
