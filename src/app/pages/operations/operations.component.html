@@ -156,14 +156,14 @@
                 <div class="col">
                     <label for="month">Mes a consultar:</label>
                     <select class="custom-select input-lg" id="month" name="month" (change)="setSelectedMonth($event.target.value)">
-                        <option *ngFor="let month of availableMonths">{{month}}</option>
+                        <option *ngFor="let month of availableMonths" >{{month}}</option>
                     </select>
                     <br>
                 </div>
 
                 <div class="col">
                     <label for="year">Año a consultar:</label>
-                    <input class="input-lg" type="number" id="year" name="year" min="2019" value="2019" (change)="setSelectedYear($event.target.value)">
+                    <input class="input-lg" type="number" id="year" name="year" min="2019" [value]="getCurrentYear()" (change)="setSelectedYear($event.target.value)">
                 </div>
 
             </div>
