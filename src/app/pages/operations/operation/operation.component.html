@@ -98,7 +98,7 @@
                         </div>
                     </div>
                     <div *ngIf="!disabledFields" class="m-t-10">
-                        <button class="btn btn-primary m-r-10" type="submit" [disabled]="operationForm.invalid">
+                        <button class="btn btn-primary m-r-10" type="submit" [disabled]="operationForm.invalid && untilAsync">
                             <i class="fa fa-save" aria-hidden="true"></i>
                             {{'buttons.submit' | translate}}
                         </button>
