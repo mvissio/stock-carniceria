@@ -31,7 +31,6 @@ export class OperationComponent implements OnInit, DoCheck {
     disabledFields = false;
     articleAmountSizeError = false;
     openCodeModal = false;
-    untilAsync = false;
     discounts = discountValues;
 
     constructor(private activateRoute: ActivatedRoute,
@@ -73,7 +72,7 @@ export class OperationComponent implements OnInit, DoCheck {
             if (this.operation.operationDetails) {
                 for (const operationDetail of this.operation.operationDetails) {
                     this._articleService.getArticleByArticleId(operationDetail.articleId).subscribe((res: Article) => {
-                        const priceOperationDetail = operationDetail.price / operationDetail.amount;
+                        const priceOperationDetail = parseFloat((operationDetail.price / operationDetail.amount).toFixed(2));
                         operationDetails.push(this.fb.group({
                             amount: [operationDetail.amount, Validators.required],
                             price: [priceOperationDetail, [Validators.required, Validators.min(1)]],
@@ -214,9 +213,11 @@ export class OperationComponent implements OnInit, DoCheck {
             const indexOperationDetail = this.operation.operationDetails
                 .findIndex((od: OperationDetail) => od.articleId === odObject.article.articleId);
             if (this.checkValidOperationDetail(odObject, indexOperationDetail)) {
-                operationDetail.amount = odObject.amount;
+                operationDetail.amount = parseFloat(odObject.amount.toFixed(2));
                 operationDetail.articleId = odObject.article.articleId;
-                operationDetail.price = (operationDetail.amount) ? odObject.price * operationDetail.amount : odObject.price;
+                operationDetail.price = (operationDetail.amount) ?
+                    parseFloat((odObject.price * operationDetail.amount).toFixed(2)) :
+                    parseFloat(odObject.price.toFixed(2));
                 if (indexOperationDetail !== -1) {
                     this.operation.operationDetails[index] = operationDetail;
                 } else {
@@ -235,7 +236,7 @@ export class OperationComponent implements OnInit, DoCheck {
         if (this.operation.discount) {
             total = total - (total * (this.operation.discount / 100));
         }
-        return total;
+        return parseFloat(total.toFixed(2));
     }
 
     selectedOperationType(operationType: string): boolean {
@@ -320,12 +321,11 @@ export class OperationComponent implements OnInit, DoCheck {
         this.router.navigate(['/operaciones']);
     }
 
-    closeModal(id) {
+    closeModal() {
         this.openCodeModal = false;
     }
 
     async findCodebar(event) {
-        this.untilAsync = true;
         const codebarObj = {
             typeArticle: '',
             codeArticle: '',
@@ -355,7 +355,6 @@ export class OperationComponent implements OnInit, DoCheck {
                         }, Validators.required]
                     })
                 );
-                this.untilAsync = false;
             } else {
                 this.translate.get('articles.noContent', { param1: event.target.value })
                     .subscribe((result) => {
@@ -367,7 +366,6 @@ export class OperationComponent implements OnInit, DoCheck {
         }).finally(() => {
             event.target.value = '';
             this.openCodeModal = false;
-            this.untilAsync = false;
         });
         // await
     }

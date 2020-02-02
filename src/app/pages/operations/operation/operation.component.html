@@ -32,10 +32,10 @@
                     </div>
                     <div class="d-flex flex-row justify-content-start">
                         <div class="form-group m-t-10 col-sm-12 col-lg-6" *ngIf="!disabledFields">
-                            <button (click)="addOperationDetail()" class="col-sm-6 btn btn-primary"><i
+                            <button (click)="addOperationDetail()" class="col-sm-6 btn btn-primary" type="button"><i
                                 class="mdi mdi-plus" aria-hidden="true"> {{'operationDetails.operationDetailAddButtonLabel' | translate}}</i>
                             </button>
-                            <button (click)="addOperationDetailByCB()" class="col-sm-6 btn btn-secondary "><i
+                            <button (click)="addOperationDetailByCB()" class="col-sm-6 btn btn-secondary" type="button"><i
                                 class="mdi mdi-barcode-scan" aria-hidden="true"> {{'operationDetails.operationDetailAddButtonBarcodeLabel' | translate}}</i>
                             </button>
                         </div>
@@ -98,7 +98,7 @@
                         </div>
                     </div>
                     <div *ngIf="!disabledFields" class="m-t-10">
-                        <button class="btn btn-primary m-r-10" type="submit" [disabled]="operationForm.invalid && untilAsync">
+                        <button class="btn btn-primary m-r-10" type="submit" [disabled]="operationForm.invalid">
                             <i class="fa fa-save" aria-hidden="true"></i>
                             {{'buttons.submit' | translate}}
                         </button>
@@ -115,7 +115,7 @@
     </div>
 </div>
 <ng-container *ngIf="openCodeModal">
-    <app-modal-container (clickClose)="closeModal(modalCodebar)" #modalCodebar [modalTitle]="'Ingrese Codigo de barras'">
+    <app-modal-container (clickClose)="closeModal()" [modalTitle]="'Ingrese Codigo de barras'">
         <div class="container">
             <div class="main-element">
                 <app-lottie-viewer [path]="'assets/lottie-data/barcode-scanner.json'" [width]="300" [height]="300"></app-lottie-viewer>
