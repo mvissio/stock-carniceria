@@ -68,12 +68,12 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-12 col-md-3 form-label-group" *ngIf="disabledFields">
-                                    <input class="form-control" type="text" [placeholder]="'operationDetails.articleNameBrandPlaceholder' | translate" id="articleDisable" [disabled]="disabledFields" [value]="operationDetail.value.article.name + '/ ' + operationDetail.value.article.brand">
-                                    <label for="articleDisable">{{'operationDetails.articleNameBrandPlaceholder' | translate}}</label>
+                                    <input class="form-control" type="text" [placeholder]="'operationDetails.articleNameBrandPlaceholder' | translate" id="{{ 'articleDisable' + i }}" [disabled]="disabledFields" [value]="operationDetail.value.article.name + '/ ' + operationDetail.value.article.brand">
+                                    <label for="{{ 'articleDisable' + i }}">{{'operationDetails.articleNameBrandPlaceholder' | translate}}</label>
                                 </div>
                                 <div class="col-sm-12 col-md-3 form-label-group">
-                                    <input class="form-control" type="number" [placeholder]="'operationDetails.amountPlaceholder' | translate" id="amount" formControlName="amount" (change)="validateOperationDetail(operationDetail.value)">
-                                    <label for="amount">{{'operationDetails.amountPlaceholder' | translate}}</label>
+                                    <input class="form-control" type="number" [placeholder]="'operationDetails.amountPlaceholder' | translate" id="{{ 'amount' + i }}" formControlName="amount" (change)="validateOperationDetail(operationDetail.value)">
+                                    <label for="{{ 'amount' + i }}">{{'operationDetails.amountPlaceholder' | translate}}</label>
                                     <div *ngIf="operationDetailControls(i).amount.invalid && (operationDetailControls(i).amount.dirty || operationDetailControls(i).amount.touched)" class="error-label">
                                         <small *ngIf="operationDetailControls(i).amount.errors.required">
                                             {{'generalValidations.required' | translate}}
@@ -82,8 +82,8 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-12 col-md-3 form-label-group">
-                                    <input class="form-control" type="number" [placeholder]="'operationDetails.pricePlaceholder' | translate" id="price" formControlName="price">
-                                    <label for="price">{{'operationDetails.pricePlaceholder' | translate}}</label>
+                                    <input class="form-control" type="number" [placeholder]="'operationDetails.pricePlaceholder' | translate" id="{{ 'price' + i }}" formControlName="price">
+                                    <label for="{{ 'price' + i }}">{{'operationDetails.pricePlaceholder' | translate}}</label>
                                     <div *ngIf="operationDetailControls(i).price.invalid && (operationDetailControls(i).price.dirty || operationDetailControls(i).price.touched)" class="error-label">
                                         <small *ngIf="operationDetailControls(i).price.errors.required">
                                             {{'generalValidations.required' | translate}}
