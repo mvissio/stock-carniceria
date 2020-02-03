@@ -32,10 +32,10 @@
                     </div>
                     <div class="d-flex flex-row justify-content-start">
                         <div class="form-group m-t-10 col-sm-12 col-lg-6" *ngIf="!disabledFields">
-                            <button (click)="addOperationDetail()" class="col-sm-6 btn btn-primary"><i
+                            <button (click)="addOperationDetail()" class="col-sm-6 btn btn-primary" type="button"><i
                                 class="mdi mdi-plus" aria-hidden="true"> {{'operationDetails.operationDetailAddButtonLabel' | translate}}</i>
                             </button>
-                            <button (click)="addOperationDetailByCB()" class="col-sm-6 btn btn-secondary "><i
+                            <button (click)="addOperationDetailByCB()" class="col-sm-6 btn btn-secondary" type="button"><i
                                 class="mdi mdi-barcode-scan" aria-hidden="true"> {{'operationDetails.operationDetailAddButtonBarcodeLabel' | translate}}</i>
                             </button>
                         </div>
@@ -68,12 +68,12 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-12 col-md-3 form-label-group" *ngIf="disabledFields">
-                                    <input class="form-control" type="text" [placeholder]="'operationDetails.articleNameBrandPlaceholder' | translate" id="articleDisable" [disabled]="disabledFields" [value]="operationDetail.value.article.name + '/ ' + operationDetail.value.article.brand">
-                                    <label for="articleDisable">{{'operationDetails.articleNameBrandPlaceholder' | translate}}</label>
+                                    <input class="form-control" type="text" [placeholder]="'operationDetails.articleNameBrandPlaceholder' | translate" id="{{ 'articleDisable' + i }}" [disabled]="disabledFields" [value]="operationDetail.value.article.name + '/ ' + operationDetail.value.article.brand">
+                                    <label for="{{ 'articleDisable' + i }}">{{'operationDetails.articleNameBrandPlaceholder' | translate}}</label>
                                 </div>
                                 <div class="col-sm-12 col-md-3 form-label-group">
-                                    <input class="form-control" type="number" [placeholder]="'operationDetails.amountPlaceholder' | translate" id="amount" formControlName="amount" (change)="validateOperationDetail(operationDetail.value)">
-                                    <label for="amount">{{'operationDetails.amountPlaceholder' | translate}}</label>
+                                    <input class="form-control" type="number" [placeholder]="'operationDetails.amountPlaceholder' | translate" id="{{ 'amount' + i }}" formControlName="amount" (change)="validateOperationDetail(operationDetail.value)">
+                                    <label for="{{ 'amount' + i }}">{{'operationDetails.amountPlaceholder' | translate}}</label>
                                     <div *ngIf="operationDetailControls(i).amount.invalid && (operationDetailControls(i).amount.dirty || operationDetailControls(i).amount.touched)" class="error-label">
                                         <small *ngIf="operationDetailControls(i).amount.errors.required">
                                             {{'generalValidations.required' | translate}}
@@ -82,8 +82,8 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-12 col-md-3 form-label-group">
-                                    <input class="form-control" type="number" [placeholder]="'operationDetails.pricePlaceholder' | translate" id="price" formControlName="price">
-                                    <label for="price">{{'operationDetails.pricePlaceholder' | translate}}</label>
+                                    <input class="form-control" type="number" [placeholder]="'operationDetails.pricePlaceholder' | translate" id="{{ 'price' + i }}" formControlName="price">
+                                    <label for="{{ 'price' + i }}">{{'operationDetails.pricePlaceholder' | translate}}</label>
                                     <div *ngIf="operationDetailControls(i).price.invalid && (operationDetailControls(i).price.dirty || operationDetailControls(i).price.touched)" class="error-label">
                                         <small *ngIf="operationDetailControls(i).price.errors.required">
                                             {{'generalValidations.required' | translate}}
@@ -98,7 +98,7 @@
                         </div>
                     </div>
                     <div *ngIf="!disabledFields" class="m-t-10">
-                        <button class="btn btn-primary m-r-10" type="submit" [disabled]="operationForm.invalid && untilAsync">
+                        <button class="btn btn-primary m-r-10" type="submit" [disabled]="operationForm.invalid">
                             <i class="fa fa-save" aria-hidden="true"></i>
                             {{'buttons.submit' | translate}}
                         </button>
@@ -115,7 +115,7 @@
     </div>
 </div>
 <ng-container *ngIf="openCodeModal">
-    <app-modal-container (clickClose)="closeModal(modalCodebar)" #modalCodebar [modalTitle]="'Ingrese Codigo de barras'">
+    <app-modal-container (clickClose)="closeModal()" [modalTitle]="'Ingrese Codigo de barras'">
         <div class="container">
             <div class="main-element">
                 <app-lottie-viewer [path]="'assets/lottie-data/barcode-scanner.json'" [width]="300" [height]="300"></app-lottie-viewer>
