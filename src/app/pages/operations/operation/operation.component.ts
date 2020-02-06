@@ -342,11 +342,11 @@ export class OperationComponent implements OnInit, DoCheck {
                 this.operationDetails.push(
                     this.fb.group({
                         amount: [{
-                            value: `${(parseFloat(codebarObj.price) / res.currentPrice).toFixed(2)}`,
+                            value: parseFloat(`${(parseFloat(codebarObj.price) / res.currentPrice).toFixed(2)}`),
                             disabled: true
                         }, [Validators.required, Validators.min(1)]],
                         price: [{
-                            value: `${parseFloat(codebarObj.price).toFixed(2)}`,
+                            value: parseFloat(`${parseFloat(codebarObj.price).toFixed(2)}`),
                             disabled: true
                         }, [Validators.required, Validators.min(1)]],
                         article: [{
@@ -364,7 +364,7 @@ export class OperationComponent implements OnInit, DoCheck {
         }).catch(error => {
             this._commonsService.showMessage(toastType.error, this._handleErrorsService.handleErrors(error));
         }).finally(() => {
-            event.target.value = '';
+            // event.target.value = '';
             this.openCodeModal = false;
         });
         // await
