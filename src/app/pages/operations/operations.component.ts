@@ -302,7 +302,8 @@ export class OperationsComponent implements OnInit {
       .subscribe(
         (resp: any) => {
           this.monthlyOperationsReport = resp;
-          console.log('resultado', this.page.content);
+          this.monthlyOperationsReport.totalMoneySale = `${parseFloat(this.monthlyOperationsReport.totalMoneySale).toFixed(2)}`;
+          this.monthlyOperationsReport.totalMoneyBuy = `${parseFloat(this.monthlyOperationsReport.totalMoneyBuy).toFixed(2)}`;
           this.isMonthSelected = false;
         },
         (err: HttpErrorResponse) => {
