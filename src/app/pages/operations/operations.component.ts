@@ -303,7 +303,7 @@ export class OperationsComponent implements OnInit {
         (resp: any) => {
           this.monthlyOperationsReport = resp;
           this.monthlyOperationsReport.totalMoneySale = `${parseFloat(this.monthlyOperationsReport.totalMoneySale).toFixed(2)}`;
-          this.monthlyOperationsReport.totalMoneyBuy = `${parseFloat(this.monthlyOperationsReport.totalMoneyBuy).toFixed(2)}`; 
+          this.monthlyOperationsReport.totalMoneyBuy = `${parseFloat(this.monthlyOperationsReport.totalMoneyBuy).toFixed(2)}`;
           this.isMonthSelected = false;
         },
         (err: HttpErrorResponse) => {
